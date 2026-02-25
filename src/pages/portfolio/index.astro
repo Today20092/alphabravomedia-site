@@ -1,0 +1,122 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allItems = await getCollection('portfolio');
+
+// Get unique categories
+const categories = [...new Set(allItems.map(item => item.data.category))];
+---
+
+<BaseLayout title="Portfolio | Alpha Bravo Media">
+  <section class="pt-32 pb-24 px-6">
+    <div class="max-w-6xl mx-auto">
+      <!-- Header -->
+      <div class="mb-16">
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-4">Portfolio</h1>
+        <p class="text-lg text-gray-400 max-w-2xl">Selected work showcasing cinematic storytelling and high-end production value.</p>
+      </div>
+
+      <!-- Category Filter -->
+      {categories.length > 0 && (
+        <div class="flex flex-wrap gap-3 mb-12">
+          <button
+            class="filter-btn active px-4 py-2 rounded-full text-sm font-medium border border-gray-700 text-white bg-white/10 transition-all duration-200"
+            data-category="all"
+          >
+            All
+          </button>
+          {categories.map((category) => (
+            <button
+              class="filter-btn px-4 py-2 rounded-full text-sm font-medium border border-gray-800 text-gray-400 hover:border-gray-700 hover:text-white transition-all duration-200"
+              data-category={category}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+      )}
+
+      <!-- Portfolio Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
+        {allItems.map((item) => (
+          <a
+            href={`/portfolio/${item.slug}`}
+            class="portfolio-item group relative bg-gray-900/50 rounded-xl overflow-hidden border border-gray-800/50 transition-all duration-300 hover:scale-[1.02] hover:border-gray-700 hover:shadow-xl hover:shadow-black/20"
+            data-category={item.data.category}
+          >
+            <!-- Thumbnail -->
+            <div class="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <!-- Category badge -->
+              <span class="absolute top-4 left-4 px-3 py-1 bg-white/10 backdrop-blur-sm rounded-full text-xs font-medium text-gray-300">
+                {item.data.category}
+              </span>
+              <!-- Play icon on hover -->
+              <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div class="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                  <svg class="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Content -->
+            <div class="p-6">
+              <h2 class="text-xl font-semibold text-white mb-2 group-hover:text-gray-200 transition-colors">
+                {item.data.title}
+              </h2>
+              <p class="text-sm text-gray-500">
+                {item.data.clientName}
+              </p>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      {allItems.length === 0 && (
+        <div class="text-center py-20">
+          <p class="text-gray-500">No portfolio items yet. Check back soon!</p>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .filter-btn.active {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: white;
+  }
+
+  .portfolio-item.hidden {
+    display: none;
+  }
+</style>
+
+<script>
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const items = document.querySelectorAll('.portfolio-item');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const category = btn.getAttribute('data-category');
+
+      // Update active state
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Filter items
+      items.forEach(item => {
+        const itemCategory = item.getAttribute('data-category');
+        if (category === 'all' || itemCategory === category) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    });
+  });
+</script>

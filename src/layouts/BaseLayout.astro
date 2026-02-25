@@ -1,0 +1,279 @@
+---
+interface Props {
+  title?: string;
+}
+
+// ============================================
+// SITE CONFIG - Edit your info here
+// ============================================
+const siteConfig = {
+  // Brand
+  siteName: 'Alpha Bravo Media',
+  tagline: 'Cinema-grade videography for brands and creators.',
+
+  // Contact
+  email: 'contact-me@alphabravomedia.co',
+  phone: '(555) 123-4567',
+  phoneRaw: '+15551234567', // For tel: link (no spaces/dashes)
+  elementUsername: '@alphabravo:matrix.org',
+
+  // Social Links
+  youtube: 'https://youtube.com/@alphabravomedia',
+  instagram: 'https://instagram.com/alphabravomedia',
+  // twitter: 'https://twitter.com/alphabravomedia',
+};
+// ============================================
+
+const { title = `${siteConfig.siteName} | Cinema-Grade Videography` } = Astro.props;
+
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/portfolio', label: 'Portfolio' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/gear', label: 'Gear' },
+  { href: '#contact', label: 'Contact' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content="Cinema-grade videography for brands and creators. High-quality video production and strategic content." />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body class="bg-[#0b0b0b] text-white font-['Inter',sans-serif] antialiased">
+    <!-- Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50">
+      <nav class="mx-4 mt-4 px-6 py-4 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-lg shadow-black/20">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+          <!-- Logo -->
+          <a href="/" class="text-lg font-semibold tracking-tight text-white hover:text-gray-300 transition-colors">
+            {siteConfig.siteName}
+          </a>
+
+          <!-- Desktop Navigation -->
+          <ul class="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class:list={[
+                    "text-sm font-medium transition-colors duration-200",
+                    currentPath === link.href
+                      ? "text-white"
+                      : "text-gray-400 hover:text-white"
+                  ]}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <!-- CTA Button -->
+          <a
+            href={siteConfig.youtube}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hidden md:flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/15 rounded-full text-sm font-medium text-white transition-colors duration-200"
+          >
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+            YouTube
+          </a>
+
+          <!-- Mobile Menu Button -->
+          <button
+            id="mobile-menu-btn"
+            class="md:hidden p-2 text-gray-400 hover:text-white transition-colors"
+            aria-label="Toggle menu"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden mt-4 pt-4 border-t border-white/10">
+          <ul class="flex flex-col gap-4">
+            {navLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class:list={[
+                    "block text-sm font-medium transition-colors duration-200",
+                    currentPath === link.href
+                      ? "text-white"
+                      : "text-gray-400 hover:text-white"
+                  ]}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+            <li>
+              <a
+                href={siteConfig.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center gap-2 text-sm font-medium text-gray-400 hover:text-white transition-colors"
+              >
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+                YouTube
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact" class="py-16 px-6 border-t border-gray-800/50 bg-[#080808]">
+      <div class="max-w-6xl mx-auto">
+        <!-- Contact Section -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+          <!-- Brand -->
+          <div class="lg:col-span-1">
+            <h3 class="text-xl font-semibold tracking-tight text-white mb-3">{siteConfig.siteName}</h3>
+            <p class="text-sm text-gray-500 leading-relaxed">{siteConfig.tagline}</p>
+          </div>
+
+          <!-- Email -->
+          <div>
+            <h4 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Email</h4>
+            <a
+              href={`mailto:${siteConfig.email}`}
+              class="group flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
+            >
+              <svg class="w-5 h-5 text-gray-500 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+              <span class="text-sm">{siteConfig.email}</span>
+            </a>
+          </div>
+
+          <!-- Phone -->
+          <div>
+            <h4 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Phone</h4>
+            <a
+              href={`tel:${siteConfig.phoneRaw}`}
+              class="group flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
+            >
+              <svg class="w-5 h-5 text-gray-500 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+              </svg>
+              <span class="text-sm">{siteConfig.phone}</span>
+            </a>
+            <p class="text-xs text-gray-600 mt-1 ml-7">Google Voice</p>
+          </div>
+
+          <!-- Element -->
+          <div>
+            <h4 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Element / Matrix</h4>
+            <button
+              id="copy-element"
+              class="group flex items-center gap-2 text-gray-300 hover:text-white transition-colors cursor-pointer"
+              data-username={siteConfig.elementUsername}
+            >
+              <svg class="w-5 h-5 text-gray-500 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-1.5 5.5a1 1 0 011-1h1a1 1 0 011 1v6a1 1 0 01-1 1h-1a1 1 0 01-1-1v-6zm0 8a1 1 0 011-1h1a1 1 0 011 1v1a1 1 0 01-1 1h-1a1 1 0 01-1-1v-1z"/>
+              </svg>
+              <span class="text-sm font-mono">{siteConfig.elementUsername}</span>
+              <svg id="copy-icon" class="w-4 h-4 text-gray-600 group-hover:text-gray-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+              </svg>
+              <svg id="check-icon" class="w-4 h-4 text-green-500 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+            </button>
+            <p class="text-xs text-gray-600 mt-1 ml-7">Click to copy</p>
+          </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="pt-8 border-t border-gray-800/50 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p class="text-gray-600 text-sm">&copy; {new Date().getFullYear()} {siteConfig.siteName}. All rights reserved.</p>
+          <div class="flex items-center gap-6">
+            <a href={siteConfig.youtube} target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-white transition-colors" aria-label="YouTube">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/>
+                <path d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="#080808"/>
+              </svg>
+            </a>
+            <a href={siteConfig.instagram} target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-white transition-colors" aria-label="Instagram">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+              </svg>
+            </a>
+            <a href={siteConfig.twitter} target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-white transition-colors" aria-label="Twitter/X">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+      // Mobile menu toggle
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const menuIcon = document.getElementById('menu-icon');
+
+      mobileMenuBtn?.addEventListener('click', () => {
+        const isOpen = !mobileMenu?.classList.contains('hidden');
+        mobileMenu?.classList.toggle('hidden');
+
+        if (isOpen) {
+          menuIcon?.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+        } else {
+          menuIcon?.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+        }
+      });
+
+      // Copy Element username
+      const copyBtn = document.getElementById('copy-element');
+      const copyIcon = document.getElementById('copy-icon');
+      const checkIcon = document.getElementById('check-icon');
+
+      copyBtn?.addEventListener('click', async () => {
+        const username = copyBtn.getAttribute('data-username');
+        if (username) {
+          await navigator.clipboard.writeText(username);
+          copyIcon?.classList.add('hidden');
+          checkIcon?.classList.remove('hidden');
+
+          setTimeout(() => {
+            copyIcon?.classList.remove('hidden');
+            checkIcon?.classList.add('hidden');
+          }, 2000);
+        }
+      });
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  @import "../styles/global.css";
+</style>

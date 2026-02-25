@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allGear = await getCollection('gear');
+
+// Group by category
+const categories = ['Camera', 'Lens', 'Audio', 'Lighting', 'Accessories', 'Software'] as const;
+const gearByCategory = categories.reduce((acc, category) => {
+  acc[category] = allGear.filter(item => item.data.category === category);
+  return acc;
+}, {} as Record<string, typeof allGear>);
+---
+
+<BaseLayout title="Gear | Alpha Bravo Media">
+  <section class="pt-32 pb-24 px-6">
+    <div class="max-w-6xl mx-auto">
+      <!-- Header -->
+      <div class="mb-16">
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-4">Gear</h1>
+        <p class="text-lg text-gray-400 max-w-2xl">The tools I use to create. These are affiliate links - I earn a small commission if you purchase through them.</p>
+      </div>
+
+      <!-- Gear by Category -->
+      {categories.map((category) => (
+        gearByCategory[category].length > 0 && (
+          <div class="mb-16">
+            <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+              <span class="w-8 h-[1px] bg-gray-700"></span>
+              {category}
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {gearByCategory[category].map((item) => (
+                <a
+                  href={`/gear/${item.slug}`}
+                  class="group relative bg-gray-900/50 rounded-xl overflow-hidden border border-gray-800/50 transition-all duration-300 hover:scale-[1.02] hover:border-gray-700 hover:shadow-xl hover:shadow-black/20"
+                >
+                  <!-- Image placeholder -->
+                  <div class="aspect-square bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden flex items-center justify-center">
+                    <svg class="w-16 h-16 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                  </div>
+
+                  <!-- Content -->
+                  <div class="p-5">
+                    <span class="text-xs text-gray-500 uppercase tracking-wider">{category}</span>
+                    <h3 class="text-lg font-semibold text-white mt-1 group-hover:text-gray-200 transition-colors">
+                      {item.data.title}
+                    </h3>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        )
+      ))}
+
+      {allGear.length === 0 && (
+        <div class="text-center py-20">
+          <p class="text-gray-500">No gear listed yet. Check back soon!</p>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>

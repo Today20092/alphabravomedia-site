@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { YouTube } from '@astro-community/astro-embed-youtube';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<BaseLayout title={`${post.data.title} | Alpha Bravo Media`}>
+  <article class="pt-32 pb-24 px-6">
+    <div class="max-w-4xl mx-auto">
+      <!-- Back link -->
+      <a href="/blog" class="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-8">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        Back to Blog
+      </a>
+
+      <!-- Header -->
+      <header class="mb-10">
+        <time class="text-sm text-gray-500 uppercase tracking-wider">
+          {post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </time>
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mt-3 mb-4">
+          {post.data.title}
+        </h1>
+        <p class="text-xl text-gray-400 mb-6">{post.data.description}</p>
+
+        <!-- Tags -->
+        {post.data.tags.length > 0 && (
+          <div class="flex flex-wrap gap-2">
+            {post.data.tags.map((tag: string) => (
+              <span class="px-3 py-1 bg-white/5 rounded-full text-xs font-medium text-gray-400">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+      </header>
+
+      <!-- YouTube Embed -->
+      <div class="relative group mb-12">
+        <div class="absolute -inset-4 bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-orange-500/10 rounded-3xl blur-2xl opacity-50"></div>
+        <div class="relative rounded-2xl overflow-hidden shadow-2xl shadow-black/50">
+          <YouTube id={post.data.youtubeId} class="w-full aspect-video" poster="maxresdefault" />
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="prose prose-invert prose-lg max-w-none">
+        <Content />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

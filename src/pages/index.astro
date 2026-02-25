@@ -1,11 +1,192 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { YouTube } from '@astro-community/astro-embed-youtube';
+import { getCollection } from 'astro:content';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Get latest blog posts and portfolio pieces
+const allBlogPosts = await getCollection('blog');
+const allPortfolio = await getCollection('portfolio');
+
+const latestBlog = allBlogPosts
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const latestPortfolio = allPortfolio.slice(0, 3);
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout>
+  <!-- Hero Section -->
+  <section class="min-h-screen flex items-center justify-center px-6 pt-20 relative overflow-hidden">
+    <!-- Subtle gradient overlay -->
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0b0b0b] pointer-events-none"></div>
+
+    <!-- Ambient glow effect -->
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-white/[0.02] rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-6xl mx-auto text-center relative z-10">
+      <!-- Main headline with gradient -->
+      <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight mb-6">
+        <span class="bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
+          Cinema-grade videography
+        </span>
+        <br />
+        <span class="text-gray-300">for brands and creators.</span>
+      </h1>
+
+      <!-- Sub-headline -->
+      <p class="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+        I help creators and businesses tell their story through high-quality video production and strategic content.
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <!-- Primary CTA -->
+        <a
+          href="#portfolio"
+          class="group relative px-8 py-4 bg-white text-black font-semibold rounded-full overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(255,255,255,0.15)]"
+        >
+          <span class="relative z-10">View My Work</span>
+        </a>
+
+        <!-- Secondary CTA -->
+        <a
+          href="https://youtube.com/@alphabravomedia"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group px-8 py-4 border border-gray-700 text-gray-300 font-medium rounded-full transition-all duration-300 hover:border-gray-500 hover:text-white hover:bg-white/5"
+        >
+          <span class="flex items-center gap-2">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+            YouTube Channel
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+      <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Featured Work / Showreel Section -->
+  <section id="showreel" class="py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+      <!-- Section header -->
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">Featured Work</h2>
+        <p class="text-gray-400 max-w-xl mx-auto">A selection of recent projects showcasing cinematic storytelling and high-end production value.</p>
+      </div>
+
+      <!-- YouTube Embed with glow effect -->
+      <div class="relative group">
+        <!-- Glow effect behind video -->
+        <div class="absolute -inset-4 bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-orange-500/20 rounded-3xl blur-2xl opacity-50 group-hover:opacity-75 transition-opacity duration-500"></div>
+
+        <!-- Video container -->
+        <div class="relative rounded-2xl overflow-hidden shadow-2xl shadow-black/50">
+          <YouTube
+            id="dQw4w9WgXcQ"
+            class="w-full aspect-video"
+            poster="maxresdefault"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest from the Studio Section -->
+  <section id="portfolio" class="py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+      <!-- Section header -->
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">Latest from the Studio</h2>
+        <p class="text-gray-400 max-w-xl mx-auto">Recent projects, tutorials, and behind-the-scenes content.</p>
+      </div>
+
+      <!-- Portfolio Grid -->
+      <div class="mb-16">
+        <h3 class="text-xl font-semibold text-gray-300 mb-6 flex items-center gap-3">
+          <span class="w-8 h-[1px] bg-gray-700"></span>
+          Portfolio
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {latestPortfolio.map((item) => (
+            <a
+              href={`/portfolio/${item.slug}`}
+              class="group relative bg-gray-900/50 rounded-xl overflow-hidden border border-gray-800/50 transition-all duration-300 hover:scale-[1.02] hover:border-gray-700 hover:shadow-xl hover:shadow-black/20"
+            >
+              <!-- Thumbnail placeholder -->
+              <div class="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <!-- Category badge -->
+                <span class="absolute top-3 left-3 px-3 py-1 bg-white/10 backdrop-blur-sm rounded-full text-xs font-medium text-gray-300">
+                  {item.data.category}
+                </span>
+              </div>
+              <!-- Content -->
+              <div class="p-5">
+                <h4 class="text-lg font-semibold text-white mb-2 group-hover:text-gray-200 transition-colors">
+                  {item.data.title}
+                </h4>
+                <p class="text-sm text-gray-500">
+                  {item.data.clientName}
+                </p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Blog Grid -->
+      <div>
+        <h3 class="text-xl font-semibold text-gray-300 mb-6 flex items-center gap-3">
+          <span class="w-8 h-[1px] bg-gray-700"></span>
+          From YouTube
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {latestBlog.map((post) => (
+            <a
+              href={`/blog/${post.slug}`}
+              class="group relative bg-gray-900/50 rounded-xl overflow-hidden border border-gray-800/50 transition-all duration-300 hover:scale-[1.02] hover:border-gray-700 hover:shadow-xl hover:shadow-black/20"
+            >
+              <!-- Thumbnail placeholder with play button -->
+              <div class="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden flex items-center justify-center">
+                <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                  <svg class="w-5 h-5 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              </div>
+              <!-- Content -->
+              <div class="p-5">
+                <h4 class="text-lg font-semibold text-white mb-2 group-hover:text-gray-200 transition-colors">
+                  {post.data.title}
+                </h4>
+                <p class="text-sm text-gray-500 line-clamp-2">
+                  {post.data.description}
+                </p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  /* Line clamp for text truncation */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
