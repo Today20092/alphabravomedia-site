@@ -26,11 +26,14 @@ const siteConfig = {
 
 const { title = `${siteConfig.siteName} | Cinema-Grade Videography` } = Astro.props;
 
+// Base URL for GitHub Pages (or '/' for custom domain)
+const base = import.meta.env.BASE_URL;
+
 const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/portfolio', label: 'Portfolio' },
-  { href: '/blog', label: 'Blog' },
-  { href: '/gear', label: 'Gear' },
+  { href: base, label: 'Home' },
+  { href: `${base}portfolio`, label: 'Portfolio' },
+  { href: `${base}blog`, label: 'Blog' },
+  { href: `${base}gear`, label: 'Gear' },
   { href: '#contact', label: 'Contact' },
 ];
 
@@ -42,8 +45,8 @@ const currentPath = Astro.url.pathname;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+    <link rel="icon" href={`${base}favicon.ico`} />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content="Cinema-grade videography for brands and creators. High-quality video production and strategic content." />
     <title>{title}</title>
@@ -57,7 +60,7 @@ const currentPath = Astro.url.pathname;
       <nav class="mx-4 mt-4 px-6 py-4 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-lg shadow-black/20">
         <div class="max-w-6xl mx-auto flex items-center justify-between">
           <!-- Logo -->
-          <a href="/" class="text-lg font-semibold tracking-tight text-white hover:text-gray-300 transition-colors">
+          <a href={base} class="text-lg font-semibold tracking-tight text-white hover:text-gray-300 transition-colors">
             {siteConfig.siteName}
           </a>
 

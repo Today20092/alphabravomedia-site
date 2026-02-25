@@ -13,6 +13,8 @@ export async function getStaticPaths() {
 const { item } = Astro.props;
 const { Content } = await item.render();
 
+const base = import.meta.env.BASE_URL;
+
 // Get related items (same category, excluding current)
 const allGear = await getCollection('gear');
 const relatedItems = allGear
@@ -24,7 +26,7 @@ const relatedItems = allGear
   <article class="pt-32 pb-24 px-6">
     <div class="max-w-4xl mx-auto">
       <!-- Back link -->
-      <a href="/gear" class="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-8">
+      <a href={`${base}gear`} class="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-8">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
         </svg>
@@ -78,7 +80,7 @@ const relatedItems = allGear
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             {relatedItems.map((related) => (
               <a
-                href={`/gear/${related.slug}`}
+                href={`${base}gear/${related.slug}`}
                 class="group relative bg-gray-900/50 rounded-xl overflow-hidden border border-gray-800/50 transition-all duration-300 hover:scale-[1.02] hover:border-gray-700"
               >
                 <div class="aspect-square bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
