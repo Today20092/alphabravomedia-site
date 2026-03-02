@@ -1,9 +1,11 @@
 ---
-title: "Rode Wireless GO II"
-amazonLink: "https://www.amazon.com/dp/B08XFQ6KP9"
-imageUrl: "/images/gear/rode-wireless-go.jpg"
+title: "Deity V-Mic D4 Mini Video Microphone"
+amazonLink: "https://amzn.to/4sjyUo6"
+imageUrl: "https://m.media-amazon.com/images/G/01/apparel/rcxgs/tile._CB483369110_.gif"
 category: "Audio"
 ---
+
+I use this microphone all the time, it works, sounds good, extremely affordable, and has great wind reduction.
 
 Compact wireless audio that just works. Essential for interviews and run-and-gun shooting.
 
