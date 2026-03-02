@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
 
 export async function getStaticPaths() {
   const gear = await getCollection("gear");
@@ -35,25 +36,14 @@ const relatedItems = allGear
         href={`${base}gear`}
         class="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-8"
       >
-        <svg
-          class="w-4 h-4"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M15 19l-7-7 7-7"></path>
-        </svg>
+        <Icon name="mdi:arrow-left" class="w-4 h-4" />
         Back to Gear
       </a>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
         <!-- Image -->
         <div
-          class="aspect-square bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl overflow-hidden"
+          class="aspect-square bg-linear-to-br from-gray-800 to-gray-900 rounded-2xl overflow-hidden"
         >
           <img
             src={item.data.imageUrl}
@@ -80,17 +70,9 @@ const relatedItems = allGear
             href={item.data.amazonLink}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 px-6 py-3 bg-[#FF9900] hover:bg-[#FFa31a] text-black font-semibold rounded-full transition-colors mb-8"
+            class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#232F3E] hover:bg-[#131921] text-white font-semibold rounded-full transition-colors mb-8"
           >
-            <svg
-              class="w-5 h-5 shrink-0 mt-0.5"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-            >
-              <path
-                d="M13.958 10.09c0 1.232.029 2.256-.591 3.351-.502.891-1.301 1.438-2.186 1.438-1.214 0-1.922-.924-1.922-2.292 0-2.692 2.415-3.182 4.7-3.182v.685zm3.186 7.705c-.209.189-.512.201-.745.074-1.052-.872-1.238-1.276-1.814-2.106-1.734 1.767-2.962 2.297-5.209 2.297-2.66 0-4.731-1.641-4.731-4.925 0-2.565 1.391-4.309 3.37-5.164 1.715-.754 4.11-.891 5.942-1.095v-.41c0-.753.06-1.642-.383-2.294-.385-.579-1.124-.82-1.775-.82-1.205 0-2.277.618-2.54 1.897-.054.285-.261.567-.549.582l-3.061-.333c-.259-.056-.548-.266-.472-.66.704-3.716 4.06-4.838 7.066-4.838 1.537 0 3.547.41 4.758 1.574 1.538 1.436 1.392 3.352 1.392 5.438v4.923c0 1.481.616 2.13 1.192 2.929.204.287.249.63-.01.839l-2.431 2.091z"
-              ></path>
-            </svg>
+            <Icon name="simple-icons:amazon" class="w-5 h-5 shrink-0" />
             View on Amazon
           </a>
 
@@ -121,7 +103,7 @@ const relatedItems = allGear
                   href={`${base}gear/${related.slug}`}
                   class="group relative bg-gray-900/50 rounded-xl overflow-hidden border border-gray-800/50 transition-all duration-300 hover:scale-[1.02] hover:border-gray-700"
                 >
-                  <div class="aspect-square bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center overflow-hidden">
+                  <div class="aspect-square bg-linear-to-br from-gray-800 to-gray-900 flex items-center justify-center overflow-hidden">
                     {related.data.imageUrl ? (
                       <img
                         src={related.data.imageUrl}
@@ -129,25 +111,7 @@ const relatedItems = allGear
                         class="w-full h-full object-cover"
                       />
                     ) : (
-                      <svg
-                        class="w-12 h-12 text-gray-700"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="1"
-                          d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
-                        />
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="1"
-                          d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
-                        />
-                      </svg>
+                      <Icon name="mdi:camera" class="w-12 h-12 text-gray-700" />
                     )}
                   </div>
                   <div class="p-4">

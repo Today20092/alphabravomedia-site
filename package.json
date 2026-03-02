@@ -6,14 +6,21 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "new": "node scripts/new-content.js"
   },
   "dependencies": {
     "@astro-community/astro-embed-youtube": "^0.5.10",
+    "@astrojs/sitemap": "^3.7.0",
+    "@iconify-json/mdi": "^1.2.3",
+    "@iconify-json/simple-icons": "^1.2.72",
+    "@playform/compress": "^0.2.1",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.2.1",
     "astro": "^5.17.1",
+    "astro-icon": "^1.1.5",
     "astro-pagefind": "^1.8.5",
+    "astro-seo": "^1.1.0",
     "tailwindcss": "^4.2.1"
   }
 }

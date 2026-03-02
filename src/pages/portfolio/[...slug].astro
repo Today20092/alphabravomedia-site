@@ -1,7 +1,8 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { getCollection } from "astro:content";
+import { getCollection, getEntries } from "astro:content";
 import { YouTube } from "@astro-community/astro-embed-youtube";
+import { Icon } from "astro-icon/components";
 
 export async function getStaticPaths() {
   const items = await getCollection("portfolio");
@@ -16,6 +17,17 @@ const { Content } = await item.render();
 
 const rawBase = import.meta.env.BASE_URL;
 const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
+
+const gearUsedRaw = item.data.gearUsed
+  ? await getEntries(item.data.gearUsed)
+  : [];
+const gearUsed = gearUsedRaw.filter((gear) => gear !== undefined);
+if (gearUsedRaw.some((g) => g === undefined)) {
+  console.warn(
+    `Some gear items could not be resolved in ${item.data.title}. Provided IDs:`,
+    item.data.gearUsed,
+  );
+}
 
 // Get related items (same category, excluding current)
 const allItems = await getCollection("portfolio");
@@ -36,18 +48,7 @@ const relatedItems = allItems
         href={`${base}portfolio`}
         class="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-8"
       >
-        <svg
-          class="w-4 h-4"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M15 19l-7-7 7-7"></path>
-        </svg>
+        <Icon name="mdi:arrow-left" class="w-4 h-4" />
         Back to Portfolio
       </a>
 
@@ -72,7 +73,7 @@ const relatedItems = allItems
       {
         (item.data.videoId || item.data.image) && (
           <div class="relative group mb-12">
-            <div class="absolute -inset-4 bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-orange-500/10 rounded-3xl blur-2xl opacity-50" />
+            <div class="absolute -inset-4 bg-linear-to-r from-purple-500/10 via-pink-500/10 to-orange-500/10 rounded-3xl blur-2xl opacity-50" />
             <div class="relative rounded-2xl overflow-hidden shadow-2xl shadow-black/50 bg-gray-900 border border-gray-800 flex items-center justify-center">
               {item.data.videoId ? (
                 <YouTube
@@ -116,6 +117,30 @@ const relatedItems = allItems
             <p class="text-white">{item.data.category}</p>
           </div>
         </div>
+
+        {
+          gearUsed.length > 0 && (
+            <div class="mt-8">
+              <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">
+                Equipment Used
+              </h3>
+              <div class="flex flex-wrap gap-2">
+                {gearUsed.map((gear) => (
+                  <a
+                    href={`${base}gear/${gear.slug}`}
+                    class="inline-flex items-center px-4 py-2 bg-gray-900 border border-gray-800 rounded-lg text-sm text-gray-300 hover:text-white hover:border-purple-500/50 hover:bg-purple-500/10 transition-all duration-300"
+                  >
+                    <Icon
+                      name="mdi:camera"
+                      class="w-4 h-4 mr-2 text-purple-400"
+                    />
+                    {gear.data.title}
+                  </a>
+                ))}
+              </div>
+            </div>
+          )
+        }
       </div>
 
       <!-- Related Projects -->
@@ -135,7 +160,7 @@ const relatedItems = allItems
                     href={`${base}portfolio/${related.slug}`}
                     class="group relative bg-gray-900/50 rounded-xl overflow-hidden border border-gray-800/50 transition-all duration-300 hover:scale-[1.02] hover:border-gray-700"
                   >
-                    <div class="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden">
+                    <div class="aspect-video bg-linear-to-br from-gray-800 to-gray-900 relative overflow-hidden">
                       {imageUrl && (
                         <img
                           src={imageUrl}
@@ -143,7 +168,7 @@ const relatedItems = allItems
                           class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
                       )}
-                      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                      <div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
                     </div>
                     <div class="p-5">
                       <h3 class="text-lg font-semibold text-white group-hover:text-gray-200 transition-colors">

@@ -1,10 +1,10 @@
 ---
 title: "Maan Academy"
 clientName: "Maan Academy"
-videoId: "dQw4w9WgXcQ"
-category: "Music Video"
+videoId: "zfEZwdZnUmc"
+category: "Documentary"
 ---
 
 # Maan Academy
 
-This is a music video for Maan Academy.
+This is a documentary for Maan Academy.

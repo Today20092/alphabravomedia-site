@@ -7,7 +7,11 @@
       "Bash(git status:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(xargs -I {} sed -i \"s/from ''astro-icon''/from ''astro-icon\\\\/components''/g\" {})",
+      "Bash(grep \"import.*Icon\" src/pages/gear/[...slug].astro src/pages/portfolio/[...slug].astro src/pages/blog/[...slug].astro)",
+      "Bash(npm ls astro-icon)",
+      "Bash(npm uninstall simple-icons)"
     ]
   }
 }

@@ -1,4 +1,4 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection, z, reference } from 'astro:content';
 
 // Blog collection - YouTube tutorials, reviews, etc.
 const blog = defineCollection({
@@ -21,6 +21,7 @@ const portfolio = defineCollection({
     videoId: z.string().optional(), // Unlisted YouTube video ID
     image: z.string().optional(),
     category: z.string(),
+    gearUsed: z.array(reference('gear')).optional(),
   }),
 });
 
