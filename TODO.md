@@ -2,9 +2,7 @@
 
 ## Priority Fixes
 
-- [ ] **Fix Navigation on GitHub Pages** - Nav links still returning 404 errors on the deployed site. Need to investigate BASE_URL implementation further.
-
-note: when clicking blog currently goes to `https://today20092.github.io/alphabravomedia-siteblog` but needs to go to `https://today20092.github.io/alphabravomedia-site/blog/` same with other nav elements like portfolio
+- [x] **Fix Navigation on GitHub Pages** - Fixed by normalizing BASE_URL to always have a trailing slash in BaseLayout.astro.
 
 ## Features to Implement
 
