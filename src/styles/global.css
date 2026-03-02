@@ -1,2 +1,73 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+
+/* =============================================
+   Pagefind UI Theme — Dark Glassmorphism
+   ============================================= */
+:root {
+  --pagefind-ui-scale: 1;
+  --pagefind-ui-primary: #ffffff;
+  --pagefind-ui-text: #e5e7eb;
+  --pagefind-ui-background: transparent;
+  --pagefind-ui-border: rgba(255, 255, 255, 0.1);
+  --pagefind-ui-tag: rgba(255, 255, 255, 0.08);
+  --pagefind-ui-border-width: 1px;
+  --pagefind-ui-border-radius: 12px;
+  --pagefind-ui-image-border-radius: 8px;
+  --pagefind-ui-font: 'Inter', sans-serif;
+}
+
+.pagefind-ui__search-input {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+  border-radius: 12px !important;
+  font-size: 1rem !important;
+  backdrop-filter: blur(8px) !important;
+}
+.pagefind-ui__search-input::placeholder {
+  color: rgba(255, 255, 255, 0.35) !important;
+}
+.pagefind-ui__search-input:focus {
+  outline: none !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+.pagefind-ui__search-clear {
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+.pagefind-ui__result {
+  border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+  padding: 1rem 0 !important;
+}
+.pagefind-ui__result-link {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+.pagefind-ui__result-link:hover {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+.pagefind-ui__result-excerpt {
+  color: rgba(255, 255, 255, 0.5) !important;
+  font-size: 0.875rem !important;
+  line-height: 1.6 !important;
+}
+.pagefind-ui__result-tag {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: rgba(255, 255, 255, 0.6) !important;
+  border-radius: 999px !important;
+  font-size: 0.75rem !important;
+}
+.pagefind-ui__message {
+  color: rgba(255, 255, 255, 0.4) !important;
+  font-size: 0.8rem !important;
+}
+.pagefind-ui__button {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+  border-radius: 999px !important;
+}
+.pagefind-ui__button:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+}

@@ -1,7 +1,7 @@
 ---
 title: "Deity V-Mic D4 Mini Video Microphone"
 amazonLink: "https://amzn.to/4sjyUo6"
-imageUrl: "https://m.media-amazon.com/images/G/01/apparel/rcxgs/tile._CB483369110_.gif"
+imageUrl: "https://m.media-amazon.com/images/I/71Nzk0KLulL._AC_SL1500_.jpg"
 category: "Audio"
 ---
 

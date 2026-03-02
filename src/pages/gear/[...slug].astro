@@ -13,7 +13,8 @@ export async function getStaticPaths() {
 const { item } = Astro.props;
 const { Content } = await item.render();
 
-const base = import.meta.env.BASE_URL;
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
 
 // Get related items (same category, excluding current)
 const allGear = await getCollection('gear');
@@ -23,7 +24,9 @@ const relatedItems = allGear
 ---
 
 <BaseLayout title={`${item.data.title} | Alpha Bravo Media`}>
-  <article class="pt-32 pb-24 px-6">
+  <article data-pagefind-body class="pt-32 pb-24 px-6">
+    <span data-pagefind-meta="type" class="sr-only">Gear</span>
+    <span data-pagefind-meta="category" style="display:none">{item.data.category}</span>
     <div class="max-w-4xl mx-auto">
       <!-- Back link -->
       <a href={`${base}gear`} class="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-8">
@@ -35,11 +38,8 @@ const relatedItems = allGear
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
         <!-- Image -->
-        <div class="aspect-square bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl flex items-center justify-center">
-          <svg class="w-24 h-24 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
-          </svg>
+        <div class="aspect-square bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl overflow-hidden">
+          <img src={item.data.imageUrl} alt={item.data.title} class="w-full h-full object-contain" />
         </div>
 
         <!-- Details -->
@@ -64,7 +64,7 @@ const relatedItems = allGear
             View on Amazon
           </a>
 
-          <p class="text-sm text-gray-500 mb-8">Affiliate link - I earn a commission on purchases</p>
+          <p data-pagefind-ignore class="text-sm text-gray-500 mb-8">Affiliate link - I earn a commission on purchases</p>
 
           <!-- Content -->
           <div class="prose prose-invert max-w-none">
@@ -75,7 +75,7 @@ const relatedItems = allGear
 
       <!-- Related Gear -->
       {relatedItems.length > 0 && (
-        <div class="border-t border-gray-800 pt-12 mt-16">
+        <div data-pagefind-ignore class="border-t border-gray-800 pt-12 mt-16">
           <h2 class="text-2xl font-bold text-white mb-8">More {item.data.category} Gear</h2>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             {relatedItems.map((related) => (
