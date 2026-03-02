@@ -7,8 +7,8 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
 
 const allGear = await getCollection('gear');
 
-// Group by category
-const categories = ['Camera', 'Lens', 'Audio', 'Lighting', 'Accessories', 'Software'] as const;
+// Group by category dynamically based on existing entries
+const categories = Array.from(new Set(allGear.map((item) => item.data.category)));
 const gearByCategory = categories.reduce((acc, category) => {
   acc[category] = allGear.filter(item => item.data.category === category);
   return acc;

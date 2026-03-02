@@ -18,8 +18,9 @@ const portfolio = defineCollection({
   schema: z.object({
     title: z.string(),
     clientName: z.string(),
-    videoId: z.string(), // Unlisted YouTube video ID
-    category: z.enum(['Brand Film', 'Music Video', 'Documentary', 'Commercial', 'Event']),
+    videoId: z.string().optional(), // Unlisted YouTube video ID
+    image: z.string().optional(),
+    category: z.string(),
   }),
 });
 
@@ -30,7 +31,7 @@ const gear = defineCollection({
     title: z.string(),
     amazonLink: z.string().url(),
     imageUrl: z.string(),
-    category: z.enum(['Camera', 'Lens', 'Audio', 'Lighting', 'Accessories', 'Software']),
+    category: z.string(),
   }),
 });
 

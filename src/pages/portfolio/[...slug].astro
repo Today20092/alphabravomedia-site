@@ -1,10 +1,10 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
-import { YouTube } from '@astro-community/astro-embed-youtube';
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { YouTube } from "@astro-community/astro-embed-youtube";
 
 export async function getStaticPaths() {
-  const items = await getCollection('portfolio');
+  const items = await getCollection("portfolio");
   return items.map((item) => ({
     params: { slug: item.slug },
     props: { item },
@@ -15,34 +15,52 @@ const { item } = Astro.props;
 const { Content } = await item.render();
 
 const rawBase = import.meta.env.BASE_URL;
-const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
+const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
 
 // Get related items (same category, excluding current)
-const allItems = await getCollection('portfolio');
+const allItems = await getCollection("portfolio");
 const relatedItems = allItems
-  .filter(i => i.slug !== item.slug && i.data.category === item.data.category)
+  .filter((i) => i.slug !== item.slug && i.data.category === item.data.category)
   .slice(0, 2);
 ---
 
 <BaseLayout title={`${item.data.title} | Alpha Bravo Media`}>
   <article data-pagefind-body class="pt-32 pb-24 px-6">
     <span data-pagefind-meta="type" class="sr-only">Portfolio</span>
-    <span data-pagefind-meta="client" style="display:none">{item.data.clientName}</span>
+    <span data-pagefind-meta="client" style="display:none"
+      >{item.data.clientName}</span
+    >
     <div class="max-w-4xl mx-auto">
       <!-- Back link -->
-      <a href={`${base}portfolio`} class="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-8">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+      <a
+        href={`${base}portfolio`}
+        class="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-8"
+      >
+        <svg
+          class="w-4 h-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15 19l-7-7 7-7"></path>
         </svg>
         Back to Portfolio
       </a>
 
       <!-- Header -->
       <header class="mb-10">
-        <span class="inline-block px-3 py-1 bg-white/10 rounded-full text-xs font-medium text-gray-300 mb-4">
+        <span
+          class="inline-block px-3 py-1 bg-white/10 rounded-full text-xs font-medium text-gray-300 mb-4"
+        >
           {item.data.category}
         </span>
-        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">
+        <h1
+          class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-4"
+        >
           {item.data.title}
         </h1>
         <p class="text-lg text-gray-400">
@@ -50,13 +68,28 @@ const relatedItems = allItems
         </p>
       </header>
 
-      <!-- Video Embed -->
-      <div class="relative group mb-12">
-        <div class="absolute -inset-4 bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-orange-500/10 rounded-3xl blur-2xl opacity-50"></div>
-        <div class="relative rounded-2xl overflow-hidden shadow-2xl shadow-black/50">
-          <YouTube id={item.data.videoId} class="w-full aspect-video" poster="maxresdefault" />
-        </div>
-      </div>
+      <!-- Video Embed or Image -->
+      {
+        (item.data.videoId || item.data.image) && (
+          <div class="relative group mb-12">
+            <div class="absolute -inset-4 bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-orange-500/10 rounded-3xl blur-2xl opacity-50" />
+            <div class="relative rounded-2xl overflow-hidden shadow-2xl shadow-black/50 bg-gray-900 border border-gray-800 flex items-center justify-center">
+              {item.data.videoId ? (
+                <YouTube
+                  id={item.data.videoId}
+                  class="w-full max-w-full aspect-video m-0"
+                />
+              ) : item.data.image ? (
+                <img
+                  src={item.data.image}
+                  alt={item.data.title}
+                  class="w-full aspect-video object-cover"
+                />
+              ) : null}
+            </div>
+          </div>
+        )
+      }
 
       <!-- Content -->
       <div class="prose prose-invert prose-lg max-w-none mb-16">
@@ -67,40 +100,66 @@ const relatedItems = allItems
       <div class="border-t border-gray-800 pt-8 mb-16">
         <div class="grid grid-cols-2 gap-6">
           <div>
-            <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Client</h3>
+            <h3
+              class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2"
+            >
+              Client
+            </h3>
             <p class="text-white">{item.data.clientName}</p>
           </div>
           <div>
-            <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Category</h3>
+            <h3
+              class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2"
+            >
+              Category
+            </h3>
             <p class="text-white">{item.data.category}</p>
           </div>
         </div>
       </div>
 
       <!-- Related Projects -->
-      {relatedItems.length > 0 && (
-        <div data-pagefind-ignore class="border-t border-gray-800 pt-12">
-          <h2 class="text-2xl font-bold text-white mb-8">Related Projects</h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {relatedItems.map((related) => (
-              <a
-                href={`${base}portfolio/${related.slug}`}
-                class="group relative bg-gray-900/50 rounded-xl overflow-hidden border border-gray-800/50 transition-all duration-300 hover:scale-[1.02] hover:border-gray-700"
-              >
-                <div class="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 relative">
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                </div>
-                <div class="p-5">
-                  <h3 class="text-lg font-semibold text-white group-hover:text-gray-200 transition-colors">
-                    {related.data.title}
-                  </h3>
-                  <p class="text-sm text-gray-500 mt-1">{related.data.clientName}</p>
-                </div>
-              </a>
-            ))}
+      {
+        relatedItems.length > 0 && (
+          <div data-pagefind-ignore class="border-t border-gray-800 pt-12">
+            <h2 class="text-2xl font-bold text-white mb-8">Related Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {relatedItems.map((related) => {
+                const imageUrl =
+                  related.data.image ||
+                  (related.data.videoId
+                    ? `https://img.youtube.com/vi/${related.data.videoId}/maxresdefault.jpg`
+                    : null);
+                return (
+                  <a
+                    href={`${base}portfolio/${related.slug}`}
+                    class="group relative bg-gray-900/50 rounded-xl overflow-hidden border border-gray-800/50 transition-all duration-300 hover:scale-[1.02] hover:border-gray-700"
+                  >
+                    <div class="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden">
+                      {imageUrl && (
+                        <img
+                          src={imageUrl}
+                          alt={related.data.title}
+                          class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                      )}
+                      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    </div>
+                    <div class="p-5">
+                      <h3 class="text-lg font-semibold text-white group-hover:text-gray-200 transition-colors">
+                        {related.data.title}
+                      </h3>
+                      <p class="text-sm text-gray-500 mt-1">
+                        {related.data.clientName}
+                      </p>
+                    </div>
+                  </a>
+                );
+              })}
+            </div>
           </div>
-        </div>
-      )}
+        )
+      }
     </div>
   </article>
 </BaseLayout>
