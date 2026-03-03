@@ -101,7 +101,7 @@
 
 ## Notes
 
-- Site is deployed at: https://today20092.github.io/alphabravomedia-site/
+- Site is deployed at: https://alphabravomedia.co/
 - GitHub repo: https://github.com/Today20092/alphabravomedia-site
 - Using Astro 5 + Tailwind CSS v4
 - Content managed via Astro Content Collections

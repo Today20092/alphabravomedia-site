@@ -2,7 +2,7 @@
 
 A cinematic, high-end portfolio website built with Astro 5, Tailwind CSS v4, and the Astro Content Layer.
 
-**Live Site:** https://today20092.github.io/alphabravomedia-site/
+**Live Site:** https://alphabravomedia.co/
 
 ---
 

@@ -9,8 +9,7 @@ import icon from 'astro-icon';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://today20092.github.io',
-  base: '/alphabravomedia-site',
+  site: 'https://alphabravomedia.co/',
   integrations: [pagefind(), sitemap(), compress(), icon({
     include: {
       mdi: ['*'],
