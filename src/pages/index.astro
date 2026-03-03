@@ -183,11 +183,13 @@ const latestPortfolio = allPortfolio.slice(0, 3);
                   />
                 )}
                 <div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent"></div>
-                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div class="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                    <Icon name="mdi:play" class="w-6 h-6 text-white ml-1" />
+                {post.data.youtubeId && (
+                  <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div class="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                      <Icon name="mdi:play" class="w-6 h-6 text-white ml-1" />
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
               <!-- Content -->
               <div class="p-5">

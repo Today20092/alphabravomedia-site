@@ -16,7 +16,7 @@ const { post } = Astro.props;
 const { Content } = await post.render();
 
 const rawBase = import.meta.env.BASE_URL;
-const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
+const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
 ---
 
 <BaseLayout title={`${post.data.title} | Alpha Bravo Media`}>
@@ -65,21 +65,20 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
       </header>
 
       <!-- YouTube Embed -->
-      <div class="relative group mb-12">
-        <div
-          class="absolute -inset-4 bg-linear-to-r from-purple-500/10 via-pink-500/10 to-orange-500/10 rounded-3xl blur-2xl opacity-50"
-        >
-        </div>
-        <div
-          class="relative rounded-2xl overflow-hidden shadow-2xl shadow-black/50"
-        >
-          <YouTube
-            id={post.data.youtubeId}
-            class="w-full aspect-video"
-            poster="maxresdefault"
-          />
-        </div>
-      </div>
+      {
+        post.data.youtubeId && (
+          <div class="relative group mb-12">
+            <div class="absolute -inset-4 bg-linear-to-r from-purple-500/10 via-pink-500/10 to-orange-500/10 rounded-3xl blur-2xl opacity-50"></div>
+            <div class="relative rounded-2xl overflow-hidden shadow-2xl shadow-black/50">
+              <YouTube
+                id={post.data.youtubeId}
+                class="w-full aspect-video"
+                poster="maxresdefault"
+              />
+            </div>
+          </div>
+        )
+      }
 
       <!-- Content -->
       <div class="prose prose-invert prose-lg max-w-none">

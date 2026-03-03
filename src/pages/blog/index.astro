@@ -28,9 +28,11 @@ const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.
           >
             <!-- Thumbnail with play button -->
             <div class="aspect-video bg-linear-to-br from-gray-800 to-gray-900 relative overflow-hidden flex items-center justify-center">
-              <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20 group-hover:scale-110 transition-all duration-300">
-                <Icon name="mdi:play" class="w-6 h-6 text-white ml-1" />
-              </div>
+              {post.data.youtubeId && (
+                <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20 group-hover:scale-110 transition-all duration-300">
+                  <Icon name="mdi:play" class="w-6 h-6 text-white ml-1" />
+                </div>
+              )}
               <div class="absolute inset-0 bg-linear-to-t from-black/60 to-transparent"></div>
             </div>
 
