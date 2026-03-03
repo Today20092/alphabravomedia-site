@@ -8,6 +8,7 @@ gearUsed:
   - lumix-s5iix
   - Deity-V-Mic-D4
   - sigma-16-28mm
+order: 2
 ---
 ## Erchid Law Firm: Scaling Legal Expertise via Cinematic Talking-Head Infrastructure
 

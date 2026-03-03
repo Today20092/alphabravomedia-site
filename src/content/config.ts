@@ -22,6 +22,7 @@ const portfolio = defineCollection({
     image: z.string().optional(),
     category: z.string(),
     gearUsed: z.array(reference('gear')).optional(),
+    order: z.number().default(999),
   }),
 });
 

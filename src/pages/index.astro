@@ -15,7 +15,9 @@ const latestBlog = allBlogPosts
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
 
-const latestPortfolio = allPortfolio.slice(0, 3);
+const latestPortfolio = allPortfolio
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
 ---
 
 <BaseLayout>

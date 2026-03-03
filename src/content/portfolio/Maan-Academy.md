@@ -8,6 +8,7 @@ gearUsed:
   - sigma-16-28mm
   - amaran-60xs
   - amaran-light-dome-90
+order: 4
 ---
 
 ### Project Overview

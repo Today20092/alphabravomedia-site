@@ -8,6 +8,7 @@ gearUsed:
   - lumix-s5iix
   - sigma-16-28mm
   - amaran-60xs
+order: 3
 ---
 
 # Elevating Community Voices: A "White-Glove" Production for the *No Losses, Just Lessons* Podcast

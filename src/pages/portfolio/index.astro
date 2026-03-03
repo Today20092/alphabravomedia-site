@@ -6,7 +6,7 @@ import { Icon } from 'astro-icon/components';
 const rawBase = import.meta.env.BASE_URL;
 const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
 
-const allItems = await getCollection('portfolio');
+const allItems = (await getCollection('portfolio')).sort((a, b) => a.data.order - b.data.order);
 
 // Get unique categories
 const categories = [...new Set(allItems.map(item => item.data.category))];
