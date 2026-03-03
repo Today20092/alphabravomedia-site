@@ -12,12 +12,19 @@ import react from '@astrojs/react';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://alphabravomedia.co/',
-  integrations: [react(), keystatic(), pagefind(), sitemap(), compress(), icon({
-    include: {
-      mdi: ['*'],
-      'simple-icons': ['*'],
-    },
-  })],
+  integrations: [
+    react(),
+    process.env.NODE_ENV === 'development' ? keystatic() : null,
+    pagefind(),
+    sitemap(),
+    compress(),
+    icon({
+      include: {
+        mdi: ['*'],
+        'simple-icons': ['*'],
+      },
+    })
+  ].filter(Boolean),
   vite: {
     plugins: [tailwindcss()]
   }
