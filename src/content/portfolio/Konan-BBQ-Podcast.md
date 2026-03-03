@@ -8,6 +8,7 @@ gearUsed:
   - lumix-s5iix
   - sigma-16-28mm
   - amaran-60xs
+  - sig
 ---
 
 ### Sizzling Content, Effortless Execution: Elevating the Konan BBQ Podcast
