@@ -354,43 +354,77 @@ const currentPath = Astro.url.pathname;
 
     <!-- Scripts -->
     <script>
-      // Mobile menu toggle
-      const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-      const mobileMenu = document.getElementById("mobile-menu");
-      const menuOpen = document.getElementById("menu-open");
-      const menuClose = document.getElementById("menu-close");
+      let lastScrollY = window.scrollY;
 
-      mobileMenuBtn?.addEventListener("click", () => {
-        const isOpen = !mobileMenu?.classList.contains("hidden");
-        mobileMenu?.classList.toggle("hidden");
+      function handleScroll() {
+        const header = document.querySelector("header");
+        if (!header) return;
 
-        if (isOpen) {
-          menuOpen?.classList.remove("hidden");
-          menuClose?.classList.add("hidden");
+        const currentScrollY = window.scrollY;
+
+        // Only hide header if scrolled down past 100px
+        if (currentScrollY > lastScrollY && currentScrollY > 100) {
+          header.style.transform = "translateY(-100%)";
         } else {
-          menuOpen?.classList.add("hidden");
-          menuClose?.classList.remove("hidden");
+          header.style.transform = "translateY(0)";
         }
-      });
+        lastScrollY = currentScrollY;
+      }
 
-      // Copy Element username
-      const copyBtn = document.getElementById("copy-element");
-      const copyIcon = document.getElementById("copy-icon");
-      const checkIcon = document.getElementById("check-icon");
+      function setupInteractions() {
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const menuOpen = document.getElementById("menu-open");
+        const menuClose = document.getElementById("menu-close");
 
-      copyBtn?.addEventListener("click", async () => {
-        const username = copyBtn.getAttribute("data-username");
-        if (username) {
-          await navigator.clipboard.writeText(username);
-          copyIcon?.classList.add("hidden");
-          checkIcon?.classList.remove("hidden");
+        mobileMenuBtn?.addEventListener("click", () => {
+          const isHidden = mobileMenu?.classList.contains("hidden");
 
-          setTimeout(() => {
-            copyIcon?.classList.remove("hidden");
-            checkIcon?.classList.add("hidden");
-          }, 2000);
+          if (isHidden) {
+            mobileMenu?.classList.remove("hidden");
+            menuOpen?.classList.add("hidden");
+            menuClose?.classList.remove("hidden");
+          } else {
+            mobileMenu?.classList.add("hidden");
+            menuOpen?.classList.remove("hidden");
+            menuClose?.classList.add("hidden");
+          }
+        });
+
+        // Copy Element username
+        const copyBtn = document.getElementById("copy-element");
+        const copyIcon = document.getElementById("copy-icon");
+        const checkIcon = document.getElementById("check-icon");
+
+        copyBtn?.addEventListener("click", async () => {
+          const username = copyBtn.getAttribute("data-username");
+          if (username) {
+            await navigator.clipboard.writeText(username);
+            copyIcon?.classList.add("hidden");
+            checkIcon?.classList.remove("hidden");
+
+            setTimeout(() => {
+              copyIcon?.classList.remove("hidden");
+              checkIcon?.classList.add("hidden");
+            }, 2000);
+          }
+        });
+
+        // Setup Header transition
+        const header = document.querySelector("header");
+        if (header) {
+          header.style.transition = "transform 0.3s ease-in-out";
         }
-      });
+
+        // Header scroll behavior
+        lastScrollY = window.scrollY;
+        window.removeEventListener("scroll", handleScroll);
+        window.addEventListener("scroll", handleScroll, { passive: true });
+      }
+
+      // Run on initial load and after view transitions
+      document.addEventListener("astro:page-load", setupInteractions);
     </script>
   </body>
 </html>
