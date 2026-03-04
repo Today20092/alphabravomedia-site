@@ -8,6 +8,7 @@ import compress from '@playform/compress';
 import icon from 'astro-icon';
 import keystatic from '@keystatic/astro';
 import react from '@astrojs/react';
+import mdx from '@astrojs/mdx';
 
 // https://astro.build/config
 export default defineConfig({
@@ -15,6 +16,7 @@ export default defineConfig({
   integrations: [
     react(),
     process.env.NODE_ENV === 'development' ? keystatic() : null,
+    mdx(),
     pagefind(),
     sitemap(),
     compress(),

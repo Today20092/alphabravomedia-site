@@ -1,13 +1,14 @@
 ---
 title: False Color Lut Generator
 pubDate: 2026-03-02
-description: 
+description:
   A python script that allows you to generate a false color LUT scientifically
   based on exposure based stops, completely customized to your liking with color
   and width for any log profile. Open Source
 tags:
   - color grading
 ---
+
 # Why I Built a Custom Hybrid False Color LUT Builder (and Why You Need One)
 
 If you’ve ever shot on a Sony FX3, A7S III, or even a cinema-line camera like the Venice, you’ve likely run into a frustrating trade-off: **How do I accurately monitor exposure without ruining my ability to see the scene?**
@@ -17,36 +18,55 @@ Standard False Color LUTs are a "rainbow mess." They wrap your entire image in n
 I wanted a better way. So, I built [lut-builder](https://github.com/Today20092/lut_builder).
 
 ## The Problem: The "All-or-Nothing" Monitoring Trap
+
 Most cameras don't have built-in, customizable false color. To get it, you usually have to buy an external monitor or load a static `.cube` file. But these static LUTs have three major flaws:
+
 1. **They are rigid:** You can't change where the exposure bands sit.
 2. **They are distracting:** They paint over the whole image.
 3. **They hide the "Real" Image:** You can't tell if your white balance is off because the "Green" exposure band is covering the actor's face.
 
+import Gallery from "../../components/Gallery.astro";
+import imgSample01 from "../../assets/background.svg";
+import imgSample02 from "../../assets/astro.svg";
+
 ## The Solution: A Hybrid, AI-Powered CLI Tool
-I used AI to help me build a Python-based command-line tool that generates professional, standards-compliant `.cube` files. 
+
+I used AI to help me build a Python-based command-line tool that generates professional, standards-compliant `.cube` files.
+
+<Gallery
+  images={[
+    { src: imgSample01, alt: "Sample False Color output 1" },
+    { src: imgSample02, alt: "Sample False Color output 2" },
+  ]}
+/>
 
 The goal was simple: **Hybrid Monitoring.** My tool allows you to keep a Rec.709 base image (so you can see your colors and white balance) while overlaying "thin" or "razor" bands of false color only at the specific exposure stops you care about.
 
 ### What makes this different?
+
 - **Precision Color Science:** Unlike cheap LUTs that use fixed BT.709 approximations, this tool uses **CIE Y luminance** derived from your camera’s specific gamut matrix (S-Gamut3.Cine, V-Gamut, etc.). The stops you see are what the sensor actually sees.
-- **The "Hybrid" Edge:** You can choose to have a monochrome base or a full Rec.709 base. This means you can see your exposure bands *on top* of a natural-looking image.
+- **The "Hybrid" Edge:** You can choose to have a monochrome base or a full Rec.709 base. This means you can see your exposure bands _on top_ of a natural-looking image.
 - **Tailwind Integration:** I integrated the **Tailwind v4 palette**, allowing you to pick professional, modern colors for your exposure bands using simple names or hex codes.
 - **Total Customization:** You can define exactly how wide the bands are (from "Razor" to "Wide") and exactly which IRE or Stop values they highlight.
 
 ## How it Works
+
 The script is a guided CLI experience. You just run `uv run lut-builder` (or use the double-clickable `.bat` and `.command` files I included for non-coders), and it walks you through:
+
 1. Choosing your source (Sony, Panasonic, Canon, ARRI, RED).
 2. Setting your target (Rec.709 or Rec.2020).
 3. Defining your exposure bands (e.g., Middle Gray at 0 stops, Highlights at +2).
 4. Exporting a `.cube` file ready for your monitor or NLE.
 
 ## Built with AI, For the Community
-This entire project was architected using AI to bridge the gap between complex mathematical transforms (scene-linear light decoding) and a user-friendly interface. 
 
-I’ve made it open-source because exposure shouldn't be a premium feature. Whether you're nailing the exposure on a skin tone or protecting your highlights in a high-contrast sunset, you should have a tool that works for *your* workflow—not one that forces you to look at a rainbow.
+This entire project was architected using AI to bridge the gap between complex mathematical transforms (scene-linear light decoding) and a user-friendly interface.
 
-**Check out the project and build your own LUTs here:** 
+I’ve made it open-source because exposure shouldn't be a premium feature. Whether you're nailing the exposure on a skin tone or protecting your highlights in a high-contrast sunset, you should have a tool that works for _your_ workflow—not one that forces you to look at a rainbow.
+
+**Check out the project and build your own LUTs here:**
 [https://github.com/Today20092/lut_builder](https://github.com/Today20092/lut_builder)
 
 ---
-*Ayoub is a creator focused on merging AI with cinematography tools to streamline the filmmaking process.*
+
+_Ayoub is a creator focused on merging AI with cinematography tools to streamline the filmmaking process._

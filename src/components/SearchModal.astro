@@ -1,6 +1,6 @@
 ---
 // SearchModal.astro — no props needed
-import { Icon } from 'astro-icon/components';
+import { Icon } from "astro-icon/components";
 ---
 
 <!-- Backdrop -->
@@ -76,15 +76,6 @@ import { Icon } from 'astro-icon/components';
 </style>
 
 <script>
-  const modal = document.getElementById(
-    "search-modal",
-  ) as HTMLDialogElement | null;
-  const backdrop = document.getElementById(
-    "search-backdrop",
-  ) as HTMLElement | null;
-  const openBtns = document.querySelectorAll("[data-search-open]");
-  const closeBtn = document.getElementById("search-close");
-
   let pagefindLoaded = false;
 
   async function loadPagefind() {
@@ -97,8 +88,6 @@ import { Icon } from 'astro-icon/components';
 
     try {
       const url = `${base}pagefind/pagefind-ui.js`;
-      // pagefind-ui.js is a UMD bundle — load it as a classic script so it
-      // registers itself on window rather than trying to export via ESM
       await new Promise<void>((resolve, reject) => {
         const script = document.createElement("script");
         script.src = url;
@@ -124,44 +113,81 @@ import { Icon } from 'astro-icon/components';
         if (input) input.focus();
       });
     } catch (e) {
-      console.error('Pagefind failed to load:', e);
+      console.error("Pagefind failed to load:", e);
     }
   }
 
-  function openModal() {
-    modal?.showModal();
-    if (backdrop) backdrop.style.display = "block";
-    document.body.style.overflow = "hidden";
-    loadPagefind();
-  }
+  function setupSearch() {
+    const modal = document.getElementById(
+      "search-modal",
+    ) as HTMLDialogElement | null;
+    const backdrop = document.getElementById(
+      "search-backdrop",
+    ) as HTMLElement | null;
+    const openBtns = document.querySelectorAll("[data-search-open]");
+    const closeBtn = document.getElementById("search-close");
 
-  function closeModal() {
-    modal?.classList.add("closing");
-    if (backdrop) backdrop.style.display = "none";
-    setTimeout(() => {
-      modal?.close();
-      modal?.classList.remove("closing");
-      document.body.style.overflow = "";
-    }, 150);
-  }
+    if (!modal) return;
 
-  openBtns.forEach((btn) => btn.addEventListener("click", openModal));
-  closeBtn?.addEventListener("click", closeModal);
-  backdrop?.addEventListener("click", closeModal);
+    function openModal(e?: Event) {
+      if (e) e.preventDefault();
+      modal?.showModal();
+      if (backdrop) backdrop.style.display = "block";
+      document.body.style.overflow = "hidden";
 
-  modal?.addEventListener("close", () => {
-    document.body.style.overflow = "";
-    if (backdrop) backdrop.style.display = "none";
-  });
-
-  window.addEventListener("keydown", (e) => {
-    if ((e.metaKey || e.ctrlKey) && e.key === "k") {
-      e.preventDefault();
-      if (modal?.open) {
-        closeModal();
-      } else {
-        openModal();
+      // Also close the mobile menu if it is open
+      const mobileMenu = document.getElementById("mobile-menu");
+      const menuOpen = document.getElementById("menu-open");
+      const menuClose = document.getElementById("menu-close");
+      if (mobileMenu && !mobileMenu.classList.contains("hidden")) {
+        mobileMenu.classList.add("hidden");
+        menuOpen?.classList.remove("hidden");
+        menuClose?.classList.add("hidden");
       }
+
+      loadPagefind();
     }
-  });
+
+    function closeModal() {
+      modal?.classList.add("closing");
+      if (backdrop) backdrop.style.display = "none";
+      setTimeout(() => {
+        modal?.close();
+        modal?.classList.remove("closing");
+        document.body.style.overflow = "";
+      }, 150);
+    }
+
+    openBtns.forEach((btn) => btn.addEventListener("click", openModal));
+    closeBtn?.addEventListener("click", closeModal);
+    backdrop?.addEventListener("click", closeModal);
+
+    modal.addEventListener("close", () => {
+      document.body.style.overflow = "";
+      if (backdrop) backdrop.style.display = "none";
+    });
+
+    // Cleanup old keydown listener if any to avoid duplicates across page loads
+    if ((window as any)._searchKeydownHandler) {
+      window.removeEventListener(
+        "keydown",
+        (window as any)._searchKeydownHandler,
+      );
+    }
+
+    (window as any)._searchKeydownHandler = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        if (modal?.open) {
+          closeModal();
+        } else {
+          openModal();
+        }
+      }
+    };
+
+    window.addEventListener("keydown", (window as any)._searchKeydownHandler);
+  }
+
+  document.addEventListener("astro:page-load", setupSearch);
 </script>
