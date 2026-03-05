@@ -27,11 +27,13 @@ async function main() {
 
     let folder, frontmatter;
     const title = await rl.question('Enter the title: ');
-    const filename = slugify(title) + '.md';
+    const slug = slugify(title);
+    let isFolderBased = false;
     const dateStr = new Date().toISOString().split('T')[0];
 
     if (choice === '1' || choice.toLowerCase() === 'portfolio') {
         folder = 'portfolio';
+        isFolderBased = true;
         frontmatter = `---
 title: "${title}"
 clientName: ""
@@ -46,6 +48,7 @@ Write about the project here...
 `;
     } else if (choice === '2' || choice.toLowerCase() === 'blog') {
         folder = 'blog';
+        isFolderBased = true;
         frontmatter = `---
 title: "${title}"
 pubDate: ${dateStr}
@@ -58,6 +61,7 @@ Write your blog post here...
 `;
     } else if (choice === '3' || choice.toLowerCase() === 'gear') {
         folder = 'gear';
+        isFolderBased = false;
         frontmatter = `---
 title: "${title}"
 amazonLink: ""
@@ -70,7 +74,10 @@ category: "Audio"
         process.exit(1);
     }
 
-    const outputDir = path.join(process.cwd(), 'src', 'content', folder);
+    const outputDir = isFolderBased
+        ? path.join(process.cwd(), 'src', 'content', folder, slug)
+        : path.join(process.cwd(), 'src', 'content', folder);
+    const filename = isFolderBased ? 'index.mdx' : `${slug}.md`;
     const outputPath = path.join(outputDir, filename);
 
     // Ensure directory exists
@@ -80,7 +87,7 @@ category: "Audio"
 
     // Ensure file doesn't already exist
     if (fs.existsSync(outputPath)) {
-        console.log(`\n❌ Error: File already exists at src/content/${folder}/${filename}`);
+        console.log(`\n❌ Error: File already exists at ${path.relative(process.cwd(), outputPath)}`);
         process.exit(1);
     }
 
