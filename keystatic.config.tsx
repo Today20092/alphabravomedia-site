@@ -8,7 +8,7 @@ export default config({
     blog: collection({
       label: 'Blog Posts',
       slugField: 'title',
-      path: 'src/content/blog/*',
+      path: 'src/content/blog/*/index',
       format: { contentField: 'content' },
       schema: {
         title: fields.slug({ name: { label: 'Title' } }),
@@ -22,7 +22,11 @@ export default config({
           fields.text({ label: 'Tag' }),
           { label: 'Tags', itemLabel: props => props.value }
         ),
-        content: fields.markdoc({ label: 'Content', extension: 'md' }),
+        image: fields.text({ label: 'Image Name (e.g. ./LUT Example.png)', description: 'Optional' }),
+        content: fields.mdx({
+          label: 'Content',
+          extension: 'mdx'
+        }),
       },
     }),
     portfolio: collection({

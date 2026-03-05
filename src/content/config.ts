@@ -3,12 +3,13 @@ import { defineCollection, z, reference } from 'astro:content';
 // Blog collection - YouTube tutorials, reviews, etc.
 const blog = defineCollection({
   type: 'content',
-  schema: z.object({
+  schema: ({ image }) => z.object({
     title: z.string(),
     pubDate: z.coerce.date(),
     description: z.string(),
     youtubeId: z.string().optional(),
     tags: z.array(z.string()).default([]),
+    image: image().optional(),
   }),
 });
 
