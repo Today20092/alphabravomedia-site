@@ -36,6 +36,11 @@ export default config({
         videoId: fields.text({ label: 'Video ID (YouTube)', description: 'Unlisted YouTube video ID (Optional)' }),
         image: fields.text({ label: 'Image URL', description: 'Optional' }),
         category: fields.text({ label: 'Category' }),
+        order: fields.integer({
+          label: 'Order',
+          defaultValue: 999,
+          description: 'Lower numbers appear first',
+        }),
         gearUsed: fields.array(
           fields.relationship({
             label: 'Gear',

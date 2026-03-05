@@ -2,7 +2,7 @@
 title: Talking Head Videos for Erchid Law Firm
 clientName: Erchid Law Firm
 videoId: gQ2X-aeOvWM
-category: Talking Head Videos
+category: Talking Head
 gearUsed:
   - amaran-60xs
   - lumix-s5iix

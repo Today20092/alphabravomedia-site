@@ -88,7 +88,19 @@ npm run preview
 
 ## Adding Content
 
-All content is managed through Markdown files in the `src/content/` directory. Each collection has its own folder and schema.
+You can manage content visually using **[Keystatic (Admin UI)](http://localhost:4321/keystatic)** when running the development server, or manually edit the Markdown files in the `src/content/` directory.
+
+### Using Keystatic (CMS)
+
+1. Start the development server (`npm run dev`).
+2. Open **[http://localhost:4321/keystatic](http://localhost:4321/keystatic)** in your browser.
+3. Use the interface to easily add, edit, or delete your content collections.
+
+---
+
+### Managing Files Manually
+
+If you prefer to work with files directly, each collection has its own folder and schema.
 
 ### Blog Posts
 

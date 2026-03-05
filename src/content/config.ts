@@ -15,11 +15,11 @@ const blog = defineCollection({
 // Portfolio collection - Client work
 const portfolio = defineCollection({
   type: 'content',
-  schema: z.object({
+  schema: ({ image }) => z.object({
     title: z.string(),
     clientName: z.string(),
     videoId: z.string().optional(), // Unlisted YouTube video ID
-    image: z.string().optional(),
+    image: image().optional(),
     category: z.string(),
     gearUsed: z.array(reference('gear')).optional(),
     order: z.number().default(999),
