@@ -2,7 +2,7 @@
   "title": "Mobile Podcast & On-Location Audio Services",
   "description": "Professional white-glove production for your podcast or event. We bring the studio to you, handling all A/V logistics so you can focus on the message.",
   "order": 3,
-  "portfolioLink": "/portfolio/podcasts",
+  "portfolioLink": "/portfolio?category=Podcast",
   "tiers": [
     {
       "discriminant": "tier",

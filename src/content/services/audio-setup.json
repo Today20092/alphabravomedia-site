@@ -2,6 +2,7 @@
   "title": "Professional Event A/V & Production Services",
   "description": "Don't let bad sound ruin a meaningful moment. We provide professional audio engineering and multi-camera production so your guests can hear every word and your memories are captured in 4K. You handle the guests; we handle the rest.",
   "order": 1,
+  "portfolioLink": "/portfolio",
   "tiers": [
     {
       "discriminant": "tier",

@@ -12,16 +12,16 @@ import { Icon } from "astro-icon/components";
 ---
 
 <div
-  class={`relative flex flex-col p-6 sm:p-8 rounded-2xl border transition-all duration-300 h-full ${
+  class={`relative flex flex-col p-6 sm:p-8 rounded-2xl transition-all duration-500 h-full ${
     isPopular
-      ? "bg-gray-900 border-gray-600 shadow-xl shadow-white/5 scale-100 md:scale-105 z-10"
-      : "bg-gray-900/50 border-gray-800 hover:border-gray-700"
+      ? "bg-gray-900 border-transparent shadow-2xl scale-100 md:scale-105 z-10 before:absolute before:-inset-[2px] before:rounded-[18px] before:bg-linear-to-r before:from-purple-500 before:via-pink-500 before:to-orange-500 before:-z-10 before:opacity-75 before:animate-[pulse_3s_ease-in-out_infinite]"
+      : "bg-gray-900/50 border border-gray-800 hover:border-gray-600 hover:-translate-y-2 hover:shadow-xl hover:shadow-black/50"
   }`}
 >
   {
     isPopular && (
-      <div class="absolute -top-4 left-1/2 -translate-x-1/2">
-        <span class="bg-white text-black text-xs font-bold uppercase tracking-wider py-1 px-3 rounded-full">
+      <div class="absolute -top-4 left-1/2 -translate-x-1/2 z-20">
+        <span class="bg-linear-to-r from-purple-500 to-orange-500 text-white text-xs font-bold uppercase tracking-wider py-1.5 px-4 rounded-full shadow-lg shadow-orange-500/30 whitespace-nowrap">
           Recommended
         </span>
       </div>
@@ -41,9 +41,9 @@ import { Icon } from "astro-icon/components";
     </div>
   </div>
 
-  <div class="flex-grow">
+  <div class="grow">
     <h4
-      class="text-sm font-semibold text-gray-300 uppercase tracking-wider mb-4"
+      class={`text-sm font-semibold uppercase tracking-wider mb-4 ${isPopular ? "text-purple-300" : "text-gray-300"}`}
     >
       What's Included
     </h4>
@@ -53,7 +53,7 @@ import { Icon } from "astro-icon/components";
           <li class="flex items-start">
             <Icon
               name="mdi:check-circle"
-              class="w-5 h-5 text-gray-400 mr-3 shrink-0 mt-0.5"
+              class={`w-5 h-5 mr-3 shrink-0 mt-0.5 ${isPopular ? "text-pink-500" : "text-gray-500"}`}
             />
             <span class="text-gray-300 text-sm leading-relaxed">{item}</span>
           </li>
@@ -65,10 +65,10 @@ import { Icon } from "astro-icon/components";
   <div class="mt-auto">
     <a
       href="#contact"
-      class={`block w-full text-center py-3 px-4 rounded-xl font-semibold transition-all duration-300 ${
+      class={`block w-full text-center py-3 px-4 rounded-xl font-semibold transition-all duration-300 hover:-translate-y-1 ${
         isPopular
-          ? "bg-white text-black hover:bg-gray-200"
-          : "bg-gray-800 text-white hover:bg-gray-700"
+          ? "bg-linear-to-r from-purple-600 to-orange-500 text-white hover:opacity-90 shadow-lg shadow-purple-500/25 hover:shadow-orange-500/40"
+          : "bg-gray-800 border border-gray-700 text-white hover:bg-gray-700 hover:shadow-lg"
       }`}
     >
       Inquire Now

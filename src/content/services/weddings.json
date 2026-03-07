@@ -2,7 +2,7 @@
   "title": "Wedding Content & A/V Services",
   "description": "Premium cinematic storytelling and high-fidelity audio services tailored to capture the true vibe, joy, and beauty of your Nikkah and Walima.",
   "order": 2,
-  "portfolioLink": "/portfolio/weddings",
+  "portfolioLink": "/portfolio?category=Weddings",
   "tiers": [
     {
       "discriminant": "tier",

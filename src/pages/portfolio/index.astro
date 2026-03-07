@@ -124,16 +124,19 @@ const categories = [...new Set(allItems.map(item => item.data.category))];
 </style>
 
 <script>
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const items = document.querySelectorAll('.portfolio-item');
+  document.addEventListener('astro:page-load', () => {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const items = document.querySelectorAll('.portfolio-item');
 
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const category = btn.getAttribute('data-category');
+    if (!filterBtns.length || !items.length) return;
 
+    // Function to handle filtering logic
+    function filterPortfolio(category: string | null) {
+      if (!category) return;
       // Update active state
       filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+      const targetBtn = Array.from(filterBtns).find(b => b.getAttribute('data-category') === category) || filterBtns[0];
+      if (targetBtn) targetBtn.classList.add('active');
 
       // Filter items
       items.forEach(item => {
@@ -144,6 +147,30 @@ const categories = [...new Set(allItems.map(item => item.data.category))];
           item.classList.add('hidden');
         }
       });
+    }
+
+    // Handle click events
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const category = btn.getAttribute('data-category');
+        filterPortfolio(category);
+        
+        // Update URL to match filter
+        const url = new URL(window.location.href);
+        if (category === 'all') {
+          url.searchParams.delete('category');
+        } else if (category) {
+          url.searchParams.set('category', category);
+        }
+        window.history.pushState({}, '', url);
+      });
     });
+
+    // Check for URL parameter on page load
+    const params = new URLSearchParams(window.location.search);
+    const initialCategory = params.get('category');
+    if (initialCategory) {
+      filterPortfolio(initialCategory);
+    }
   });
 </script>
