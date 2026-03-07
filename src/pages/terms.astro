@@ -17,21 +17,21 @@ export const prerender = true;
     <div class="max-w-4xl mx-auto">
       <div class="mb-12">
         <h1
-          class="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-4"
+          class="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-4 font-['Sora',sans-serif]"
         >
           {termsEntry?.data?.title || "Terms of Service & Booking Agreement"}
         </h1>
-        <p class="text-lg text-gray-400">
+        <p class="text-lg text-[#a8998a]">
           Please review our policies and procedures before booking your session.
         </p>
       </div>
 
       <div
-        class="bg-gray-900/60 backdrop-blur-md border border-gray-800 rounded-2xl p-6 sm:p-8 mb-16 shadow-xl shadow-black/20"
+        class="bg-[#141211]/60 backdrop-blur-md border border-[#2a2520] rounded-2xl p-6 sm:p-8 mb-16 shadow-xl shadow-black/20"
       >
         <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
           <svg
-            class="w-6 h-6 text-indigo-400"
+            class="w-6 h-6 text-[#c8875c]"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -45,9 +45,9 @@ export const prerender = true;
           The Quick Summary (TL;DR)
         </h2>
         <ul class="space-y-3">
-          <li class="flex items-start gap-3 text-gray-300">
+          <li class="flex items-start gap-3 text-[#a8998a]">
             <svg
-              class="w-5 h-5 text-gray-500 mt-0.5 shrink-0"
+              class="w-5 h-5 text-[#7a6f63] mt-0.5 shrink-0"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -63,9 +63,9 @@ export const prerender = true;
               > is required to secure your booking date.</span
             >
           </li>
-          <li class="flex items-start gap-3 text-gray-300">
+          <li class="flex items-start gap-3 text-[#a8998a]">
             <svg
-              class="w-5 h-5 text-gray-500 mt-0.5 shrink-0"
+              class="w-5 h-5 text-[#7a6f63] mt-0.5 shrink-0"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -83,9 +83,9 @@ export const prerender = true;
               > for longer-form content.</span
             >
           </li>
-          <li class="flex items-start gap-3 text-gray-300">
+          <li class="flex items-start gap-3 text-[#a8998a]">
             <svg
-              class="w-5 h-5 text-gray-500 mt-0.5 shrink-0"
+              class="w-5 h-5 text-[#7a6f63] mt-0.5 shrink-0"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -101,9 +101,9 @@ export const prerender = true;
               > for rescheduling or cancellations.</span
             >
           </li>
-          <li class="flex items-start gap-3 text-gray-300">
+          <li class="flex items-start gap-3 text-[#a8998a]">
             <svg
-              class="w-5 h-5 text-gray-500 mt-0.5 shrink-0"
+              class="w-5 h-5 text-[#7a6f63] mt-0.5 shrink-0"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -120,9 +120,9 @@ export const prerender = true;
               >.</span
             >
           </li>
-          <li class="flex items-start gap-3 text-gray-300">
+          <li class="flex items-start gap-3 text-[#a8998a]">
             <svg
-              class="w-5 h-5 text-gray-500 mt-0.5 shrink-0"
+              class="w-5 h-5 text-[#7a6f63] mt-0.5 shrink-0"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -144,17 +144,17 @@ export const prerender = true;
         Content ? (
           <article
             class="prose prose-invert max-w-none
-          prose-h2:text-2xl prose-h2:font-semibold prose-h2:text-white prose-h2:mb-4 prose-h2:tracking-tight prose-h2:border-b prose-h2:border-gray-800 prose-h2:pb-2 prose-h2:mt-12
-          prose-p:text-gray-400 prose-p:leading-relaxed prose-p:mb-4
-          prose-strong:text-gray-200
-          prose-ul:list-disc prose-ul:pl-5 prose-ul:space-y-2 prose-ul:marker:text-gray-600 prose-ul:mb-4
-          prose-li:text-gray-400
+          prose-h2:text-2xl prose-h2:font-semibold prose-h2:text-white prose-h2:mb-4 prose-h2:tracking-tight prose-h2:border-b prose-h2:border-[#2a2520] prose-h2:pb-2 prose-h2:mt-12 prose-h2:font-['Sora',sans-serif]
+          prose-p:text-[#a8998a] prose-p:leading-relaxed prose-p:mb-4
+          prose-strong:text-[#f5e6d3]
+          prose-ul:list-disc prose-ul:pl-5 prose-ul:space-y-2 prose-ul:marker:text-[#7a6f63] prose-ul:mb-4
+          prose-li:text-[#a8998a]
         "
           >
             <Content />
           </article>
         ) : (
-          <div class="text-center text-gray-400 py-12">
+          <div class="text-center text-[#a8998a] py-12">
             Unable to load terms of service content.
           </div>
         )

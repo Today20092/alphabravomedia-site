@@ -18,22 +18,22 @@ const categories = [...new Set(allItems.map(item => item.data.category))];
     <div class="max-w-6xl mx-auto">
       <!-- Header -->
       <div class="mb-16">
-        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-4">Portfolio</h1>
-        <p class="text-lg text-gray-400 max-w-2xl">Selected work showcasing cinematic storytelling and high-end production value.</p>
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-4 font-['Sora',sans-serif]">Portfolio</h1>
+        <p class="text-lg text-[#a8998a] max-w-2xl">Selected work showcasing cinematic storytelling and high-end production value.</p>
       </div>
 
       <!-- Category Filter -->
       {categories.length > 0 && (
         <div class="flex flex-wrap gap-3 mb-12">
           <button
-            class="filter-btn active px-4 py-2 rounded-full text-sm font-medium border border-gray-700 text-white bg-white/10 transition-all duration-200"
+            class="filter-btn active px-4 py-2 rounded-full text-sm font-medium border border-[#c8875c] text-white bg-[#c8875c]/10 transition-all duration-200"
             data-category="all"
           >
             All
           </button>
           {categories.map((category) => (
             <button
-              class="filter-btn px-4 py-2 rounded-full text-sm font-medium border border-gray-800 text-gray-400 hover:border-gray-700 hover:text-white transition-all duration-200"
+              class="filter-btn px-4 py-2 rounded-full text-sm font-medium border border-[#2a2520] text-[#a8998a] hover:border-[#c8875c] hover:text-white transition-all duration-200"
               data-category={category}
             >
               {category}
@@ -47,7 +47,7 @@ const categories = [...new Set(allItems.map(item => item.data.category))];
         {allItems.map((item) => (
           <a
             href={`${base}portfolio/${item.slug}`}
-            class="portfolio-item group relative bg-gray-900/50 rounded-xl overflow-hidden border border-gray-800/50 transition-all duration-300 hover:scale-[1.02] hover:border-gray-700 hover:shadow-xl hover:shadow-black/20"
+            class="portfolio-item group relative bg-[#141211] rounded-xl overflow-hidden border border-[#2a2520] transition-all duration-300 hover:scale-[1.02] hover:border-[#c8875c]/30 hover:shadow-xl hover:shadow-black/20"
             data-category={item.data.category}
           >
             <!-- Thumbnail -->
@@ -76,7 +76,7 @@ const categories = [...new Set(allItems.map(item => item.data.category))];
               })()}
               <div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent"></div>
               <!-- Category badge -->
-              <span class="absolute top-4 left-4 px-3 py-1 bg-white/10 backdrop-blur-sm rounded-full text-xs font-medium text-gray-300">
+              <span class="absolute top-4 left-4 px-3 py-1 bg-[#c8875c]/10 backdrop-blur-sm rounded-full text-xs font-medium text-[#c8875c]">
                 {item.data.category}
               </span>
               <!-- Play icon on hover if video -->
@@ -91,10 +91,10 @@ const categories = [...new Set(allItems.map(item => item.data.category))];
 
             <!-- Content -->
             <div class="p-6">
-              <h2 class="text-xl font-semibold text-white mb-2 group-hover:text-gray-200 transition-colors">
+              <h2 class="text-xl font-semibold text-white mb-2 font-['Sora',sans-serif] group-hover:text-gray-200 transition-colors">
                 {item.data.title}
               </h2>
-              <p class="text-sm text-gray-500">
+              <p class="text-sm text-[#7a6f63]">
                 {item.data.clientName}
               </p>
             </div>
@@ -104,7 +104,7 @@ const categories = [...new Set(allItems.map(item => item.data.category))];
 
       {allItems.length === 0 && (
         <div class="text-center py-20">
-          <p class="text-gray-500">No portfolio items yet. Check back soon!</p>
+          <p class="text-[#7a6f63]">No portfolio items yet. Check back soon!</p>
         </div>
       )}
     </div>
@@ -113,8 +113,8 @@ const categories = [...new Set(allItems.map(item => item.data.category))];
 
 <style>
   .filter-btn.active {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(200, 135, 92, 0.1);
+    border-color: rgba(200, 135, 92, 0.5);
     color: white;
   }
 

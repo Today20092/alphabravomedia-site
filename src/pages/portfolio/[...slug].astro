@@ -47,7 +47,7 @@ const relatedItems = allItems
       <!-- Back link -->
       <a
         href={`${base}portfolio`}
-        class="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-8"
+        class="inline-flex items-center gap-2 text-[#a8998a] hover:text-white transition-colors mb-8"
       >
         <Icon name="mdi:arrow-left" class="w-4 h-4" />
         Back to Portfolio
@@ -56,16 +56,16 @@ const relatedItems = allItems
       <!-- Header -->
       <header class="mb-10">
         <span
-          class="inline-block px-3 py-1 bg-white/10 rounded-full text-xs font-medium text-gray-300 mb-4"
+          class="inline-block px-3 py-1 bg-[#c8875c]/10 rounded-full text-xs font-medium text-[#c8875c] mb-4"
         >
           {item.data.category}
         </span>
         <h1
-          class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-4"
+          class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-4 font-['Sora',sans-serif]"
         >
           {item.data.title}
         </h1>
-        <p class="text-lg text-gray-400">
+        <p class="text-lg text-[#a8998a]">
           Client: <span class="text-white">{item.data.clientName}</span>
         </p>
       </header>
@@ -74,8 +74,8 @@ const relatedItems = allItems
       {
         (item.data.videoId || item.data.image) && (
           <div class="relative group mb-12">
-            <div class="absolute -inset-4 bg-linear-to-r from-purple-500/10 via-pink-500/10 to-orange-500/10 rounded-3xl blur-2xl opacity-50" />
-            <div class="relative rounded-2xl overflow-hidden shadow-2xl shadow-black/50 bg-gray-900 border border-gray-800 flex items-center justify-center">
+            <div class="absolute -inset-4 bg-linear-to-r from-[#c8875c]/10 to-[#a06b3e]/10 rounded-3xl blur-2xl opacity-50" />
+            <div class="relative rounded-2xl overflow-hidden shadow-2xl shadow-black/50 bg-[#141211] border border-[#2a2520] flex items-center justify-center">
               {item.data.videoId ? (
                 <YouTube
                   id={item.data.videoId}
@@ -99,11 +99,11 @@ const relatedItems = allItems
       </div>
 
       <!-- Project Details -->
-      <div class="border-t border-gray-800 pt-8 mb-16">
+      <div class="border-t border-[#2a2520] pt-8 mb-16">
         <div class="grid grid-cols-2 gap-6">
           <div>
             <h3
-              class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2"
+              class="text-xs font-semibold text-[#7a6f63] uppercase tracking-wider mb-2"
             >
               Client
             </h3>
@@ -111,7 +111,7 @@ const relatedItems = allItems
           </div>
           <div>
             <h3
-              class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2"
+              class="text-xs font-semibold text-[#7a6f63] uppercase tracking-wider mb-2"
             >
               Category
             </h3>
@@ -129,11 +129,11 @@ const relatedItems = allItems
                 {gearUsed.map((gear) => (
                   <a
                     href={`${base}gear/${gear.slug}`}
-                    class="inline-flex items-center px-4 py-2 bg-gray-900 border border-gray-800 rounded-lg text-sm text-gray-300 hover:text-white hover:border-purple-500/50 hover:bg-purple-500/10 transition-all duration-300"
+                    class="inline-flex items-center px-4 py-2 bg-[#141211] border border-[#2a2520] rounded-lg text-sm text-[#a8998a] hover:text-white hover:border-[#c8875c]/50 hover:bg-[#c8875c]/10 transition-all duration-300"
                   >
                     <Icon
                       name="mdi:camera"
-                      class="w-4 h-4 mr-2 text-purple-400"
+                      class="w-4 h-4 mr-2 text-[#c8875c]"
                     />
                     {gear.data.title}
                   </a>
@@ -147,13 +147,13 @@ const relatedItems = allItems
       <!-- Related Projects -->
       {
         relatedItems.length > 0 && (
-          <div data-pagefind-ignore class="border-t border-gray-800 pt-12">
-            <h2 class="text-2xl font-bold text-white mb-8">Related Projects</h2>
+          <div data-pagefind-ignore class="border-t border-[#2a2520] pt-12">
+            <h2 class="text-2xl font-bold text-white mb-8 font-['Sora',sans-serif]">Related Projects</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               {relatedItems.map((related) => (
                 <a
                   href={`${base}portfolio/${related.slug}`}
-                  class="group relative bg-gray-900/50 rounded-xl overflow-hidden border border-gray-800/50 transition-all duration-300 hover:scale-[1.02] hover:border-gray-700"
+                  class="group relative bg-[#141211] rounded-xl overflow-hidden border border-[#2a2520] transition-all duration-300 hover:scale-[1.02] hover:border-[#c8875c]/30"
                 >
                   <div class="aspect-video bg-linear-to-br from-gray-800 to-gray-900 relative overflow-hidden">
                     {related.data.image ? (
@@ -175,7 +175,7 @@ const relatedItems = allItems
                     <h3 class="text-lg font-semibold text-white group-hover:text-gray-200 transition-colors">
                       {related.data.title}
                     </h3>
-                    <p class="text-sm text-gray-500 mt-1">
+                    <p class="text-sm text-[#7a6f63] mt-1">
                       {related.data.clientName}
                     </p>
                   </div>

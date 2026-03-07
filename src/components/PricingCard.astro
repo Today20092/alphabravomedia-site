@@ -14,14 +14,14 @@ import { Icon } from "astro-icon/components";
 <div
   class={`relative flex flex-col p-6 sm:p-8 rounded-2xl transition-all duration-500 h-full ${
     isPopular
-      ? "bg-gray-900 border-transparent shadow-2xl scale-100 md:scale-105 z-10 before:absolute before:-inset-[2px] before:rounded-[18px] before:bg-linear-to-r before:from-purple-500 before:via-pink-500 before:to-orange-500 before:-z-10 before:opacity-75 before:animate-[pulse_3s_ease-in-out_infinite]"
-      : "bg-gray-900/50 border border-gray-800 hover:border-gray-600 hover:-translate-y-2 hover:shadow-xl hover:shadow-black/50"
+      ? "bg-[#141211] border-transparent shadow-2xl scale-100 md:scale-105 z-10 before:absolute before:-inset-[2px] before:rounded-[18px] before:bg-linear-to-r before:from-[#c8875c] before:to-[#a06b3e] before:-z-10 before:opacity-75 before:animate-[pulse_3s_ease-in-out_infinite]"
+      : "bg-[#141211] border border-[#2a2520] hover:border-[#c8875c]/30 hover:-translate-y-2 hover:shadow-xl hover:shadow-black/50"
   }`}
 >
   {
     isPopular && (
       <div class="absolute -top-4 left-1/2 -translate-x-1/2 z-20">
-        <span class="bg-linear-to-r from-purple-500 to-orange-500 text-white text-xs font-bold uppercase tracking-wider py-1.5 px-4 rounded-full shadow-lg shadow-orange-500/30 whitespace-nowrap">
+        <span class="bg-linear-to-r from-[#c8875c] to-[#a06b3e] text-white text-xs font-bold uppercase tracking-wider py-1.5 px-4 rounded-full shadow-lg shadow-[#c8875c]/30 whitespace-nowrap">
           Recommended
         </span>
       </div>
@@ -29,12 +29,12 @@ import { Icon } from "astro-icon/components";
   }
 
   <div class="mb-8">
-    <h3 class="text-xl font-bold text-white mb-2">{name}</h3>
+    <h3 class="text-xl font-bold text-white mb-2 font-['Sora',sans-serif]">{name}</h3>
     <div class="text-3xl font-bold text-white mb-4">{price}</div>
     <div
-      class="text-sm font-medium text-gray-400 bg-gray-800/50 rounded-lg p-3 inline-block"
+      class="text-sm font-medium text-[#a8998a] bg-[#2a2520]/50 rounded-lg p-3 inline-block"
     >
-      <span class="block text-gray-500 text-xs uppercase tracking-wider mb-1"
+      <span class="block text-[#7a6f63] text-xs uppercase tracking-wider mb-1"
         >Best For</span
       >
       {bestFor}
@@ -43,7 +43,7 @@ import { Icon } from "astro-icon/components";
 
   <div class="grow">
     <h4
-      class={`text-sm font-semibold uppercase tracking-wider mb-4 ${isPopular ? "text-purple-300" : "text-gray-300"}`}
+      class={`text-sm font-semibold uppercase tracking-wider mb-4 ${isPopular ? "text-[#c8875c]" : "text-[#a8998a]"}`}
     >
       What's Included
     </h4>
@@ -53,9 +53,9 @@ import { Icon } from "astro-icon/components";
           <li class="flex items-start">
             <Icon
               name="mdi:check-circle"
-              class={`w-5 h-5 mr-3 shrink-0 mt-0.5 ${isPopular ? "text-pink-500" : "text-gray-500"}`}
+              class={`w-5 h-5 mr-3 shrink-0 mt-0.5 ${isPopular ? "text-[#c8875c]" : "text-[#7a6f63]"}`}
             />
-            <span class="text-gray-300 text-sm leading-relaxed">{item}</span>
+            <span class="text-[#a8998a] text-sm leading-relaxed">{item}</span>
           </li>
         ))
       }
@@ -67,8 +67,8 @@ import { Icon } from "astro-icon/components";
       href="#contact"
       class={`block w-full text-center py-3 px-4 rounded-xl font-semibold transition-all duration-300 hover:-translate-y-1 ${
         isPopular
-          ? "bg-linear-to-r from-purple-600 to-orange-500 text-white hover:opacity-90 shadow-lg shadow-purple-500/25 hover:shadow-orange-500/40"
-          : "bg-gray-800 border border-gray-700 text-white hover:bg-gray-700 hover:shadow-lg"
+          ? "bg-linear-to-r from-[#c8875c] to-[#a06b3e] text-white hover:opacity-90 shadow-lg shadow-[#c8875c]/25 hover:shadow-[#c8875c]/40"
+          : "bg-[#2a2520] border border-[#2a2520] text-white hover:bg-[#2a2520]/80 hover:shadow-lg"
       }`}
     >
       Inquire Now

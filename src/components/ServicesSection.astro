@@ -10,7 +10,7 @@ const sortedServices = allServices.sort((a, b) => {
 });
 ---
 
-<section id="services" class="py-24 px-6 relative border-t border-gray-800">
+<section id="services" class="py-24 px-6 relative border-t border-[#2a2520]">
   <!-- Interactive subtle background glow -->
   <div
     class="absolute inset-0 bg-linear-to-b from-gray-900/50 via-[#0b0b0b] to-[#0b0b0b] z-[-1]"
@@ -21,11 +21,11 @@ const sortedServices = allServices.sort((a, b) => {
     <!-- Section Header -->
     <div class="text-center mb-12 relative">
       <h2
-        class="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-6 leading-tight"
+        class="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-6 leading-tight font-['Sora',sans-serif]"
       >
         Services & Packages
       </h2>
-      <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+      <p class="text-xl text-[#a8998a] max-w-2xl mx-auto">
         Transparent, flat-rate pricing to bring your vision to life. No hidden
         fees.
       </p>
@@ -46,8 +46,8 @@ const sortedServices = allServices.sort((a, b) => {
             id={`tab-${service.id}`}
             class={`px-6 py-3 rounded-full font-medium transition-all duration-300 text-sm sm:text-base border ${
               index === 0
-                ? "bg-white text-black border-white shadow-[0_0_20px_rgba(255,255,255,0.1)]"
-                : "bg-gray-900 border-gray-700 text-gray-300 hover:border-gray-500 hover:text-white hover:bg-white/5"
+                ? "bg-[#c8875c] text-white border-[#c8875c] shadow-[0_0_20px_rgba(200,135,92,0.15)]"
+                : "bg-[#141211] border-[#2a2520] text-[#a8998a] hover:border-[#c8875c] hover:text-white hover:bg-white/5"
             }`}
             data-target={`panel-${service.id}`}
           >
@@ -91,12 +91,12 @@ const sortedServices = allServices.sort((a, b) => {
         tabButtons.forEach((btn) => {
           btn.setAttribute("aria-selected", "false");
           btn.classList.remove(
-            "bg-white",
-            "text-black",
-            "border-white",
-            "shadow-[0_0_20px_rgba(255,255,255,0.1)]",
+            "bg-[#c8875c]",
+            "text-white",
+            "border-[#c8875c]",
+            "shadow-[0_0_20px_rgba(200,135,92,0.15)]",
           );
-          btn.classList.add("bg-gray-900", "border-gray-700", "text-gray-300");
+          btn.classList.add("bg-[#141211]", "border-[#2a2520]", "text-[#a8998a]");
         });
 
         tabPanels.forEach((panel) => {
@@ -108,15 +108,15 @@ const sortedServices = allServices.sort((a, b) => {
         // 2. Activate clicked tab
         button.setAttribute("aria-selected", "true");
         button.classList.remove(
-          "bg-gray-900",
-          "border-gray-700",
-          "text-gray-300",
+          "bg-[#141211]",
+          "border-[#2a2520]",
+          "text-[#a8998a]",
         );
         button.classList.add(
-          "bg-white",
-          "text-black",
-          "border-white",
-          "shadow-[0_0_20px_rgba(255,255,255,0.1)]",
+          "bg-[#c8875c]",
+          "text-white",
+          "border-[#c8875c]",
+          "shadow-[0_0_20px_rgba(200,135,92,0.15)]",
         );
 
         // 3. Show associated panel

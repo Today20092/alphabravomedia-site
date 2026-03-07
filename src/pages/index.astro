@@ -33,16 +33,16 @@ const latestPortfolio = allPortfolio
 
     <div class="max-w-6xl mx-auto text-center relative z-10">
       <!-- Main headline with gradient -->
-      <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight mb-6">
+      <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight mb-6 font-['Sora',sans-serif]">
         <span class="bg-linear-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
           Cinema-grade videography
         </span>
         <br />
-        <span class="text-gray-300">for brands and creators.</span>
+        <span class="text-[#a8998a]">for brands and creators.</span>
       </h1>
 
       <!-- Sub-headline -->
-      <p class="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+      <p class="text-lg sm:text-xl text-[#a8998a] max-w-2xl mx-auto mb-10 leading-relaxed">
         I help creators and businesses tell their story through high-quality video production and strategic content.
       </p>
 
@@ -51,7 +51,7 @@ const latestPortfolio = allPortfolio
         <!-- Primary CTA -->
         <a
           href="#portfolio"
-          class="group relative px-8 py-4 bg-white text-black font-semibold rounded-full overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(255,255,255,0.15)]"
+          class="group relative px-8 py-4 bg-[#c8875c] text-white font-semibold rounded-full overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(200,135,92,0.2)]"
         >
           <span class="relative z-10">View My Work</span>
         </a>
@@ -61,7 +61,7 @@ const latestPortfolio = allPortfolio
           href="https://youtube.com/@alphabravomedia"
           target="_blank"
           rel="noopener noreferrer"
-          class="group px-8 py-4 border border-gray-700 text-gray-300 font-medium rounded-full transition-all duration-300 hover:border-gray-500 hover:text-white hover:bg-white/5"
+          class="group px-8 py-4 border border-[#2a2520] text-[#a8998a] font-medium rounded-full transition-all duration-300 hover:border-[#c8875c] hover:text-[#f5e6d3] hover:bg-white/5"
         >
           <span class="flex items-center gap-2">
             <Icon name="simple-icons:youtube" class="w-5 h-5" />
@@ -73,7 +73,7 @@ const latestPortfolio = allPortfolio
 
     <!-- Scroll indicator -->
     <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-      <Icon name="mdi:chevron-down" class="w-6 h-6 text-gray-600" />
+      <Icon name="mdi:chevron-down" class="w-6 h-6 text-[#7a6f63]" />
     </div>
   </section>
 
@@ -81,18 +81,18 @@ const latestPortfolio = allPortfolio
   <ServicesSection />
 
   <!-- Featured Work / Showreel Section -->
-  <section id="showreel" class="py-24 px-6">
+  <section id="showreel" class="py-24 px-6 bg-[#0e0e0e]">
     <div class="max-w-6xl mx-auto">
       <!-- Section header -->
       <div class="text-center mb-12">
-        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">Featured Work</h2>
-        <p class="text-gray-400 max-w-xl mx-auto">A selection of recent projects showcasing cinematic storytelling and high-end production value.</p>
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4 font-['Sora',sans-serif]">Featured Work</h2>
+        <p class="text-[#a8998a] max-w-xl mx-auto">A selection of recent projects showcasing cinematic storytelling and high-end production value.</p>
       </div>
 
       <!-- YouTube Embed with glow effect -->
       <div class="relative group">
         <!-- Glow effect behind video -->
-        <div class="absolute -inset-4 bg-linear-to-r from-purple-500/20 via-pink-500/20 to-orange-500/20 rounded-3xl blur-2xl opacity-50 group-hover:opacity-75 transition-opacity duration-500"></div>
+        <div class="absolute -inset-4 bg-linear-to-r from-[#c8875c]/20 to-[#a06b3e]/20 rounded-3xl blur-2xl opacity-50 group-hover:opacity-75 transition-opacity duration-500"></div>
 
         <!-- Video container -->
         <div class="relative rounded-2xl overflow-hidden shadow-2xl shadow-black/50">
@@ -110,21 +110,21 @@ const latestPortfolio = allPortfolio
     <div class="max-w-6xl mx-auto">
       <!-- Section header -->
       <div class="text-center mb-16">
-        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">Latest from the Studio</h2>
-        <p class="text-gray-400 max-w-xl mx-auto">Recent projects, tutorials, and behind-the-scenes content.</p>
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4 font-['Sora',sans-serif]">Latest from the Studio</h2>
+        <p class="text-[#a8998a] max-w-xl mx-auto">Recent projects, tutorials, and behind-the-scenes content.</p>
       </div>
 
       <!-- Portfolio Grid -->
       <div class="mb-16">
-        <h3 class="text-xl font-semibold text-gray-300 mb-6 flex items-center gap-3">
-          <span class="w-8 h-px bg-gray-700"></span>
+        <h3 class="text-xl font-semibold text-[#a8998a] mb-6 flex items-center gap-3 font-['Sora',sans-serif]">
+          <span class="w-8 h-px bg-[#2a2520]"></span>
           Portfolio
         </h3>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           {latestPortfolio.map((item) => (
             <a
               href={`${base}portfolio/${item.slug}`}
-              class="group relative bg-gray-900/50 rounded-xl overflow-hidden border border-gray-800/50 transition-all duration-300 hover:scale-[1.02] hover:border-gray-700 hover:shadow-xl hover:shadow-black/20"
+              class="group relative bg-[#141211] rounded-xl overflow-hidden border border-[#2a2520] transition-all duration-300 hover:scale-[1.02] hover:border-[#c8875c]/30 hover:shadow-xl hover:shadow-black/20"
             >
               <!-- Thumbnail -->
               <div class="aspect-video bg-linear-to-br from-gray-800 to-gray-900 relative overflow-hidden">
@@ -152,7 +152,7 @@ const latestPortfolio = allPortfolio
                 })()}
                 <div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent"></div>
                 <!-- Category badge -->
-                <span class="absolute top-3 left-3 px-3 py-1 bg-white/10 backdrop-blur-sm rounded-full text-xs font-medium text-gray-300">
+                <span class="absolute top-3 left-3 px-3 py-1 bg-[#c8875c]/10 backdrop-blur-sm rounded-full text-xs font-medium text-[#c8875c]">
                   {item.data.category}
                 </span>
                 <!-- Play icon on hover if video -->
@@ -169,7 +169,7 @@ const latestPortfolio = allPortfolio
                 <h4 class="text-lg font-semibold text-white mb-2 group-hover:text-gray-200 transition-colors">
                   {item.data.title}
                 </h4>
-                <p class="text-sm text-gray-500">
+                <p class="text-sm text-[#7a6f63]">
                   {item.data.clientName}
                 </p>
               </div>
@@ -180,15 +180,15 @@ const latestPortfolio = allPortfolio
 
       <!-- Blog Grid -->
       <div>
-        <h3 class="text-xl font-semibold text-gray-300 mb-6 flex items-center gap-3">
-          <span class="w-8 h-px bg-gray-700"></span>
+        <h3 class="text-xl font-semibold text-[#a8998a] mb-6 flex items-center gap-3 font-['Sora',sans-serif]">
+          <span class="w-8 h-px bg-[#2a2520]"></span>
           Latest Blogs
         </h3>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           {latestBlog.map((post) => (
             <a
               href={`${base}blog/${post.slug}`}
-              class="group relative bg-gray-900/50 rounded-xl overflow-hidden border border-gray-800/50 transition-all duration-300 hover:scale-[1.02] hover:border-gray-700 hover:shadow-xl hover:shadow-black/20"
+              class="group relative bg-[#141211] rounded-xl overflow-hidden border border-[#2a2520] transition-all duration-300 hover:scale-[1.02] hover:border-[#c8875c]/30 hover:shadow-xl hover:shadow-black/20"
             >
               <!-- Thumbnail with play button -->
               <div class="aspect-video bg-linear-to-br from-gray-800 to-gray-900 relative overflow-hidden flex items-center justify-center">
@@ -228,7 +228,7 @@ const latestPortfolio = allPortfolio
                 <h4 class="text-lg font-semibold text-white mb-2 group-hover:text-gray-200 transition-colors">
                   {post.data.title}
                 </h4>
-                <p class="text-sm text-gray-500 line-clamp-2">
+                <p class="text-sm text-[#7a6f63] line-clamp-2">
                   {post.data.description}
                 </p>
               </div>

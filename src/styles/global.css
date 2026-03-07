@@ -7,14 +7,14 @@
 :root {
   --pagefind-ui-scale: 1;
   --pagefind-ui-primary: #ffffff;
-  --pagefind-ui-text: #e5e7eb;
+  --pagefind-ui-text: #a8998a;
   --pagefind-ui-background: transparent;
-  --pagefind-ui-border: rgba(255, 255, 255, 0.1);
-  --pagefind-ui-tag: rgba(255, 255, 255, 0.08);
+  --pagefind-ui-border: #2a2520;
+  --pagefind-ui-tag: rgba(200, 135, 92, 0.1);
   --pagefind-ui-border-width: 1px;
   --pagefind-ui-border-radius: 12px;
   --pagefind-ui-image-border-radius: 8px;
-  --pagefind-ui-font: 'Inter', sans-serif;
+  --pagefind-ui-font: 'Sora', 'Inter', sans-serif;
 }
 
 .pagefind-ui__search-input {

@@ -16,8 +16,8 @@ const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.
     <div class="max-w-6xl mx-auto">
       <!-- Header -->
       <div class="mb-16">
-        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-4">Blog</h1>
-        <p class="text-lg text-gray-400 max-w-2xl">Tutorials, gear reviews, and behind-the-scenes content from the studio.</p>
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-4 font-['Sora',sans-serif]">Blog</h1>
+        <p class="text-lg text-[#a8998a] max-w-2xl">Tutorials, gear reviews, and behind-the-scenes content from the studio.</p>
       </div>
 
       <!-- Posts Grid -->
@@ -25,7 +25,7 @@ const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.
         {posts.map((post) => (
           <a
             href={`${base}blog/${post.slug}`}
-            class="group relative bg-gray-900/50 rounded-xl overflow-hidden border border-gray-800/50 transition-all duration-300 hover:scale-[1.02] hover:border-gray-700 hover:shadow-xl hover:shadow-black/20"
+            class="group relative bg-[#141211] rounded-xl overflow-hidden border border-[#2a2520] transition-all duration-300 hover:scale-[1.02] hover:border-[#c8875c]/30 hover:shadow-xl hover:shadow-black/20"
           >
             <!-- Thumbnail with play button -->
             <div class="aspect-video bg-linear-to-br from-gray-800 to-gray-900 relative overflow-hidden flex items-center justify-center">
@@ -46,13 +46,13 @@ const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.
 
             <!-- Content -->
             <div class="p-6">
-              <time class="text-xs text-gray-500 uppercase tracking-wider">
+              <time class="text-xs text-[#7a6f63] uppercase tracking-wider">
                 {post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
               </time>
-              <h2 class="text-xl font-semibold text-white mt-2 mb-3 group-hover:text-gray-200 transition-colors line-clamp-2">
+              <h2 class="text-xl font-semibold text-white mt-2 mb-3 font-['Sora',sans-serif] group-hover:text-gray-200 transition-colors line-clamp-2">
                 {post.data.title}
               </h2>
-              <p class="text-sm text-gray-500 line-clamp-2">
+              <p class="text-sm text-[#7a6f63] line-clamp-2">
                 {post.data.description}
               </p>
             </div>
@@ -62,7 +62,7 @@ const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.
 
       {posts.length === 0 && (
         <div class="text-center py-20">
-          <p class="text-gray-500">No posts yet. Check back soon!</p>
+          <p class="text-[#7a6f63]">No posts yet. Check back soon!</p>
         </div>
       )}
     </div>

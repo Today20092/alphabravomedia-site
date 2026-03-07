@@ -16,7 +16,7 @@ import { Icon } from "astro-icon/components";
 <dialog
   id="search-modal"
   class="fixed inset-0 z-100 m-auto w-full max-w-2xl max-h-[80vh]
-         bg-[#111111]/90 backdrop-blur-xl border border-white/10
+         bg-[#111111]/90 backdrop-blur-xl border border-[#2a2520]
          rounded-2xl shadow-2xl shadow-black/60 p-6 overflow-hidden
          flex-col"
   aria-label="Site search"
@@ -24,20 +24,20 @@ import { Icon } from "astro-icon/components";
   <!-- Modal Header -->
   <div class="flex items-center justify-between mb-4 shrink-0">
     <div class="flex items-center gap-3">
-      <Icon name="mdi:magnify" class="w-5 h-5 text-gray-400" />
-      <span class="text-sm font-medium text-gray-400">Search</span>
+      <Icon name="mdi:magnify" class="w-5 h-5 text-[#a8998a]" />
+      <span class="text-sm font-medium text-[#a8998a]">Search</span>
     </div>
     <div class="flex items-center gap-3">
-      <span class="hidden sm:flex items-center gap-1 text-xs text-gray-600">
+      <span class="hidden sm:flex items-center gap-1 text-xs text-[#7a6f63]">
         <kbd
-          class="px-1.5 py-0.5 bg-white/5 border border-white/10 rounded text-gray-500 font-mono text-xs"
+          class="px-1.5 py-0.5 bg-white/5 border border-[#2a2520] rounded text-[#7a6f63] font-mono text-xs"
           >Esc</kbd
         >
         to close
       </span>
       <button
         id="search-close"
-        class="p-1.5 text-gray-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+        class="p-1.5 text-[#a8998a] hover:text-white hover:bg-white/10 rounded-lg transition-colors"
         aria-label="Close search"
       >
         <Icon name="mdi:close" class="w-5 h-5" />
