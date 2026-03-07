@@ -1,0 +1,56 @@
+{
+  "title": "Mobile Podcast & On-Location Audio Services",
+  "description": "Professional white-glove production for your podcast or event. We bring the studio to you, handling all A/V logistics so you can focus on the message.",
+  "order": 3,
+  "portfolioLink": "/portfolio/podcasts",
+  "tiers": [
+    {
+      "discriminant": "tier",
+      "value": {
+        "name": "Audio Essentials",
+        "price": "Starting at $300/session",
+        "bestFor": "Solo creators or duos needing clean, professional sound on a recurring basis.",
+        "isPopular": false,
+        "includes": [
+          "On-site setup and breakdown",
+          "Up to 2 broadcast-grade microphones",
+          "Professional audio mixing & live monitoring",
+          "Standard noise reduction & audio leveling",
+          "Delivered in high-quality .WAV and .MP3 formats"
+        ]
+      }
+    },
+    {
+      "discriminant": "tier",
+      "value": {
+        "name": "The Studio Setup",
+        "price": "Starting at $600/session",
+        "bestFor": "Podcast series and interviews requiring cinematic 4K visuals and broadcast-quality audio.",
+        "isPopular": true,
+        "includes": [
+          "Everything in Audio Essentials",
+          "4K Cinematic Multi-Cam Setup (2 Angles)",
+          "Professional 3-Point Lighting Kit",
+          "Post-production: Cinematic Color Grading & Audio Mastering",
+          "Metadata packaging (Titles, Chapters, Descriptions)"
+        ]
+      }
+    },
+    {
+      "discriminant": "tier",
+      "value": {
+        "name": "Full Agency Production",
+        "price": "Custom Quote (Bundles Available)",
+        "bestFor": "Established brands needing a complete, hands-off pipeline from filming to distribution.",
+        "isPopular": false,
+        "includes": [
+          "Everything in The Studio Setup",
+          "Advanced Sound Design & FabFilter Mastering",
+          "Custom Vertical Content (TikTok/Reels/Shorts)",
+          "Direct YouTube Upload & Channel Management",
+          "Priority scheduling and monthly retainer discounts"
+        ]
+      }
+    }
+  ]
+}
