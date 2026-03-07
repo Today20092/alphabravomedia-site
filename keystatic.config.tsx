@@ -72,5 +72,48 @@ export default config({
         content: fields.markdoc({ label: 'Content', extension: 'md' }),
       },
     }),
+    services: collection({
+      label: 'Services & Pricing',
+      slugField: 'title',
+      path: 'src/content/services/*',
+      format: { data: 'json' },
+      schema: {
+        title: fields.slug({ name: { label: 'Service Name (e.g., Audio Setup)' } }),
+        description: fields.text({ label: 'Description', multiline: true }),
+        order: fields.integer({
+          label: 'Order',
+          defaultValue: 999,
+          description: 'Lower numbers appear first',
+        }),
+        portfolioLink: fields.text({
+          label: 'Portfolio Link',
+          description: 'Optional link to portfolio (e.g., /portfolio/weddings)',
+        }),
+        tiers: fields.blocks(
+          {
+            tier: {
+              label: 'Pricing Tier',
+              schema: fields.object({
+                name: fields.text({ label: 'Tier Name (e.g., Tier 1: Essential Audio Package)' }),
+                price: fields.text({ label: 'Price (e.g., $600 to $800)' }),
+                bestFor: fields.text({ label: 'Best For' }),
+                isPopular: fields.checkbox({
+                  label: 'Highlight as Recommended/Most Popular',
+                  defaultValue: false,
+                }),
+                includes: fields.array(
+                  fields.text({ label: 'Feature/Inclusion' }),
+                  {
+                    label: 'What it includes',
+                    itemLabel: (props) => props.value || 'New feature',
+                  }
+                ),
+              }),
+            },
+          },
+          { label: 'Pricing Tiers' }
+        ),
+      },
+    }),
   },
 });

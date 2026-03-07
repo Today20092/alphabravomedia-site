@@ -1,0 +1,147 @@
+---
+import { getCollection } from "astro:content";
+import ServicePricingBlock from "./ServicePricingBlock.astro";
+
+// Fetch all services, sort by the 'order' field
+const allServices = await getCollection("services");
+
+const sortedServices = allServices.sort((a, b) => {
+  return a.data.order - b.data.order;
+});
+---
+
+<section id="services" class="py-24 px-6 relative border-t border-gray-800">
+  <!-- Interactive subtle background glow -->
+  <div
+    class="absolute inset-0 bg-linear-to-b from-gray-900/50 via-[#0b0b0b] to-[#0b0b0b] z-[-1]"
+  >
+  </div>
+
+  <div class="max-w-6xl mx-auto">
+    <!-- Section Header -->
+    <div class="text-center mb-12 relative">
+      <h2
+        class="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-6 leading-tight"
+      >
+        Services & Packages
+      </h2>
+      <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+        Transparent, flat-rate pricing to bring your vision to life. No hidden
+        fees.
+      </p>
+    </div>
+
+    <!-- Tabs Container -->
+    <div
+      class="flex flex-wrap justify-center gap-2 mb-16"
+      id="services-tabs"
+      role="tablist"
+    >
+      {
+        sortedServices.map((service, index) => (
+          <button
+            role="tab"
+            aria-selected={index === 0 ? "true" : "false"}
+            aria-controls={`panel-${service.id}`}
+            id={`tab-${service.id}`}
+            class={`px-6 py-3 rounded-full font-medium transition-all duration-300 text-sm sm:text-base border ${
+              index === 0
+                ? "bg-white text-black border-white shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+                : "bg-gray-900 border-gray-700 text-gray-300 hover:border-gray-500 hover:text-white hover:bg-white/5"
+            }`}
+            data-target={`panel-${service.id}`}
+          >
+            {service.data.title}
+          </button>
+        ))
+      }
+    </div>
+
+    <!-- Tab Panels Container -->
+    <div id="services-panels">
+      {
+        sortedServices.map((service, index) => (
+          <div
+            id={`panel-${service.id}`}
+            role="tabpanel"
+            aria-labelledby={`tab-${service.id}`}
+            class={`transition-opacity duration-500 ${index === 0 ? "block opacity-100" : "hidden opacity-0 absolute top-0 left-0 w-full"}`}
+          >
+            <ServicePricingBlock service={service} />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  // Setup tabs interaction perfectly on client-side
+  document.addEventListener("astro:page-load", () => {
+    const tabButtons = document.querySelectorAll("#services-tabs button");
+    const tabPanels = document.querySelectorAll(
+      '#services-panels [role="tabpanel"]',
+    );
+
+    if (tabButtons.length === 0) return;
+
+    tabButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        // 1. Deactivate all tabs and hide panels
+        tabButtons.forEach((btn) => {
+          btn.setAttribute("aria-selected", "false");
+          btn.classList.remove(
+            "bg-white",
+            "text-black",
+            "border-white",
+            "shadow-[0_0_20px_rgba(255,255,255,0.1)]",
+          );
+          btn.classList.add("bg-gray-900", "border-gray-700", "text-gray-300");
+        });
+
+        tabPanels.forEach((panel) => {
+          panel.classList.replace("block", "hidden");
+          panel.classList.replace("opacity-100", "opacity-0");
+          panel.classList.add("absolute", "top-0", "left-0", "w-full"); // Stack them perfectly to prevent layout jumps
+        });
+
+        // 2. Activate clicked tab
+        button.setAttribute("aria-selected", "true");
+        button.classList.remove(
+          "bg-gray-900",
+          "border-gray-700",
+          "text-gray-300",
+        );
+        button.classList.add(
+          "bg-white",
+          "text-black",
+          "border-white",
+          "shadow-[0_0_20px_rgba(255,255,255,0.1)]",
+        );
+
+        // 3. Show associated panel
+        const targetId = button.getAttribute("data-target");
+        if (!targetId) return;
+
+        const targetPanel = document.getElementById(targetId);
+
+        if (targetPanel) {
+          targetPanel.classList.remove(
+            "hidden",
+            "absolute",
+            "top-0",
+            "left-0",
+            "w-full",
+          );
+          targetPanel.classList.add("block");
+
+          // Trigger flow layout first, then fade in for smooth transition effect
+          requestAnimationFrame(() => {
+            targetPanel.classList.remove("opacity-0");
+            targetPanel.classList.add("opacity-100");
+          });
+        }
+      });
+    });
+  });
+</script>

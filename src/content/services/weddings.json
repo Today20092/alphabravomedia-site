@@ -1,0 +1,55 @@
+{
+  "title": "Wedding Content & A/V Services",
+  "description": "Premium cinematic storytelling and high-fidelity audio services tailored to capture the true vibe, joy, and beauty of your Nikkah and Walima.",
+  "order": 2,
+  "portfolioLink": "/portfolio/weddings",
+  "tiers": [
+    {
+      "discriminant": "tier",
+      "value": {
+        "name": "The Nikkah Essential",
+        "price": "$2,500 (Portfolio Special: $1,600)",
+        "bestFor": "Intimate ceremonies and budget-conscious couples who still want premium quality.",
+        "isPopular": false,
+        "includes": [
+          "Up to 6 hours of coverage",
+          "1 Lead Videographer",
+          "3 to 5-minute Cinematic Highlight Film",
+          "High-Quality 4K Cinematic Footage",
+          "Professional Color Grading & Custom Sound Design"
+        ]
+      }
+    },
+    {
+      "discriminant": "tier",
+      "value": {
+        "name": "The Tampa Premium",
+        "price": "$3,500",
+        "bestFor": "Our industry-standard package designed to capture every meaningful angle of your big day.",
+        "isPopular": true,
+        "includes": [
+          "Up to 8–10 hours of coverage",
+          "1 Lead Videographer + 1 Static Camera (for secondary angles)",
+          "5 to 7-minute Cinematic Highlight Film",
+          "Full, uncut video of the Nikkah ceremony and main speeches"
+        ]
+      }
+    },
+    {
+      "discriminant": "tier",
+      "value": {
+        "name": "The Complete Bundle (Video + Audio)",
+        "price": "Starting at $4,800",
+        "bestFor": "The ultimate stress-free package. We solve both your video and audio needs in one booking.",
+        "isPopular": false,
+        "includes": [
+          "Full-day video coverage",
+          "Extended Cinematic Highlight & Documentary Edit",
+          "Pro Audio Package: 2 speakers, professional mixer",
+          "2 wireless mics for Imam/speeches (feedback eliminated)",
+          "Bluetooth/Aux connection for family audio/Nasheeds"
+        ]
+      }
+    }
+  ]
+}

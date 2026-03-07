@@ -4,6 +4,7 @@ import { YouTube } from '@astro-community/astro-embed-youtube';
 import { getCollection } from 'astro:content';
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
+import ServicesSection from '../components/ServicesSection.astro';
 
 const rawBase = import.meta.env.BASE_URL;
 const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
@@ -75,6 +76,9 @@ const latestPortfolio = allPortfolio
       <Icon name="mdi:chevron-down" class="w-6 h-6 text-gray-600" />
     </div>
   </section>
+
+  <!-- Services & Packages Section -->
+  <ServicesSection />
 
   <!-- Featured Work / Showreel Section -->
   <section id="showreel" class="py-24 px-6">

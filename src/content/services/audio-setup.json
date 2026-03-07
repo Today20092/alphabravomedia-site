@@ -1,0 +1,55 @@
+{
+  "title": "Professional Event A/V & Production Services",
+  "description": "Don't let bad sound ruin a meaningful moment. We provide professional audio engineering and multi-camera production so your guests can hear every word and your memories are captured in 4K. You handle the guests; we handle the rest.",
+  "order": 1,
+  "tiers": [
+    {
+      "discriminant": "tier",
+      "value": {
+        "name": "The Essential PA Package",
+        "price": "Starting at $600",
+        "bestFor": "Small halaqas, community dinners, and intimate recitations",
+        "isPopular": false,
+        "includes": [
+          "Professional 2-speaker PA system",
+          "Digital mixing with live EQ & compression",
+          "Up to 3 high-fidelity wireless microphones",
+          "Dedicated on-site sound engineer (4 hours)",
+          "Setup, tear-down, and stress-free operation"
+        ]
+      }
+    },
+    {
+      "discriminant": "tier",
+      "value": {
+        "name": "Audio + Highlights Package",
+        "price": "Starting at $950",
+        "bestFor": "Guest speakers, fundraisers, and special event recaps",
+        "isPopular": true,
+        "includes": [
+          "Everything in Essential PA Package",
+          "Stationary 4K broadcast-quality camera",
+          "Direct-feed audio sync (crystal clear sound)",
+          "1–2 minute professionally edited highlight reel",
+          "48-hour delivery turnaround"
+        ]
+      }
+    },
+    {
+      "discriminant": "tier",
+      "value": {
+        "name": "Full Broadcast & Live Stream",
+        "price": "Starting at $1,500",
+        "bestFor": "Major fundraisers, conferences, and high-impact VIP events",
+        "isPopular": false,
+        "includes": [
+          "Complete premium audio setup",
+          "Multi-camera live switching (Live Stream ready)",
+          "Direct integration to YouTube/Facebook/Zoom",
+          "Dedicated broadcast engineer for the full event",
+          "Full digital audio capture for archival use"
+        ]
+      }
+    }
+  ]
+}

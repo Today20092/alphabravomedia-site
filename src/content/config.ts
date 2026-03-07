@@ -37,5 +37,25 @@ const gear = defineCollection({
     category: z.string(),
   }),
 });
+// Services collection - Pricing and offerings
+const services = defineCollection({
+  type: 'data',
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    order: z.number().default(999),
+    portfolioLink: z.string().optional(),
+    tiers: z.array(z.object({
+      discriminant: z.literal('tier'),
+      value: z.object({
+        name: z.string(),
+        price: z.string(),
+        bestFor: z.string(),
+        isPopular: z.boolean().default(false),
+        includes: z.array(z.string()),
+      })
+    })).default([]),
+  }),
+});
 
-export const collections = { blog, portfolio, gear };
+export const collections = { blog, portfolio, gear, services };

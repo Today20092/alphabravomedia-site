@@ -1,0 +1,56 @@
+---
+import PricingCard from "./PricingCard.astro";
+import { Icon } from "astro-icon/components";
+
+export interface Props {
+  service: any;
+}
+
+const { service } = Astro.props;
+---
+
+<div class="mb-24 last:mb-0" id={`service-${service.slug}`}>
+  <div class="text-center max-w-3xl mx-auto mb-12">
+    <h3 class="text-3xl sm:text-4xl font-bold text-white mb-6">
+      {service.data.title}
+    </h3>
+    <p class="text-lg text-gray-400 leading-relaxed">
+      {service.data.description}
+    </p>
+  </div>
+
+  <div
+    class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 mt-12 max-w-6xl mx-auto"
+  >
+    {
+      service.data.tiers.map((tierWrapper: any) => {
+        // Keystatic blocks wrap values in a slightly complex object
+        const tier = tierWrapper.value;
+
+        return (
+          <PricingCard
+            name={tier.name}
+            price={tier.price}
+            bestFor={tier.bestFor}
+            isPopular={tier.isPopular}
+            includes={tier.includes}
+          />
+        );
+      })
+    }
+  </div>
+
+  {
+    service.data.portfolioLink && (
+      <div class="mt-12 text-center">
+        <a
+          href={service.data.portfolioLink}
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-gray-700 text-gray-300 hover:text-white hover:border-gray-500 hover:bg-white/5 transition-all duration-300 font-medium"
+        >
+          View related portfolio work
+          <Icon name="mdi:arrow-right" class="w-5 h-5" />
+        </a>
+      </div>
+    )
+  }
+</div>
