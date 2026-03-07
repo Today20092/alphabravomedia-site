@@ -57,5 +57,12 @@ const services = defineCollection({
     })).default([]),
   }),
 });
+// Legal collection - Terms of Service, Privacy Policy, etc.
+const legal = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+  }),
+});
 
-export const collections = { blog, portfolio, gear, services };
+export const collections = { blog, portfolio, gear, services, legal };

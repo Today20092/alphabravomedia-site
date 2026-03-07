@@ -1,4 +1,4 @@
-import { config, fields, collection } from '@keystatic/core';
+import { config, fields, collection, singleton } from '@keystatic/core';
 
 export default config({
   storage: {
@@ -113,6 +113,20 @@ export default config({
           },
           { label: 'Pricing Tiers' }
         ),
+      },
+    }),
+  },
+  singletons: {
+    terms: config.singleton({
+      label: 'Terms of Service',
+      path: 'src/content/legal/terms',
+      format: { contentField: 'content' },
+      schema: {
+        title: fields.text({ label: 'Title', defaultValue: 'Terms of Service & Booking Agreement' }),
+        content: fields.mdx({
+          label: 'Content',
+          extension: 'mdx'
+        }),
       },
     }),
   },

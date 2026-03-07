@@ -1,16 +1,25 @@
 ---
+import { getEntry } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+// Fetch the Terms of Service content
+const termsEntry = await getEntry("legal", "terms");
+const { Content } = termsEntry ? await termsEntry.render() : { Content: null };
+
 export const prerender = true;
 ---
 
-<BaseLayout title="Terms of Service | Alpha Bravo Media">
+<BaseLayout
+  title={(termsEntry?.data?.title as string) ||
+    "Terms of Service | Alpha Bravo Media"}
+>
   <section class="pt-32 pb-24 px-6 min-h-screen">
     <div class="max-w-4xl mx-auto">
       <div class="mb-12">
         <h1
           class="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-4"
         >
-          Terms of Service & Booking Agreement
+          {termsEntry?.data?.title || "Terms of Service & Booking Agreement"}
         </h1>
         <p class="text-lg text-gray-400">
           Please review our policies and procedures before booking your session.
@@ -131,186 +140,25 @@ export const prerender = true;
         </ul>
       </div>
 
-      <div class="space-y-12">
-        <section>
-          <h2
-            class="text-2xl font-semibold text-white mb-4 tracking-tight border-b border-gray-800 pb-2"
+      {
+        Content ? (
+          <article
+            class="prose prose-invert max-w-none
+          prose-h2:text-2xl prose-h2:font-semibold prose-h2:text-white prose-h2:mb-4 prose-h2:tracking-tight prose-h2:border-b prose-h2:border-gray-800 prose-h2:pb-2 prose-h2:mt-12
+          prose-p:text-gray-400 prose-p:leading-relaxed prose-p:mb-4
+          prose-strong:text-gray-200
+          prose-ul:list-disc prose-ul:pl-5 prose-ul:space-y-2 prose-ul:marker:text-gray-600 prose-ul:mb-4
+          prose-li:text-gray-400
+        "
           >
-            1. Booking & Payments
-          </h2>
-          <div class="text-gray-400 leading-relaxed space-y-4">
-            <p>
-              To lock in and secure your date, Alpha Bravo Media requires a <strong
-                class="text-gray-200"
-                >25% non-refundable retainer (booking fee)</strong
-              >. This ensures that we turn away other potential clients for your
-              specific date and time. Your booking is not considered official
-              until this retainer is received and the contract is signed.
-            </p>
-            <p>
-              The remaining balance for your project is due <strong
-                class="text-gray-200">14 days prior</strong
-              > to the event or production start date.
-            </p>
+            <Content />
+          </article>
+        ) : (
+          <div class="text-center text-gray-400 py-12">
+            Unable to load terms of service content.
           </div>
-        </section>
-
-        <section>
-          <h2
-            class="text-2xl font-semibold text-white mb-4 tracking-tight border-b border-gray-800 pb-2"
-          >
-            2. Cancellations & Rescheduling
-          </h2>
-          <div class="text-gray-400 leading-relaxed space-y-4">
-            <p>
-              We understand that unexpected circumstances arise. If you need to
-              reschedule or cancel, we require written notice at least <strong
-                class="text-gray-200">14 days prior</strong
-              > to the scheduled date.
-            </p>
-            <ul class="list-disc pl-5 space-y-2 marker:text-gray-600">
-              <li>
-                If canceled within 14 days of the event, the client is
-                responsible for 50% of the total remaining balance.
-              </li>
-              <li>
-                In the event of rescheduling, the original 25% retainer can be
-                transferred to a new date (subject to our availability) if
-                notice is provided at least 14 days in advance. If we are
-                unavailable on your new date, the retainer remains
-                non-refundable.
-              </li>
-            </ul>
-          </div>
-        </section>
-
-        <section>
-          <h2
-            class="text-2xl font-semibold text-white mb-4 tracking-tight border-b border-gray-800 pb-2"
-          >
-            3. Creative Control & Revisions
-          </h2>
-          <div class="text-gray-400 leading-relaxed space-y-4">
-            <p>
-              We pride ourselves on our cinematic storytelling, and we value
-              your feedback. To ensure a smooth post-production process, we
-              include the following structured revision rounds in our standard
-              packages:
-            </p>
-            <div
-              class="bg-gray-900/40 rounded-xl p-5 border border-gray-800/60 my-6"
-            >
-              <ul class="space-y-3">
-                <li class="flex items-center gap-3">
-                  <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
-                  <span class="text-gray-300"
-                    ><strong class="text-white"
-                      >Short-form Content (Under 6-7 minutes):</strong
-                    > Up to <strong class="text-white">three (3)</strong> rounds of
-                    revisions.</span
-                  >
-                </li>
-                <li class="flex items-center gap-3">
-                  <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
-                  <span class="text-gray-300"
-                    ><strong class="text-white"
-                      >Long-form Content (Over 7 minutes, documentaries):</strong
-                    > Up to <strong class="text-white">two (2)</strong> rounds of
-                    revisions.</span
-                  >
-                </li>
-              </ul>
-            </div>
-            <p>
-              Any additional revision rounds beyond these limits will be billed
-              at an hourly editing rate. Revisions should be submitted compiled
-              in a single list format. A "revision" constitutes minor
-              adjustments to pacing, music, or specific clips—it does not cover
-              a complete structural re-edit of the project.
-            </p>
-          </div>
-        </section>
-
-        <section>
-          <h2
-            class="text-2xl font-semibold text-white mb-4 tracking-tight border-b border-gray-800 pb-2"
-          >
-            4. Raw Files, Delivery & Archiving
-          </h2>
-          <div class="text-gray-400 leading-relaxed space-y-4">
-            <p>
-              Our completed, color-graded, and sound-mixed films are the final
-              deliverable. However, we understand clients may want untouched
-              archival footage.
-            </p>
-            <ul class="list-disc pl-5 space-y-3 marker:text-gray-600">
-              <li>
-                <strong class="text-gray-200">Raw Footage:</strong> Full, unedited
-                raw footage is available for an additional fee. To receive raw footage,
-                the client must supply a physical hard drive (USB 3.0 or better) with
-                sufficient storage capacity.
-              </li>
-              <li>
-                <strong class="text-gray-200">Archiving:</strong> We keep final project
-                files and edited footage archived for <strong
-                  class="text-gray-200">60 days</strong
-                > after final delivery. We highly recommend downloading and backing
-                up your final files immediately upon receipt. Alpha Bravo Media is
-                not liable for data loss after this 60-day period.
-              </li>
-            </ul>
-          </div>
-        </section>
-
-        <section>
-          <h2
-            class="text-2xl font-semibold text-white mb-4 tracking-tight border-b border-gray-800 pb-2"
-          >
-            5. Venue & Halal Guidelines
-          </h2>
-          <div class="text-gray-400 leading-relaxed space-y-4">
-            <p>
-              We are committed to providing services in a completely halal
-              manner that respects our community's values. At this time, we are
-              exclusively offering videography for the <strong
-                class="text-gray-200"
-                >men's section and non-segregated general events</strong
-              >. Until we can bring a dedicated female videographer onto our
-              team to respectfully capture the women's side, we will strictly
-              adhere to these guidelines.
-            </p>
-            <p>
-              For events requiring our Audio/PA services or live projection, it
-              is the client's responsibility to ensure the venue permits us to
-              tap into their soundboards, set up lighting equipment, and utilize
-              staging areas.
-            </p>
-          </div>
-        </section>
-
-        <section>
-          <h2
-            class="text-2xl font-semibold text-white mb-4 tracking-tight border-b border-gray-800 pb-2"
-          >
-            6. Copyright & Promotional Usage
-          </h2>
-          <div class="text-gray-400 leading-relaxed space-y-4">
-            <p>
-              Alpha Bravo Media retains the copyright to all recorded video and
-              captured audio. The client is granted a perpetual, non-exclusive
-              license to use, share, and distribute the final deliverables for
-              personal or (if applicable) standard business use.
-            </p>
-            <p>
-              By booking with us, you grant Alpha Bravo Media the irrevocable
-              right to use recorded media in our portfolio, website, and social
-              media for standard promotional purposes, unless a strict
-              Non-Disclosure Agreement (NDA) is negotiated and signed prior to
-              the booking.
-            </p>
-          </div>
-        </section>
-      </div>
+        )
+      }
     </div>
   </section>
 </BaseLayout>
