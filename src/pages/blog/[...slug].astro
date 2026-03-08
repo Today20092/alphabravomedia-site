@@ -44,7 +44,7 @@ const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
           }
         </time>
         <h1
-          class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mt-3 mb-4 font-['Sora',sans-serif]"
+          class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white mt-3 mb-4 font-['Sora',sans-serif] text-balance"
         >
           {post.data.title}
         </h1>
@@ -68,7 +68,7 @@ const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
       {
         post.data.youtubeId && (
           <div class="relative group mb-12">
-            <div class="absolute -inset-4 bg-linear-to-r from-[#c8875c]/10 to-[#a06b3e]/10 rounded-3xl blur-2xl opacity-50"></div>
+            <div class="absolute -inset-4 bg-linear-to-r from-[#c8875c]/10 to-[#a06b3e]/10 rounded-3xl blur-2xl opacity-50" />
             <div class="relative rounded-2xl overflow-hidden shadow-2xl shadow-black/50">
               <YouTube
                 id={post.data.youtubeId}
@@ -81,7 +81,9 @@ const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
       }
 
       <!-- Content -->
-      <div class="prose prose-invert prose-lg max-w-none">
+      <div
+        class="prose prose-invert md:prose-lg max-w-none prose-headings:text-balance prose-h1:text-3xl md:prose-h1:text-4xl lg:prose-h1:text-5xl prose-h2:text-2xl md:prose-h2:text-3xl lg:prose-h2:text-4xl prose-h3:text-xl md:prose-h3:text-2xl"
+      >
         <Content />
       </div>
     </div>
