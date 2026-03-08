@@ -296,6 +296,17 @@ const currentPath = Astro.url.pathname;
               <span class="text-sm">{siteConfig.phone}</span>
             </a>
             <p class="text-xs text-[#7a6f63] mt-1 ml-7">Google Voice</p>
+            <a
+              href={`sms:${siteConfig.phoneRaw}`}
+              class="group flex items-center gap-2 text-[#a8998a] hover:text-white transition-colors mt-2"
+            >
+              <Icon
+                name="mdi:message-outline"
+                class="w-5 h-5 text-[#7a6f63] group-hover:text-white transition-colors"
+              />
+              <span class="text-sm">{siteConfig.phone}</span>
+            </a>
+            <p class="text-xs text-[#7a6f63] mt-1 ml-7">Text</p>
           </div>
 
           <!-- Element -->
