@@ -318,29 +318,19 @@ const currentPath = Astro.url.pathname;
             >
               Element / Matrix
             </h4>
-            <button
-              id="copy-element"
-              class="group flex items-center gap-2 text-gray-300 hover:text-white transition-colors cursor-pointer"
-              data-username={siteConfig.elementUsername}
+            <a
+              href={`https://matrix.to/#/${siteConfig.elementUsername}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex items-center gap-2 text-[#a8998a] hover:text-white transition-colors"
             >
               <Icon
                 name="simple-icons:element"
                 class="w-5 h-5 text-[#7a6f63] group-hover:text-white transition-colors"
               />
-              <span class="text-sm font-mono">{siteConfig.elementUsername}</span
-              >
-              <Icon
-                id="copy-icon"
-                name="mdi:file-document-outline"
-                class="w-4 h-4 text-[#7a6f63] group-hover:text-[#a8998a] transition-colors"
-              />
-              <Icon
-                id="check-icon"
-                name="mdi:check"
-                class="w-4 h-4 text-green-500 hidden"
-              />
-            </button>
-            <p class="text-xs text-[#7a6f63] mt-1 ml-7">Click to copy</p>
+              <span class="text-sm font-mono">{siteConfig.elementUsername}</span>
+            </a>
+            <p class="text-xs text-[#7a6f63] mt-1 ml-7">Opens in Element</p>
           </div>
         </div>
 
@@ -418,25 +408,6 @@ const currentPath = Astro.url.pathname;
             mobileMenu?.classList.add("hidden");
             menuOpen?.classList.remove("hidden");
             menuClose?.classList.add("hidden");
-          }
-        });
-
-        // Copy Element username
-        const copyBtn = document.getElementById("copy-element");
-        const copyIcon = document.getElementById("copy-icon");
-        const checkIcon = document.getElementById("check-icon");
-
-        copyBtn?.addEventListener("click", async () => {
-          const username = copyBtn.getAttribute("data-username");
-          if (username) {
-            await navigator.clipboard.writeText(username);
-            copyIcon?.classList.add("hidden");
-            checkIcon?.classList.remove("hidden");
-
-            setTimeout(() => {
-              copyIcon?.classList.remove("hidden");
-              checkIcon?.classList.add("hidden");
-            }, 2000);
           }
         });
 
