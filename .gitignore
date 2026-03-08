@@ -22,3 +22,18 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# vscode settings
+.vscode/
+
+# claude code
+.claude/
+
+# local environment overrides
+.env.local
+
+# editor temp files
+*.swp
+*.swo
+*~
+*.bak
