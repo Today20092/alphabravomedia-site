@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "tailwindcss-development": {
+      "source": "coollabsio/coolify",
+      "sourceType": "github",
+      "computedHash": "f88155b297f310705977de18f7d6dfb9277301069d2ce98d332b0286a0253c65"
+    }
+  }
+}
