@@ -1,6 +1,11 @@
 {
   "version": 1,
   "skills": {
+    "astro-developer": {
+      "source": "withastro/astro",
+      "sourceType": "github",
+      "computedHash": "3fb6fa260826515b65e14186ac29b66bd27fe94ddcd6f2bc0bbdf4846d967023"
+    },
     "tailwindcss-development": {
       "source": "coollabsio/coolify",
       "sourceType": "github",
