@@ -55,6 +55,7 @@ const categories = [...new Set(allItems.map(item => item.data.category))];
               {(() => {
                 const thumbImage = item.data.image;
                 const youtubeUrl = item.data.videoId ? `https://img.youtube.com/vi/${item.data.videoId}/maxresdefault.jpg` : null;
+                const facebookUrl = item.data.facebookUrl;
 
                 if (thumbImage) {
                   return (
@@ -71,6 +72,12 @@ const categories = [...new Set(allItems.map(item => item.data.category))];
                       alt={item.data.title} 
                       class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
+                  );
+                } else if (facebookUrl) {
+                  return (
+                    <div class="absolute inset-0 flex items-center justify-center bg-[#1a1817]">
+                      <Icon name="mdi:facebook" class="w-12 h-12 text-[#c8875c]/20" />
+                    </div>
                   );
                 }
               })()}

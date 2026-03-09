@@ -20,6 +20,7 @@ const portfolio = defineCollection({
     title: z.string(),
     clientName: z.string(),
     videoId: z.string().optional(), // Unlisted YouTube video ID
+    facebookUrl: z.string().url().optional(), // Facebook video URL
     image: image().optional(),
     category: z.string(),
     gearUsed: z.array(reference('gear')).optional(),
