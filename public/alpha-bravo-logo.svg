@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 1080 1080" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g id="Main-Logo" serif:id="Main Logo" transform="matrix(1.23571,0,0,1.23571,-176.373,-54.1874)">
+        <g transform="matrix(2.70838,0,-0.646064,2.70838,-49.7421,-900.07)">
+            <text x="201.542px" y="512.617px" style="font-family:'AtkinsonHyperlegibleNext-Bold', 'Atkinson Hyperlegible Next';font-weight:700;font-size:103.999px;fill:white;">a<tspan x="250.733px 275.693px 329.46px 380.627px " y="512.617px 512.617px 512.617px 512.617px ">lpha</tspan></text>
+        </g>
+        <g transform="matrix(2.70838,0,-0.646064,2.70838,107,-718.915)">
+            <g transform="matrix(103.999,0,0,103.999,437.723,512.617)">
+            </g>
+            <text x="201.542px" y="512.617px" style="font-family:'AtkinsonHyperlegibleNext-Bold', 'Atkinson Hyperlegible Next';font-weight:700;font-size:103.999px;fill:white;">b<tspan x="255.309px 285.157px 332.476px 377.716px " y="512.617px 512.617px 512.617px 512.617px ">ravo</tspan></text>
+        </g>
+    </g>
+</svg>
