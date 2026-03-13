@@ -4,6 +4,18 @@ clientName: "The Sunnah Initiative"
 videoId: "CsqFRKpo7tQ"
 category: "AV & Live Production"
 order: 4
+image: "./D2174E26-A098-4CA3-B19E-4BD2741EAE52.jpg"
+gallery:
+  - "./D2174E26-A098-4CA3-B19E-4BD2741EAE52.jpg"
+  - "./IMG_0524.JPG"
+  - "./IMG_0512.JPG"
+  - "./IMG_0527.JPG"
+  - "./IMG_0533.JPG"
+  - "./IMG_0549.JPG"
+  - "./IMG_0550.JPG"
+  - "./IMG_0559.JPG"
+  - "./IMG_0516.JPG"
+  - "./DSC00243.JPG"
 ---
 
 There is a distinct difference between just "being heard" and being *understood*. 
