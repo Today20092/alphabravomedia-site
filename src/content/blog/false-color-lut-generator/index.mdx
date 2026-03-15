@@ -1,39 +1,40 @@
 ---
-title: False Color Lut Generator
+title: False Color LUT Builder
 pubDate: 2026-03-02
 description:
-  A python script that allows you to generate a false color LUT scientifically
-  based on exposure based stops, completely customized to your liking with color
-  and width for any log profile. Open Source
+  A free, open-source Python tool that generates scientifically accurate false color LUTs
+  for any log profile — with a unique hybrid mode that lets you monitor exposure and
+  white balance at the same time.
 tags:
   - color grading
 image: "./LUT Example.png"
 ---
 
-# Why I Built a Custom Hybrid False Color LUT Builder (and Why You Need One)
+import Gallery from "../../../components/Gallery.astro";
+import { YouTube } from "@astro-community/astro-embed-youtube";
+import imgSample01 from "./LUT Example.png";
+import imgSample02 from "./VLOG example.png";
+import imgSample03 from "./rec709.png";
 
-If you’ve ever shot on a Sony FX3, A7S III, or even a cinema-line camera like the Venice, you’ve likely run into a frustrating trade-off: **How do I accurately monitor exposure without ruining my ability to see the scene?**
+# Why I Built a Custom False Color LUT Builder (and Why You Need One)
 
-Standard False Color LUTs are a "rainbow mess." They wrap your entire image in neon gradients, making it impossible to check white balance, judge skin tones naturally, or even pull focus comfortably. On the other hand, relying solely on a standard Rec.709 LUT is a guessing game for highlight retention and noise floors.
+If you shoot on Sony, Panasonic, Canon, or any camera with a log profile, you've probably hit this wall: **How do I accurately monitor exposure without losing the ability to see the actual scene?**
+
+Standard false color LUTs paint your entire image in a neon rainbow — great for a quick exposure check, terrible for everything else. You can't judge white balance, skin tones, or focus when your subject's face is covered in green and yellow gradients. But relying on a Rec.709 LUT alone is a guessing game for highlights and noise floors.
 
 I wanted a better way. So, I built [lut-builder](https://github.com/Today20092/lut_builder).
 
 ## The Problem: The "All-or-Nothing" Monitoring Trap
 
-Most cameras don't have built-in, customizable false color. To get it, you usually have to buy an external monitor or load a static `.cube` file. But these static LUTs have three major flaws:
+Most cameras don't have customizable false color built in. To get it, you either buy an external monitor or load a static `.cube` file. But static LUTs have three fundamental flaws:
 
-1. **They are rigid:** You can't change where the exposure bands sit.
-2. **They are distracting:** They paint over the whole image.
-3. **They hide the "Real" Image:** You can't tell if your white balance is off because the "Green" exposure band is covering the actor's face.
+1. **They are rigid:** You can't move the exposure bands.
+2. **They are distracting:** They paint over the entire image.
+3. **They kill white balance monitoring:** When your subject's face is covered by an exposure band, you have no idea if your color temperature is off.
 
-import Gallery from "../../../components/Gallery.astro";
-import imgSample01 from "./LUT Example.png";
-import imgSample02 from "./VLOG example.png";
-import imgSample03 from "./rec709.png";
+This last point is what really broke my workflow. I do a lot of **run-and-gun recording** — there's no time to pull up a waveform. I needed to glance at my monitor and immediately know if I'm exposed correctly *and* if my white balance is drifting. Traditional false color forces you to choose one or the other.
 
-## The Solution: A Hybrid, AI-Powered CLI Tool
-
-I used AI to help me build a Python-based command-line tool that generates professional, standards-compliant `.cube` files.
+## The Solution: Two Modes, One Tool
 
 <Gallery
   images={[
@@ -43,31 +44,87 @@ I used AI to help me build a Python-based command-line tool that generates profe
   ]}
 />
 
-The goal was simple: **Hybrid Monitoring.** My tool allows you to keep a Rec.709 base image (so you can see your colors and white balance) while overlaying "thin" or "razor" bands of false color only at the specific exposure stops you care about.
+lut-builder is a free, open-source Python CLI tool that generates professional `.cube` files. It supports two distinct monitoring modes:
 
-### What makes this different?
+### Fill Mode
+Covers the full image with exposure-banded false color — similar to what you'd get from a traditional false color LUT or an external monitor. Every stop gets its own color across the entire frame. Great when you just need a fast, full-frame exposure read.
 
-- **Precision Color Science:** Unlike cheap LUTs that use fixed BT.709 approximations, this tool uses **CIE Y luminance** derived from your camera’s specific gamut matrix (S-Gamut3.Cine, V-Gamut, etc.). The stops you see are what the sensor actually sees.
-- **The "Hybrid" Edge:** You can choose to have a monochrome base or a full Rec.709 base. This means you can see your exposure bands _on top_ of a natural-looking image.
-- **Tailwind Integration:** I integrated the **Tailwind v4 palette**, allowing you to pick professional, modern colors for your exposure bands using simple names or hex codes.
-- **Total Customization:** You can define exactly how wide the bands are (from "Razor" to "Wide") and exactly which IRE or Stop values they highlight.
+### Band (Stops) Mode — The Hybrid Advantage
+This is the mode that changes everything. Instead of painting over your whole image, it overlays **thin bands of false color only at the exact stops you define**, on top of a full Rec.709 base image.
 
-## How it Works
+The result: you can see your actual colors, skin tones, and white balance — with just a subtle color marker showing exactly where your exposure sits. You can leave this on your camera monitor all day and still direct, focus, and check color at the same time.
 
-The script is a guided CLI experience. You just run `uv run lut-builder` (or use the double-clickable `.bat` and `.command` files I included for non-coders), and it walks you through:
+### What makes it accurate?
 
-1. Choosing your source (Sony, Panasonic, Canon, ARRI, RED).
-2. Setting your target (Rec.709 or Rec.2020).
-3. Defining your exposure bands (e.g., Middle Gray at 0 stops, Highlights at +2).
-4. Exporting a `.cube` file ready for your monitor or NLE.
+- **Proper color science:** Under the hood, the tool uses the **colour-science library** — a dedicated, well-tested library for color space conversions. It decodes your log profile to linear light, derives **CIE Y luminance** using your camera's specific gamut matrix (S-Gamut3.Cine, V-Gamut, etc.), calculates the stop values from that, then converts back to Rec.709 or Rec.2020. The stops you see are what the sensor actually captured — not a BT.709 approximation.
+- **Tailwind color palette:** Pick band colors by name (`emerald-500`, `yellow-400`) or enter any hex code. The suggested defaults look clean on a monitor.
+- **Band width control:** From razor-thin (±0.25 stops) to wide fill (±2 stops). Thin bands let you see the image; wide bands work like traditional false color.
+- **Crushed blacks & clipped whites markers:** Optional indicators at the floor and ceiling of your log profile.
+- **Monochrome base option:** Strip the base image to grayscale if you only need exposure data with no color distraction.
+- **IRE mode:** For advanced users who prefer to set bands by IRE value instead of stops.
+- **Terminal preview:** Before you export, the CLI shows you a visual preview of what the LUT looks like so you can tweak before loading it to your camera.
+- **Save your config:** After building, you can save your settings as a reusable config file — reload and modify anytime without starting over.
+
+## Getting Started
+
+### Installation
+
+You need [uv](https://github.com/astral-sh/uv) — a fast Python package and version manager. Install it once, and you never have to touch Python manually.
+
+**Windows:**
+1. Install `uv`
+2. Download or clone the repo from GitHub
+3. Double-click `build.bat`
+
+**Mac:**
+1. Install `uv`
+2. Download or clone the repo from GitHub
+3. Run `build.command`
+
+**Advanced (any platform):**
+```bash
+uv run lut-builder
+```
+
+### Building Your LUT
+
+The CLI walks you through every step interactively:
+
+1. **Choose your log profile** — S-Log3, V-Log, Canon Log C3, RED, ARRI, and more
+2. **Set your display target** — Rec.709 (most cameras) or Rec.2020
+3. **Choose LUT size** — 33 works for most cameras including Sony and Panasonic; use 65 if your camera supports it
+4. **Pick your mode** — Fill or Band/Stops
+5. **Define your exposure bands** — e.g., `-2, -1, 0, 1, 2` as comma-separated values
+6. **Choose colors** — accept suggested Tailwind defaults or pick your own
+7. **Set band width** — razor, standard, or wide
+8. **Add optional markers** — crushed blacks, clipped whites
+9. **Export your `.cube` file**
+
+### Decoding Your LUT Later
+
+If you ever forget which color means which stop, just open the `.cube` file in any text editor (VS Code works great). The tool writes the full band legend as comments at the top of the file — stop values, color names, and band widths are all documented right there.
+
+## Loading into DaVinci Resolve
+
+1. In DaVinci Resolve, go to **Color** → **LUTs** panel
+2. Right-click → **Open File Location**
+3. Drop your `.cube` file into the folder (no spaces in the filename if you plan to use it on a camera)
+4. Right-click the LUTs panel → **Refresh**
+5. Find your LUT under **Imported LUTs** and apply it to a node
+
+From there you can preview exactly how your camera monitor will look before you ever put the LUT on the camera.
+
+## Watch It In Action
+
+<YouTube id="CDNdVtROnew" title="False Color LUT Builder — Demo & Walkthrough" style="max-width: 100%;" />
 
 ## Built with AI, For the Community
 
-This entire project was architected using AI to bridge the gap between complex mathematical transforms (scene-linear light decoding) and a user-friendly interface.
+This project was built using Claude Code to bridge the gap between complex color math and a tool anyone can actually use. The colour-science library handles the hard part — proper gamut matrix decoding, linear light transforms, and display conversion — so the output is correct, not just close enough.
 
-I’ve made it open-source because exposure shouldn't be a premium feature. Whether you're nailing the exposure on a skin tone or protecting your highlights in a high-contrast sunset, you should have a tool that works for _your_ workflow—not one that forces you to look at a rainbow.
+I made it open-source because proper exposure monitoring shouldn't require an expensive external monitor. If you want to contribute or add a profile, pull requests are welcome.
 
-**Check out the project and build your own LUTs here:**
+**Download or contribute on GitHub:**
 [https://github.com/Today20092/lut_builder](https://github.com/Today20092/lut_builder)
 
 ---
