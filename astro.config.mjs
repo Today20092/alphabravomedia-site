@@ -27,6 +27,9 @@ export default defineConfig({
       },
     })
   ].filter(Boolean),
+  markdown: {
+    syntaxHighlight: false,
+  },
   vite: {
     plugins: [tailwindcss()]
   }
