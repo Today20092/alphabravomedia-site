@@ -1,0 +1,79 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Gallery from "../../components/Gallery.astro";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("galleries");
+  return entries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { title, date, description, galleryLayout } = entry.data;
+const { Content } = await render(entry);
+
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
+
+// Auto-discover all images in this gallery's folder
+const allImages = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/content/galleries/**/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}',
+  { eager: true }
+);
+
+const allOriginalsUrl = import.meta.glob<string>(
+  '/src/content/galleries/**/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}',
+  { eager: true, query: '?url', import: 'default' }
+);
+
+const slug = entry.slug;
+const galleryImages = Object.entries(allImages)
+  .filter(([path]) => path.includes(`/galleries/${slug}/`))
+  .sort(([a], [b]) => a.localeCompare(b))
+  .map(([path, mod], i) => ({
+    src: mod.default,
+    alt: `${title} — photo ${i + 1}`,
+    fullSrc: allOriginalsUrl[path] ?? '',
+  }));
+
+const formattedDate = new Date(date + "T00:00:00").toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<BaseLayout title={`${title} | Photo Gallery | Alpha Bravo Media`}>
+  <div class="min-h-screen pt-28 pb-20 px-6">
+    <div class="max-w-6xl mx-auto">
+      <!-- Back link -->
+      <a
+        href={`${base}gallery`}
+        class="inline-flex items-center gap-2 text-[#a8998a] hover:text-white transition-colors text-sm mb-8"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        All Galleries
+      </a>
+
+      <!-- Header -->
+      <div class="mb-10">
+        <h1 class="text-3xl md:text-4xl font-bold text-white font-['Sora',sans-serif] mb-2">
+          {title}
+        </h1>
+        <p class="text-[#7a6f63] text-sm">{formattedDate} &middot; {galleryImages.length} photo{galleryImages.length !== 1 ? "s" : ""}</p>
+        {description && <p class="text-[#a8998a] mt-3 max-w-2xl">{description}</p>}
+      </div>
+
+      <!-- Markdown body (event write-up) -->
+      <div class="prose prose-invert prose-sm max-w-2xl mb-10 text-[#a8998a]">
+        <Content />
+      </div>
+
+      <!-- Photo grid with lightbox -->
+      <Gallery images={galleryImages} layout={galleryLayout} />
+    </div>
+  </div>
+</BaseLayout>
