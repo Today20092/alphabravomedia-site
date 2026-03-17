@@ -67,4 +67,20 @@ const legal = defineCollection({
   }),
 });
 
-export const collections = { blog, portfolio, gear, services, legal };
+// Galleries collection - Client photo event galleries
+const galleries = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    date: z.string(),
+    description: z.string().optional(),
+    // Layout options:
+    //   square  — uniform square crop grid (default, good for headshots)
+    //   natural — grid preserving each photo's true aspect ratio
+    //   masonry — Pinterest-style columns, best for mixed event photography
+    galleryLayout: z.enum(['square', 'natural', 'masonry']).default('square'),
+    password: z.string().optional(),
+  }),
+});
+
+export const collections = { blog, portfolio, gear, services, legal, galleries };

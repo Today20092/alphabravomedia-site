@@ -1,0 +1,173 @@
+---
+import Gallery from './Gallery.astro';
+
+interface GalleryImage {
+  src: ImageMetadata;
+  alt: string;
+  fullSrc: string;
+}
+
+interface Props {
+  passwordHash?: string;
+  images: GalleryImage[];
+  layout?: 'square' | 'natural' | 'masonry';
+  slug: string;
+}
+
+const { passwordHash, images, layout = 'square', slug } = Astro.props;
+---
+
+{!passwordHash ? (
+  <Gallery images={images} layout={layout} />
+) : (
+  <>
+    <div id="gallery-content" style="display:none">
+      <Gallery images={images} layout={layout} />
+    </div>
+
+    <div id="gallery-gate">
+      <div class="gate-card">
+        <!-- Lock icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="gate-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+
+        <h2 class="gate-heading">Private Gallery</h2>
+        <p class="gate-sub">Enter the password to view this gallery.</p>
+
+        <form id="gate-form" class="gate-form">
+          <input
+            id="gate-input"
+            type="password"
+            placeholder="Password"
+            class="gate-input"
+            autocomplete="current-password"
+          />
+          <button type="submit" class="gate-btn">Unlock</button>
+        </form>
+
+        <p id="gate-error" class="gate-error" style="display:none">Incorrect password. Please try again.</p>
+      </div>
+    </div>
+  </>
+)}
+
+<style>
+  #gallery-gate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    padding: 2rem;
+  }
+
+  .gate-card {
+    background: #1c1916;
+    border: 1px solid #2a2520;
+    border-radius: 1rem;
+    padding: 2.5rem 2rem;
+    max-width: 380px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+  }
+
+  .gate-lock {
+    width: 2.5rem;
+    height: 2.5rem;
+    color: #c9a84c;
+    margin: 0 auto 1.25rem;
+  }
+
+  .gate-heading {
+    font-family: 'Sora', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 0.5rem;
+  }
+
+  .gate-sub {
+    color: #7a6f63;
+    font-size: 0.9rem;
+    margin: 0 0 1.75rem;
+  }
+
+  .gate-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .gate-input {
+    background: #141211;
+    border: 1px solid #2a2520;
+    border-radius: 0.5rem;
+    color: #fff;
+    font-size: 1rem;
+    padding: 0.65rem 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .gate-input:focus {
+    border-color: #c9a84c;
+  }
+
+  .gate-btn {
+    background: #c9a84c;
+    border: none;
+    border-radius: 0.5rem;
+    color: #141211;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 0.7rem 1rem;
+    transition: background 0.2s;
+  }
+
+  .gate-btn:hover {
+    background: #e0be6a;
+  }
+
+  .gate-error {
+    color: #e05252;
+    font-size: 0.85rem;
+    margin-top: 0.75rem;
+  }
+</style>
+
+<script define:vars={{ passwordHash, slug }}>
+  async function sha256hex(str) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+    return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  function unlock() {
+    document.getElementById('gallery-gate').style.display = 'none';
+    document.getElementById('gallery-content').style.display = '';
+  }
+
+  const key = `gallery-unlocked-${slug}`;
+  if (sessionStorage.getItem(key) === '1') {
+    unlock();
+  } else {
+    document.getElementById('gate-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const input = document.getElementById('gate-input').value;
+      const hash = await sha256hex(input);
+      if (hash === passwordHash) {
+        sessionStorage.setItem(key, '1');
+        unlock();
+      } else {
+        const err = document.getElementById('gate-error');
+        err.style.display = '';
+        document.getElementById('gate-input').value = '';
+        document.getElementById('gate-input').focus();
+      }
+    });
+  }
+</script>
