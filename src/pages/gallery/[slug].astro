@@ -13,13 +13,24 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { title, date, description, galleryLayout, password } = entry.data;
+const { title, date, description, galleryLayout, password, remoteBase } = entry.data;
 const { Content } = await render(entry);
 
 const rawBase = import.meta.env.BASE_URL;
 const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
 
-// Auto-discover all images in this gallery's folder
+const slug = entry.slug;
+
+// Remote (R2) gallery — load filenames from images.json sidecar
+const allImageLists = import.meta.glob<{ default: string[] }>(
+  '/src/content/galleries/**/images.json',
+  { eager: true }
+);
+
+const remoteJsonKey = Object.keys(allImageLists).find(k => k.includes(`/galleries/${slug}/images.json`));
+const remoteFilenames: string[] = remoteJsonKey ? (allImageLists[remoteJsonKey].default ?? allImageLists[remoteJsonKey] as unknown as string[]) : [];
+
+// Local gallery — auto-discover images from folder
 const allImages = import.meta.glob<{ default: ImageMetadata }>(
   '/src/content/galleries/**/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}',
   { eager: true }
@@ -30,15 +41,20 @@ const allOriginalsUrl = import.meta.glob<string>(
   { eager: true, query: '?url', import: 'default' }
 );
 
-const slug = entry.slug;
-const galleryImages = Object.entries(allImages)
-  .filter(([path]) => path.includes(`/galleries/${slug}/`))
-  .sort(([a], [b]) => a.localeCompare(b))
-  .map(([path, mod], i) => ({
-    src: mod.default,
-    alt: `${title} — photo ${i + 1}`,
-    fullSrc: allOriginalsUrl[path] ?? '',
-  }));
+const galleryImages = remoteBase && remoteFilenames.length > 0
+  ? remoteFilenames.map((filename, i) => ({
+      src: `${remoteBase}/${filename}` as string,
+      alt: `${title} — photo ${i + 1}`,
+      fullSrc: `${remoteBase}/${filename}`,
+    }))
+  : Object.entries(allImages)
+      .filter(([path]) => path.includes(`/galleries/${slug}/`))
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([path, mod], i) => ({
+        src: mod.default as unknown as string,
+        alt: `${title} — photo ${i + 1}`,
+        fullSrc: allOriginalsUrl[path] ?? '',
+      }));
 
 const formattedDate = new Date(date + "T00:00:00").toLocaleDateString("en-US", {
   year: "numeric",

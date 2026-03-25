@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 
 interface Props {
   images: Array<{
-    src: ImageMetadata;
+    src: ImageMetadata | string;
     alt: string;
     caption?: string;
     fullSrc?: string;
@@ -26,11 +26,11 @@ const id = `gallery-${Math.random().toString(36).slice(2, 8)}`;
           data-full={image.fullSrc ?? ''}
           aria-label={`Open photo ${i + 1} of ${images.length}`}
         >
-          <Image
-            src={image.src}
-            alt={image.alt}
-            class="w-full h-auto block transition-transform duration-500 group-hover:scale-105"
-          />
+          {typeof image.src === 'string' ? (
+            <img src={image.src} alt={image.alt} loading="lazy" class="w-full h-auto block transition-transform duration-500 group-hover:scale-105" />
+          ) : (
+            <Image src={image.src} alt={image.alt} class="w-full h-auto block transition-transform duration-500 group-hover:scale-105" />
+          )}
           <div class="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-xl pointer-events-none" />
           <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 rounded-xl" />
           {image.caption && (
@@ -52,11 +52,11 @@ const id = `gallery-${Math.random().toString(36).slice(2, 8)}`;
           data-full={image.fullSrc ?? ''}
           aria-label={`Open photo ${i + 1} of ${images.length}`}
         >
-          <Image
-            src={image.src}
-            alt={image.alt}
-            class={layout === 'square' ? 'w-full h-full object-cover transition-transform duration-500 group-hover:scale-105' : 'w-full h-auto block transition-transform duration-500 group-hover:scale-105'}
-          />
+          {typeof image.src === 'string' ? (
+            <img src={image.src} alt={image.alt} loading="lazy" class={layout === 'square' ? 'w-full h-full object-cover transition-transform duration-500 group-hover:scale-105' : 'w-full h-auto block transition-transform duration-500 group-hover:scale-105'} />
+          ) : (
+            <Image src={image.src} alt={image.alt} class={layout === 'square' ? 'w-full h-full object-cover transition-transform duration-500 group-hover:scale-105' : 'w-full h-auto block transition-transform duration-500 group-hover:scale-105'} />
+          )}
           <div class="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-xl pointer-events-none" />
           <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 rounded-xl" />
           {image.caption && (

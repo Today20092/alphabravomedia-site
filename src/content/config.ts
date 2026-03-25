@@ -80,6 +80,7 @@ const galleries = defineCollection({
     //   masonry — Pinterest-style columns, best for mixed event photography
     galleryLayout: z.enum(['square', 'natural', 'masonry']).default('square'),
     password: z.string().optional(),
+    remoteBase: z.string().optional(),
   }),
 });
 
