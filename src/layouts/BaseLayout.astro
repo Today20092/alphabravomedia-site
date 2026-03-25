@@ -5,6 +5,8 @@ import { ClientRouter } from "astro:transitions";
 
 interface Props {
   title?: string;
+  ogImage?: string;
+  noIndex?: boolean;
 }
 
 // ============================================
@@ -49,7 +51,7 @@ const youtubeLink = siteConfig.socialLinks.find(
   (s) => s.platform === "youtube",
 );
 
-const { title = `${siteConfig.siteName} | Cinema-Grade Videography` } =
+const { title = `${siteConfig.siteName} | Cinema-Grade Videography`, ogImage, noIndex = false } =
   Astro.props;
 
 // Base URL for GitHub Pages (or '/' for custom domain)
@@ -81,6 +83,10 @@ const currentPath = Astro.url.pathname;
       content="Cinema-grade videography for brands and creators. High-quality video production and strategic content."
     />
     <title>{title}</title>
+    <meta property="og:title" content={title} />
+    <meta property="og:site_name" content={siteConfig.siteName} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    {noIndex && <meta name="robots" content="noindex, nosnippet" />}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
