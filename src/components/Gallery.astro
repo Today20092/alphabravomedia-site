@@ -27,7 +27,7 @@ const id = `gallery-${Math.random().toString(36).slice(2, 8)}`;
           aria-label={`Open photo ${i + 1} of ${images.length}`}
         >
           {typeof image.src === 'string' ? (
-            <img src={image.src} alt={image.alt} loading="lazy" class="w-full h-auto block transition-transform duration-500 group-hover:scale-105" />
+            <img src={image.src} alt={image.alt} loading="lazy" decoding="async" class="w-full h-auto block transition-transform duration-500 group-hover:scale-105" />
           ) : (
             <Image src={image.src} alt={image.alt} class="w-full h-auto block transition-transform duration-500 group-hover:scale-105" />
           )}
@@ -53,7 +53,7 @@ const id = `gallery-${Math.random().toString(36).slice(2, 8)}`;
           aria-label={`Open photo ${i + 1} of ${images.length}`}
         >
           {typeof image.src === 'string' ? (
-            <img src={image.src} alt={image.alt} loading="lazy" class={layout === 'square' ? 'w-full h-full object-cover transition-transform duration-500 group-hover:scale-105' : 'w-full h-auto block transition-transform duration-500 group-hover:scale-105'} />
+            <img src={image.src} alt={image.alt} loading="lazy" decoding="async" class={layout === 'square' ? 'w-full h-full object-cover transition-transform duration-500 group-hover:scale-105' : 'w-full h-auto block transition-transform duration-500 group-hover:scale-105'} />
           ) : (
             <Image src={image.src} alt={image.alt} class={layout === 'square' ? 'w-full h-full object-cover transition-transform duration-500 group-hover:scale-105' : 'w-full h-auto block transition-transform duration-500 group-hover:scale-105'} />
           )}
@@ -71,6 +71,17 @@ const id = `gallery-${Math.random().toString(36).slice(2, 8)}`;
     </div>
   )}
 </div>
+
+{images.length > 50 && (
+  <div id={`${id}-load-more-wrap`} class="flex justify-center mt-8">
+    <button
+      id={`${id}-load-more`}
+      class="px-6 py-3 rounded-full bg-[#1c1916] border border-[#2a2520] text-[#a8998a] hover:text-white hover:border-[#c9a84c] transition-colors text-sm font-medium"
+    >
+      Load more photos
+    </button>
+  </div>
+)}
 
 <!-- Lightbox -->
 <div
@@ -129,7 +140,7 @@ const id = `gallery-${Math.random().toString(36).slice(2, 8)}`;
   </div>
 </div>
 
-<script define:vars={{ id, imageCount: images.length }}>
+<script define:vars={{ id, imageCount: images.length, pageSize: 50 }}>
   (function () {
     const grid = document.getElementById(id);
     const lightbox = document.getElementById(`${id}-lightbox`);
@@ -138,6 +149,24 @@ const id = `gallery-${Math.random().toString(36).slice(2, 8)}`;
     const img = lightbox.querySelector(".lightbox-img");
     const current = lightbox.querySelector(".lightbox-current");
     const thumbs = Array.from(grid.querySelectorAll(".gallery-thumb"));
+
+    // Pagination — hide thumbs beyond first page
+    let shown = Math.min(pageSize, imageCount);
+    thumbs.forEach((btn, i) => {
+      if (i >= pageSize) btn.style.display = "none";
+    });
+    const loadMoreWrap = document.getElementById(`${id}-load-more-wrap`);
+    const loadMoreBtn = document.getElementById(`${id}-load-more`);
+    if (loadMoreBtn) {
+      loadMoreBtn.addEventListener("click", () => {
+        const next = Math.min(shown + pageSize, imageCount);
+        for (let i = shown; i < next; i++) thumbs[i].style.display = "";
+        shown = next;
+        if (shown >= imageCount && loadMoreWrap) loadMoreWrap.style.display = "none";
+        else if (loadMoreBtn) loadMoreBtn.textContent = `Load more photos (${imageCount - shown} remaining)`;
+      });
+      if (imageCount > pageSize) loadMoreBtn.textContent = `Load more photos (${imageCount - pageSize} remaining)`;
+    }
 
     // Collect src, alt, and full-res URL from each thumb
     const srcs = thumbs.map((btn) => {

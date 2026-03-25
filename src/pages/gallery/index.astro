@@ -11,9 +11,15 @@ const sorted = entries.sort(
   (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
 );
 
-// Auto-discover all gallery images
+// Auto-discover all gallery images (local)
 const allImages = import.meta.glob<{ default: ImageMetadata }>(
   '/src/content/galleries/**/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}',
+  { eager: true }
+);
+
+// Auto-discover remote image lists (R2 galleries)
+const allImageLists = import.meta.glob<{ default: string[] }>(
+  '/src/content/galleries/**/images.json',
   { eager: true }
 );
 
@@ -23,6 +29,13 @@ function getImagesForSlug(slug: string) {
     .filter(([path]) => path.includes(`/galleries/${slug}/`))
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([_, mod]) => mod.default);
+}
+
+function getRemoteFilenames(slug: string): string[] {
+  const key = Object.keys(allImageLists).find(k => k.includes(`/galleries/${slug}/images.json`));
+  if (!key) return [];
+  const val = allImageLists[key];
+  return (val.default ?? val) as string[];
 }
 ---
 
@@ -44,9 +57,15 @@ function getImagesForSlug(slug: string) {
       ) : (
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {sorted.map((entry) => {
-            const imgs = getImagesForSlug(entry.slug);
-            const count = imgs.length;
-            const cover = imgs[0];
+            const isRemote = !!entry.data.remoteBase;
+            const isPrivate = !!entry.data.password;
+            const remoteFiles = isRemote ? getRemoteFilenames(entry.slug) : [];
+            const localImgs = isRemote ? [] : getImagesForSlug(entry.slug);
+            const count = isRemote ? remoteFiles.length : localImgs.length;
+            const remoteCoverUrl = isRemote && remoteFiles.length > 0
+              ? `${entry.data.remoteBase}/${remoteFiles[0]}`
+              : null;
+            const localCover = localImgs[0];
             return (
               <a
                 href={`${base}gallery/${entry.slug}`}
@@ -54,9 +73,25 @@ function getImagesForSlug(slug: string) {
               >
                 <!-- Cover image -->
                 <div class="aspect-[4/3] overflow-hidden relative">
-                  {cover ? (
+                  {remoteCoverUrl && isPrivate ? (
+                    <img
+                      src={remoteCoverUrl}
+                      alt=""
+                      aria-hidden="true"
+                      class="w-full h-full object-cover scale-110"
+                      style="filter: blur(28px);"
+                    />
+                  ) : remoteCoverUrl ? (
+                    <img
+                      src={remoteCoverUrl}
+                      alt={entry.data.title}
+                      loading="lazy"
+                      decoding="async"
+                      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  ) : localCover ? (
                     <Image
-                      src={cover}
+                      src={localCover}
                       alt={entry.data.title}
                       class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
