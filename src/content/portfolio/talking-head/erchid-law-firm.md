@@ -36,4 +36,4 @@ Omar needed to accomplish **scalable client education** (**4-5 videos/month**) t
 ### Strategic Takeaway
 Alpha Bravo Media builds compounding content infrastructure that transforms professional expertise into scalable, referable assets—not disposable social media.
 
-**Facing a similar authority challenge?** [Book a Technical Discovery Call] to architect your evergreen video system.
+**Facing a similar authority challenge?** [Book a Call](#contact) to architect your evergreen video system.
