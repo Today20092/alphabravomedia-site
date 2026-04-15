@@ -16,7 +16,8 @@
       "mcp__plugin_context-mode_context-mode__ctx_search",
       "mcp__plugin_context-mode_context-mode__ctx_execute_file",
       "Bash(grep -r \"AV\\\\|av-\\\\|live-production\\\\|Professional Event\" C:\\\\Users\\\\User\\\\Documents\\\\alphabravomedia-site\\\\src --include=\"*.json\" --include=\"*.astro\" --include=\"*.md\" -l 2>/dev/null | head -20)",
-      "mcp__plugin_context-mode_context-mode__ctx_execute"
+      "mcp__plugin_context-mode_context-mode__ctx_execute",
+      "Skill(update-config)"
     ]
   }
 }

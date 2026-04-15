@@ -28,6 +28,8 @@ pnpm-debug.log*
 
 # claude code
 .claude/
+AGENTS.original.md
+CLAUDE.original.md
 
 # local environment overrides
 .env.local
