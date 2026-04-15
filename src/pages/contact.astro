@@ -1,0 +1,126 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Icon } from "astro-icon/components";
+import { siteConfig } from "../site-config";
+
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
+const hasContactForm = Boolean(siteConfig.contactFormUrl);
+
+const inquiryPoints = [
+  "What kind of project this is: brand video, podcast, event, editing, or A/V support.",
+  "When you need it: date, location, and how urgent the timeline is.",
+  "What success looks like: deliverables, usage, and budget range if you have one.",
+];
+---
+
+<BaseLayout title={`Contact | ${siteConfig.siteName}`}>
+  <section class="px-4 pt-32 sm:px-6 sm:pt-36">
+    <div class="site-shell">
+      <div class="site-page-header mb-0 max-w-3xl">
+        <span class="site-kicker">Contact</span>
+        <h1 class="site-page-title">
+          Tell us what you need and we will handle the next step.
+        </h1>
+        <p class="site-page-copy max-w-2xl">
+          Use the form for production inquiries, event questions, podcast support, editing, or A/V work.
+          If you prefer to talk first, use the direct contact links below.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-4 pb-24 sm:px-6 sm:pb-28">
+    <div class="site-shell">
+      <div class="grid gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-start">
+        <div class="site-panel p-4 sm:p-6">
+          {hasContactForm ? (
+            <div class="rounded-[1.5rem] border border-[var(--site-border)] bg-[var(--site-surface)] p-3 shadow-[var(--site-shadow-sm)] sm:p-4">
+              <div class="mb-4 flex items-center justify-between gap-3">
+                <div>
+                  <span class="site-kicker">Inquiry form</span>
+                  <h2 class="site-section-title mt-3">Start with the basics.</h2>
+                </div>
+                <span class="site-chip">Tally</span>
+              </div>
+
+              <div class="overflow-hidden rounded-[1.15rem] bg-[var(--site-bg)]">
+                <script src="https://tally.so/widgets/embed.js" async></script>
+                <iframe
+                  data-tally-src={siteConfig.contactFormUrl}
+                  loading="lazy"
+                  width="100%"
+                  height="980"
+                  frameborder="0"
+                  marginheight="0"
+                  marginwidth="0"
+                  title={`${siteConfig.siteName} contact form`}
+                  class="block w-full border-0 bg-transparent"
+                />
+              </div>
+            </div>
+          ) : (
+            <div class="site-card p-6 sm:p-8">
+              <span class="site-kicker">Form setup</span>
+              <h2 class="site-section-title mt-4">Connect your Tally form URL.</h2>
+              <p class="site-section-copy mt-4">
+                Set <code>PUBLIC_TALLY_CONTACT_FORM_URL</code> to your published Tally embed URL,
+                then this page will load the form here.
+              </p>
+              <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+                <a href={`mailto:${siteConfig.email}`} class="site-button-primary">
+                  Email instead
+                </a>
+                <a href={`tel:${siteConfig.phoneRaw}`} class="site-button-secondary">
+                  Call instead
+                </a>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <aside class="space-y-6">
+          <div class="site-card p-6 sm:p-7">
+            <span class="site-kicker">What to include</span>
+            <h2 class="site-card-title mt-4">Enough detail to estimate cleanly.</h2>
+            <ul class="mt-5 space-y-4 text-sm leading-7 text-[var(--site-text-muted)]">
+              {inquiryPoints.map((point) => (
+                <li class="flex items-start gap-3">
+                  <Icon name="mdi:check-circle" class="mt-0.5 h-5 w-5 shrink-0 text-[var(--site-accent)]" />
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="site-card p-6 sm:p-7">
+            <span class="site-kicker">Direct contact</span>
+            <h2 class="site-card-title mt-4">Prefer to reach out first?</h2>
+            <div class="mt-5 flex flex-col gap-3">
+              <a href={`mailto:${siteConfig.email}`} class="site-button-primary">
+                <Icon name="mdi:email-outline" class="h-4 w-4" />
+                Email Ayoub
+              </a>
+              <a href={`tel:${siteConfig.phoneRaw}`} class="site-button-secondary">
+                <Icon name="mdi:phone-outline" class="h-4 w-4" />
+                Call Ayoub
+              </a>
+              <a href={`${base}services`} class="site-button-secondary">
+                <Icon name="mdi:clipboard-text-outline" class="h-4 w-4" />
+                Review services
+              </a>
+            </div>
+          </div>
+
+          <div class="site-card p-6 sm:p-7">
+            <span class="site-kicker">Response time</span>
+            <p class="mt-4 text-sm leading-7 text-[var(--site-text-muted)]">
+              Most inquiry emails and form submissions get a reply within one business day.
+              If the project is time-sensitive, call or text after submitting the form.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

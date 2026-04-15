@@ -6,7 +6,7 @@ const allServices = await getCollection("services");
 const sortedServices = allServices.sort((a, b) => a.data.order - b.data.order);
 ---
 
-<section id="services" class="border-t border-[var(--site-border)] px-6 py-24">
+<section id="services" class="border-t border-[var(--site-border)] px-4 py-24 sm:px-6">
   <div class="site-shell">
     <div class="mb-10 grid gap-4 text-center">
       <span class="site-kicker mx-auto">Services</span>

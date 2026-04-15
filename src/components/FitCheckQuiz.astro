@@ -2,6 +2,9 @@
 import { Icon } from "astro-icon/components";
 import { siteConfig } from "../site-config";
 
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
+
 const questions = [
   {
     label: "Project type",
@@ -188,9 +191,9 @@ const resultViews = {
 } as const;
 ---
 
-<section id="fit-check" class="scroll-mt-32 px-6 pb-24">
+<section id="fit-check" class="scroll-mt-32 px-4 pb-24 sm:px-6">
   <div class="site-shell">
-    <div class="fit-check-shell overflow-hidden">
+    <div class="fit-check-shell overflow-hidden" data-fit-check>
       <div class="grid gap-0 lg:grid-cols-[minmax(0,1.12fr)_minmax(320px,0.88fr)]">
         <div class="p-6 sm:p-8">
           <div class="flex flex-wrap items-center gap-3">
@@ -332,9 +335,9 @@ const resultViews = {
               <p class="mt-3 text-sm leading-7 text-[var(--site-text-muted)]" data-fit-hint>
                 No email required. No pressure.
               </p>
-              <div class="mt-4 grid gap-3">
-                <a href={`mailto:${siteConfig.email}`} class="site-button-primary w-full">
-                  Contact direct
+            <div class="mt-4 grid gap-3">
+                <a href={`${base}contact`} class="site-button-primary w-full">
+                  Book consult
                 </a>
                 <a href={`tel:${siteConfig.phoneRaw}`} class="site-button-secondary w-full">
                   Call now
