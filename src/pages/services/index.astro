@@ -4,6 +4,7 @@ import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
 import { siteConfig } from "../../site-config";
 import { formatGoogleReviewSummary } from "../../lib/google-business-profile";
+import FitCheckQuiz from "../../components/FitCheckQuiz.astro";
 
 const allServices = await getCollection("services");
 const sortedServices = allServices.sort((a, b) => a.data.order - b.data.order);
@@ -112,6 +113,8 @@ const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
     </div>
   </section>
 
+  <FitCheckQuiz />
+
   <section class="px-6 pb-24">
     <div class="site-shell">
       <div class="site-panel p-6 sm:p-8">
@@ -120,7 +123,7 @@ const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
             <span class="site-kicker">Contact</span>
             <h2 class="site-section-title mt-4">Talk scope and timing, then choose the right fit.</h2>
             <p class="site-section-copy mt-4">
-              Start with the service that fits best, then confirm scope, timing, and fit.
+              Start with the service that fits best, or book a free 15-minute consult call to talk through your event, ask questions, or get advice before you commit.
             </p>
             <div class="mt-5 flex flex-wrap items-center gap-2 text-sm text-[var(--site-text-muted)]">
               <Icon name="simple-icons:google" class="h-4 w-4 text-[var(--site-accent)]" />
@@ -140,10 +143,10 @@ const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
 
           <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-1 lg:w-[19rem] lg:justify-self-end">
             <a href="mailto:contact@alphabravomedia.co" class="site-button-primary w-full">
-              Contact direct
+              Book consult
             </a>
             <a href="tel:+18136650166" class="site-button-secondary w-full">
-              Call now
+              Call Ayoub
             </a>
             <a
               href={siteConfig.googleMapsUrl}
