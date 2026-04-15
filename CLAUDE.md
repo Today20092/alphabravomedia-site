@@ -1,32 +1,33 @@
-# Alpha Bravo Media
+# Alpha Bravo Media Agent Notes
 
-Astro 5 site for videography, A/V, portfolio, blog, gear, services, galleries.
+Compact Astro content site for Alpha Bravo Media.
 
-## Project Shape
-- `src/pages/` = routed pages.
-- `src/content/` = collections + schemas.
+## What To Know
+- Cinema-style videography + A/V portfolio.
+- Main areas: home, services, portfolio, blog, gear, gallery, legal.
+- Content is file-driven and schema-checked.
+
+## Where To Look First
+- `src/content/config.ts` = schemas + allowed fields.
+- `src/pages/` = routing + page behavior.
 - `src/components/` = reusable UI.
-- `src/layouts/` + `src/styles/` = shared layout + global styling.
+- `src/layouts/BaseLayout.astro` = nav, metadata, contact, social.
 
-## Source Of Truth
-- `src/content/config.ts` = content schemas/fields.
-- `src/layouts/BaseLayout.astro` = live site config, contact, nav.
-- `package.json` = supported commands.
+## Editing Guidance
+- Smallest change that fits.
+- Reuse existing styling, sections, patterns.
+- Avoid new abstraction unless repeated.
+- Keep cinematic, dark, high-contrast look.
 
-## Working Rules
-- Edit existing content/components first.
-- Keep current cinematic, dark style.
-- Stay concise; keep AI-facing edits task-specific.
-- Check existing content structure before assuming fields/behavior.
+## Content Areas
+- Services: `src/content/services/`
+- Portfolio: `src/content/portfolio/`
+- Blog: `src/content/blog/`
+- Gear: `src/content/gear/`
+- Galleries: `src/content/galleries/`
 
-## Useful Commands
-- `npm install`
+## Commands
 - `npm run dev`
 - `npm run build`
 - `npm run preview`
 - `npm run new`
-
-## Notes
-- Live site: `https://alphabravomedia.co/`.
-- Keystatic available in dev.
-- Main editable areas: services, portfolio, blog, gear, galleries.
