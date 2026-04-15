@@ -194,8 +194,84 @@ const resultViews = {
 <section id="fit-check" class="scroll-mt-32 px-4 pb-24 sm:px-6">
   <div class="site-shell">
     <div class="fit-check-shell overflow-hidden" data-fit-check>
-      <div class="grid gap-0 lg:grid-cols-[minmax(0,1.12fr)_minmax(320px,0.88fr)]">
-        <div class="p-6 sm:p-8">
+      <div class="grid gap-8 p-6 sm:p-8">
+        <div hidden data-fit-readout-shell>
+          <div class="fit-result-panel">
+            <div class="flex items-center justify-between gap-4">
+              <span class="site-kicker">Readout</span>
+              <span class="site-chip site-chip-muted" data-result-badge>Fit pending</span>
+            </div>
+
+            <div class="mt-6">
+              <div class="flex items-end justify-between gap-4 text-sm text-[var(--site-text-soft)]">
+                <span>Fit meter</span>
+                <span data-fit-score>0 / 14</span>
+              </div>
+              <div class="mt-3 h-2 rounded-full bg-[var(--site-control-bg)]">
+                <div
+                  class="quiz-meter-fill h-full w-0 rounded-full"
+                  data-fit-meter
+                  style="width: 0%"
+                ></div>
+              </div>
+            </div>
+
+            <div class="mt-6 rounded-[1.25rem] border border-[var(--site-border)] bg-[var(--site-control-bg)] p-5">
+              <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--site-text-soft)]">
+                Current read
+              </p>
+              <h3
+                class="fit-result-title mt-3 font-['Sora',sans-serif] text-2xl font-semibold tracking-tight text-[var(--site-text)]"
+                data-fit-label
+              >
+                Answer a few questions to see your fit.
+              </h3>
+              <p class="mt-3 text-sm leading-7 text-[var(--site-text-muted)]" data-fit-copy>
+                This is a soft check. It is meant to save time and point people to the right
+                next step, not trap them in a form wall.
+              </p>
+            </div>
+
+            <div class="mt-6 grid gap-4">
+              <div class="rounded-[1.25rem] border border-[var(--site-border)] bg-[var(--site-control-bg)] p-5">
+                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--site-text-soft)]">
+                  What we are hearing
+                </p>
+                <ul class="mt-4 space-y-3 text-sm leading-6 text-[var(--site-text-muted)]" data-answer-list>
+                  <li>Answer the questions and this summary will populate live.</li>
+                </ul>
+              </div>
+
+              <div class="rounded-[1.25rem] border border-[var(--site-border)] bg-[var(--site-control-bg)] p-5">
+                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--site-text-soft)]">
+                  Best next step
+                </p>
+                <p class="mt-3 text-sm leading-7 text-[var(--site-text-muted)]" data-fit-hint>
+                  No email required. No pressure.
+                </p>
+                <div class="mt-4 grid gap-3">
+                  <a href={`${base}contact`} class="site-button-primary w-full">
+                    Book consult
+                  </a>
+                  <a href={`sms:${siteConfig.phoneRaw}`} class="site-button-secondary w-full">
+                    Text Ayoub
+                  </a>
+                  <a
+                    href={siteConfig.googleMapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="site-button-secondary w-full"
+                  >
+                    <Icon name="simple-icons:google" class="h-4 w-4" />
+                    Read reviews
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
           <div class="flex flex-wrap items-center gap-3">
             <span class="site-kicker">Fit Check</span>
             <span class="site-chip site-chip-muted">Prototype</span>
@@ -227,148 +303,103 @@ const resultViews = {
             </span>
           </div>
 
-          <div class="mt-8 grid gap-4">
-            {questions.map((question, questionIndex) => (
-              <section
-                class="fit-question-card"
-                data-question-card
-                data-question-index={questionIndex}
-                aria-labelledby={`fit-question-${questionIndex}`}
-              >
-                <div class="flex flex-wrap items-center justify-between gap-4">
-                  <span class="site-chip site-chip-muted">{question.label}</span>
-                  <span class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--site-text-soft)]">
-                    0{questionIndex + 1}
-                  </span>
-                </div>
-
-                <h3
-                  id={`fit-question-${questionIndex}`}
-                  class="mt-4 font-['Sora',sans-serif] text-xl font-semibold tracking-tight text-[var(--site-text)] sm:text-2xl"
-                >
-                  {question.prompt}
-                </h3>
-                <p class="mt-2 max-w-2xl text-sm leading-7 text-[var(--site-text-muted)]">
-                  {question.description}
-                </p>
-
-                <div class="mt-5 grid gap-3">
-                  {question.options.map((option, optionIndex) => (
-                    <button
-                      type="button"
-                      class="quiz-option"
-                      data-option
-                      data-question-index={questionIndex}
-                      data-option-index={optionIndex}
-                      data-score={option.score}
-                      data-red-flag={option.redFlag ? "1" : "0"}
-                      aria-pressed="false"
-                    >
-                      <span class="quiz-option-label">{option.label}</span>
-                      <span class="quiz-option-meta">{option.help}</span>
-                    </button>
-                  ))}
-                </div>
-
-                <div class="mt-4 flex flex-wrap items-center justify-between gap-3 text-xs text-[var(--site-text-soft)]">
-                  <span data-answer-copy>Choose one option to lock this in.</span>
-                  <span class="flex items-center gap-2">
-                    <Icon name="mdi:chevron-down" class="h-4 w-4" />
-                    Live update
-                  </span>
-                </div>
-              </section>
-            ))}
-          </div>
-        </div>
-
-        <aside class="fit-result-panel border-t border-[var(--site-border)] p-6 sm:p-8 lg:border-l lg:border-t-0 lg:sticky lg:top-28 lg:self-start">
-          <div class="flex items-center justify-between gap-4">
-            <span class="site-kicker">Readout</span>
-            <span class="site-chip site-chip-muted" data-result-badge>Fit pending</span>
-          </div>
-
-          <div class="mt-6">
+          <div class="mt-8 rounded-[1rem] border border-[var(--site-border)] bg-[var(--site-control-bg)] p-4">
             <div class="flex items-end justify-between gap-4 text-sm text-[var(--site-text-soft)]">
-              <span>Fit meter</span>
-              <span data-fit-score>0 / 14</span>
+              <span>Question progress</span>
+              <span data-step-progress-label>01 / 05</span>
             </div>
-            <div class="mt-3 h-2 rounded-full bg-[var(--site-control-bg)]">
+            <div class="mt-3 h-2 rounded-full bg-[var(--site-control-bg-hover)]">
               <div
                 class="quiz-meter-fill h-full w-0 rounded-full"
-                data-fit-meter
+                data-step-progress
                 style="width: 0%"
               ></div>
             </div>
           </div>
 
-          <div class="mt-6 rounded-[1.25rem] border border-[var(--site-border)] bg-[var(--site-control-bg)] p-5">
-            <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--site-text-soft)]">
-              Current read
-            </p>
-            <h3
-              class="fit-result-title mt-3 font-['Sora',sans-serif] text-2xl font-semibold tracking-tight text-[var(--site-text)]"
-              data-fit-label
-            >
-              Answer a few questions to see your fit.
-            </h3>
-            <p class="mt-3 text-sm leading-7 text-[var(--site-text-muted)]" data-fit-copy>
-              This is a soft check. It is meant to save time and point people to the right
-              next step, not trap them in a form wall.
-            </p>
-          </div>
-
-          <div class="mt-6 grid gap-4">
-            <div class="rounded-[1.25rem] border border-[var(--site-border)] bg-[var(--site-control-bg)] p-5">
-              <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--site-text-soft)]">
-                What we are hearing
-              </p>
-              <ul class="mt-4 space-y-3 text-sm leading-6 text-[var(--site-text-muted)]" data-answer-list>
-                <li>Answer the questions and this summary will populate live.</li>
-              </ul>
-            </div>
-
-            <div class="rounded-[1.25rem] border border-[var(--site-border)] bg-[var(--site-control-bg)] p-5">
-              <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--site-text-soft)]">
-                Best next step
-              </p>
-              <p class="mt-3 text-sm leading-7 text-[var(--site-text-muted)]" data-fit-hint>
-                No email required. No pressure.
-              </p>
-            <div class="mt-4 grid gap-3">
-                <a href={`${base}contact`} class="site-button-primary w-full">
-                  Book consult
-                </a>
-                <a href={`tel:${siteConfig.phoneRaw}`} class="site-button-secondary w-full">
-                  Call now
-                </a>
-                <a
-                  href={siteConfig.googleMapsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="site-button-secondary w-full"
-                >
-                  <Icon name="simple-icons:google" class="h-4 w-4" />
-                  Read reviews
-                </a>
+          <div class="mt-8">
+            <section class="fit-step-card" data-step-shell data-step-state="question">
+              <div class="flex flex-wrap items-center justify-between gap-4">
+                <div class="flex flex-wrap items-center gap-3">
+                  <span class="site-chip site-chip-muted" data-step-label>{questions[0].label}</span>
+                  <span
+                    class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--site-text-soft)]"
+                    data-step-position
+                  >
+                    01 / 05
+                  </span>
+                </div>
+                <span class="site-stat">
+                  <span class="font-semibold text-[var(--site-accent)]">5</span>
+                  <span>questions total</span>
+                </span>
               </div>
-            </div>
+
+              <div class="mt-4">
+                <h3
+                  id="fit-question-active"
+                  class="font-['Sora',sans-serif] text-xl font-semibold tracking-tight text-[var(--site-text)] sm:text-2xl"
+                  data-step-prompt
+                >
+                  {questions[0].prompt}
+                </h3>
+                <p class="mt-2 max-w-2xl text-sm leading-7 text-[var(--site-text-muted)]" data-step-description>
+                  {questions[0].description}
+                </p>
+              </div>
+
+              <div class="mt-5 grid gap-3" data-step-options>
+                {
+                  questions[0].options.map((option, optionIndex) => (
+                    <button
+                      type="button"
+                      class="quiz-option"
+                      data-option
+                      data-option-index={optionIndex}
+                      aria-pressed="false"
+                    >
+                      <span class="quiz-option-label">{option.label}</span>
+                      <span class="quiz-option-meta">{option.help}</span>
+                    </button>
+                  ))
+                }
+              </div>
+
+              <div class="mt-5 flex flex-wrap items-center justify-between gap-3 text-xs text-[var(--site-text-soft)]">
+                <button type="button" class="fit-step-back" data-step-back disabled>
+                  Back
+                </button>
+                <span class="flex items-center gap-2" data-step-hint>
+                  Choose one option to continue.
+                </span>
+              </div>
+            </section>
           </div>
-        </aside>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<script define:vars={{ questions, resultViews }}>
+<script define:vars={{ questions, resultViews, contactHref: `${base}contact` }}>
   document.addEventListener("astro:page-load", () => {
     const root = document.querySelector("[data-fit-check]");
 
     if (!root || root.dataset.enhanced === "true") return;
     root.dataset.enhanced = "true";
 
-    const questionCards = Array.from(root.querySelectorAll("[data-question-card]"));
-    const optionButtons = Array.from(root.querySelectorAll("[data-option]"));
+    const stepShell = root.querySelector("[data-step-shell]");
+    const readoutShell = root.querySelector("[data-fit-readout-shell]");
+    const stepLabel = root.querySelector("[data-step-label]");
+    const stepPosition = root.querySelector("[data-step-position]");
+    const stepStatus = root.querySelector("[data-step-status]");
+    const stepPrompt = root.querySelector("[data-step-prompt]");
+    const stepDescription = root.querySelector("[data-step-description]");
+    const stepOptions = root.querySelector("[data-step-options]");
+    const stepBack = root.querySelector("[data-step-back]");
+    const stepHint = root.querySelector("[data-step-hint]");
+    const stepProgress = root.querySelector("[data-step-progress]");
+    const stepProgressLabel = root.querySelector("[data-step-progress-label]");
     const answerList = root.querySelector("[data-answer-list]");
     const answerCount = root.querySelector("[data-answer-count]");
     const fitLabel = root.querySelector("[data-fit-label]");
@@ -377,8 +408,8 @@ const resultViews = {
     const fitBadge = root.querySelector("[data-result-badge]");
     const fitScore = root.querySelector("[data-fit-score]");
     const fitMeter = root.querySelector("[data-fit-meter]");
-    const answerCopyNodes = Array.from(root.querySelectorAll("[data-answer-copy]"));
     const answerState = Array.from({ length: questions.length }, () => null);
+    let currentIndex = 0;
 
     const renderViews = {
       neutral: resultViews.neutral,
@@ -386,6 +417,15 @@ const resultViews = {
       maybe: resultViews.maybe,
       "not-right": resultViews["not-right"],
     };
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
 
     function computeReadout() {
       let total = 0;
@@ -421,33 +461,137 @@ const resultViews = {
       return { state, total, answered, selections };
     }
 
-    function renderSelectionState() {
-      optionButtons.forEach((button) => {
-        const questionIndex = Number(button.getAttribute("data-question-index"));
-        const optionIndex = Number(button.getAttribute("data-option-index"));
-        const selected = answerState[questionIndex];
-        const isSelected = selected && questions[questionIndex].options[optionIndex] === selected;
+    function renderSelectionsList(selections) {
+      if (!answerList) return;
 
-        button.classList.toggle("is-selected", Boolean(isSelected));
-        button.setAttribute("aria-pressed", isSelected ? "true" : "false");
-      });
+      if (selections.length === 0) {
+        answerList.innerHTML =
+          "<li>Answer the questions and this summary will populate live.</li>";
+        return;
+      }
 
-      questionCards.forEach((card, index) => {
-        const selected = answerState[index];
-        const answerCopy = answerCopyNodes[index];
-
-        if (answerCopy) {
-          answerCopy.textContent = selected
-            ? `Selected: ${selected.label}`
-            : "Choose one option to lock this in.";
-        }
-      });
+      answerList.innerHTML = selections
+        .map(
+          (entry) => `
+            <li class="flex items-start gap-3">
+              <span class="mt-1 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[var(--site-border)] bg-[var(--site-control-bg)] text-[10px] font-semibold text-[var(--site-accent)]">•</span>
+              <span><strong class="text-[var(--site-text)]">${escapeHtml(entry.question)}:</strong> ${escapeHtml(entry.answer)}</span>
+            </li>
+          `,
+        )
+        .join("");
     }
 
-    function renderReadout() {
-      const { state, total, answered, selections } = computeReadout();
-      const view = renderViews[state];
+    function renderStep(readout) {
+      if (!stepShell) return;
+
+      const completed = currentIndex >= questions.length;
+      const answeredCount = readout.answered;
+      const progress = Math.round((answeredCount / questions.length) * 100);
+      const stepNumber = completed ? questions.length : currentIndex + 1;
+      const stepNumberLabel = `${String(stepNumber).padStart(2, "0")} / ${String(questions.length).padStart(2, "0")}`;
+
+      if (stepShell) stepShell.dataset.stepState = completed ? "complete" : "question";
+      if (readoutShell) {
+        readoutShell.hidden = !completed;
+      }
+      if (stepProgress) stepProgress.style.width = `${progress || 0}%`;
+      if (stepProgressLabel) stepProgressLabel.textContent = stepNumberLabel;
+      if (stepStatus) stepStatus.textContent = `${answeredCount}/${questions.length} answered`;
+
+      if (completed) {
+        if (stepLabel) stepLabel.textContent = "Complete";
+        if (stepPosition) stepPosition.textContent = stepNumberLabel;
+        if (stepPrompt) stepPrompt.textContent = "You finished the fit check.";
+        if (stepDescription) {
+          stepDescription.textContent =
+            "Review the summary, edit anything if needed, then book the consult if the fit looks right.";
+        }
+        if (stepHint) {
+          stepHint.textContent = "Use the review button or Back to edit any answer.";
+        }
+        if (stepBack) {
+          stepBack.disabled = false;
+          stepBack.textContent = "Review answers";
+        }
+        if (stepOptions) {
+          const summaryItems = readout.selections.length
+            ? readout.selections
+                .map(
+                  (entry) => `
+                    <li class="flex items-start gap-3">
+                      <span class="mt-1 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[var(--site-border)] bg-[var(--site-control-bg)] text-[10px] font-semibold text-[var(--site-accent)]">•</span>
+                      <span><strong class="text-[var(--site-text)]">${escapeHtml(entry.question)}:</strong> ${escapeHtml(entry.answer)}</span>
+                    </li>
+                  `,
+                )
+                .join("")
+            : "<li>No answers yet.</li>";
+
+          stepOptions.innerHTML = `
+            <div class="rounded-[1rem] border border-[var(--site-border)] bg-[var(--site-control-bg)] p-5">
+              <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--site-text-soft)]">
+                Your summary
+              </p>
+              <ul class="mt-4 space-y-3 text-sm leading-6 text-[var(--site-text-muted)]">
+                ${summaryItems}
+              </ul>
+            </div>
+            <div class="grid gap-3 sm:grid-cols-2">
+              <a href="${contactHref}" class="site-button-primary w-full">Book consult</a>
+              <button type="button" class="site-button-secondary w-full" data-step-review>Review answers</button>
+            </div>
+          `;
+        }
+
+        if (readoutShell) {
+          requestAnimationFrame(() => {
+            readoutShell.scrollIntoView({ behavior: "smooth", block: "start" });
+          });
+        }
+        return;
+      }
+
+      const question = questions[currentIndex];
+      const selected = answerState[currentIndex];
+      const selectedLabel = selected ? selected.label : null;
+      const selectedHint = selected ? `Selected: ${selectedLabel}` : "Choose one option to continue.";
+
+      if (stepLabel) stepLabel.textContent = question.label;
+      if (stepPosition) stepPosition.textContent = stepNumberLabel;
+      if (stepPrompt) stepPrompt.textContent = question.prompt;
+      if (stepDescription) stepDescription.textContent = question.description;
+      if (stepHint) stepHint.textContent = selectedHint;
+      if (stepBack) {
+        stepBack.disabled = currentIndex === 0;
+        stepBack.textContent = "Back";
+      }
+      if (stepOptions) {
+        stepOptions.innerHTML = question.options
+          .map((option, optionIndex) => {
+            const isSelected = selected === option;
+
+            return `
+              <button
+                type="button"
+                class="quiz-option${isSelected ? " is-selected" : ""}"
+                data-option
+                data-option-index="${optionIndex}"
+                aria-pressed="${isSelected ? "true" : "false"}"
+              >
+                <span class="quiz-option-label">${escapeHtml(option.label)}</span>
+                <span class="quiz-option-meta">${escapeHtml(option.help)}</span>
+              </button>
+            `;
+          })
+          .join("");
+      }
+    }
+
+    function renderReadout(readout) {
+      const { state, total, answered, selections } = readout;
       const progress = Math.round((answered / questions.length) * 100);
+      const view = renderViews[state];
 
       root.dataset.fitState = state;
 
@@ -458,40 +602,49 @@ const resultViews = {
       if (fitScore) fitScore.textContent = `${total} / 14`;
       if (answerCount) answerCount.textContent = `${answered}/${questions.length} answered`;
       if (fitMeter) fitMeter.style.width = `${progress}%`;
-
-      if (answerList) {
-        if (selections.length === 0) {
-          answerList.innerHTML =
-            "<li>Answer the questions and this summary will populate live.</li>";
-        } else {
-          answerList.innerHTML = selections
-            .map(
-              (entry) => `
-                <li class="flex items-start gap-3">
-                  <span class="mt-1 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[var(--site-border)] bg-[var(--site-control-bg)] text-[10px] font-semibold text-[var(--site-accent)]">•</span>
-                  <span><strong class="text-[var(--site-text)]">${entry.question}:</strong> ${entry.answer}</span>
-                </li>
-              `,
-            )
-            .join("");
-        }
-      }
+      renderSelectionsList(selections);
     }
 
-    optionButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        const questionIndex = Number(button.getAttribute("data-question-index"));
-        const optionIndex = Number(button.getAttribute("data-option-index"));
-        const selectedOption = questions[questionIndex].options[optionIndex];
+    function syncState() {
+      const readout = computeReadout();
+      renderStep(readout);
+      renderReadout(readout);
+    }
 
-        answerState[questionIndex] = selectedOption;
-        renderSelectionState();
-        renderReadout();
-      });
+    root.addEventListener("click", (event) => {
+      const target = event.target;
+
+      if (!(target instanceof Element)) return;
+
+      const optionButton = target.closest("[data-option]");
+      if (optionButton instanceof HTMLButtonElement) {
+        const optionIndex = Number(optionButton.getAttribute("data-option-index"));
+        const question = questions[currentIndex];
+        const selectedOption = question.options[optionIndex];
+
+        if (!selectedOption) return;
+
+        answerState[currentIndex] = selectedOption;
+        currentIndex = Math.min(currentIndex + 1, questions.length);
+        syncState();
+        return;
+      }
+
+      const backButton = target.closest("[data-step-back]");
+      if (backButton instanceof HTMLButtonElement) {
+        currentIndex = currentIndex >= questions.length ? questions.length - 1 : Math.max(0, currentIndex - 1);
+        syncState();
+        return;
+      }
+
+      const reviewButton = target.closest("[data-step-review]");
+      if (reviewButton instanceof HTMLButtonElement) {
+        currentIndex = Math.max(questions.length - 1, 0);
+        syncState();
+      }
     });
 
-    renderSelectionState();
-    renderReadout();
+    syncState();
   });
 </script>
 
@@ -534,12 +687,16 @@ const resultViews = {
     background: var(--site-accent);
   }
 
-  .fit-question-card {
+  .fit-step-card {
     border: 1px solid var(--site-border);
     border-radius: 1.25rem;
     background: linear-gradient(180deg, var(--site-card-media-tint), transparent), var(--site-surface);
     padding: 1.25rem;
     box-shadow: var(--site-shadow-sm);
+    transition:
+      border-color 180ms ease,
+      background-color 180ms ease,
+      box-shadow 180ms ease;
   }
 
   .quiz-option {
@@ -588,5 +745,31 @@ const resultViews = {
     background:
       linear-gradient(180deg, var(--site-card-media-tint), transparent),
       var(--site-surface-muted);
+  }
+
+  .fit-step-back {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--site-text-soft);
+    transition: color 180ms ease, opacity 180ms ease;
+  }
+
+  .fit-step-back:hover:not(:disabled) {
+    color: var(--site-text);
+  }
+
+  .fit-step-back:disabled {
+    opacity: 0.38;
+    cursor: not-allowed;
+  }
+
+  .fit-step-card[data-step-state="complete"] {
+    border-color: color-mix(in oklab, var(--site-accent) 24%, var(--site-border));
+    background:
+      radial-gradient(circle at top left, color-mix(in oklab, var(--site-accent) 12%, transparent), transparent 38%),
+      linear-gradient(180deg, color-mix(in oklab, var(--site-control-bg) 70%, transparent), transparent 45%),
+      var(--site-surface);
   }
 </style>
