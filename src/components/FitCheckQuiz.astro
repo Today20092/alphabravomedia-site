@@ -308,7 +308,7 @@ const resultViews = {
               <span>Question progress</span>
               <span data-step-progress-label>01 / 05</span>
             </div>
-            <div class="mt-3 h-2 rounded-full bg-[var(--site-control-bg-hover)]">
+            <div class="mt-3 h-1.5 rounded-full bg-[var(--site-control-bg-hover)]">
               <div
                 class="quiz-meter-fill h-full w-0 rounded-full"
                 data-step-progress
@@ -358,8 +358,11 @@ const resultViews = {
                       data-option-index={optionIndex}
                       aria-pressed="false"
                     >
-                      <span class="quiz-option-label">{option.label}</span>
-                      <span class="quiz-option-meta">{option.help}</span>
+                      <span class="quiz-option-copy">
+                        <span class="quiz-option-label">{option.label}</span>
+                        <span class="quiz-option-meta">{option.help}</span>
+                      </span>
+                      <span class="quiz-option-affordance" aria-hidden="true"></span>
                     </button>
                   ))
                 }
@@ -369,9 +372,7 @@ const resultViews = {
                 <button type="button" class="fit-step-back" data-step-back disabled>
                   Back
                 </button>
-                <span class="flex items-center gap-2" data-step-hint>
-                  Choose one option to continue.
-                </span>
+                <span class="flex items-center gap-2" data-step-hint></span>
               </div>
             </section>
           </div>
@@ -493,26 +494,28 @@ const resultViews = {
 
       if (stepShell) stepShell.dataset.stepState = completed ? "complete" : "question";
       if (readoutShell) {
-        readoutShell.hidden = !completed;
+        readoutShell.hidden = true;
       }
       if (stepProgress) stepProgress.style.width = `${progress || 0}%`;
       if (stepProgressLabel) stepProgressLabel.textContent = stepNumberLabel;
       if (stepStatus) stepStatus.textContent = `${answeredCount}/${questions.length} answered`;
 
       if (completed) {
+        const resultView = resultViews[readout.state];
+        const meterWidth = Math.max(0, Math.min(100, Math.round((readout.total / 14) * 100)));
         if (stepLabel) stepLabel.textContent = "Complete";
         if (stepPosition) stepPosition.textContent = stepNumberLabel;
         if (stepPrompt) stepPrompt.textContent = "You finished the fit check.";
         if (stepDescription) {
           stepDescription.textContent =
-            "Review the summary, edit anything if needed, then book the consult if the fit looks right.";
+            "See the readout, book the consult if it fits, or review your answers in place.";
         }
         if (stepHint) {
-          stepHint.textContent = "Use the review button or Back to edit any answer.";
+          stepHint.textContent = "Review answers or go back without leaving this section.";
         }
         if (stepBack) {
           stepBack.disabled = false;
-          stepBack.textContent = "Review answers";
+          stepBack.textContent = "Back";
         }
         if (stepOptions) {
           const summaryItems = readout.selections.length
@@ -529,7 +532,40 @@ const resultViews = {
             : "<li>No answers yet.</li>";
 
           stepOptions.innerHTML = `
-            <div class="rounded-[1rem] border border-[var(--site-border)] bg-[var(--site-control-bg)] p-5">
+            <div class="fit-step-complete-panel rounded-[1rem] border border-[var(--site-border)] bg-[var(--site-control-bg)] p-4 sm:p-5">
+              <div class="flex flex-wrap items-center justify-between gap-3">
+                <span class="site-kicker">Readout</span>
+                <span class="site-chip site-chip-muted">${escapeHtml(resultView.badge)}</span>
+              </div>
+              <div class="mt-4">
+                <div class="flex items-end justify-between gap-4 text-sm text-[var(--site-text-soft)]">
+                  <span>Fit meter</span>
+                  <span>${readout.total} / 14</span>
+                </div>
+                  <div class="mt-3 h-1.5 rounded-full bg-[var(--site-control-bg-hover)]">
+                    <div class="quiz-meter-fill h-full rounded-full" style="width: ${meterWidth}%"></div>
+                  </div>
+                </div>
+              <div class="mt-4 rounded-[1rem] border border-[var(--site-border)] bg-[var(--site-surface)] p-4 sm:p-5">
+                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--site-text-soft)]">
+                  Current read
+                </p>
+                <h4 class="fit-result-title mt-3 font-['Sora',sans-serif] text-2xl font-semibold tracking-tight text-[var(--site-text)]">
+                  ${escapeHtml(resultView.title)}
+                </h4>
+                <p class="mt-3 text-sm leading-7 text-[var(--site-text-muted)]">
+                  ${escapeHtml(resultView.copy)}
+                </p>
+                <p class="mt-3 text-sm leading-6 text-[var(--site-text-soft)]">
+                  ${escapeHtml(resultView.hint)}
+                </p>
+              </div>
+            </div>
+            <div class="grid gap-3 sm:grid-cols-2">
+              <a href="${contactHref}" class="site-button-primary w-full">Book consult</a>
+              <button type="button" class="site-button-secondary w-full" data-step-review>Review answers</button>
+            </div>
+            <div class="rounded-[1rem] border border-[var(--site-border)] bg-[var(--site-control-bg)] p-4 sm:p-5">
               <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--site-text-soft)]">
                 Your summary
               </p>
@@ -537,25 +573,14 @@ const resultViews = {
                 ${summaryItems}
               </ul>
             </div>
-            <div class="grid gap-3 sm:grid-cols-2">
-              <a href="${contactHref}" class="site-button-primary w-full">Book consult</a>
-              <button type="button" class="site-button-secondary w-full" data-step-review>Review answers</button>
-            </div>
           `;
-        }
-
-        if (readoutShell) {
-          requestAnimationFrame(() => {
-            readoutShell.scrollIntoView({ behavior: "smooth", block: "start" });
-          });
         }
         return;
       }
 
       const question = questions[currentIndex];
       const selected = answerState[currentIndex];
-      const selectedLabel = selected ? selected.label : null;
-      const selectedHint = selected ? `Selected: ${selectedLabel}` : "Choose one option to continue.";
+      const selectedHint = selected ? "Tap a different card to update your answer." : "";
 
       if (stepLabel) stepLabel.textContent = question.label;
       if (stepPosition) stepPosition.textContent = stepNumberLabel;
@@ -579,8 +604,11 @@ const resultViews = {
                 data-option-index="${optionIndex}"
                 aria-pressed="${isSelected ? "true" : "false"}"
               >
-                <span class="quiz-option-label">${escapeHtml(option.label)}</span>
-                <span class="quiz-option-meta">${escapeHtml(option.help)}</span>
+                <span class="quiz-option-copy">
+                  <span class="quiz-option-label">${escapeHtml(option.label)}</span>
+                  <span class="quiz-option-meta">${escapeHtml(option.help)}</span>
+                </span>
+                <span class="quiz-option-affordance${isSelected ? " is-selected" : ""}" aria-hidden="true"></span>
               </button>
             `;
           })
@@ -700,12 +728,20 @@ const resultViews = {
   }
 
   .quiz-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
     width: 100%;
     border: 1px solid var(--site-border);
     border-radius: 1rem;
-    background: var(--site-control-bg);
-    padding: 0.95rem 1rem;
+    background: color-mix(in oklab, var(--site-control-bg) 90%, var(--site-surface));
+    padding: 1rem 1.05rem;
     text-align: left;
+    cursor: pointer;
+    box-shadow:
+      inset 0 1px 0 color-mix(in oklab, white 65%, transparent),
+      var(--site-shadow-sm);
     transition:
       border-color 180ms ease,
       background-color 180ms ease,
@@ -717,17 +753,29 @@ const resultViews = {
     border-color: var(--site-border-strong);
     background: var(--site-control-bg-hover);
     transform: translateY(-1px);
+    box-shadow:
+      inset 0 1px 0 color-mix(in oklab, white 75%, transparent),
+      var(--site-shadow-md);
   }
 
   .quiz-option.is-selected {
     border-color: color-mix(in oklab, var(--site-accent) 35%, var(--site-border));
     background: var(--site-accent-soft);
-    box-shadow: 0 0 0 1px color-mix(in oklab, var(--site-accent) 24%, transparent) inset;
+    box-shadow:
+      0 0 0 1px color-mix(in oklab, var(--site-accent) 24%, transparent) inset,
+      var(--site-shadow-sm);
+  }
+
+  .quiz-option-copy {
+    display: grid;
+    gap: 0.35rem;
+    min-width: 0;
+    flex: 1 1 auto;
   }
 
   .quiz-option-label {
     display: block;
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 600;
     line-height: 1.35;
     color: var(--site-text);
@@ -739,6 +787,36 @@ const resultViews = {
     font-size: 0.875rem;
     line-height: 1.55;
     color: var(--site-text-muted);
+  }
+
+  .quiz-option-affordance {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid color-mix(in oklab, var(--site-border) 88%, var(--site-accent));
+    border-radius: 999px;
+    color: var(--site-text-soft);
+    background: color-mix(in oklab, var(--site-surface) 78%, transparent);
+    flex: 0 0 auto;
+  }
+
+  .quiz-option-affordance::before {
+    content: "";
+    width: 0.45rem;
+    height: 0.45rem;
+    border-top: 1.5px solid currentColor;
+    border-right: 1.5px solid currentColor;
+    transform: rotate(45deg);
+    margin-left: -0.1rem;
+  }
+
+  .quiz-option.is-selected .quiz-option-affordance,
+  .quiz-option-affordance.is-selected {
+    color: var(--site-accent-strong);
+    border-color: color-mix(in oklab, var(--site-accent) 35%, var(--site-border));
+    background: color-mix(in oklab, var(--site-accent-soft) 70%, var(--site-surface));
   }
 
   .fit-result-panel {
