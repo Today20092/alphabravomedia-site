@@ -100,12 +100,12 @@ body {
 
 @layer components {
   .site-shell {
-    width: min(100% - 1.5rem, 78rem);
+    width: min(100% - 1rem, 78rem);
     margin-inline: auto;
   }
 
   .site-shell-wide {
-    width: min(100% - 1rem, 88rem);
+    width: min(100% - 0.75rem, 88rem);
     margin-inline: auto;
   }
 

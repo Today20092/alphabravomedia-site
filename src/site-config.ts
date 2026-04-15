@@ -1,9 +1,12 @@
+const publicTallyContactFormUrl = import.meta.env.PUBLIC_TALLY_CONTACT_FORM_URL ?? "";
+
 export const siteConfig = {
   siteName: "Alpha Bravo Media",
   tagline: "Cinema-grade videography for brands and creators.",
   email: "contact@alphabravomedia.co",
   phone: "(813) 665-0166",
   phoneRaw: "+18136650166",
+  contactFormUrl: publicTallyContactFormUrl,
   elementUsername: "@ayoubab:matrix.org",
   googleMapsUrl: "https://maps.app.goo.gl/8aHq1mHx7L9Q8z4A8",
   googleMapsLabel: "Open Google Maps",

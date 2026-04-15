@@ -28,7 +28,7 @@ const navLinks = [
   { href: `${base}blog`, label: "Blog" },
   { href: `${base}gallery`, label: "Gallery" },
   { href: `${base}gear`, label: "Gear" },
-  { href: "#contact", label: "Contact" },
+  { href: `${base}contact`, label: "Contact" },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -91,7 +91,7 @@ const currentPath = Astro.url.pathname;
   <body class="bg-[var(--site-bg)] text-[var(--site-text)] font-['Inter',sans-serif] antialiased">
     <!-- Navigation -->
     <header class="fixed top-0 left-0 right-0 z-50">
-      <nav class="site-shell-wide mt-4 rounded-[1.35rem] border border-[var(--site-border)] bg-[var(--site-nav-bg)] px-5 py-4 shadow-[var(--site-shadow-sm)] backdrop-blur">
+      <nav class="site-shell-wide mt-4 rounded-[1.35rem] border border-[var(--site-border)] bg-[var(--site-nav-bg)] px-4 py-4 shadow-[var(--site-shadow-sm)] backdrop-blur sm:px-5">
         <div class="flex items-center justify-between gap-4">
           <!-- Logo -->
           <a
@@ -255,7 +255,7 @@ const currentPath = Astro.url.pathname;
     <!-- Footer -->
     <footer
       id="contact"
-      class="contact-highlight-target border-t border-[var(--site-border)] px-6 py-14 relative sm:py-16"
+      class="contact-highlight-target relative border-t border-[var(--site-border)] px-4 py-14 sm:px-6 sm:py-16"
     >
       <div class="site-shell">
         <div
