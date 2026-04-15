@@ -100,12 +100,12 @@ body {
 
 @layer components {
   .site-shell {
-    width: min(100% - 3rem, 72rem);
+    width: min(100% - 1.5rem, 78rem);
     margin-inline: auto;
   }
 
   .site-shell-wide {
-    width: min(100% - 2rem, 80rem);
+    width: min(100% - 1rem, 88rem);
     margin-inline: auto;
   }
 
@@ -135,9 +135,9 @@ body {
 
   .site-page-title {
     font-family: "Sora", sans-serif;
-    font-size: clamp(2.5rem, 4vw, 4.5rem);
+    font-size: clamp(2rem, 4vw, 4.5rem);
     font-weight: 700;
-    line-height: 1.05;
+    line-height: 1.02;
     letter-spacing: -0.04em;
     color: var(--site-text);
     text-wrap: balance;
@@ -145,9 +145,9 @@ body {
 
   .site-section-title {
     font-family: "Sora", sans-serif;
-    font-size: clamp(1.75rem, 2vw, 2.75rem);
+    font-size: clamp(1.4rem, 2vw, 2.75rem);
     font-weight: 700;
-    line-height: 1.1;
+    line-height: 1.08;
     letter-spacing: -0.03em;
     color: var(--site-text);
     text-wrap: balance;
@@ -215,11 +215,17 @@ body {
 
   .site-card-title {
     font-family: "Sora", sans-serif;
-    font-size: 1.125rem;
+    font-size: 1rem;
     font-weight: 600;
     line-height: 1.3;
     color: var(--site-text);
     text-wrap: balance;
+  }
+
+  @media (min-width: 640px) {
+    .site-card-title {
+      font-size: 1.125rem;
+    }
   }
 
   .site-card-copy {

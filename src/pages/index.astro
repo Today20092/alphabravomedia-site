@@ -25,29 +25,65 @@ const latestPortfolio = allPortfolio
 <BaseLayout>
   <section class="px-6 pb-12 pt-32 sm:pb-16 sm:pt-36">
     <div class="site-shell">
-      <div class="site-page-header">
-        <span class="site-kicker">Alpha Bravo Media</span>
-        <h1 class="site-page-title max-w-4xl">
-          Cinema-grade video that helps brands build trust, creators stand out, and
-          events feel worth remembering.
-        </h1>
-        <p class="site-page-copy text-lg sm:text-xl">
-          Strategy, filming, editing, and delivery from one production partner. Built
-          for businesses that need better marketing content without adding in-house
-          overhead.
-        </p>
-        <div class="flex flex-col gap-3 sm:flex-row">
-          <a href={`${base}portfolio`} class="site-button-primary">
-            See selected work
+      <div class="grid gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-end">
+        <div class="site-page-header mb-0">
+          <span class="site-kicker">Alpha Bravo Media</span>
+          <h1 class="site-page-title max-w-3xl">
+            Cinematic video production that helps brands earn trust, creators grow
+            their audience, and events feel worth remembering.
+          </h1>
+          <p class="site-page-copy max-w-2xl text-base sm:text-lg">
+            Strategy, filming, editing, and delivery from one production partner.
+            Built for businesses that need polished content, and for viewers from
+            YouTube who want to explore the blog, gear, and the way we work.
+          </p>
+          <p class="mt-4 max-w-2xl text-sm leading-6 text-[var(--site-text-soft)] sm:text-base">
+            Hire us for production. Read the blog, explore gear, and learn how we
+            build each project.
+          </p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href={`${base}#contact`} class="site-button-primary">
+              Contact
+            </a>
+            <a href={`${base}blog`} class="site-button-secondary">
+              Read the blog
+            </a>
+          </div>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+          <a href={`${base}services`} class="site-card site-card-interactive group p-6">
+            <div class="flex items-center justify-between gap-4">
+              <div>
+                <p class="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--site-text-soft)]">
+                  For customers
+                </p>
+                <h2 class="mt-3 font-['Sora',sans-serif] text-xl font-semibold text-[var(--site-text)]">
+                  Hire us for production
+                </h2>
+                <p class="mt-3 max-w-sm text-sm leading-6 text-[var(--site-text-muted)]">
+                  Services, portfolio, and a direct path to start a project.
+                </p>
+              </div>
+              <span class="site-chip shrink-0">Book</span>
+            </div>
           </a>
-          <a
-            href="https://youtube.com/@alphabravomedia"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="site-button-secondary"
-          >
-            <Icon name="simple-icons:youtube" class="h-4 w-4" />
-            Visit channel
+
+          <a href={`${base}gear`} class="site-card site-card-interactive group p-6">
+            <div class="flex items-center justify-between gap-4">
+              <div>
+                <p class="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--site-text-soft)]">
+                  From YouTube
+                </p>
+                <h2 class="mt-3 font-['Sora',sans-serif] text-xl font-semibold text-[var(--site-text)]">
+                  Explore the blog and gear
+                </h2>
+                <p class="mt-3 max-w-sm text-sm leading-6 text-[var(--site-text-muted)]">
+                  Gear notes, production insights, and the tools behind the work.
+                </p>
+              </div>
+              <span class="site-chip shrink-0">Learn</span>
+            </div>
           </a>
         </div>
       </div>
