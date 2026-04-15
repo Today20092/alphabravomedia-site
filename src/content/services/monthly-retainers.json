@@ -1,0 +1,71 @@
+{
+  "title": "Monthly Content Retainers",
+  "description": "Strategy-led content marketing for Tampa businesses that need more than a camera crew. We help clarify the message, shape the offer, plan the communication, and execute with video, photography, editing, and social-ready assets.",
+  "order": 0,
+  "icon": "mdi:calendar-refresh",
+  "category": "Retainers",
+  "faq": [
+    {
+      "question": "What is included in a monthly retainer?",
+      "answer": "Each retainer bundles strategy, production, editing, and delivery-ready assets. The exact mix depends on the tier, but the goal is consistent publishing and clearer messaging instead of one-off shoot days."
+    },
+    {
+      "question": "Do you help with planning and distribution, not just filming?",
+      "answer": "Yes. Retainers are built around message clarity, shoot planning, editing, and handoff support so the content is usable for social, web, and campaign needs."
+    },
+    {
+      "question": "What do you need from the client before filming starts?",
+      "answer": "A quick call to align on the offer, target audience, priorities, and monthly cadence is usually enough to start. From there, shoot dates, locations, and deliverables are mapped into a repeatable plan."
+    }
+  ],
+  "tiers": [
+    {
+      "discriminant": "tier",
+      "value": {
+        "name": "Starter Retainer",
+        "price": "Starting at $1,200/mo",
+        "bestFor": "Tampa businesses that need one solid monthly production day plus clearer messaging and a reliable content pipeline.",
+        "isPopular": false,
+        "includes": [
+          "One monthly shoot day up to 4 hours",
+          "Up to 8 vertical videos for Reels, Shorts, or TikTok",
+          "Light brand photography and b-roll capture",
+          "Messaging guidance, caption support, and publishing-ready exports",
+          "One monthly strategy and content planning call"
+        ]
+      }
+    },
+    {
+      "discriminant": "tier",
+      "value": {
+        "name": "Growth Retainer",
+        "price": "Starting at $2,000/mo",
+        "bestFor": "Brands that want weekly content, stronger visibility, and a partner who can guide both message and execution.",
+        "isPopular": true,
+        "includes": [
+          "Two production sessions each month",
+          "Up to 12 vertical videos",
+          "Social media posting calendar, messaging direction, and handoff support",
+          "Photo assets for Google Business, website, and ads",
+          "Monthly performance review, content planning, and campaign guidance"
+        ]
+      }
+    },
+    {
+      "discriminant": "tier",
+      "value": {
+        "name": "Authority Retainer",
+        "price": "Starting at $3,000/mo",
+        "bestFor": "Established businesses that want an ongoing strategic content partner with priority booking.",
+        "isPopular": false,
+        "includes": [
+          "Up to four production blocks each month",
+          "20+ vertical edits and campaign cutdowns",
+          "Photography for brand, team, and location needs",
+          "Advanced post-production, captions, and repurposing",
+          "Priority scheduling and quarterly strategy sessions with campaign direction"
+        ]
+      }
+    }
+  ]
+}

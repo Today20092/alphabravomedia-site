@@ -2,13 +2,29 @@
   "title": "Mobile Podcast & On-Location Audio Services",
   "description": "Professional white-glove production for your podcast or event. We bring the studio to you, handling all A/V logistics so you can focus on the message.",
   "order": 3,
+  "icon": "mdi:microphone",
+  "category": "Podcast",
   "portfolioLink": "/portfolio?category=Podcast",
+  "faq": [
+    {
+      "question": "Do you bring the full setup on location?",
+      "answer": "Yes. The service is designed to bring microphones, cameras, lighting, and production workflow to your location so you do not need to build a studio yourself."
+    },
+    {
+      "question": "Can you help with editing and publishing support?",
+      "answer": "Yes. Higher tiers cover post-production, mastering, and delivery support so the episode assets are ready for YouTube, social clips, and platform handoff."
+    },
+    {
+      "question": "Who is this best for?",
+      "answer": "It fits creators, interview series, and brands that want polished podcast production without managing the technical side in-house."
+    }
+  ],
   "tiers": [
     {
       "discriminant": "tier",
       "value": {
         "name": "Audio Essentials",
-        "price": "Starting at $300/session",
+        "price": "Starting at $450/session",
         "bestFor": "Solo creators or duos needing clean, professional sound on a recurring basis.",
         "isPopular": false,
         "includes": [
@@ -24,7 +40,7 @@
       "discriminant": "tier",
       "value": {
         "name": "The Studio Setup",
-        "price": "Starting at $600/session",
+        "price": "Starting at $750/session",
         "bestFor": "Podcast series and interviews requiring cinematic 4K visuals and broadcast-quality audio.",
         "isPopular": true,
         "includes": [
@@ -40,7 +56,7 @@
       "discriminant": "tier",
       "value": {
         "name": "Full Agency Production",
-        "price": "Custom Quote (Bundles Available)",
+        "price": "Custom Quote (Monthly Bundles Available)",
         "bestFor": "Established brands needing a complete, hands-off pipeline from filming to distribution.",
         "isPopular": false,
         "includes": [

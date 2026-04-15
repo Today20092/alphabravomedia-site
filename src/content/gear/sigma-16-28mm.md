@@ -3,6 +3,7 @@ title: "Sigma 16-28mm F2.8 DG Lens"
 amazonLink: "https://amzn.to/4raFhcu"
 imageUrl: "https://m.media-amazon.com/images/I/71H3sA-TvZL._AC_SL1500_.jpg"
 category: "Lens"
+specs: "f/2.8 · Sharp workhorse zoom · L-Mount"
 ---
 
 The workhorse zoom that lives on my camera. Sharp, fast, and versatile.

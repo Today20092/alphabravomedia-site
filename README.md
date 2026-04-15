@@ -310,6 +310,19 @@ const siteConfig = {
 
 All contact info, social links, and branding throughout the site pull from this config.
 
+### Google Reviews Sync
+
+Google Business Profile reviews are fetched during `npm run dev` and `npm run build` when the required environment variables are set.
+
+Required variables:
+
+- `GOOGLE_BUSINESS_PROFILE_LOCATION_NAME`
+- `GOOGLE_BUSINESS_PROFILE_CLIENT_ID`
+- `GOOGLE_BUSINESS_PROFILE_CLIENT_SECRET`
+- `GOOGLE_BUSINESS_PROFILE_REFRESH_TOKEN`
+
+The fetch script caches the latest review summary in `src/generated/google-business-profile.ts`. The GitHub Actions deploy workflow also runs on a daily schedule so the data stays reasonably fresh.
+
 ---
 
 ## Pages Overview

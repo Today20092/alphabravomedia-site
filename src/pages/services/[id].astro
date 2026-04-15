@@ -1,0 +1,148 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
+import ServicePricingBlock from "../../components/ServicePricingBlock.astro";
+import { siteConfig } from "../../site-config";
+
+export async function getStaticPaths() {
+  const services = await getCollection("services");
+  return services.map((service) => ({
+    params: { id: service.id },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
+const icon = service.data.icon ?? "mdi:star";
+const category = service.data.category ?? "Service";
+const startingPrice = service.data.tiers[0]?.value?.price ?? "";
+const faqs = service.data.faq ?? [];
+---
+
+<BaseLayout title={`${service.data.title} | Alpha Bravo Media`}>
+  <section class="px-6 pb-12 pt-28 sm:pb-16 sm:pt-32">
+    <div class="site-shell">
+      <nav class="mb-8" aria-label="Breadcrumb">
+        <ol class="site-meta-row">
+          <li><a href={base} class="site-link">Home</a></li>
+          <li><Icon name="mdi:chevron-right" class="h-4 w-4" /></li>
+          <li><a href={`${base}services`} class="site-link">Services</a></li>
+          <li><Icon name="mdi:chevron-right" class="h-4 w-4" /></li>
+          <li class="text-[var(--site-text-muted)]">{service.data.title}</li>
+        </ol>
+      </nav>
+
+      <div class="site-page-header">
+        <div class="flex flex-wrap items-center gap-3">
+          <span class="site-chip">{category}</span>
+          {startingPrice && <span class="site-chip site-chip-muted">{startingPrice}</span>}
+        </div>
+        <div class="flex h-14 w-14 items-center justify-center rounded-[1.25rem] border border-[var(--site-border)] bg-[rgba(255,255,255,0.03)] text-[var(--site-accent)]">
+          <Icon name={icon} class="h-7 w-7" />
+        </div>
+        <h1 class="site-page-title max-w-4xl">{service.data.title}</h1>
+        <p class="site-page-copy text-lg">{service.data.description}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-6 pb-16 sm:pb-20">
+    <div class="site-shell">
+      <ServicePricingBlock service={service} />
+    </div>
+  </section>
+
+  <section class="px-6 pb-10 sm:pb-12">
+    <div class="site-shell">
+      <div class="site-panel-muted p-5 sm:p-6">
+        <div class="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
+          <div>
+            <p class="text-sm font-semibold text-[var(--site-text)]">
+              Clients check the work and the reputation before they book.
+            </p>
+            <p class="mt-2 text-sm leading-7 text-[var(--site-text-muted)]">
+              Worked with brands, events, weddings, and creator-led businesses around Tampa.
+            </p>
+          </div>
+          <div class="flex lg:justify-end">
+            <a
+              href={siteConfig.googleMapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="site-button-secondary"
+            >
+              <Icon name="simple-icons:google" class="h-4 w-4" />
+              {siteConfig.googleMapsLabel}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {faqs.length > 0 && (
+    <section class="px-6 pb-16 sm:pb-20">
+      <div class="site-shell">
+        <div class="mb-8 max-w-3xl">
+          <span class="site-kicker">FAQ</span>
+          <h2 class="site-section-title mt-4">Questions clients usually ask before booking.</h2>
+          <p class="site-section-copy mt-4">
+            Clear answers help narrow the scope faster and make the first conversation more useful.
+          </p>
+        </div>
+
+        <div class="grid gap-4">
+          {faqs.map((item) => (
+            <details class="site-panel p-5 sm:p-6">
+              <summary class="cursor-pointer list-none pr-8 font-['Sora',sans-serif] text-base font-semibold text-[var(--site-text)]">
+                {item.question}
+              </summary>
+              <p class="mt-4 max-w-3xl text-sm leading-7 text-[var(--site-text-muted)]">
+                {item.answer}
+              </p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section id="contact" class="px-6 pb-24">
+    <div class="site-shell">
+      <div class="site-panel p-6 sm:p-8">
+        <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
+          <div>
+            <span class="site-kicker">Book</span>
+            <h2 class="site-section-title mt-4">Ready to talk through the package and scope?</h2>
+            <p class="site-section-copy mt-4">
+              Reach out directly and reference the service name. That keeps the next
+              step focused on timing, deliverables, and whether a retainer or project
+              package fits better.
+            </p>
+          </div>
+
+          <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+            <a href="mailto:contact@alphabravomedia.co" class="site-button-primary">
+              Email direct
+            </a>
+            <a href="tel:+18136650166" class="site-button-secondary">
+              Call (813) 665-0166
+            </a>
+            <a
+              href="https://matrix.to/#/%40ayoubab%3Amatrix.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="site-button-secondary"
+            >
+              Message on Matrix
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

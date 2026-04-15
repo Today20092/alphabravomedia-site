@@ -1,21 +1,37 @@
 {
   "title": "Professional Event A/V & Production Services",
-  "description": "Don't let bad sound ruin a meaningful moment. We provide professional audio engineering and multi-camera production so your guests can hear every word and your memories are captured in 4K. You handle the guests; we handle the rest.",
+  "description": "Don't let bad sound ruin a meaningful moment. We provide premium audio engineering and multi-camera production so your guests can hear every word and your memories are captured in 4K. You handle the guests; we handle the rest.",
   "order": 1,
+  "icon": "mdi:speaker",
+  "category": "Event A/V",
   "portfolioLink": "/portfolio?category=AV+%26+Live+Production",
+  "faq": [
+    {
+      "question": "What kinds of events do you support?",
+      "answer": "The setup is built for community events, dinners, fundraisers, recitations, guest speakers, and other gatherings where clear sound and dependable production matter."
+    },
+    {
+      "question": "What is needed from the venue before setup day?",
+      "answer": "The key requirements are access to the venue with enough setup time, a clear run-of-show, and confirmation of power, speaking positions, and any streaming needs."
+    },
+    {
+      "question": "Can you handle both audio and video production together?",
+      "answer": "Yes. Depending on the package, the service can cover live sound, camera capture, highlight edits, and live-stream integration in one production setup."
+    }
+  ],
   "tiers": [
     {
       "discriminant": "tier",
       "value": {
         "name": "The Essential PA Package",
-        "price": "Starting at $600",
-        "bestFor": "Small halaqas, community dinners, and intimate recitations",
+        "price": "Starting at $750",
+        "bestFor": "Small halaqas, community dinners, and intimate recitations that need clean sound.",
         "isPopular": false,
         "includes": [
           "Professional 2-speaker PA system",
           "Digital mixing with live EQ & compression",
           "Up to 3 high-fidelity wireless microphones",
-          "Dedicated on-site sound engineer (4 hours)",
+          "Dedicated on-site sound engineer (up to 4 hours)",
           "Setup, tear-down, and stress-free operation"
         ]
       }
@@ -24,8 +40,8 @@
       "discriminant": "tier",
       "value": {
         "name": "Audio + Highlights Package",
-        "price": "Starting at $950",
-        "bestFor": "Guest speakers, fundraisers, and special event recaps",
+        "price": "Starting at $1,150",
+        "bestFor": "Guest speakers, fundraisers, and special event recaps that need video plus clean audio.",
         "isPopular": true,
         "includes": [
           "Everything in Essential PA Package",
@@ -40,8 +56,8 @@
       "discriminant": "tier",
       "value": {
         "name": "Full Broadcast & Live Stream",
-        "price": "Starting at $1,500",
-        "bestFor": "Major fundraisers, conferences, and high-impact VIP events",
+        "price": "Starting at $1,800",
+        "bestFor": "Major fundraisers, conferences, and high-impact VIP events that need broadcast-level coverage.",
         "isPopular": false,
         "includes": [
           "Complete premium audio setup",

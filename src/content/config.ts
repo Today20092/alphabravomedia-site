@@ -37,6 +37,7 @@ const gear = defineCollection({
     amazonLink: z.string().url(),
     imageUrl: z.string(),
     category: z.string(),
+    specs: z.string().optional(),
   }),
 });
 // Services collection - Pricing and offerings
@@ -46,7 +47,13 @@ const services = defineCollection({
     title: z.string(),
     description: z.string(),
     order: z.number().default(999),
+    icon: z.string().optional(),
+    category: z.string().optional(),
     portfolioLink: z.string().optional(),
+    faq: z.array(z.object({
+      question: z.string(),
+      answer: z.string(),
+    })).default([]),
     tiers: z.array(z.object({
       discriminant: z.literal('tier'),
       value: z.object({

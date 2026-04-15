@@ -3,6 +3,7 @@ title: "Deity V-Mic D4 Mini Video Microphone"
 amazonLink: "https://amzn.to/4sjyUo6"
 imageUrl: "https://m.media-amazon.com/images/I/71Nzk0KLulL._AC_SL1500_.jpg"
 category: "Audio"
+specs: "Compact wireless · Dual-channel · Built-in backup"
 ---
 
 I use this microphone all the time, it works, sounds good, extremely affordable, and has great wind reduction.

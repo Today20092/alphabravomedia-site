@@ -4,9 +4,12 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
+    "predev": "node scripts/fetch-google-business-profile.mjs",
     "build": "astro build",
+    "prebuild": "node scripts/fetch-google-business-profile.mjs",
     "preview": "astro preview",
     "astro": "astro",
+    "sync:google-business-profile": "node scripts/fetch-google-business-profile.mjs",
     "new": "node scripts/new-content.js"
   },
   "dependencies": {

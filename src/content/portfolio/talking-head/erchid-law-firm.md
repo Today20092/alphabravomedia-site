@@ -6,7 +6,7 @@ category: Talking Head
 gearUsed:
   - amaran-60xs
   - lumix-s5iix
-  - Deity-V-Mic-D4
+  - deity-v-mic-d4
   - sigma-16-28mm
 order: 2
 ---

@@ -2,14 +2,30 @@
   "title": "Wedding Content & A/V Services",
   "description": "Premium cinematic storytelling and high-fidelity audio services tailored to capture the true vibe, joy, and beauty of your Nikkah and Walima.",
   "order": 2,
+  "icon": "mdi:heart",
+  "category": "Weddings",
   "portfolioLink": "/portfolio?category=Weddings",
+  "faq": [
+    {
+      "question": "How does booking work for wedding coverage?",
+      "answer": "The first step is a conversation about the ceremony, schedule, locations, and what matters most to your family. Once the scope is clear, the right package and coverage plan can be locked in."
+    },
+    {
+      "question": "How fast is delivery after the event?",
+      "answer": "Delivery timing depends on the package and final edit scope, but the timeline is clarified before booking so expectations are set early and nothing feels vague after the event."
+    },
+    {
+      "question": "Do you handle audio as well as video?",
+      "answer": "Yes. Wedding coverage can include professional audio support for ceremonies, speeches, and family program moments when the event needs both clean sound and cinematic visuals."
+    }
+  ],
   "tiers": [
     {
       "discriminant": "tier",
       "value": {
         "name": "The Nikkah Essential",
-        "price": "$2,500 (Portfolio Special: $1,600)",
-        "bestFor": "Intimate ceremonies and budget-conscious couples who still want premium quality.",
+        "price": "Starting at $2,750",
+        "bestFor": "Intimate ceremonies that still deserve premium quality and careful storytelling.",
         "isPopular": false,
         "includes": [
           "Up to 6 hours of coverage",
@@ -24,7 +40,7 @@
       "discriminant": "tier",
       "value": {
         "name": "The Tampa Premium",
-        "price": "$3,500",
+        "price": "Starting at $4,000",
         "bestFor": "Our industry-standard package designed to capture every meaningful angle of your big day.",
         "isPopular": true,
         "includes": [
@@ -39,7 +55,7 @@
       "discriminant": "tier",
       "value": {
         "name": "The Complete Bundle (Video + Audio)",
-        "price": "Starting at $4,800",
+        "price": "Starting at $5,500",
         "bestFor": "The ultimate stress-free package. We solve both your video and audio needs in one booking.",
         "isPopular": false,
         "includes": [

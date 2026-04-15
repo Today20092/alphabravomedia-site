@@ -1,0 +1,99 @@
+---
+import { Icon } from "astro-icon/components";
+import { siteConfig } from "../site-config";
+import {
+  formatGoogleReviewSummary,
+  getLatestGoogleReview,
+} from "../lib/google-business-profile";
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+const reviewSummary = formatGoogleReviewSummary();
+const latestReview = getLatestGoogleReview();
+---
+
+<section class:list={["px-6", compact ? "pb-10 sm:pb-12" : "pb-16 sm:pb-20"]}>
+  <div class="site-shell">
+    <div class="site-panel-muted p-6 sm:p-8">
+      <div class="grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)_auto] lg:items-center">
+        <div>
+          <span class="site-kicker">Client Feedback</span>
+          <h2 class="site-section-title mt-4 max-w-2xl">
+            Trust the process before you commit the budget.
+          </h2>
+          <p class="site-section-copy mt-4 max-w-2xl">
+            Clients use Alpha Bravo Media when the work needs clean execution, steady
+            communication, and a final delivery that feels ready to publish.
+          </p>
+          {reviewSummary && (
+            <div class="mt-6 flex flex-wrap items-center gap-2 text-sm text-[var(--site-text-muted)]">
+              <Icon name="mdi:star" class="h-4 w-4 text-[var(--site-accent)]" />
+              <span>{reviewSummary}</span>
+              <a
+                href={siteConfig.googleMapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="site-link whitespace-nowrap"
+              >
+                Read reviews
+              </a>
+            </div>
+          )}
+        </div>
+
+        <div class="grid gap-3 text-sm leading-7 text-[var(--site-text-muted)]">
+          <div class="flex items-start gap-3">
+            <Icon
+              name="mdi:check-circle"
+              class="mt-1 h-4 w-4 shrink-0 text-[var(--site-accent)]"
+            />
+            <span>Trusted for business content, events, weddings, and creator-led productions.</span>
+          </div>
+          <div class="flex items-start gap-3">
+            <Icon
+              name="mdi:check-circle"
+              class="mt-1 h-4 w-4 shrink-0 text-[var(--site-accent)]"
+            />
+            <span>Clear planning, on-set execution, editing, and delivery without extra overhead.</span>
+          </div>
+          {!compact && (
+            <div class="flex items-start gap-3">
+              <Icon
+                name="mdi:check-circle"
+                class="mt-1 h-4 w-4 shrink-0 text-[var(--site-accent)]"
+              />
+              <span>Based in Tampa and built for clients who want strong work and fast next steps.</span>
+            </div>
+          )}
+          {!compact && latestReview?.comment && (
+            <blockquote class="site-panel-muted mt-2 rounded-[1rem] p-4 text-sm leading-7 text-[var(--site-text-muted)]">
+              <p class="text-[var(--site-text)]">
+                “{latestReview.comment.length > 160
+                  ? `${latestReview.comment.slice(0, 157)}...`
+                  : latestReview.comment}”
+              </p>
+              <footer class="mt-2 text-xs uppercase tracking-[0.2em] text-[var(--site-text-soft)]">
+                {latestReview.reviewerName}
+              </footer>
+            </blockquote>
+          )}
+        </div>
+
+        <div class="flex lg:justify-end">
+          <a
+            href={siteConfig.googleMapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="site-button-secondary whitespace-nowrap"
+          >
+            <Icon name="simple-icons:google" class="h-4 w-4" />
+            {siteConfig.googleMapsLabel}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
