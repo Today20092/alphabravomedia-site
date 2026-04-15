@@ -13,7 +13,7 @@ export const siteConfig = {
     {
       platform: "discord",
       label: "Discord",
-      href: "https://discord.gg/p4QP7zTkv8",
+      href: "https://discord.gg/5C8yFbzv77",
       icon: "simple-icons:discord",
     },
     {
