@@ -2,7 +2,6 @@
 import { getEntry } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-// Fetch the Terms of Service content
 const termsEntry = await getEntry("legal", "terms");
 const { Content } = termsEntry ? await termsEntry.render() : { Content: null };
 
@@ -10,192 +9,68 @@ export const prerender = true;
 ---
 
 <BaseLayout
-  title={(termsEntry?.data?.title as string) ||
-    "Terms of Service | Alpha Bravo Media"}
+  title={(termsEntry?.data?.title as string) || "Terms of Service | Alpha Bravo Media"}
 >
-  <section class="pt-32 pb-24 px-6 min-h-screen">
-    <div class="max-w-4xl mx-auto">
-      <div class="mb-12">
-        <h1
-          class="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-4 font-['Sora',sans-serif]"
-        >
+  <section class="min-h-screen px-6 pb-24 pt-32">
+    <div class="site-shell">
+      <div class="site-page-header">
+        <span class="site-kicker">Terms</span>
+        <h1 class="site-page-title max-w-4xl">
           {termsEntry?.data?.title || "Terms of Service & Booking Agreement"}
         </h1>
-        <p class="text-lg text-[#a8998a]">
-          Please review our policies and procedures before booking your session.
+        <p class="site-page-copy text-lg">
+          Review the core policies, booking expectations, and delivery terms before
+          reserving a date.
         </p>
       </div>
 
-      <div
-        class="bg-[#141211]/60 backdrop-blur-md border border-[#2a2520] rounded-2xl p-6 sm:p-8 mb-16 shadow-xl shadow-black/20"
-      >
-        <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
-          <svg
-            class="w-6 h-6 text-[#c8875c]"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            ><path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            ></path></svg
-          >
-          The Quick Summary (TL;DR)
-        </h2>
-        <ul class="space-y-3">
-          <li class="flex items-start gap-3 text-[#a8998a]">
-            <svg
-              class="w-5 h-5 text-[#7a6f63] mt-0.5 shrink-0"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              ><path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M5 13l4 4L19 7"></path></svg
-            >
-            <span
-              >A <strong class="text-white font-semibold"
-                >25% non-refundable retainer</strong
-              > is required to secure your booking date.</span
-            >
+      <div class="site-panel mb-12 p-6 sm:p-8">
+        <div class="mb-6 flex items-center gap-3">
+          <span class="site-chip">Quick Summary</span>
+        </div>
+        <ul class="space-y-4">
+          <li class="flex items-start gap-3 text-[var(--site-text-muted)]">
+            <span class="mt-1 h-2 w-2 rounded-full bg-[var(--site-accent)]"></span>
+            <span>A <strong class="text-[var(--site-text)]">25% non-refundable retainer</strong> secures the booking date.</span>
           </li>
-          <li class="flex items-start gap-3 text-[#a8998a]">
-            <svg
-              class="w-5 h-5 text-[#7a6f63] mt-0.5 shrink-0"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              ><path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M5 13l4 4L19 7"></path></svg
-            >
-            <span
-              >We offer up to <strong class="text-white font-semibold"
-                >3 rounds of revisions</strong
-              > for shorter videos (under 6-7 minutes) and <strong
-                class="text-white font-semibold">2 rounds</strong
-              > for longer-form content.</span
-            >
+          <li class="flex items-start gap-3 text-[var(--site-text-muted)]">
+            <span class="mt-1 h-2 w-2 rounded-full bg-[var(--site-accent)]"></span>
+            <span>Shorter edits include up to <strong class="text-[var(--site-text)]">3 revision rounds</strong>; longer-form content includes <strong class="text-[var(--site-text)]">2 rounds</strong>.</span>
           </li>
-          <li class="flex items-start gap-3 text-[#a8998a]">
-            <svg
-              class="w-5 h-5 text-[#7a6f63] mt-0.5 shrink-0"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              ><path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M5 13l4 4L19 7"></path></svg
-            >
-            <span
-              >We require at least <strong class="text-white font-semibold"
-                >14 days' notice</strong
-              > for rescheduling or cancellations.</span
-            >
+          <li class="flex items-start gap-3 text-[var(--site-text-muted)]">
+            <span class="mt-1 h-2 w-2 rounded-full bg-[var(--site-accent)]"></span>
+            <span>Rescheduling or cancellations require at least <strong class="text-[var(--site-text)]">14 days' notice</strong>.</span>
           </li>
-          <li class="flex items-start gap-3 text-[#a8998a]">
-            <svg
-              class="w-5 h-5 text-[#7a6f63] mt-0.5 shrink-0"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              ><path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M5 13l4 4L19 7"></path></svg
-            >
-            <span
-              >Currently, we offer videography exclusively for the <strong
-                class="text-white font-semibold flex-col"
-                >men's section and general unsegregated events</strong
-              >.</span
-            >
+          <li class="flex items-start gap-3 text-[var(--site-text-muted)]">
+            <span class="mt-1 h-2 w-2 rounded-full bg-[var(--site-accent)]"></span>
+            <span>Videography is currently offered for the <strong class="text-[var(--site-text)]">men's section and general unsegregated events</strong>.</span>
           </li>
-          <li class="flex items-start gap-3 text-[#a8998a]">
-            <svg
-              class="w-5 h-5 text-[#7a6f63] mt-0.5 shrink-0"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              ><path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M5 13l4 4L19 7"></path></svg
-            >
-            <span
-              >Raw footage is available for an additional fee, provided you
-              supply an adequate physical hard drive.</span
-            >
+          <li class="flex items-start gap-3 text-[var(--site-text-muted)]">
+            <span class="mt-1 h-2 w-2 rounded-full bg-[var(--site-accent)]"></span>
+            <span>Raw footage is available for an additional fee when you provide a suitable hard drive.</span>
           </li>
-          <li class="flex items-start gap-3 text-[#a8998a]">
-            <svg
-              class="w-5 h-5 text-[#7a6f63] mt-0.5 shrink-0"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              ><path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M5 13l4 4L19 7"></path></svg
-            >
-            <span
-              >Clients assume financial responsibility for any <strong
-                class="text-white font-semibold"
-                >equipment damage or loss</strong
-              > while on-site.</span
-            >
+          <li class="flex items-start gap-3 text-[var(--site-text-muted)]">
+            <span class="mt-1 h-2 w-2 rounded-full bg-[var(--site-accent)]"></span>
+            <span>Clients are responsible for any equipment damage or loss while on-site.</span>
           </li>
-          <li class="flex items-start gap-3 text-[#a8998a]">
-            <svg
-              class="w-5 h-5 text-[#7a6f63] mt-0.5 shrink-0"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              ><path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M5 13l4 4L19 7"></path></svg
-            >
-            <span
-              >For A/V services, we require clear venue access at least <strong
-                class="text-white font-semibold">2 hours prior</strong
-              > to the event start time.</span
-            >
+          <li class="flex items-start gap-3 text-[var(--site-text-muted)]">
+            <span class="mt-1 h-2 w-2 rounded-full bg-[var(--site-accent)]"></span>
+            <span>For A/V services, venue access is required at least <strong class="text-[var(--site-text)]">2 hours before</strong> event start.</span>
           </li>
         </ul>
       </div>
 
-      {
-        Content ? (
-          <article
-            class="prose prose-invert max-w-none
-          prose-h2:text-2xl prose-h2:font-semibold prose-h2:text-white prose-h2:mb-4 prose-h2:tracking-tight prose-h2:border-b prose-h2:border-[#2a2520] prose-h2:pb-2 prose-h2:mt-12 prose-h2:font-['Sora',sans-serif]
-          prose-p:text-[#a8998a] prose-p:leading-relaxed prose-p:mb-4
-          prose-strong:text-[#f5e6d3]
-          prose-ul:list-disc prose-ul:pl-5 prose-ul:space-y-2 prose-ul:marker:text-[#7a6f63] prose-ul:mb-4
-          prose-li:text-[#a8998a]
-        "
-          >
-            <Content />
-          </article>
-        ) : (
-          <div class="text-center text-[#a8998a] py-12">
-            Unable to load terms of service content.
-          </div>
-        )
-      }
+      {Content ? (
+        <article
+          class="site-prose prose prose-invert max-w-none prose-h2:border-b prose-h2:border-[var(--site-border)] prose-h2:pb-3 prose-h2:text-2xl prose-h2:font-['Sora',sans-serif] prose-p:leading-7 prose-ul:space-y-2 prose-ul:pl-5"
+        >
+          <Content />
+        </article>
+      ) : (
+        <div class="py-12 text-center text-[var(--site-text-muted)]">
+          Unable to load terms of service content.
+        </div>
+      )}
     </div>
   </section>
 </BaseLayout>

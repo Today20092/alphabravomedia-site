@@ -1,70 +1,173 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
-import { Icon } from 'astro-icon/components';
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
 
 const rawBase = import.meta.env.BASE_URL;
-const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
+const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
 
-const allGear = await getCollection('gear');
+const allGear = await getCollection("gear");
 
-// Group by category dynamically based on existing entries
-const categories = Array.from(new Set(allGear.map((item) => item.data.category)));
-const gearByCategory = categories.reduce((acc, category) => {
-  acc[category] = allGear.filter(item => item.data.category === category);
+const gearByCategory = allGear.reduce((acc, item) => {
+  const cat = item.data.category;
+  if (!acc[cat]) acc[cat] = [];
+  acc[cat].push(item);
   return acc;
 }, {} as Record<string, typeof allGear>);
+
+const sortedGearByCategory = Object.fromEntries(
+  Object.entries(gearByCategory).map(([category, items]) => [
+    category,
+    [...items].sort((a, b) => a.data.title.localeCompare(b.data.title)),
+  ]),
+) as Record<string, typeof allGear>;
+
+const categoryOrder = ["Camera", "Lens", "Lights", "Audio", "Accessories"];
+const categories = [
+  ...categoryOrder.filter((category) => sortedGearByCategory[category]?.length > 0),
+  ...Object.keys(sortedGearByCategory)
+    .filter((category) => !categoryOrder.includes(category))
+    .sort((a, b) => a.localeCompare(b)),
+];
+
+const categoryMeta: Record<string, { icon: string }> = {
+  Camera: { icon: "mdi:camera-iris" },
+  Lens: { icon: "mdi:camera-metering-matrix" },
+  Lights: { icon: "mdi:spotlight-beam" },
+  Audio: { icon: "mdi:microphone-variant" },
+  Accessories: { icon: "mdi:toolbox-outline" },
+};
+
+const defaultMeta = { icon: "mdi:star-four-points-circle-outline" };
+
+const getCategoryMeta = (category: string) => categoryMeta[category] ?? defaultMeta;
+const getCategoryId = (category: string) =>
+  `category-${category.toLowerCase().replace(/\s+/g, "-")}`;
 ---
 
 <BaseLayout title="Gear | Alpha Bravo Media">
-  <section class="pt-32 pb-24 px-6">
-    <div class="max-w-6xl mx-auto">
-      <!-- Header -->
-      <div class="mb-16">
-        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-4 font-['Sora',sans-serif]">Gear</h1>
-        <p class="text-lg text-[#a8998a] max-w-2xl">The tools I use to create. These are affiliate links - I earn a small commission if you purchase through them.</p>
+  <section class="px-6 pb-24 pt-32">
+    <div class="site-shell">
+      <div class="site-panel mb-10 p-6 sm:p-8">
+        <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+          <div class="site-page-header mb-0">
+            <span class="site-kicker">Gear</span>
+            <h1 class="site-page-title max-w-3xl">
+              Cameras, lenses, lights, audio, and the working setup behind the work.
+            </h1>
+            <p class="site-page-copy text-lg">
+              A practical equipment list, grouped by role, with notes for the tools
+              that actually make it into production.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap gap-3 lg:justify-end">
+            <span class="site-stat">{allGear.length} picks</span>
+            <span class="site-stat">{categories.length} categories</span>
+          </div>
+        </div>
+
+        <div class="mt-8 site-panel-muted p-5">
+          <p class="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--site-text-soft)]">
+            Affiliate note
+          </p>
+          <p class="mt-3 text-sm leading-7 text-[var(--site-text-muted)]">
+            Some links are affiliate links. If you buy through them, I may earn a
+            commission.
+          </p>
+        </div>
       </div>
 
-      <!-- Gear by Category -->
-      {categories.map((category) => (
-        gearByCategory[category].length > 0 && (
-          <div class="mb-16">
-            <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3 font-['Sora',sans-serif]">
-              <span class="w-8 h-px bg-[#2a2520]"></span>
-              {category}
-            </h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
-              {gearByCategory[category].map((item) => (
-                <a
-                  href={`${base}gear/${item.slug}`}
-                  class="group relative bg-[#141211] rounded-xl overflow-hidden border border-[#2a2520] transition-all duration-300 hover:scale-[1.02] hover:border-[#c8875c]/30 hover:shadow-xl hover:shadow-black/20 flex flex-col"
-                >
-                  <!-- Image placeholder -->
-                  <div class="aspect-square bg-linear-to-br from-gray-800 to-gray-900 relative overflow-hidden flex items-center justify-center">
-                    {item.data.imageUrl ? (
-                      <img src={item.data.imageUrl} alt={item.data.title} class="w-full h-full object-cover" />
-                    ) : (
-                      <Icon name="mdi:camera" class="w-10 h-10 sm:w-16 sm:h-16 text-gray-700" />
-                    )}
-                  </div>
-
-                  <!-- Content -->
-                  <div class="p-3 sm:p-5 flex-1 flex flex-col">
-                    <span class="text-[10px] sm:text-xs text-[#7a6f63] uppercase tracking-wider">{category}</span>
-                    <h3 class="text-sm sm:text-lg font-semibold text-white mt-1 group-hover:text-gray-200 transition-colors line-clamp-2 leading-snug">
-                      {item.data.title}
-                    </h3>
-                  </div>
+      {allGear.length > 0 && (
+        <nav aria-label="Browse gear categories" class="mb-12">
+          <p class="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--site-text-soft)]">
+            Categories
+          </p>
+          <div class="flex snap-x gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {categories.map((category) => {
+              const meta = getCategoryMeta(category);
+              return (
+                <a href={`#${getCategoryId(category)}`} class="site-chip site-chip-muted min-w-max snap-start">
+                  <Icon name={meta.icon} class="h-4 w-4 text-[var(--site-accent)]" />
+                  <span class="normal-case tracking-normal text-sm text-[var(--site-text-muted)]">
+                    {category}
+                  </span>
+                  <span class="normal-case tracking-normal text-sm text-[var(--site-text-soft)]">
+                    {sortedGearByCategory[category].length}
+                  </span>
                 </a>
-              ))}
-            </div>
+              );
+            })}
           </div>
-        )
-      ))}
+        </nav>
+      )}
 
-      {allGear.length === 0 && (
-        <div class="text-center py-20">
-          <p class="text-[#7a6f63]">No gear listed yet. Check back soon!</p>
+      {allGear.length === 0 ? (
+        <div class="site-panel-muted px-6 py-20 text-center">
+          <p class="text-lg text-[var(--site-text)]">No gear listed yet.</p>
+          <p class="mt-3 text-sm text-[var(--site-text-soft)]">
+            Add a few recommendations and this page will render them automatically.
+          </p>
+        </div>
+      ) : (
+        <div class="space-y-16">
+          {categories.map((category) => {
+            const meta = getCategoryMeta(category);
+            const items = sortedGearByCategory[category];
+
+            return (
+              <section id={getCategoryId(category)} class="scroll-mt-28">
+                <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                  <div class="site-page-header mb-0">
+                    <span class="site-chip site-chip-muted w-fit">
+                      <Icon name={meta.icon} class="h-4 w-4 text-[var(--site-accent)]" />
+                      <span class="normal-case tracking-normal text-sm text-[var(--site-text-muted)]">
+                        {category}
+                      </span>
+                    </span>
+                  </div>
+                  <p class="text-sm text-[var(--site-text-soft)]">
+                    {items.length} {items.length === 1 ? "recommendation" : "recommendations"}
+                  </p>
+                </div>
+
+                <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                  {items.map((item) => (
+                    <a
+                      href={`${base}gear/${item.slug}`}
+                      class="site-card site-card-interactive group"
+                    >
+                      <div class="site-card-media aspect-[4/3] sm:aspect-square flex items-center justify-center p-6">
+                        {item.data.imageUrl ? (
+                          <img
+                            src={item.data.imageUrl}
+                            alt={item.data.title}
+                            class="h-full w-full object-contain"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <Icon
+                            name={meta.icon}
+                            class="h-14 w-14 text-[var(--site-text-soft)]"
+                          />
+                        )}
+                      </div>
+
+                      <div class="site-card-body">
+                        <div class="site-meta-row">
+                          <span>{category}</span>
+                        </div>
+                        <h2 class="site-card-title">{item.data.title}</h2>
+                        <div class="site-meta-row">
+                          <span class="text-[var(--site-accent)]">View gear</span>
+                        </div>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </section>
+            );
+          })}
         </div>
       )}
     </div>

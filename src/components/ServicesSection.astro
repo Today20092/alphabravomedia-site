@@ -2,38 +2,23 @@
 import { getCollection } from "astro:content";
 import ServicePricingBlock from "./ServicePricingBlock.astro";
 
-// Fetch all services, sort by the 'order' field
 const allServices = await getCollection("services");
-
-const sortedServices = allServices.sort((a, b) => {
-  return a.data.order - b.data.order;
-});
+const sortedServices = allServices.sort((a, b) => a.data.order - b.data.order);
 ---
 
-<section id="services" class="py-24 px-6 relative border-t border-[#2a2520]">
-  <!-- Interactive subtle background glow -->
-  <div
-    class="absolute inset-0 bg-linear-to-b from-gray-900/50 via-[#0b0b0b] to-[#0b0b0b] z-[-1]"
-  >
-  </div>
-
-  <div class="max-w-6xl mx-auto">
-    <!-- Section Header -->
-    <div class="text-center mb-12 relative">
-      <h2
-        class="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-6 leading-tight font-['Sora',sans-serif]"
-      >
-        Services & Packages
-      </h2>
-      <p class="text-xl text-[#a8998a] max-w-2xl mx-auto">
-        Transparent, flat-rate pricing to bring your vision to life. No hidden
-        fees.
+<section id="services" class="border-t border-[var(--site-border)] px-6 py-24">
+  <div class="site-shell">
+    <div class="mb-10 grid gap-4 text-center">
+      <span class="site-kicker mx-auto">Services</span>
+      <h2 class="site-section-title">Packages and retainers</h2>
+      <p class="site-section-copy mx-auto">
+        Transparent pricing, consistent production standards, and a quieter comparison
+        view that keeps the package differences readable.
       </p>
     </div>
 
-    <!-- Tabs Container -->
     <div
-      class="flex flex-col sm:flex-row sm:flex-wrap justify-center items-center gap-3 sm:gap-2 mb-16"
+      class="mb-10 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:justify-center"
       id="services-tabs"
       role="tablist"
     >
@@ -44,11 +29,7 @@ const sortedServices = allServices.sort((a, b) => {
             aria-selected={index === 0 ? "true" : "false"}
             aria-controls={`panel-${service.id}`}
             id={`tab-${service.id}`}
-            class={`w-full sm:w-auto px-6 py-3 rounded-full font-medium transition-all duration-300 text-sm sm:text-base border flex justify-center items-center ${
-              index === 0
-                ? "bg-[#c8875c] text-white border-[#c8875c] shadow-[0_0_20px_rgba(200,135,92,0.15)]"
-                : "bg-[#141211] border-[#2a2520] text-[#a8998a] hover:border-[#c8875c] hover:text-white hover:bg-white/5"
-            }`}
+            class={`service-tab site-button-secondary ${index === 0 ? "is-active" : ""}`}
             data-target={`panel-${service.id}`}
           >
             {service.data.title}
@@ -57,7 +38,6 @@ const sortedServices = allServices.sort((a, b) => {
       }
     </div>
 
-    <!-- Tab Panels Container -->
     <div id="services-panels">
       {
         sortedServices.map((service, index) => (
@@ -65,7 +45,7 @@ const sortedServices = allServices.sort((a, b) => {
             id={`panel-${service.id}`}
             role="tabpanel"
             aria-labelledby={`tab-${service.id}`}
-            class={`transition-opacity duration-500 ${index === 0 ? "block opacity-100" : "hidden opacity-0 absolute top-0 left-0 w-full"}`}
+            class={index === 0 ? "block" : "hidden"}
           >
             <ServicePricingBlock service={service} />
           </div>
@@ -76,7 +56,6 @@ const sortedServices = allServices.sort((a, b) => {
 </section>
 
 <script>
-  // Setup tabs interaction perfectly on client-side
   document.addEventListener("astro:page-load", () => {
     const tabButtons = document.querySelectorAll("#services-tabs button");
     const tabPanels = document.querySelectorAll(
@@ -87,63 +66,24 @@ const sortedServices = allServices.sort((a, b) => {
 
     tabButtons.forEach((button) => {
       button.addEventListener("click", () => {
-        // 1. Deactivate all tabs and hide panels
         tabButtons.forEach((btn) => {
           btn.setAttribute("aria-selected", "false");
-          btn.classList.remove(
-            "bg-[#c8875c]",
-            "text-white",
-            "border-[#c8875c]",
-            "shadow-[0_0_20px_rgba(200,135,92,0.15)]",
-          );
-          btn.classList.add(
-            "bg-[#141211]",
-            "border-[#2a2520]",
-            "text-[#a8998a]",
-          );
+          btn.classList.remove("is-active");
         });
 
         tabPanels.forEach((panel) => {
-          panel.classList.replace("block", "hidden");
-          panel.classList.replace("opacity-100", "opacity-0");
-          panel.classList.add("absolute", "top-0", "left-0", "w-full"); // Stack them perfectly to prevent layout jumps
+          panel.classList.add("hidden");
         });
 
-        // 2. Activate clicked tab
         button.setAttribute("aria-selected", "true");
-        button.classList.remove(
-          "bg-[#141211]",
-          "border-[#2a2520]",
-          "text-[#a8998a]",
-        );
-        button.classList.add(
-          "bg-[#c8875c]",
-          "text-white",
-          "border-[#c8875c]",
-          "shadow-[0_0_20px_rgba(200,135,92,0.15)]",
-        );
+        button.classList.add("is-active");
 
-        // 3. Show associated panel
         const targetId = button.getAttribute("data-target");
         if (!targetId) return;
 
         const targetPanel = document.getElementById(targetId);
-
         if (targetPanel) {
-          targetPanel.classList.remove(
-            "hidden",
-            "absolute",
-            "top-0",
-            "left-0",
-            "w-full",
-          );
-          targetPanel.classList.add("block");
-
-          // Trigger flow layout first, then fade in for smooth transition effect
-          requestAnimationFrame(() => {
-            targetPanel.classList.remove("opacity-0");
-            targetPanel.classList.add("opacity-100");
-          });
+          targetPanel.classList.remove("hidden");
         }
       });
     });
@@ -151,10 +91,9 @@ const sortedServices = allServices.sort((a, b) => {
 </script>
 
 <style>
-  #services-tabs button[aria-selected="true"] {
-    background-color: #c8875c !important;
-    border-color: #c8875c !important;
-    color: white !important;
-    box-shadow: 0 0 20px rgba(200, 135, 92, 0.15);
+  .service-tab.is-active {
+    border-color: rgba(200, 135, 92, 0.24);
+    background: rgba(200, 135, 92, 0.12);
+    color: var(--site-accent);
   }
 </style>

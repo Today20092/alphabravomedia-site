@@ -20,72 +20,77 @@ const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
 ---
 
 <BaseLayout title={`${post.data.title} | Alpha Bravo Media`}>
-  <article data-pagefind-body class="pt-32 pb-24 px-6">
+  <article data-pagefind-body class="px-6 pb-24 pt-32">
     <span data-pagefind-meta="type" class="sr-only">Blog Post</span>
-    <div class="max-w-4xl mx-auto">
-      <!-- Back link -->
-      <a
-        href={`${base}blog`}
-        class="inline-flex items-center gap-2 text-[#a8998a] hover:text-white transition-colors mb-8"
-      >
-        <Icon name="mdi:arrow-left" class="w-4 h-4" />
+
+    <div class="site-shell">
+      <a href={`${base}blog`} class="site-link inline-flex items-center gap-2 text-sm">
+        <Icon name="mdi:arrow-left" class="h-4 w-4" />
         Back to Blog
       </a>
 
-      <!-- Header -->
-      <header class="mb-10">
-        <time class="text-sm text-[#7a6f63] uppercase tracking-wider">
-          {
-            post.data.pubDate.toLocaleDateString("en-US", {
+      <header class="site-page-header mt-8">
+        <div class="site-meta-row">
+          <time>
+            {post.data.pubDate.toLocaleDateString("en-US", {
               year: "numeric",
               month: "long",
               day: "numeric",
-            })
-          }
-        </time>
-        <h1
-          class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white mt-3 mb-4 font-['Sora',sans-serif] text-balance"
-        >
-          {post.data.title}
-        </h1>
-        <p class="text-xl text-[#a8998a] mb-6">{post.data.description}</p>
-
-        <!-- Tags -->
-        {
-          post.data.tags.length > 0 && (
-            <div class="flex flex-wrap gap-2">
-              {post.data.tags.map((tag: string) => (
-                <span class="px-3 py-1 bg-[#c8875c]/10 rounded-full text-xs font-medium text-[#c8875c]">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          )
-        }
+            })}
+          </time>
+        </div>
+        <h1 class="site-page-title max-w-4xl">{post.data.title}</h1>
+        <p class="site-page-copy text-lg">{post.data.description}</p>
+        {post.data.tags.length > 0 && (
+          <div class="flex flex-wrap gap-3">
+            {post.data.tags.map((tag: string) => (
+              <span class="site-chip site-chip-muted">{tag}</span>
+            ))}
+          </div>
+        )}
       </header>
 
-      <!-- YouTube Embed -->
-      {
-        post.data.youtubeId && (
-          <div class="relative group mb-12">
-            <div class="absolute -inset-4 bg-linear-to-r from-[#c8875c]/10 to-[#a06b3e]/10 rounded-3xl blur-2xl opacity-50" />
-            <div class="relative rounded-2xl overflow-hidden shadow-2xl shadow-black/50">
-              <YouTube
-                id={post.data.youtubeId}
-                class="w-full aspect-video"
-                poster="maxresdefault"
-              />
-            </div>
+      {post.data.youtubeId && (
+        <div class="site-card mb-12 overflow-hidden">
+          <div class="site-card-media aspect-video">
+            <YouTube
+              id={post.data.youtubeId}
+              class="m-0 w-full aspect-video"
+              poster="maxresdefault"
+            />
           </div>
-        )
-      }
+        </div>
+      )}
 
-      <!-- Content -->
       <div
-        class="prose prose-invert md:prose-lg max-w-none prose-headings:text-balance prose-h1:text-3xl md:prose-h1:text-4xl lg:prose-h1:text-5xl prose-h2:text-2xl md:prose-h2:text-3xl lg:prose-h2:text-4xl prose-h3:text-xl md:prose-h3:text-2xl"
+        class="site-prose prose prose-invert md:prose-lg max-w-none prose-headings:text-balance prose-h1:text-3xl md:prose-h1:text-4xl prose-h2:text-2xl md:prose-h2:text-3xl prose-h3:text-xl md:prose-h3:text-2xl"
       >
         <Content />
       </div>
+
+      <aside class="site-panel mt-16 p-6 sm:p-8">
+        <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
+          <div>
+            <span class="site-kicker">Creator Community</span>
+            <h2 class="site-section-title mt-4">
+              Want more help with video, marketing, and AI workflows?
+            </h2>
+            <p class="site-section-copy mt-4">
+              Join the Discord to learn with other creators, ask questions, and compare
+              how people are using these tools in real businesses.
+            </p>
+          </div>
+          <a
+            href="https://discord.gg/p4QP7zTkv8"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="site-button-primary"
+          >
+            <Icon name="simple-icons:discord" class="h-4 w-4" />
+            Join the Discord
+          </a>
+        </div>
+      </aside>
     </div>
   </article>
 </BaseLayout>

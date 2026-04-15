@@ -1,79 +1,98 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
-import { Icon } from 'astro-icon/components';
-import { Image } from 'astro:assets';
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
 
 const rawBase = import.meta.env.BASE_URL;
-const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
+const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
 
-const allPosts = await getCollection('blog');
+const allPosts = await getCollection("blog");
 const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
 <BaseLayout title="Blog | Alpha Bravo Media">
-  <section class="pt-32 pb-24 px-6">
-    <div class="max-w-6xl mx-auto">
-      <!-- Header -->
-      <div class="mb-16">
-        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-4 font-['Sora',sans-serif]">Blog</h1>
-        <p class="text-lg text-[#a8998a] max-w-2xl">Tutorials, gear reviews, and behind-the-scenes content from the studio.</p>
+  <section class="px-6 pb-24 pt-32">
+    <div class="site-shell">
+      <div class="site-page-header">
+        <span class="site-kicker">Blog</span>
+        <h1 class="site-page-title">Tutorials, reviews, and studio notes from the work.</h1>
+        <p class="site-page-copy text-lg">
+          Practical posts for creators and businesses building better video systems,
+          better marketing assets, and better production habits.
+        </p>
       </div>
 
-      <!-- Posts Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {posts.map((post) => (
+      <div class="site-panel mb-12 p-6 sm:p-8">
+        <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
+          <div>
+            <span class="site-kicker">Creator Community</span>
+            <h2 class="site-section-title mt-4">
+              Learn video, marketing, and AI with other creators.
+            </h2>
+            <p class="site-section-copy mt-4">
+              Join the Discord for practical workflows, creator-business conversations,
+              and real examples of how people are shipping the work.
+            </p>
+          </div>
           <a
-            href={`${base}blog/${post.slug}`}
-            class="group relative bg-[#141211] rounded-xl overflow-hidden border border-[#2a2520] transition-all duration-300 hover:scale-[1.02] hover:border-[#c8875c]/30 hover:shadow-xl hover:shadow-black/20"
+            href="https://discord.gg/p4QP7zTkv8"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="site-button-primary"
           >
-            <!-- Thumbnail with play button -->
-            <div class="aspect-video bg-linear-to-br from-gray-800 to-gray-900 relative overflow-hidden flex items-center justify-center">
-              {post.data.image && (
+            <Icon name="simple-icons:discord" class="h-4 w-4" />
+            Join the Discord
+          </a>
+        </div>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {posts.map((post) => (
+          <a href={`${base}blog/${post.slug}`} class="site-card site-card-interactive group">
+            <div class="site-card-media">
+              {post.data.image ? (
                 <Image
                   src={post.data.image}
                   alt={post.data.title}
-                  class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  class="absolute inset-0 h-full w-full object-cover"
                 />
-              )}
-              {post.data.youtubeId && (
-                <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20 group-hover:scale-110 transition-all duration-300 z-10 relative">
-                  <Icon name="mdi:play" class="w-6 h-6 text-white ml-1" />
+              ) : (
+                <div class="flex h-full items-center justify-center text-[var(--site-text-soft)]">
+                  <Icon name="mdi:book-open-page-variant-outline" class="h-10 w-10" />
                 </div>
               )}
-              <div class="absolute inset-0 bg-linear-to-t from-black/60 to-transparent"></div>
+              {post.data.youtubeId && (
+                <div class="absolute left-4 top-4 rounded-full border border-[var(--site-border)] bg-black/40 px-3 py-1 text-xs font-medium text-[var(--site-text)]">
+                  Video
+                </div>
+              )}
+              <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/70 to-transparent"></div>
             </div>
 
-            <!-- Content -->
-            <div class="p-6">
-              <time class="text-xs text-[#7a6f63] uppercase tracking-wider">
-                {post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
-              </time>
-              <h2 class="text-xl font-semibold text-white mt-2 mb-3 font-['Sora',sans-serif] group-hover:text-gray-200 transition-colors line-clamp-2">
-                {post.data.title}
-              </h2>
-              <p class="text-sm text-[#7a6f63] line-clamp-2">
-                {post.data.description}
-              </p>
+            <div class="site-card-body">
+              <div class="site-meta-row">
+                <time>
+                  {post.data.pubDate.toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  })}
+                </time>
+              </div>
+              <h2 class="site-card-title line-clamp-2">{post.data.title}</h2>
+              <p class="site-card-copy line-clamp-2">{post.data.description}</p>
             </div>
           </a>
         ))}
       </div>
 
       {posts.length === 0 && (
-        <div class="text-center py-20">
-          <p class="text-[#7a6f63]">No posts yet. Check back soon!</p>
+        <div class="site-panel-muted mt-10 px-6 py-16 text-center">
+          <p class="text-lg text-[var(--site-text)]">No posts yet.</p>
+          <p class="mt-3 text-sm text-[var(--site-text-soft)]">Check back soon.</p>
         </div>
       )}
     </div>
   </section>
 </BaseLayout>
-
-<style>
-  .line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-</style>

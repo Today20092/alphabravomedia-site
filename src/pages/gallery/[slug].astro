@@ -1,7 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import Gallery from "../../components/Gallery.astro";
 import GalleryGate from "../../components/GalleryGate.astro";
 
 export async function getStaticPaths() {
@@ -21,40 +20,44 @@ const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
 
 const slug = entry.slug;
 
-// Remote (R2) gallery — load filenames from images.json sidecar
 const allImageLists = import.meta.glob<{ default: string[] }>(
-  '/src/content/galleries/**/images.json',
-  { eager: true }
+  "/src/content/galleries/**/images.json",
+  { eager: true },
 );
 
-const remoteJsonKey = Object.keys(allImageLists).find(k => k.includes(`/galleries/${slug}/images.json`));
-const remoteFilenames: string[] = remoteJsonKey ? (allImageLists[remoteJsonKey].default ?? allImageLists[remoteJsonKey] as unknown as string[]) : [];
+const remoteJsonKey = Object.keys(allImageLists).find((k) =>
+  k.includes(`/galleries/${slug}/images.json`),
+);
+const remoteFilenames: string[] = remoteJsonKey
+  ? ((allImageLists[remoteJsonKey].default ??
+      allImageLists[remoteJsonKey]) as unknown as string[])
+  : [];
 
-// Local gallery — auto-discover images from folder
 const allImages = import.meta.glob<{ default: ImageMetadata }>(
-  '/src/content/galleries/**/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}',
-  { eager: true }
+  "/src/content/galleries/**/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}",
+  { eager: true },
 );
 
 const allOriginalsUrl = import.meta.glob<string>(
-  '/src/content/galleries/**/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}',
-  { eager: true, query: '?url', import: 'default' }
+  "/src/content/galleries/**/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}",
+  { eager: true, query: "?url", import: "default" },
 );
 
-const galleryImages = remoteBase && remoteFilenames.length > 0
-  ? remoteFilenames.map((filename, i) => ({
-      src: `${remoteBase}/${filename}` as string,
-      alt: `${title} — photo ${i + 1}`,
-      fullSrc: `${remoteBase}/${filename}`,
-    }))
-  : Object.entries(allImages)
-      .filter(([path]) => path.includes(`/galleries/${slug}/`))
-      .sort(([a], [b]) => a.localeCompare(b))
-      .map(([path, mod], i) => ({
-        src: mod.default as unknown as string,
+const galleryImages =
+  remoteBase && remoteFilenames.length > 0
+    ? remoteFilenames.map((filename, i) => ({
+        src: `${remoteBase}/${filename}` as string,
         alt: `${title} — photo ${i + 1}`,
-        fullSrc: allOriginalsUrl[path] ?? '',
-      }));
+        fullSrc: `${remoteBase}/${filename}`,
+      }))
+    : Object.entries(allImages)
+        .filter(([path]) => path.includes(`/galleries/${slug}/`))
+        .sort(([a], [b]) => a.localeCompare(b))
+        .map(([path, mod], i) => ({
+          src: mod.default as unknown as string,
+          alt: `${title} — photo ${i + 1}`,
+          fullSrc: allOriginalsUrl[path] ?? "",
+        }));
 
 const formattedDate = new Date(date + "T00:00:00").toLocaleDateString("en-US", {
   year: "numeric",
@@ -68,33 +71,32 @@ const formattedDate = new Date(date + "T00:00:00").toLocaleDateString("en-US", {
   ogImage={password ? `https://alphabravomedia.co/alpha-bravo-logo.svg` : undefined}
   noIndex={!!password}
 >
-  <div class="min-h-screen pt-28 pb-20 px-6">
-    <div class="max-w-6xl mx-auto">
-      <!-- Back link -->
-      <a
-        href={`${base}gallery`}
-        class="inline-flex items-center gap-2 text-[#a8998a] hover:text-white transition-colors text-sm mb-8"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+  <section class="min-h-screen px-6 pb-24 pt-32">
+    <div class="site-shell">
+      <a href={`${base}gallery`} class="site-link inline-flex items-center gap-2 text-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
         All Galleries
       </a>
 
-      <!-- Header -->
-      <div class="mb-10">
-        <h1 class="text-3xl md:text-4xl font-bold text-white font-['Sora',sans-serif] mb-2">
-          {title}
-        </h1>
-        <p class="text-[#7a6f63] text-sm">{formattedDate} &middot; {galleryImages.length} photo{galleryImages.length !== 1 ? "s" : ""}</p>
-        {description && <p class="text-[#a8998a] mt-3 max-w-2xl">{description}</p>}
+      <div class="site-page-header mt-8">
+        <div class="site-meta-row">
+          <span>{formattedDate}</span>
+          <span>{galleryImages.length} photo{galleryImages.length !== 1 ? "s" : ""}</span>
+        </div>
+        <h1 class="site-page-title max-w-4xl">{title}</h1>
+        {description && <p class="site-page-copy text-lg">{description}</p>}
       </div>
 
-      <!-- Markdown body (event write-up) -->
-      <div class="prose prose-invert prose-sm max-w-2xl mb-10 text-[#a8998a]">
+      <div class="site-prose prose prose-invert prose-sm mb-10 max-w-2xl">
         <Content />
       </div>
 
-      <!-- Photo grid with lightbox -->
-      <GalleryGate images={galleryImages} layout={galleryLayout} passwordHash={password} slug={slug} />
+      <GalleryGate
+        images={galleryImages}
+        layout={galleryLayout}
+        passwordHash={password}
+        slug={slug}
+      />
     </div>
-  </div>
+  </section>
 </BaseLayout>

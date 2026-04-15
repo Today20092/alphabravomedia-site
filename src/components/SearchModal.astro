@@ -6,7 +6,7 @@ import { Icon } from "astro-icon/components";
 <!-- Backdrop -->
 <div
   id="search-backdrop"
-  class="fixed inset-0 z-90 bg-black/60 backdrop-blur-sm"
+  class="fixed inset-0 z-90 bg-black/70"
   style="display:none"
   aria-hidden="true"
 >
@@ -16,28 +16,28 @@ import { Icon } from "astro-icon/components";
 <dialog
   id="search-modal"
   class="fixed inset-0 z-100 m-auto w-full max-w-2xl max-h-[80vh]
-         bg-[#111111]/90 backdrop-blur-xl border border-[#2a2520]
-         rounded-2xl shadow-2xl shadow-black/60 p-6 overflow-hidden
+         bg-[var(--site-bg-elevated)]/95 backdrop-blur border border-[var(--site-border)]
+         rounded-2xl shadow-[var(--site-shadow-md)] p-6 overflow-hidden
          flex-col"
   aria-label="Site search"
 >
   <!-- Modal Header -->
   <div class="flex items-center justify-between mb-4 shrink-0">
     <div class="flex items-center gap-3">
-      <Icon name="mdi:magnify" class="w-5 h-5 text-[#a8998a]" />
-      <span class="text-sm font-medium text-[#a8998a]">Search</span>
+      <Icon name="mdi:magnify" class="w-5 h-5 text-[var(--site-accent)]" />
+      <span class="text-sm font-medium text-[var(--site-text-muted)]">Search</span>
     </div>
     <div class="flex items-center gap-3">
-      <span class="hidden sm:flex items-center gap-1 text-xs text-[#7a6f63]">
+      <span class="hidden sm:flex items-center gap-1 text-xs text-[var(--site-text-soft)]">
         <kbd
-          class="px-1.5 py-0.5 bg-white/5 border border-[#2a2520] rounded text-[#7a6f63] font-mono text-xs"
+          class="rounded border border-[var(--site-border)] bg-white/5 px-1.5 py-0.5 font-mono text-xs text-[var(--site-text-soft)]"
           >Esc</kbd
         >
         to close
       </span>
       <button
         id="search-close"
-        class="p-1.5 text-[#a8998a] hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+        class="rounded-lg p-1.5 text-[var(--site-text-muted)] transition-colors hover:bg-white/10 hover:text-[var(--site-text)]"
         aria-label="Close search"
       >
         <Icon name="mdi:close" class="w-5 h-5" />

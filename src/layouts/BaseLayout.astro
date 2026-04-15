@@ -2,50 +2,13 @@
 import SearchModal from "../components/SearchModal.astro";
 import { Icon } from "astro-icon/components";
 import { ClientRouter } from "astro:transitions";
+import { siteConfig } from "../site-config";
 
 interface Props {
   title?: string;
   ogImage?: string;
   noIndex?: boolean;
 }
-
-// ============================================
-// SITE CONFIG - Edit your info here
-// ============================================
-const siteConfig = {
-  // Brand
-  siteName: "Alpha Bravo Media",
-  tagline: "Cinema-grade videography for brands and creators.",
-
-  // Contact
-  email: "contact@alphabravomedia.co",
-  phone: "(813) 665-0166",
-  phoneRaw: "+18136650166", // For tel: link (no spaces/dashes)
-  elementUsername: "@ayoubab:matrix.org",
-
-  // Social Links
-  socialLinks: [
-    {
-      platform: "youtube",
-      label: "YouTube",
-      href: "https://youtube.com/@alphabravomedia",
-      icon: "simple-icons:youtube",
-    },
-    {
-      platform: "instagram",
-      label: "Instagram",
-      href: "https://instagram.com/alphabravomedia",
-      icon: "simple-icons:instagram",
-    },
-    // {
-    //   platform: "twitter",
-    //   label: "Twitter/X",
-    //   href: "https://twitter.com/alphabravomedia",
-    //   icon: "simple-icons:x",
-    // },
-  ],
-};
-// ============================================
 
 const youtubeLink = siteConfig.socialLinks.find(
   (s) => s.platform === "youtube",
@@ -60,6 +23,7 @@ const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
 
 const navLinks = [
   { href: base, label: "Home" },
+  { href: `${base}services`, label: "Services" },
   { href: `${base}portfolio`, label: "Portfolio" },
   { href: `${base}blog`, label: "Blog" },
   { href: `${base}gallery`, label: "Gallery" },
@@ -96,33 +60,31 @@ const currentPath = Astro.url.pathname;
     <link rel="stylesheet" href={`${base}pagefind/pagefind-ui.css`} />
     <ClientRouter />
   </head>
-  <body class="bg-[#0b0b0b] text-white font-['Inter',sans-serif] antialiased">
+  <body class="font-['Inter',sans-serif] antialiased">
     <!-- Navigation -->
     <header class="fixed top-0 left-0 right-0 z-50">
-      <nav
-        class="mx-4 mt-4 px-6 py-4 rounded-2xl bg-white/5 backdrop-blur-xl border border-[#2a2520] shadow-lg shadow-black/20"
-      >
-        <div class="max-w-6xl mx-auto flex items-center justify-between">
+      <nav class="site-shell-wide mt-4 rounded-[1.35rem] border border-[var(--site-border)] bg-[rgba(17,15,13,0.9)] px-5 py-4 shadow-[var(--site-shadow-sm)] backdrop-blur">
+        <div class="flex items-center justify-between gap-4">
           <!-- Logo -->
           <a
             href={base}
-            class="text-lg font-semibold tracking-tight text-white hover:text-gray-300 transition-colors font-['Sora',sans-serif]"
+            class="font-['Sora',sans-serif] text-base font-semibold tracking-tight text-[var(--site-text)] transition-colors hover:text-[var(--site-accent-strong)] sm:text-lg"
           >
             {siteConfig.siteName}
           </a>
 
           <!-- Desktop Navigation -->
-          <ul class="hidden md:flex items-center gap-8">
+          <ul class="hidden md:flex items-center gap-6 lg:gap-8">
             {
               navLinks.map((link) => (
                 <li>
                   <a
                     href={link.href}
                     class:list={[
-                      "text-sm font-medium transition-colors duration-200 font-['Sora',sans-serif]",
+                      "font-['Sora',sans-serif] text-sm font-medium transition-colors duration-200",
                       currentPath === link.href
-                        ? "text-white"
-                        : "text-[#a8998a] hover:text-white",
+                        ? "text-[var(--site-text)]"
+                        : "text-[var(--site-text-muted)] hover:text-[var(--site-text)]",
                     ]}
                   >
                     {link.label}
@@ -135,7 +97,7 @@ const currentPath = Astro.url.pathname;
           <!-- Search Button (desktop) -->
           <button
             data-search-open
-            class="hidden md:flex items-center gap-2 px-3 py-2 text-[#a8998a] hover:text-white hover:bg-white/10 rounded-full text-sm font-medium transition-colors duration-200"
+            class="hidden md:flex items-center gap-2 rounded-full border border-[var(--site-border)] px-3 py-2 text-sm font-medium text-[var(--site-text-muted)] transition-colors duration-200 hover:border-[var(--site-border-strong)] hover:text-[var(--site-text)]"
             aria-label="Open search (Ctrl+K)"
           >
             <svg
@@ -150,22 +112,20 @@ const currentPath = Astro.url.pathname;
                 stroke-width="2"
                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
             </svg>
-            <kbd class="hidden lg:inline text-xs text-[#7a6f63] font-mono"
+            <kbd class="hidden font-mono text-xs text-[var(--site-text-soft)] lg:inline"
               >⌘K</kbd
             >
           </button>
 
           <!-- CTA Button -->
           {
-            youtubeLink && (
+            siteConfig.phoneRaw && (
               <a
-                href={youtubeLink.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="hidden md:flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/15 rounded-full text-sm font-medium text-white transition-colors duration-200"
+                href={`tel:${siteConfig.phoneRaw}`}
+                class="site-button-primary hidden md:inline-flex"
               >
-                <Icon name={youtubeLink.icon} class="w-4 h-4" />
-                {youtubeLink.label}
+                <Icon name="mdi:phone-outline" class="h-4 w-4" />
+                Book a Call
               </a>
             )
           }
@@ -173,7 +133,7 @@ const currentPath = Astro.url.pathname;
           <!-- Mobile Menu Button -->
           <button
             id="mobile-menu-btn"
-            class="md:hidden p-2 text-[#a8998a] hover:text-white transition-colors"
+            class="rounded-full border border-[var(--site-border)] p-2 text-[var(--site-text-muted)] transition-colors hover:text-[var(--site-text)] md:hidden"
             aria-label="Toggle menu"
           >
             <Icon id="menu-open" name="mdi:menu" class="w-6 h-6" />
@@ -184,7 +144,7 @@ const currentPath = Astro.url.pathname;
         <!-- Mobile Navigation -->
         <div
           id="mobile-menu"
-          class="hidden md:hidden mt-4 pt-4 border-t border-[#2a2520]"
+          class="mt-4 hidden border-t border-[var(--site-border)] pt-4 md:hidden"
         >
           <ul class="flex flex-col gap-4">
             {
@@ -193,10 +153,10 @@ const currentPath = Astro.url.pathname;
                   <a
                     href={link.href}
                     class:list={[
-                      "block text-sm font-medium transition-colors duration-200 font-['Sora',sans-serif]",
+                      "block font-['Sora',sans-serif] text-sm font-medium transition-colors duration-200",
                       currentPath === link.href
-                        ? "text-white"
-                        : "text-[#a8998a] hover:text-white",
+                        ? "text-[var(--site-text)]"
+                        : "text-[var(--site-text-muted)] hover:text-[var(--site-text)]",
                     ]}
                   >
                     {link.label}
@@ -207,7 +167,7 @@ const currentPath = Astro.url.pathname;
             <li>
               <button
                 data-search-open
-                class="flex items-center gap-2 text-sm font-medium text-[#a8998a] hover:text-white transition-colors w-full"
+                class="flex w-full items-center gap-2 text-sm font-medium text-[var(--site-text-muted)] transition-colors hover:text-[var(--site-text)]"
               >
                 <Icon name="mdi:magnify" class="w-4 h-4" />
                 Search
@@ -220,7 +180,7 @@ const currentPath = Astro.url.pathname;
                     href={youtubeLink.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="flex items-center gap-2 text-sm font-medium text-[#a8998a] hover:text-white transition-colors"
+                    class="flex items-center gap-2 text-sm font-medium text-[var(--site-text-muted)] transition-colors hover:text-[var(--site-text)]"
                   >
                     <Icon name={youtubeLink.icon} class="w-4 h-4" />
                     {youtubeLink.label}
@@ -241,134 +201,99 @@ const currentPath = Astro.url.pathname;
     <!-- Footer -->
     <footer
       id="contact"
-      class="py-16 px-6 border-t border-[#2a2520] bg-[#080808] contact-highlight-target relative"
+      class="contact-highlight-target border-t border-[var(--site-border)] px-6 py-16 relative"
     >
-      <div class="max-w-6xl mx-auto">
-        <!-- Contact Section -->
+      <div class="site-shell">
         <div
           id="contact-methods"
-          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12 rounded-2xl transition-all duration-500"
+          class="mb-10 grid gap-8 rounded-[1.5rem] border border-[var(--site-border)] bg-[rgba(255,255,255,0.02)] p-6 transition-all duration-500 md:grid-cols-[1.1fr_1fr_0.9fr]"
         >
-          <!-- Brand -->
           <div
-            class="lg:col-span-1 p-4 -m-4 rounded-xl transition-all duration-500"
+            class="rounded-xl transition-all duration-500"
             id="contact-brand-highlight"
           >
-            <h3
-              class="text-xl font-semibold tracking-tight text-white mb-3 font-['Sora',sans-serif]"
-            >
+            <span class="site-kicker">Contact</span>
+            <h2 class="mt-4 font-['Sora',sans-serif] text-2xl font-semibold tracking-tight text-[var(--site-text)]">
               {siteConfig.siteName}
-            </h3>
-            <p class="text-sm text-[#7a6f63] leading-relaxed">
+            </h2>
+            <p class="mt-3 max-w-[34ch] text-sm leading-7 text-[var(--site-text-muted)]">
               {siteConfig.tagline}
             </p>
           </div>
 
-          <!-- Email -->
-          <div class="p-4 -m-4 rounded-xl transition-all duration-500">
-            <h4
-              class="text-sm font-semibold text-[#a8998a] uppercase tracking-wider mb-3"
-            >
-              Email
-            </h4>
-            <a
-              href={`mailto:${siteConfig.email}`}
-              class="group flex items-center gap-2 text-[#a8998a] hover:text-white transition-colors"
-            >
-              <Icon
-                name="mdi:email-outline"
-                class="w-5 h-5 text-[#7a6f63] group-hover:text-white transition-colors"
-              />
-              <span class="text-sm">{siteConfig.email}</span>
+          <div class="grid gap-4 text-sm">
+            <p class="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--site-text-soft)]">
+              Reach out
+            </p>
+            <a href={`mailto:${siteConfig.email}`} class="site-link flex items-center gap-3">
+              <Icon name="mdi:email-outline" class="h-4 w-4 text-[var(--site-accent)]" />
+              <span>{siteConfig.email}</span>
             </a>
-          </div>
-
-          <!-- Phone -->
-          <div class="p-4 -m-4 rounded-xl transition-all duration-500">
-            <h4
-              class="text-sm font-semibold text-[#a8998a] uppercase tracking-wider mb-3"
-            >
-              Phone
-            </h4>
-            <a
-              href={`tel:${siteConfig.phoneRaw}`}
-              class="group flex items-center gap-2 text-[#a8998a] hover:text-white transition-colors"
-            >
-              <Icon
-                name="mdi:phone-outline"
-                class="w-5 h-5 text-[#7a6f63] group-hover:text-white transition-colors"
-              />
-              <span class="text-sm">{siteConfig.phone}</span>
+            <a href={`tel:${siteConfig.phoneRaw}`} class="site-link flex items-center gap-3">
+              <Icon name="mdi:phone-outline" class="h-4 w-4 text-[var(--site-accent)]" />
+              <span>{siteConfig.phone}</span>
             </a>
-            <p class="text-xs text-[#7a6f63] mt-1 ml-7">Google Voice</p>
-            <a
-              href={`sms:${siteConfig.phoneRaw}`}
-              class="group flex items-center gap-2 text-[#a8998a] hover:text-white transition-colors mt-2"
-            >
-              <Icon
-                name="mdi:message-outline"
-                class="w-5 h-5 text-[#7a6f63] group-hover:text-white transition-colors"
-              />
-              <span class="text-sm">{siteConfig.phone}</span>
+            <a href={`sms:${siteConfig.phoneRaw}`} class="site-link flex items-center gap-3">
+              <Icon name="mdi:message-outline" class="h-4 w-4 text-[var(--site-accent)]" />
+              <span>Text message</span>
             </a>
-            <p class="text-xs text-[#7a6f63] mt-1 ml-7">Text</p>
-          </div>
-
-          <!-- Element -->
-          <div class="p-4 -m-4 rounded-xl transition-all duration-500">
-            <h4
-              class="text-sm font-semibold text-[#a8998a] uppercase tracking-wider mb-3"
-            >
-              Element / Matrix
-            </h4>
             <a
               href={`https://matrix.to/#/${siteConfig.elementUsername}`}
               target="_blank"
               rel="noopener noreferrer"
-              class="group flex items-center gap-2 text-[#a8998a] hover:text-white transition-colors"
+              class="site-link flex items-center gap-3"
             >
-              <Icon
-                name="simple-icons:element"
-                class="w-5 h-5 text-[#7a6f63] group-hover:text-white transition-colors"
-              />
-              <span class="text-sm font-mono">{siteConfig.elementUsername}</span
-              >
+              <Icon name="simple-icons:element" class="h-4 w-4 text-[var(--site-accent)]" />
+              <span class="font-mono text-xs sm:text-sm">{siteConfig.elementUsername}</span>
             </a>
-            <p class="text-xs text-[#7a6f63] mt-1 ml-7">Opens in Element</p>
           </div>
-        </div>
 
-        <!-- Bottom Bar -->
-        <div
-          class="pt-8 border-t border-[#2a2520] flex flex-col sm:flex-row items-center justify-between gap-4"
-        >
-          <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-6">
-            <p class="text-[#7a6f63] text-sm">
-              &copy; {new Date().getFullYear()}
-              {siteConfig.siteName}. All rights reserved.
+          <div class="grid gap-4 text-sm">
+            <p class="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--site-text-soft)]">
+              Elsewhere
             </p>
             <a
-              href={`${base}terms`}
-              class="text-[#7a6f63] hover:text-white text-sm transition-colors mt-2 sm:mt-0"
+              href={siteConfig.googleMapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="site-link flex items-center gap-3"
             >
-              Terms of Service
+              <Icon name="simple-icons:google" class="h-4 w-4 text-[var(--site-accent)]" />
+              <span>{siteConfig.googleMapsLabel}</span>
             </a>
-          </div>
-          <div class="flex items-center gap-6">
             {
               siteConfig.socialLinks.map((link) => (
                 <a
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="text-[#7a6f63] hover:text-white transition-colors"
-                  aria-label={link.label}
+                  class="site-link flex items-center gap-3"
                 >
-                  <Icon name={link.icon} class="w-5 h-5" />
+                  <Icon name={link.icon} class="h-4 w-4 text-[var(--site-accent)]" />
+                  <span>{link.label}</span>
                 </a>
               ))
             }
+            <a
+              href="https://discord.gg/p4QP7zTkv8"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="site-link flex items-center gap-3"
+            >
+              <Icon name="simple-icons:discord" class="h-4 w-4 text-[var(--site-accent)]" />
+              <span>Creator community</span>
+            </a>
           </div>
+        </div>
+
+        <div class="flex flex-col gap-3 border-t border-[var(--site-border)] pt-6 text-sm text-[var(--site-text-soft)] sm:flex-row sm:items-center sm:justify-between">
+          <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-6">
+            <p>
+              &copy; {new Date().getFullYear()} {siteConfig.siteName}. All rights reserved.
+            </p>
+            <a href={`${base}terms`} class="site-link">Terms of Service</a>
+          </div>
+          <p>Based in Tampa, serving brands, creators, and events.</p>
         </div>
       </div>
     </footer>
@@ -459,23 +384,23 @@ const currentPath = Astro.url.pathname;
 
   @keyframes contact-glow-pulse {
     0% {
-      background-color: #080808;
+      background-color: rgba(255, 255, 255, 0);
       box-shadow: inset 0 0 0 0px rgba(200, 135, 92, 0);
     }
     15% {
       background-color: rgba(200, 135, 92, 0.05);
       box-shadow:
-        inset 0 0 0 1px rgba(200, 135, 92, 0.2),
-        inset 0 20px 40px -20px rgba(200, 135, 92, 0.15);
+        inset 0 0 0 1px rgba(200, 135, 92, 0.16),
+        inset 0 18px 30px -24px rgba(200, 135, 92, 0.14);
     }
     85% {
       background-color: rgba(200, 135, 92, 0.05);
       box-shadow:
-        inset 0 0 0 1px rgba(200, 135, 92, 0.2),
-        inset 0 20px 40px -20px rgba(200, 135, 92, 0.15);
+        inset 0 0 0 1px rgba(200, 135, 92, 0.16),
+        inset 0 18px 30px -24px rgba(200, 135, 92, 0.14);
     }
     100% {
-      background-color: #080808;
+      background-color: rgba(255, 255, 255, 0);
       box-shadow: inset 0 0 0 0px rgba(200, 135, 92, 0);
     }
   }
