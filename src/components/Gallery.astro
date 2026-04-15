@@ -31,11 +31,11 @@ const id = `gallery-${Math.random().toString(36).slice(2, 8)}`;
           ) : (
             <Image src={image.src} alt={image.alt} class="block h-auto w-full" />
           )}
-          <div class="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-white/10" />
-          <div class="absolute inset-0 rounded-xl bg-black/0 transition-colors duration-300 group-hover:bg-black/10" />
+          <div class="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-[var(--site-border)]" />
+          <div class="absolute inset-0 rounded-xl bg-transparent transition-colors duration-300 group-hover:bg-[var(--site-control-bg-hover)]" />
           {image.caption && (
-            <div class="absolute bottom-0 left-0 right-0 translate-y-full bg-black/60 p-3 transition-transform duration-300 ease-in-out group-hover:translate-y-0">
-              <p class="text-sm text-white/90 font-medium text-center m-0 leading-tight">
+            <div class="absolute bottom-0 left-0 right-0 translate-y-full bg-[var(--site-backdrop)] p-3 transition-transform duration-300 ease-in-out group-hover:translate-y-0">
+              <p class="m-0 text-center text-sm font-medium leading-tight text-[var(--site-text)]">
                 {image.caption}
               </p>
             </div>
@@ -57,11 +57,11 @@ const id = `gallery-${Math.random().toString(36).slice(2, 8)}`;
           ) : (
             <Image src={image.src} alt={image.alt} class={layout === 'square' ? 'h-full w-full object-cover' : 'block h-auto w-full'} />
           )}
-          <div class="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-white/10" />
-          <div class="absolute inset-0 rounded-xl bg-black/0 transition-colors duration-300 group-hover:bg-black/10" />
+          <div class="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-[var(--site-border)]" />
+          <div class="absolute inset-0 rounded-xl bg-transparent transition-colors duration-300 group-hover:bg-[var(--site-control-bg-hover)]" />
           {image.caption && (
-            <div class="absolute bottom-0 left-0 right-0 translate-y-full bg-black/60 p-3 transition-transform duration-300 ease-in-out group-hover:translate-y-0">
-              <p class="text-sm text-white/90 font-medium text-center m-0 leading-tight">
+            <div class="absolute bottom-0 left-0 right-0 translate-y-full bg-[var(--site-backdrop)] p-3 transition-transform duration-300 ease-in-out group-hover:translate-y-0">
+              <p class="m-0 text-center text-sm font-medium leading-tight text-[var(--site-text)]">
                 {image.caption}
               </p>
             </div>
@@ -86,14 +86,14 @@ const id = `gallery-${Math.random().toString(36).slice(2, 8)}`;
 <!-- Lightbox -->
 <div
   id={`${id}-lightbox`}
-  class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90"
+  class="fixed inset-0 z-50 hidden items-center justify-center bg-[var(--site-backdrop)]"
   role="dialog"
   aria-modal="true"
   aria-label="Image lightbox"
 >
   <!-- Download -->
   <a
-    class="lightbox-download absolute right-16 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/10 text-white transition-colors hover:bg-white/20"
+    class="lightbox-download absolute right-16 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-[var(--site-border)] bg-[var(--site-control-bg)] text-[var(--site-text)] transition-colors hover:bg-[var(--site-control-bg-hover)]"
     href=""
     download
     aria-label="Download photo"
@@ -103,7 +103,7 @@ const id = `gallery-${Math.random().toString(36).slice(2, 8)}`;
 
   <!-- Close -->
   <button
-    class="lightbox-close absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/10 text-white transition-colors hover:bg-white/20"
+    class="lightbox-close absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-[var(--site-border)] bg-[var(--site-control-bg)] text-[var(--site-text)] transition-colors hover:bg-[var(--site-control-bg-hover)]"
     aria-label="Close lightbox"
   >
     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -111,7 +111,7 @@ const id = `gallery-${Math.random().toString(36).slice(2, 8)}`;
 
   <!-- Prev -->
   <button
-    class="lightbox-prev absolute left-3 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/10 text-white transition-colors hover:bg-white/20 disabled:opacity-30 md:left-6"
+    class="lightbox-prev absolute left-3 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-[var(--site-border)] bg-[var(--site-control-bg)] text-[var(--site-text)] transition-colors hover:bg-[var(--site-control-bg-hover)] disabled:opacity-30 md:left-6"
     aria-label="Previous image"
   >
     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
@@ -128,14 +128,14 @@ const id = `gallery-${Math.random().toString(36).slice(2, 8)}`;
 
   <!-- Next -->
   <button
-    class="lightbox-next absolute right-3 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/10 text-white transition-colors hover:bg-white/20 md:right-6"
+    class="lightbox-next absolute right-3 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-[var(--site-border)] bg-[var(--site-control-bg)] text-[var(--site-text)] transition-colors hover:bg-[var(--site-control-bg-hover)] md:right-6"
     aria-label="Next image"
   >
     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
   </button>
 
   <!-- Counter -->
-  <div class="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/50 text-sm tabular-nums">
+  <div class="absolute bottom-4 left-1/2 -translate-x-1/2 text-sm tabular-nums text-[var(--site-text-soft)]">
     <span class="lightbox-current">1</span> / <span class="lightbox-total">{images.length}</span>
   </div>
 </div>

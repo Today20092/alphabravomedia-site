@@ -46,6 +46,7 @@ const currentPath = Astro.url.pathname;
       name="description"
       content="Cinema-grade videography for brands and creators. High-quality video production and strategic content."
     />
+    <meta name="theme-color" content="#110f0d" />
     <title>{title}</title>
     <meta property="og:title" content={title} />
     <meta property="og:site_name" content={siteConfig.siteName} />
@@ -58,12 +59,39 @@ const currentPath = Astro.url.pathname;
       rel="stylesheet"
     />
     <link rel="stylesheet" href={`${base}pagefind/pagefind-ui.css`} />
+    <script is:inline>
+      (() => {
+        const storageKey = "abm-theme";
+        const root = document.documentElement;
+        const meta = document.querySelector('meta[name="theme-color"]');
+        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
+
+        let storedTheme = null;
+        try {
+          const value = localStorage.getItem(storageKey);
+          if (value === "dark" || value === "light") {
+            storedTheme = value;
+          }
+        } catch {
+          storedTheme = null;
+        }
+
+        const theme = storedTheme ?? systemTheme;
+        root.dataset.theme = theme;
+        root.style.colorScheme = theme;
+        if (meta) {
+          meta.setAttribute("content", theme === "dark" ? "#110f0d" : "#f4efe7");
+        }
+      })();
+    </script>
     <ClientRouter />
   </head>
-  <body class="font-['Inter',sans-serif] antialiased">
+  <body class="bg-[var(--site-bg)] text-[var(--site-text)] font-['Inter',sans-serif] antialiased">
     <!-- Navigation -->
     <header class="fixed top-0 left-0 right-0 z-50">
-      <nav class="site-shell-wide mt-4 rounded-[1.35rem] border border-[var(--site-border)] bg-[rgba(17,15,13,0.9)] px-5 py-4 shadow-[var(--site-shadow-sm)] backdrop-blur">
+      <nav class="site-shell-wide mt-4 rounded-[1.35rem] border border-[var(--site-border)] bg-[var(--site-nav-bg)] px-5 py-4 shadow-[var(--site-shadow-sm)] backdrop-blur">
         <div class="flex items-center justify-between gap-4">
           <!-- Logo -->
           <a
@@ -93,6 +121,19 @@ const currentPath = Astro.url.pathname;
               ))
             }
           </ul>
+
+          <!-- Theme Toggle (desktop) -->
+          <button
+            data-theme-toggle
+            type="button"
+            class="site-button-secondary site-theme-toggle hidden md:inline-flex"
+            aria-pressed="true"
+            aria-label="Toggle color theme"
+          >
+            <Icon name="mdi:weather-night" class="h-4 w-4" data-theme-icon="moon" />
+            <Icon name="mdi:weather-sunny" class="h-4 w-4" data-theme-icon="sun" />
+            <span data-theme-label>Dark</span>
+          </button>
 
           <!-- Search Button (desktop) -->
           <button
@@ -173,6 +214,19 @@ const currentPath = Astro.url.pathname;
                 Search
               </button>
             </li>
+            <li>
+              <button
+                data-theme-toggle
+                type="button"
+                class="site-button-secondary site-theme-toggle flex w-full justify-start"
+                aria-pressed="true"
+                aria-label="Toggle color theme"
+              >
+                <Icon name="mdi:weather-night" class="h-4 w-4" data-theme-icon="moon" />
+                <Icon name="mdi:weather-sunny" class="h-4 w-4" data-theme-icon="sun" />
+                <span data-theme-label>Dark</span>
+              </button>
+            </li>
             {
               youtubeLink && (
                 <li>
@@ -206,7 +260,7 @@ const currentPath = Astro.url.pathname;
       <div class="site-shell">
         <div
           id="contact-methods"
-          class="mb-10 grid gap-8 rounded-[1.5rem] border border-[var(--site-border)] bg-[rgba(255,255,255,0.02)] p-6 transition-all duration-500 md:grid-cols-[1.1fr_1fr_0.9fr]"
+          class="mb-10 grid gap-8 rounded-[1.5rem] border border-[var(--site-border)] bg-[var(--site-surface)] p-6 transition-all duration-500 md:grid-cols-[1.1fr_1fr_0.9fr]"
         >
           <div
             class="rounded-xl transition-all duration-500"
@@ -303,6 +357,11 @@ const currentPath = Astro.url.pathname;
     <!-- Scripts -->
     <script>
       let lastScrollY = window.scrollY;
+      const themeStorageKey = "abm-theme";
+      const themeColors = {
+        dark: "#110f0d",
+        light: "#f4efe7",
+      };
 
       function handleScroll() {
         const header = document.querySelector("header");
@@ -317,6 +376,96 @@ const currentPath = Astro.url.pathname;
           header.style.transform = "translateY(0)";
         }
         lastScrollY = currentScrollY;
+      }
+
+      function getStoredTheme() {
+        try {
+          const value = localStorage.getItem(themeStorageKey);
+          if (value === "dark" || value === "light") return value;
+        } catch {
+          return null;
+        }
+
+        return null;
+      }
+
+      function getSystemTheme() {
+        return window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
+      }
+
+      function applyTheme(theme) {
+        const root = document.documentElement;
+        const meta = document.querySelector('meta[name="theme-color"]');
+
+        root.dataset.theme = theme;
+        root.style.colorScheme = theme;
+
+        if (meta) {
+          meta.setAttribute("content", themeColors[theme]);
+        }
+
+        document.querySelectorAll("[data-theme-toggle]").forEach((button) => {
+          button.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
+          button.setAttribute(
+            "aria-label",
+            theme === "dark" ? "Switch to light theme" : "Switch to dark theme",
+          );
+
+          const label = button.querySelector("[data-theme-label]");
+          if (label) {
+            label.textContent = theme === "dark" ? "Dark" : "Light";
+          }
+        });
+      }
+
+      function setupThemeToggle() {
+        applyTheme(getStoredTheme() ?? getSystemTheme());
+
+        if (window.__abmThemeChangeHandler) {
+          document.removeEventListener("click", window.__abmThemeChangeHandler);
+        }
+
+        window.__abmThemeChangeHandler = (event) => {
+          if (!(event.target instanceof Element)) return;
+          const button = event.target.closest("[data-theme-toggle]");
+          if (!button) return;
+
+          event.preventDefault();
+
+          const currentTheme =
+            document.documentElement.dataset.theme === "light" ? "light" : "dark";
+          const nextTheme = currentTheme === "dark" ? "light" : "dark";
+
+          try {
+            localStorage.setItem(themeStorageKey, nextTheme);
+          } catch {
+            // Ignore storage failures and keep the current theme in memory.
+          }
+
+          applyTheme(nextTheme);
+        };
+
+        document.addEventListener("click", window.__abmThemeChangeHandler);
+
+        if (window.__abmThemeMediaQuery && window.__abmThemeMediaHandler) {
+          window.__abmThemeMediaQuery.removeEventListener(
+            "change",
+            window.__abmThemeMediaHandler,
+          );
+        }
+
+        window.__abmThemeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+        window.__abmThemeMediaHandler = () => {
+          if (!getStoredTheme()) {
+            applyTheme(getSystemTheme());
+          }
+        };
+        window.__abmThemeMediaQuery.addEventListener(
+          "change",
+          window.__abmThemeMediaHandler,
+        );
       }
 
       function setupInteractions() {
@@ -374,7 +523,9 @@ const currentPath = Astro.url.pathname;
       }
 
       // Run on initial load and after view transitions
+      setupThemeToggle();
       document.addEventListener("astro:page-load", setupInteractions);
+      document.addEventListener("astro:page-load", setupThemeToggle);
     </script>
   </body>
 </html>
@@ -384,24 +535,24 @@ const currentPath = Astro.url.pathname;
 
   @keyframes contact-glow-pulse {
     0% {
-      background-color: rgba(255, 255, 255, 0);
-      box-shadow: inset 0 0 0 0px rgba(200, 135, 92, 0);
+      background-color: transparent;
+      box-shadow: inset 0 0 0 0px color-mix(in oklab, var(--site-accent) 0%, transparent);
     }
     15% {
-      background-color: rgba(200, 135, 92, 0.05);
+      background-color: var(--site-accent-soft);
       box-shadow:
-        inset 0 0 0 1px rgba(200, 135, 92, 0.16),
-        inset 0 18px 30px -24px rgba(200, 135, 92, 0.14);
+        inset 0 0 0 1px color-mix(in oklab, var(--site-accent) 26%, transparent),
+        inset 0 18px 30px -24px color-mix(in oklab, var(--site-accent) 20%, transparent);
     }
     85% {
-      background-color: rgba(200, 135, 92, 0.05);
+      background-color: var(--site-accent-soft);
       box-shadow:
-        inset 0 0 0 1px rgba(200, 135, 92, 0.16),
-        inset 0 18px 30px -24px rgba(200, 135, 92, 0.14);
+        inset 0 0 0 1px color-mix(in oklab, var(--site-accent) 26%, transparent),
+        inset 0 18px 30px -24px color-mix(in oklab, var(--site-accent) 20%, transparent);
     }
     100% {
-      background-color: rgba(255, 255, 255, 0);
-      box-shadow: inset 0 0 0 0px rgba(200, 135, 92, 0);
+      background-color: transparent;
+      box-shadow: inset 0 0 0 0px color-mix(in oklab, var(--site-accent) 0%, transparent);
     }
   }
 

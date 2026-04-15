@@ -117,8 +117,8 @@ const categories = [...new Set(allItems.map((item) => item.data.category))];
 
 <style>
   .filter-btn.active {
-    border-color: rgba(200, 135, 92, 0.24);
-    background: rgba(200, 135, 92, 0.12);
+    border-color: color-mix(in oklab, var(--site-accent) 28%, transparent);
+    background: var(--site-accent-soft);
     color: var(--site-accent);
   }
 
