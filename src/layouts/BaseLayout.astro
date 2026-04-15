@@ -166,7 +166,7 @@ const currentPath = Astro.url.pathname;
                 class="site-button-primary hidden md:inline-flex"
               >
                 <Icon name="mdi:phone-outline" class="h-4 w-4" />
-                Check availability
+                Call direct
               </a>
             )
           }
@@ -316,27 +316,25 @@ const currentPath = Astro.url.pathname;
               <span>{siteConfig.googleMapsLabel}</span>
             </a>
             {
-              siteConfig.socialLinks.map((link) => (
-                <a
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="site-link flex items-center gap-3"
-                >
-                  <Icon name={link.icon} class="h-4 w-4 text-[var(--site-accent)]" />
-                  <span>{link.label}</span>
-                </a>
-              ))
+              siteConfig.socialLinks
+                .filter((link) => link.platform !== "discord")
+                .map((link) => (
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="site-link flex items-center gap-3"
+                  >
+                    <Icon name={link.icon} class="h-4 w-4 text-[var(--site-accent)]" />
+                    <span>{link.label}</span>
+                  </a>
+                ))
             }
-            <a
-              href="https://discord.gg/p4QP7zTkv8"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="site-link flex items-center gap-3"
-            >
+            <div class="site-link flex items-center gap-3 text-[var(--site-text-muted)]">
               <Icon name="simple-icons:discord" class="h-4 w-4 text-[var(--site-accent)]" />
-              <span>Creator community</span>
-            </a>
+              <span>Discord creator community</span>
+            </div>
+            }
           </div>
         </div>
 
