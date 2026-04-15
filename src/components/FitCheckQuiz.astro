@@ -1,0 +1,589 @@
+---
+import { Icon } from "astro-icon/components";
+import { siteConfig } from "../site-config";
+
+const questions = [
+  {
+    label: "Project type",
+    prompt: "What are you looking for?",
+    description: "Pick the closest match. This helps separate recurring work from one-off asks.",
+    options: [
+      {
+        label: "Ongoing content or retainer",
+        help: "Best fit for a recurring production relationship.",
+        score: 3,
+        redFlag: false,
+      },
+      {
+        label: "Brand film or campaign piece",
+        help: "A strong fit when the brief is clear and scoped.",
+        score: 2,
+        redFlag: false,
+      },
+      {
+        label: "Event, podcast, or multi-cam production",
+        help: "A good fit when timing and logistics are defined.",
+        score: 2,
+        redFlag: false,
+      },
+      {
+        label: "Just a small one-off edit",
+        help: "Usually too light for this offer.",
+        score: 0,
+        redFlag: true,
+      },
+    ],
+  },
+  {
+    label: "Timeline",
+    prompt: "How soon do you need it?",
+    description: "Urgency matters. This helps show whether the scope has enough runway.",
+    options: [
+      {
+        label: "Planning ahead",
+        help: "Most comfortable for a polished production plan.",
+        score: 3,
+        redFlag: false,
+      },
+      {
+        label: "Next month",
+        help: "Still workable for a focused project.",
+        score: 2,
+        redFlag: false,
+      },
+      {
+        label: "A little soon, but flexible",
+        help: "Possible if the scope is tight.",
+        score: 1,
+        redFlag: false,
+      },
+      {
+        label: "Need it immediately",
+        help: "Usually not the right match.",
+        score: 0,
+        redFlag: true,
+      },
+    ],
+  },
+  {
+    label: "Budget comfort",
+    prompt: "Which range feels closest?",
+    description: "The quiz is meant to save time by spotting budget mismatch early.",
+    options: [
+      {
+        label: "Ready to invest in full production",
+        help: "Aligned with a higher-touch offer.",
+        score: 3,
+        redFlag: false,
+      },
+      {
+        label: "Comfortable with a mid-size project budget",
+        help: "A good middle-ground fit.",
+        score: 2,
+        redFlag: false,
+      },
+      {
+        label: "Budget not locked yet",
+        help: "Still fine if the scope is flexible.",
+        score: 1,
+        redFlag: false,
+      },
+      {
+        label: "Need the smallest spend possible",
+        help: "Usually better handled by a leaner provider.",
+        score: 0,
+        redFlag: true,
+      },
+    ],
+  },
+  {
+    label: "Support",
+    prompt: "What kind of help do you need?",
+    description: "This separates strategy-led work from simple task execution.",
+    options: [
+      {
+        label: "Strategy, shooting, and editing",
+        help: "This is the sweet spot.",
+        score: 3,
+        redFlag: false,
+      },
+      {
+        label: "Production and editing",
+        help: "Still a strong fit when the scope is clear.",
+        score: 2,
+        redFlag: false,
+      },
+      {
+        label: "Editing only",
+        help: "Possible, but not the strongest fit.",
+        score: 1,
+        redFlag: false,
+      },
+      {
+        label: "Just a quick fix",
+        help: "Usually too narrow for this offer.",
+        score: 0,
+        redFlag: true,
+      },
+    ],
+  },
+  {
+    label: "Direction",
+    prompt: "How clear is the vision?",
+    description: "Clear references help a project move faster, but rough ideas can still work.",
+    options: [
+      {
+        label: "I have references and a clear direction",
+        help: "Ideal for a smooth start.",
+        score: 2,
+        redFlag: false,
+      },
+      {
+        label: "I know the goal, need help shaping it",
+        help: "A good middle point for strategy-led work.",
+        score: 2,
+        redFlag: false,
+      },
+      {
+        label: "I need support from scratch",
+        help: "Still possible if the scope and timing are right.",
+        score: 1,
+        redFlag: false,
+      },
+      {
+        label: "I just need the fastest option",
+        help: "Usually not the right match for this level of work.",
+        score: 0,
+        redFlag: true,
+      },
+    ],
+  },
+] as const;
+
+const resultViews = {
+  neutral: {
+    badge: "Fit pending",
+    title: "Answer a few questions to see your fit.",
+    copy: "This is a soft check. It is meant to save time and point people to the right next step, not trap them in a form wall.",
+    hint: "No email required. No pressure.",
+  },
+  good: {
+    badge: "Good fit",
+    title: "You look like a strong match.",
+    copy: "The scope, timing, and budget all point toward a project or retainer worth a real conversation.",
+    hint: "Best next step: reach out directly.",
+  },
+  maybe: {
+    badge: "Maybe fit",
+    title: "This could work with a quick call.",
+    copy: "There is enough signal here to continue, but the scope would benefit from a short consult before either side commits.",
+    hint: "Best next step: talk through scope and timing.",
+  },
+  "not-right": {
+    badge: "Not right now",
+    title: "Probably not the best fit today.",
+    copy: "The answers suggest a mismatch in budget, timeline, or scope. A leaner provider or a different timing window may be a better path.",
+    hint: "Best next step: revisit later or compare lighter options.",
+  },
+} as const;
+---
+
+<section id="fit-check" class="scroll-mt-32 px-6 pb-24">
+  <div class="site-shell">
+    <div class="fit-check-shell overflow-hidden">
+      <div class="grid gap-0 lg:grid-cols-[minmax(0,1.12fr)_minmax(320px,0.88fr)]">
+        <div class="p-6 sm:p-8">
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="site-kicker">Fit Check</span>
+            <span class="site-chip site-chip-muted">Prototype</span>
+          </div>
+
+          <div class="mt-4 max-w-3xl">
+            <h2 class="site-section-title">
+              See if Alpha Bravo Media is the right fit before you book the call.
+            </h2>
+            <p class="site-section-copy mt-4 text-base sm:text-lg">
+              Five questions. No email wall. The result changes live so visitors can tell
+              whether they should reach out, keep shaping the brief, or look for a lighter
+              option.
+            </p>
+          </div>
+
+          <div class="mt-8 flex flex-wrap gap-3 text-sm text-[var(--site-text-muted)]">
+            <span class="site-stat">
+              <span class="font-semibold text-[var(--site-accent)]">5</span>
+              <span data-answer-count>0/5 answered</span>
+            </span>
+            <span class="site-stat">
+              <Icon name="mdi:shield-check-outline" class="h-4 w-4 text-[var(--site-accent)]" />
+              Soft qualifier
+            </span>
+            <span class="site-stat">
+              <Icon name="mdi:timer-sand" class="h-4 w-4 text-[var(--site-accent)]" />
+              Fast read, no form fields
+            </span>
+          </div>
+
+          <div class="mt-8 grid gap-4">
+            {questions.map((question, questionIndex) => (
+              <section
+                class="fit-question-card"
+                data-question-card
+                data-question-index={questionIndex}
+                aria-labelledby={`fit-question-${questionIndex}`}
+              >
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                  <span class="site-chip site-chip-muted">{question.label}</span>
+                  <span class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--site-text-soft)]">
+                    0{questionIndex + 1}
+                  </span>
+                </div>
+
+                <h3
+                  id={`fit-question-${questionIndex}`}
+                  class="mt-4 font-['Sora',sans-serif] text-xl font-semibold tracking-tight text-[var(--site-text)] sm:text-2xl"
+                >
+                  {question.prompt}
+                </h3>
+                <p class="mt-2 max-w-2xl text-sm leading-7 text-[var(--site-text-muted)]">
+                  {question.description}
+                </p>
+
+                <div class="mt-5 grid gap-3">
+                  {question.options.map((option, optionIndex) => (
+                    <button
+                      type="button"
+                      class="quiz-option"
+                      data-option
+                      data-question-index={questionIndex}
+                      data-option-index={optionIndex}
+                      data-score={option.score}
+                      data-red-flag={option.redFlag ? "1" : "0"}
+                      aria-pressed="false"
+                    >
+                      <span class="quiz-option-label">{option.label}</span>
+                      <span class="quiz-option-meta">{option.help}</span>
+                    </button>
+                  ))}
+                </div>
+
+                <div class="mt-4 flex flex-wrap items-center justify-between gap-3 text-xs text-[var(--site-text-soft)]">
+                  <span data-answer-copy>Choose one option to lock this in.</span>
+                  <span class="flex items-center gap-2">
+                    <Icon name="mdi:chevron-down" class="h-4 w-4" />
+                    Live update
+                  </span>
+                </div>
+              </section>
+            ))}
+          </div>
+        </div>
+
+        <aside class="fit-result-panel border-t border-[var(--site-border)] p-6 sm:p-8 lg:border-l lg:border-t-0 lg:sticky lg:top-28 lg:self-start">
+          <div class="flex items-center justify-between gap-4">
+            <span class="site-kicker">Readout</span>
+            <span class="site-chip site-chip-muted" data-result-badge>Fit pending</span>
+          </div>
+
+          <div class="mt-6">
+            <div class="flex items-end justify-between gap-4 text-sm text-[var(--site-text-soft)]">
+              <span>Fit meter</span>
+              <span data-fit-score>0 / 14</span>
+            </div>
+            <div class="mt-3 h-2 rounded-full bg-[var(--site-control-bg)]">
+              <div
+                class="quiz-meter-fill h-full w-0 rounded-full"
+                data-fit-meter
+                style="width: 0%"
+              ></div>
+            </div>
+          </div>
+
+          <div class="mt-6 rounded-[1.25rem] border border-[var(--site-border)] bg-[var(--site-control-bg)] p-5">
+            <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--site-text-soft)]">
+              Current read
+            </p>
+            <h3
+              class="fit-result-title mt-3 font-['Sora',sans-serif] text-2xl font-semibold tracking-tight text-[var(--site-text)]"
+              data-fit-label
+            >
+              Answer a few questions to see your fit.
+            </h3>
+            <p class="mt-3 text-sm leading-7 text-[var(--site-text-muted)]" data-fit-copy>
+              This is a soft check. It is meant to save time and point people to the right
+              next step, not trap them in a form wall.
+            </p>
+          </div>
+
+          <div class="mt-6 grid gap-4">
+            <div class="rounded-[1.25rem] border border-[var(--site-border)] bg-[var(--site-control-bg)] p-5">
+              <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--site-text-soft)]">
+                What we are hearing
+              </p>
+              <ul class="mt-4 space-y-3 text-sm leading-6 text-[var(--site-text-muted)]" data-answer-list>
+                <li>Answer the questions and this summary will populate live.</li>
+              </ul>
+            </div>
+
+            <div class="rounded-[1.25rem] border border-[var(--site-border)] bg-[var(--site-control-bg)] p-5">
+              <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--site-text-soft)]">
+                Best next step
+              </p>
+              <p class="mt-3 text-sm leading-7 text-[var(--site-text-muted)]" data-fit-hint>
+                No email required. No pressure.
+              </p>
+              <div class="mt-4 grid gap-3">
+                <a href={`mailto:${siteConfig.email}`} class="site-button-primary w-full">
+                  Contact direct
+                </a>
+                <a href={`tel:${siteConfig.phoneRaw}`} class="site-button-secondary w-full">
+                  Call now
+                </a>
+                <a
+                  href={siteConfig.googleMapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="site-button-secondary w-full"
+                >
+                  <Icon name="simple-icons:google" class="h-4 w-4" />
+                  Read reviews
+                </a>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ questions, resultViews }}>
+  document.addEventListener("astro:page-load", () => {
+    const root = document.querySelector("[data-fit-check]");
+
+    if (!root || root.dataset.enhanced === "true") return;
+    root.dataset.enhanced = "true";
+
+    const questionCards = Array.from(root.querySelectorAll("[data-question-card]"));
+    const optionButtons = Array.from(root.querySelectorAll("[data-option]"));
+    const answerList = root.querySelector("[data-answer-list]");
+    const answerCount = root.querySelector("[data-answer-count]");
+    const fitLabel = root.querySelector("[data-fit-label]");
+    const fitCopy = root.querySelector("[data-fit-copy]");
+    const fitHint = root.querySelector("[data-fit-hint]");
+    const fitBadge = root.querySelector("[data-result-badge]");
+    const fitScore = root.querySelector("[data-fit-score]");
+    const fitMeter = root.querySelector("[data-fit-meter]");
+    const answerCopyNodes = Array.from(root.querySelectorAll("[data-answer-copy]"));
+    const answerState = Array.from({ length: questions.length }, () => null);
+
+    const renderViews = {
+      neutral: resultViews.neutral,
+      good: resultViews.good,
+      maybe: resultViews.maybe,
+      "not-right": resultViews["not-right"],
+    };
+
+    function computeReadout() {
+      let total = 0;
+      let redFlags = 0;
+      let answered = 0;
+      const selections = [];
+
+      answerState.forEach((entry, index) => {
+        if (!entry) return;
+
+        answered += 1;
+        total += Number(entry.score || 0);
+        if (entry.redFlag) redFlags += 1;
+
+        selections.push({
+          question: questions[index].label,
+          answer: entry.label,
+        });
+      });
+
+      let state = "neutral";
+
+      if (answered > 0) {
+        if (redFlags >= 2 || total <= 4) {
+          state = "not-right";
+        } else if (total >= 10 && redFlags === 0) {
+          state = "good";
+        } else {
+          state = "maybe";
+        }
+      }
+
+      return { state, total, answered, selections };
+    }
+
+    function renderSelectionState() {
+      optionButtons.forEach((button) => {
+        const questionIndex = Number(button.getAttribute("data-question-index"));
+        const optionIndex = Number(button.getAttribute("data-option-index"));
+        const selected = answerState[questionIndex];
+        const isSelected = selected && questions[questionIndex].options[optionIndex] === selected;
+
+        button.classList.toggle("is-selected", Boolean(isSelected));
+        button.setAttribute("aria-pressed", isSelected ? "true" : "false");
+      });
+
+      questionCards.forEach((card, index) => {
+        const selected = answerState[index];
+        const answerCopy = answerCopyNodes[index];
+
+        if (answerCopy) {
+          answerCopy.textContent = selected
+            ? `Selected: ${selected.label}`
+            : "Choose one option to lock this in.";
+        }
+      });
+    }
+
+    function renderReadout() {
+      const { state, total, answered, selections } = computeReadout();
+      const view = renderViews[state];
+      const progress = Math.round((answered / questions.length) * 100);
+
+      root.dataset.fitState = state;
+
+      if (fitLabel) fitLabel.textContent = view.title;
+      if (fitCopy) fitCopy.textContent = view.copy;
+      if (fitHint) fitHint.textContent = view.hint;
+      if (fitBadge) fitBadge.textContent = view.badge;
+      if (fitScore) fitScore.textContent = `${total} / 14`;
+      if (answerCount) answerCount.textContent = `${answered}/${questions.length} answered`;
+      if (fitMeter) fitMeter.style.width = `${progress}%`;
+
+      if (answerList) {
+        if (selections.length === 0) {
+          answerList.innerHTML =
+            "<li>Answer the questions and this summary will populate live.</li>";
+        } else {
+          answerList.innerHTML = selections
+            .map(
+              (entry) => `
+                <li class="flex items-start gap-3">
+                  <span class="mt-1 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[var(--site-border)] bg-[var(--site-control-bg)] text-[10px] font-semibold text-[var(--site-accent)]">•</span>
+                  <span><strong class="text-[var(--site-text)]">${entry.question}:</strong> ${entry.answer}</span>
+                </li>
+              `,
+            )
+            .join("");
+        }
+      }
+    }
+
+    optionButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const questionIndex = Number(button.getAttribute("data-question-index"));
+        const optionIndex = Number(button.getAttribute("data-option-index"));
+        const selectedOption = questions[questionIndex].options[optionIndex];
+
+        answerState[questionIndex] = selectedOption;
+        renderSelectionState();
+        renderReadout();
+      });
+    });
+
+    renderSelectionState();
+    renderReadout();
+  });
+</script>
+
+<style>
+  .fit-check-shell {
+    border: 1px solid var(--site-border);
+    border-radius: 1.5rem;
+    background:
+      radial-gradient(circle at top left, color-mix(in oklab, var(--site-accent) 12%, transparent), transparent 34%),
+      linear-gradient(180deg, color-mix(in oklab, var(--site-control-bg) 62%, transparent), transparent 45%),
+      var(--site-surface);
+    box-shadow: var(--site-shadow-md);
+  }
+
+  .fit-check-shell[data-fit-state="good"] .fit-result-title {
+    color: var(--site-accent-strong);
+  }
+
+  .fit-check-shell[data-fit-state="good"] .quiz-meter-fill {
+    background: var(--site-accent-strong);
+  }
+
+  .fit-check-shell[data-fit-state="maybe"] .fit-result-title {
+    color: oklch(0.82 0.11 74);
+  }
+
+  .fit-check-shell[data-fit-state="maybe"] .quiz-meter-fill {
+    background: oklch(0.82 0.11 74);
+  }
+
+  .fit-check-shell[data-fit-state="not-right"] .fit-result-title {
+    color: oklch(0.7 0.15 28);
+  }
+
+  .fit-check-shell[data-fit-state="not-right"] .quiz-meter-fill {
+    background: oklch(0.7 0.15 28);
+  }
+
+  .quiz-meter-fill {
+    background: var(--site-accent);
+  }
+
+  .fit-question-card {
+    border: 1px solid var(--site-border);
+    border-radius: 1.25rem;
+    background: linear-gradient(180deg, var(--site-card-media-tint), transparent), var(--site-surface);
+    padding: 1.25rem;
+    box-shadow: var(--site-shadow-sm);
+  }
+
+  .quiz-option {
+    width: 100%;
+    border: 1px solid var(--site-border);
+    border-radius: 1rem;
+    background: var(--site-control-bg);
+    padding: 0.95rem 1rem;
+    text-align: left;
+    transition:
+      border-color 180ms ease,
+      background-color 180ms ease,
+      box-shadow 180ms ease,
+      transform 180ms ease;
+  }
+
+  .quiz-option:hover {
+    border-color: var(--site-border-strong);
+    background: var(--site-control-bg-hover);
+    transform: translateY(-1px);
+  }
+
+  .quiz-option.is-selected {
+    border-color: color-mix(in oklab, var(--site-accent) 35%, var(--site-border));
+    background: var(--site-accent-soft);
+    box-shadow: 0 0 0 1px color-mix(in oklab, var(--site-accent) 24%, transparent) inset;
+  }
+
+  .quiz-option-label {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--site-text);
+  }
+
+  .quiz-option-meta {
+    display: block;
+    margin-top: 0.35rem;
+    font-size: 0.875rem;
+    line-height: 1.55;
+    color: var(--site-text-muted);
+  }
+
+  .fit-result-panel {
+    background:
+      linear-gradient(180deg, var(--site-card-media-tint), transparent),
+      var(--site-surface-muted);
+  }
+</style>
