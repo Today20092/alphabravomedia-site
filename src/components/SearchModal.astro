@@ -16,28 +16,28 @@ import { Icon } from "astro-icon/components";
 <dialog
   id="search-modal"
   class="fixed inset-0 z-100 m-auto w-full max-w-2xl max-h-[80vh]
-         bg-[var(--site-bg-elevated)] backdrop-blur border border-[var(--site-border)]
-         rounded-2xl shadow-[var(--site-shadow-md)] p-6 overflow-hidden
+         bg-site-bg-elevated backdrop-blur border border-site-border
+         rounded-2xl shadow-site-md p-6 overflow-hidden
          flex-col"
   aria-label="Site search"
 >
   <!-- Modal Header -->
   <div class="flex items-center justify-between mb-4 shrink-0">
     <div class="flex items-center gap-3">
-      <Icon name="mdi:magnify" class="w-5 h-5 text-[var(--site-accent)]" />
-      <span class="text-sm font-medium text-[var(--site-text-muted)]">Search</span>
+      <Icon name="mdi:magnify" class="w-5 h-5 text-site-accent" />
+      <span class="text-sm font-medium text-site-text-muted">Search</span>
     </div>
     <div class="flex items-center gap-3">
-      <span class="hidden sm:flex items-center gap-1 text-xs text-[var(--site-text-soft)]">
+      <span class="hidden sm:flex items-center gap-1 text-xs text-site-text-soft">
         <kbd
-          class="rounded border border-[var(--site-border)] bg-[var(--site-control-bg)] px-1.5 py-0.5 font-mono text-xs text-[var(--site-text-soft)]"
+          class="rounded border border-site-border bg-site-control-bg px-1.5 py-0.5 font-mono text-xs text-site-text-soft"
           >Esc</kbd
         >
         to close
       </span>
       <button
         id="search-close"
-        class="rounded-lg p-1.5 text-[var(--site-text-muted)] transition-colors hover:bg-[var(--site-control-bg-hover)] hover:text-[var(--site-text)]"
+        class="rounded-lg p-1.5 text-site-text-muted transition-colors hover:bg-site-control-bg-hover hover:text-site-text"
         aria-label="Close search"
       >
         <Icon name="mdi:close" class="w-5 h-5" />

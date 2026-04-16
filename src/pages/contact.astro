@@ -11,7 +11,7 @@ const inquiryPoints = [
 ---
 
 <BaseLayout title={`Contact | ${siteConfig.siteName}`}>
-  <section class="px-4 pt-32 sm:px-6 sm:pt-36">
+  <section class="site-section-hero">
     <div class="site-shell">
       <div class="site-page-header mb-0 max-w-3xl">
         <span class="site-kicker">Contact</span>
@@ -26,10 +26,10 @@ const inquiryPoints = [
     </div>
   </section>
 
-  <section class="px-4 pb-24 sm:px-6 sm:pb-28">
+  <section class="site-section">
     <div class="site-shell">
       <div class="space-y-14">
-        <div class="overflow-hidden rounded-[1.9rem] border border-[var(--site-border-strong)] bg-[linear-gradient(180deg,var(--site-card-media-tint),transparent)] p-6 shadow-[var(--site-shadow-sm)] sm:p-8 lg:p-10">
+        <div class="site-panel p-6 sm:p-8 lg:p-10">
           <div class="grid gap-10 lg:grid-cols-[minmax(0,1.35fr)_minmax(18rem,0.85fr)] lg:items-end">
             <div class="max-w-3xl">
               <span class="site-kicker">Direct contact</span>
@@ -48,16 +48,16 @@ const inquiryPoints = [
                 </div>
                 <a
                   href={`sms:${siteConfig.phoneRaw}`}
-                  class="mt-4 inline-flex text-sm font-medium text-[var(--site-text-soft)] transition-colors hover:text-[var(--site-text)]"
+                  class="site-link mt-4 inline-flex text-sm font-medium"
                 >
                   Text Ayoub instead
                 </a>
               </div>
             </div>
 
-            <div class="border-t border-[var(--site-border-strong)] pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
+            <div class="border-t border-site-border-strong pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
               <p class="site-kicker">Response time</p>
-              <p class="mt-4 max-w-sm text-sm leading-7 text-[var(--site-text-muted)] sm:text-base">
+              <p class="mt-4 max-w-sm text-sm leading-7 text-site-text-muted sm:text-base">
                 Most inquiries get a reply within one business day. If the project is time-sensitive, call
                 or text and include the date.
               </p>
@@ -74,10 +74,10 @@ const inquiryPoints = [
             </p>
           </div>
 
-          <ul class="space-y-5 border-l border-[var(--site-border)] pl-6 text-sm leading-7 text-[var(--site-text-muted)] sm:pl-8 sm:text-base">
+          <ul class="space-y-5 border-l border-site-border pl-6 text-sm leading-7 text-site-text-muted sm:pl-8 sm:text-base">
               {inquiryPoints.map((point) => (
                 <li class="flex items-start gap-3">
-                  <Icon name="mdi:check-circle" class="mt-0.5 h-5 w-5 shrink-0 text-[var(--site-accent)]" />
+                  <Icon name="mdi:check-circle" class="mt-0.5 h-5 w-5 shrink-0 text-site-accent" />
                   <span>{point}</span>
                 </li>
               ))}

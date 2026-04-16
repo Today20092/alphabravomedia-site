@@ -46,7 +46,7 @@ const getCategoryId = (category: string) =>
 ---
 
 <BaseLayout title="Gear | Alpha Bravo Media">
-  <section class="px-4 pb-24 pt-32 sm:px-6">
+  <section class="site-section-hero">
     <div class="site-shell">
       <div class="space-y-10">
         <div class="site-page-header mb-0 max-w-3xl">
@@ -67,7 +67,7 @@ const getCategoryId = (category: string) =>
 
         {allGear.length > 0 && (
           <nav aria-label="Browse gear categories">
-            <p class="mb-5 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--site-text-soft)]">
+            <p class="mb-5 text-xs font-semibold uppercase tracking-[0.24em] text-site-text-soft">
               Categories
             </p>
             <div class="flex snap-x gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
@@ -75,11 +75,11 @@ const getCategoryId = (category: string) =>
                 const meta = getCategoryMeta(category);
                 return (
                   <a href={`#${getCategoryId(category)}`} class="site-chip site-chip-muted min-w-max snap-start">
-                    <Icon name={meta.icon} class="h-4 w-4 text-[var(--site-accent)]" />
-                    <span class="normal-case tracking-normal text-sm text-[var(--site-text-muted)]">
+                    <Icon name={meta.icon} class="h-4 w-4 text-site-accent" />
+                    <span class="normal-case tracking-normal text-sm text-site-text-muted">
                       {category}
                     </span>
-                    <span class="normal-case tracking-normal text-sm text-[var(--site-text-soft)]">
+                    <span class="normal-case tracking-normal text-sm text-site-text-soft">
                       {sortedGearByCategory[category].length}
                     </span>
                   </a>
@@ -91,8 +91,8 @@ const getCategoryId = (category: string) =>
 
         {allGear.length === 0 ? (
           <div class="site-panel-muted px-6 py-20 text-center">
-            <p class="text-lg text-[var(--site-text)]">No gear listed yet.</p>
-            <p class="mt-3 text-sm text-[var(--site-text-soft)]">
+            <p class="text-lg text-site-text">No gear listed yet.</p>
+            <p class="mt-3 text-sm text-site-text-soft">
               Add a few recommendations and this page will render them automatically.
             </p>
           </div>
@@ -107,18 +107,18 @@ const getCategoryId = (category: string) =>
                   <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
                     <div class="site-page-header mb-0">
                       <span class="site-chip site-chip-muted w-fit">
-                        <Icon name={meta.icon} class="h-4 w-4 text-[var(--site-accent)]" />
-                        <span class="normal-case tracking-normal text-sm text-[var(--site-text-muted)]">
+                        <Icon name={meta.icon} class="h-4 w-4 text-site-accent" />
+                        <span class="normal-case tracking-normal text-sm text-site-text-muted">
                           {category}
                         </span>
                       </span>
                     </div>
-                    <p class="text-sm text-[var(--site-text-soft)]">
+                    <p class="text-sm text-site-text-soft">
                       {items.length} {items.length === 1 ? "recommendation" : "recommendations"}
                     </p>
                   </div>
 
-                  <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                  <div class="site-grid-3">
                     {items.map((item) => (
                       <a
                         href={`${base}gear/${item.slug}`}
@@ -135,7 +135,7 @@ const getCategoryId = (category: string) =>
                           ) : (
                             <Icon
                               name={meta.icon}
-                              class="h-14 w-14 text-[var(--site-text-soft)]"
+                              class="h-14 w-14 text-site-text-soft"
                             />
                           )}
                         </div>
@@ -146,7 +146,7 @@ const getCategoryId = (category: string) =>
                           </div>
                           <h2 class="site-card-title">{item.data.title}</h2>
                           <div class="site-meta-row">
-                            <span class="text-[var(--site-accent)]">View gear</span>
+                            <span class="text-site-accent">View gear</span>
                           </div>
                         </div>
                       </a>

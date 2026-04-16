@@ -9,7 +9,7 @@ const rawBase = import.meta.env.BASE_URL;
 const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
 ---
 
-<section id="services-teaser" class="border-t border-[var(--site-border)] px-4 py-20 sm:px-6 sm:py-24">
+<section id="services-teaser" class="site-section">
   <div class="site-shell">
     <div class="mb-10 grid gap-4">
       <span class="site-kicker">Services</span>
@@ -22,7 +22,7 @@ const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
       </p>
     </div>
 
-    <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+    <div class="site-grid-4">
       {sortedServices.map((service) => {
         const icon = service.data.icon ?? "mdi:star";
         const startingPrice = service.data.tiers[0]?.value?.price ?? "";
@@ -36,14 +36,14 @@ const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
               <span class="site-chip site-chip-muted w-fit">
                 {service.data.category ?? "Service"}
               </span>
-              <div class="flex h-11 w-11 items-center justify-center rounded-2xl border border-[var(--site-border)] bg-[rgba(255,255,255,0.03)] text-[var(--site-accent)]">
+              <div class="flex h-11 w-11 items-center justify-center rounded-2xl border border-site-border bg-site-control-bg text-site-accent">
                 <Icon name={icon} class="h-5 w-5" />
               </div>
               <h3 class="site-card-title">{service.data.title}</h3>
               <p class="site-card-copy line-clamp-2">{service.data.description}</p>
               <div class="site-meta-row mt-auto justify-between">
                 <span>{startingPrice}</span>
-                <span class="text-[var(--site-accent)]">See package</span>
+                <span class="text-site-accent">See package</span>
               </div>
             </div>
           </a>
