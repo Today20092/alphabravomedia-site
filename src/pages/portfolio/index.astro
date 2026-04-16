@@ -17,102 +17,104 @@ const categories = [...new Set(allItems.map((item) => item.data.category))];
 <BaseLayout title="Portfolio | Alpha Bravo Media">
   <section class="px-4 pb-24 pt-32 sm:px-6">
     <div class="site-shell">
-      <div class="site-page-header">
-        <span class="site-kicker">Portfolio</span>
-        <h1 class="site-page-title">Selected work across client, creator, and event projects.</h1>
-        <p class="site-page-copy text-lg">
-          A focused look at the projects, outcomes, and production standards behind the
-          work.
-        </p>
-      </div>
+      <div class="space-y-10">
+        <div class="site-page-header mb-0">
+          <span class="site-kicker">Portfolio</span>
+          <h1 class="site-page-title">Selected work across client, creator, and event projects.</h1>
+          <p class="site-page-copy text-lg">
+            A focused look at the projects, outcomes, and production standards behind the
+            work.
+          </p>
+        </div>
 
-      {categories.length > 0 && (
-        <div class="mb-10 flex flex-wrap gap-3">
-          <button
-            class="filter-btn site-chip active"
-            data-category="all"
-          >
-            All
-          </button>
-          {categories.map((category) => (
+        {categories.length > 0 && (
+          <div class="flex flex-wrap gap-3">
             <button
-              class="filter-btn site-chip site-chip-muted"
-              data-category={category}
+              class="filter-btn site-chip active"
+              data-category="all"
             >
-              {category}
+              All
             </button>
+            {categories.map((category) => (
+              <button
+                class="filter-btn site-chip site-chip-muted"
+                data-category={category}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+        )}
+
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3" id="portfolio-grid">
+          {allItems.map((item) => (
+            <a
+              href={`${base}portfolio/${item.slug}`}
+              class="portfolio-item site-card site-card-interactive group"
+              data-category={item.data.category}
+            >
+              <div class="site-card-media">
+                {(() => {
+                  const thumbImage = item.data.image;
+                  const youtubeUrl = item.data.videoId
+                    ? `https://img.youtube.com/vi/${item.data.videoId}/maxresdefault.jpg`
+                    : null;
+                  const facebookUrl = item.data.facebookUrl;
+
+                  if (thumbImage) {
+                    return (
+                      <Image
+                        src={thumbImage}
+                        alt={item.data.title}
+                        class="absolute inset-0 h-full w-full object-cover"
+                      />
+                    );
+                  }
+
+                  if (youtubeUrl) {
+                    return (
+                      <img
+                        src={youtubeUrl}
+                        alt={item.data.title}
+                        class="absolute inset-0 h-full w-full object-cover"
+                      />
+                    );
+                  }
+
+                  if (facebookUrl) {
+                    return (
+                      <div class="flex h-full items-center justify-center text-[var(--site-text-soft)]">
+                        <Icon name="mdi:facebook" class="h-10 w-10" />
+                      </div>
+                    );
+                  }
+
+                  return null;
+                })()}
+                <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/70 to-transparent"></div>
+                <span class="site-chip portfolio-category-chip absolute left-4 top-4">
+                  {item.data.category}
+                </span>
+              </div>
+
+              <div class="site-card-body">
+                <h2 class="site-card-title">{item.data.title}</h2>
+                <div class="site-meta-row">
+                  <span>{item.data.clientName}</span>
+                  <span>View project</span>
+                </div>
+              </div>
+            </a>
           ))}
         </div>
-      )}
 
-      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3" id="portfolio-grid">
-        {allItems.map((item) => (
-          <a
-            href={`${base}portfolio/${item.slug}`}
-            class="portfolio-item site-card site-card-interactive group"
-            data-category={item.data.category}
-          >
-            <div class="site-card-media">
-              {(() => {
-                const thumbImage = item.data.image;
-                const youtubeUrl = item.data.videoId
-                  ? `https://img.youtube.com/vi/${item.data.videoId}/maxresdefault.jpg`
-                  : null;
-                const facebookUrl = item.data.facebookUrl;
-
-                if (thumbImage) {
-                  return (
-                    <Image
-                      src={thumbImage}
-                      alt={item.data.title}
-                      class="absolute inset-0 h-full w-full object-cover"
-                    />
-                  );
-                }
-
-                if (youtubeUrl) {
-                  return (
-                    <img
-                      src={youtubeUrl}
-                      alt={item.data.title}
-                      class="absolute inset-0 h-full w-full object-cover"
-                    />
-                  );
-                }
-
-                if (facebookUrl) {
-                  return (
-                    <div class="flex h-full items-center justify-center text-[var(--site-text-soft)]">
-                      <Icon name="mdi:facebook" class="h-10 w-10" />
-                    </div>
-                  );
-                }
-
-                return null;
-              })()}
-              <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/70 to-transparent"></div>
-              <span class="site-chip portfolio-category-chip absolute left-4 top-4">
-                {item.data.category}
-              </span>
-            </div>
-
-            <div class="site-card-body">
-              <h2 class="site-card-title">{item.data.title}</h2>
-              <div class="site-meta-row">
-                <span>{item.data.clientName}</span>
-                <span>View project</span>
-              </div>
-            </div>
-          </a>
-        ))}
+        {allItems.length === 0 && (
+          <div class="site-panel-muted px-6 py-16 text-center">
+            <p class="text-lg text-[var(--site-text)]">No portfolio items yet.</p>
+            <p class="mt-3 text-sm text-[var(--site-text-soft)]">Check back soon.</p>
+          </div>
+        )}
       </div>
-
-      {allItems.length === 0 && (
-        <div class="site-panel-muted mt-10 px-6 py-16 text-center">
-          <p class="text-lg text-[var(--site-text)]">No portfolio items yet.</p>
-          <p class="mt-3 text-sm text-[var(--site-text-soft)]">Check back soon.</p>
-        </div>
-      )}
     </div>
   </section>
 </BaseLayout>

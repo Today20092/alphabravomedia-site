@@ -48,114 +48,116 @@ const getCategoryId = (category: string) =>
 <BaseLayout title="Gear | Alpha Bravo Media">
   <section class="px-4 pb-24 pt-32 sm:px-6">
     <div class="site-shell">
-      <div class="site-page-header max-w-3xl">
-        <span class="site-kicker">Gear</span>
-        <h1 class="site-page-title">
-          Cameras, lenses, lights, audio, and the working setup behind the work.
-        </h1>
-        <p class="site-page-copy text-lg">
-          A practical equipment list, grouped by role, with notes for the tools that
-          actually make it into production.
-        </p>
-      </div>
-
-      <div class="mt-10 flex flex-wrap gap-3 sm:mt-12">
-        <span class="site-stat">{allGear.length} picks</span>
-        <span class="site-stat">{categories.length} categories</span>
-      </div>
-
-      {allGear.length > 0 && (
-        <nav aria-label="Browse gear categories" class="mt-8 sm:mt-10">
-          <p class="mb-5 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--site-text-soft)]">
-            Categories
+      <div class="space-y-10">
+        <div class="site-page-header mb-0 max-w-3xl">
+          <span class="site-kicker">Gear</span>
+          <h1 class="site-page-title">
+            Cameras, lenses, lights, audio, and the working setup behind the work.
+          </h1>
+          <p class="site-page-copy text-lg">
+            A practical equipment list, grouped by role, with notes for the tools that
+            actually make it into production.
           </p>
-          <div class="flex snap-x gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <span class="site-stat">{allGear.length} picks</span>
+          <span class="site-stat">{categories.length} categories</span>
+        </div>
+
+        {allGear.length > 0 && (
+          <nav aria-label="Browse gear categories">
+            <p class="mb-5 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--site-text-soft)]">
+              Categories
+            </p>
+            <div class="flex snap-x gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              {categories.map((category) => {
+                const meta = getCategoryMeta(category);
+                return (
+                  <a href={`#${getCategoryId(category)}`} class="site-chip site-chip-muted min-w-max snap-start">
+                    <Icon name={meta.icon} class="h-4 w-4 text-[var(--site-accent)]" />
+                    <span class="normal-case tracking-normal text-sm text-[var(--site-text-muted)]">
+                      {category}
+                    </span>
+                    <span class="normal-case tracking-normal text-sm text-[var(--site-text-soft)]">
+                      {sortedGearByCategory[category].length}
+                    </span>
+                  </a>
+                );
+              })}
+            </div>
+          </nav>
+        )}
+
+        {allGear.length === 0 ? (
+          <div class="site-panel-muted px-6 py-20 text-center">
+            <p class="text-lg text-[var(--site-text)]">No gear listed yet.</p>
+            <p class="mt-3 text-sm text-[var(--site-text-soft)]">
+              Add a few recommendations and this page will render them automatically.
+            </p>
+          </div>
+        ) : (
+          <div class="space-y-16">
             {categories.map((category) => {
               const meta = getCategoryMeta(category);
+              const items = sortedGearByCategory[category];
+
               return (
-                <a href={`#${getCategoryId(category)}`} class="site-chip site-chip-muted min-w-max snap-start">
-                  <Icon name={meta.icon} class="h-4 w-4 text-[var(--site-accent)]" />
-                  <span class="normal-case tracking-normal text-sm text-[var(--site-text-muted)]">
-                    {category}
-                  </span>
-                  <span class="normal-case tracking-normal text-sm text-[var(--site-text-soft)]">
-                    {sortedGearByCategory[category].length}
-                  </span>
-                </a>
+                <section id={getCategoryId(category)} class="scroll-mt-28">
+                  <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                    <div class="site-page-header mb-0">
+                      <span class="site-chip site-chip-muted w-fit">
+                        <Icon name={meta.icon} class="h-4 w-4 text-[var(--site-accent)]" />
+                        <span class="normal-case tracking-normal text-sm text-[var(--site-text-muted)]">
+                          {category}
+                        </span>
+                      </span>
+                    </div>
+                    <p class="text-sm text-[var(--site-text-soft)]">
+                      {items.length} {items.length === 1 ? "recommendation" : "recommendations"}
+                    </p>
+                  </div>
+
+                  <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                    {items.map((item) => (
+                      <a
+                        href={`${base}gear/${item.slug}`}
+                        class="site-card site-card-interactive group"
+                      >
+                        <div class="site-card-media aspect-[4/3] sm:aspect-square flex items-center justify-center p-6">
+                          {item.data.imageUrl ? (
+                            <img
+                              src={item.data.imageUrl}
+                              alt={item.data.title}
+                              class="h-full w-full object-contain"
+                              loading="lazy"
+                            />
+                          ) : (
+                            <Icon
+                              name={meta.icon}
+                              class="h-14 w-14 text-[var(--site-text-soft)]"
+                            />
+                          )}
+                        </div>
+
+                        <div class="site-card-body">
+                          <div class="site-meta-row">
+                            <span>{category}</span>
+                          </div>
+                          <h2 class="site-card-title">{item.data.title}</h2>
+                          <div class="site-meta-row">
+                            <span class="text-[var(--site-accent)]">View gear</span>
+                          </div>
+                        </div>
+                      </a>
+                    ))}
+                  </div>
+                </section>
               );
             })}
           </div>
-        </nav>
-      )}
-
-      {allGear.length === 0 ? (
-        <div class="site-panel-muted px-6 py-20 text-center">
-          <p class="text-lg text-[var(--site-text)]">No gear listed yet.</p>
-          <p class="mt-3 text-sm text-[var(--site-text-soft)]">
-            Add a few recommendations and this page will render them automatically.
-          </p>
-        </div>
-      ) : (
-        <div class="space-y-16">
-          {categories.map((category) => {
-            const meta = getCategoryMeta(category);
-            const items = sortedGearByCategory[category];
-
-            return (
-              <section id={getCategoryId(category)} class="scroll-mt-28">
-                <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-                  <div class="site-page-header mb-0">
-                    <span class="site-chip site-chip-muted w-fit">
-                      <Icon name={meta.icon} class="h-4 w-4 text-[var(--site-accent)]" />
-                      <span class="normal-case tracking-normal text-sm text-[var(--site-text-muted)]">
-                        {category}
-                      </span>
-                    </span>
-                  </div>
-                  <p class="text-sm text-[var(--site-text-soft)]">
-                    {items.length} {items.length === 1 ? "recommendation" : "recommendations"}
-                  </p>
-                </div>
-
-                <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-                  {items.map((item) => (
-                    <a
-                      href={`${base}gear/${item.slug}`}
-                      class="site-card site-card-interactive group"
-                    >
-                      <div class="site-card-media aspect-[4/3] sm:aspect-square flex items-center justify-center p-6">
-                        {item.data.imageUrl ? (
-                          <img
-                            src={item.data.imageUrl}
-                            alt={item.data.title}
-                            class="h-full w-full object-contain"
-                            loading="lazy"
-                          />
-                        ) : (
-                          <Icon
-                            name={meta.icon}
-                            class="h-14 w-14 text-[var(--site-text-soft)]"
-                          />
-                        )}
-                      </div>
-
-                      <div class="site-card-body">
-                        <div class="site-meta-row">
-                          <span>{category}</span>
-                        </div>
-                        <h2 class="site-card-title">{item.data.title}</h2>
-                        <div class="site-meta-row">
-                          <span class="text-[var(--site-accent)]">View gear</span>
-                        </div>
-                      </div>
-                    </a>
-                  ))}
-                </div>
-              </section>
-            );
-          })}
-        </div>
-      )}
+        )}
+      </div>
     </div>
   </section>
 </BaseLayout>
