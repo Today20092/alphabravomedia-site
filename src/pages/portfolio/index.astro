@@ -91,7 +91,9 @@ const categories = [...new Set(allItems.map((item) => item.data.category))];
                 return null;
               })()}
               <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/70 to-transparent"></div>
-              <span class="site-chip absolute left-4 top-4">{item.data.category}</span>
+              <span class="site-chip portfolio-category-chip absolute left-4 top-4">
+                {item.data.category}
+              </span>
             </div>
 
             <div class="site-card-body">
@@ -120,6 +122,16 @@ const categories = [...new Set(allItems.map((item) => item.data.category))];
     border-color: color-mix(in oklab, var(--site-accent) 28%, transparent);
     background: var(--site-accent-soft);
     color: var(--site-accent);
+  }
+
+  .portfolio-category-chip {
+    border-color: color-mix(in oklab, #ffffff 22%, transparent);
+    background: rgba(18, 14, 12, 0.68);
+    color: #f7dfd0;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.45);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
   }
 
   .portfolio-item.hidden {
