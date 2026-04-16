@@ -48,39 +48,25 @@ const getCategoryId = (category: string) =>
 <BaseLayout title="Gear | Alpha Bravo Media">
   <section class="px-4 pb-24 pt-32 sm:px-6">
     <div class="site-shell">
-      <div class="site-panel mb-10 p-6 sm:p-8">
-        <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
-          <div class="site-page-header mb-0">
-            <span class="site-kicker">Gear</span>
-            <h1 class="site-page-title max-w-3xl">
-              Cameras, lenses, lights, audio, and the working setup behind the work.
-            </h1>
-            <p class="site-page-copy text-lg">
-              A practical equipment list, grouped by role, with notes for the tools
-              that actually make it into production.
-            </p>
-          </div>
+      <div class="site-page-header max-w-3xl">
+        <span class="site-kicker">Gear</span>
+        <h1 class="site-page-title">
+          Cameras, lenses, lights, audio, and the working setup behind the work.
+        </h1>
+        <p class="site-page-copy text-lg">
+          A practical equipment list, grouped by role, with notes for the tools that
+          actually make it into production.
+        </p>
+      </div>
 
-          <div class="flex flex-wrap gap-3 lg:justify-end">
-            <span class="site-stat">{allGear.length} picks</span>
-            <span class="site-stat">{categories.length} categories</span>
-          </div>
-        </div>
-
-        <div class="mt-8 site-panel-muted p-5">
-          <p class="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--site-text-soft)]">
-            Affiliate note
-          </p>
-          <p class="mt-3 text-sm leading-7 text-[var(--site-text-muted)]">
-            Some links are affiliate links. If you buy through them, I may earn a
-            commission.
-          </p>
-        </div>
+      <div class="mt-10 flex flex-wrap gap-3 sm:mt-12">
+        <span class="site-stat">{allGear.length} picks</span>
+        <span class="site-stat">{categories.length} categories</span>
       </div>
 
       {allGear.length > 0 && (
-        <nav aria-label="Browse gear categories" class="mb-12">
-          <p class="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--site-text-soft)]">
+        <nav aria-label="Browse gear categories" class="mt-8 sm:mt-10">
+          <p class="mb-5 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--site-text-soft)]">
             Categories
           </p>
           <div class="flex snap-x gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
