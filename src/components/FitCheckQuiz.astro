@@ -194,84 +194,8 @@ const resultViews = {
 <section id="fit-check" class="scroll-mt-32 px-4 pb-24 sm:px-6">
   <div class="site-shell">
     <div class="fit-check-shell overflow-hidden" data-fit-check>
-      <div class="grid gap-8 p-6 sm:p-8">
-        <div hidden data-fit-readout-shell>
-          <div class="fit-result-panel">
-            <div class="flex items-center justify-between gap-4">
-              <span class="site-kicker">Readout</span>
-              <span class="site-chip site-chip-muted" data-result-badge>Fit pending</span>
-            </div>
-
-            <div class="mt-6">
-              <div class="flex items-end justify-between gap-4 text-sm text-[var(--site-text-soft)]">
-                <span>Fit meter</span>
-                <span data-fit-score>0 / 14</span>
-              </div>
-              <div class="mt-3 h-2 rounded-full bg-[var(--site-control-bg)]">
-                <div
-                  class="quiz-meter-fill h-full w-0 rounded-full"
-                  data-fit-meter
-                  style="width: 0%"
-                ></div>
-              </div>
-            </div>
-
-            <div class="mt-6 rounded-[1.25rem] border border-[var(--site-border)] bg-[var(--site-control-bg)] p-5">
-              <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--site-text-soft)]">
-                Current read
-              </p>
-              <h3
-                class="fit-result-title mt-3 font-['Sora',sans-serif] text-2xl font-semibold tracking-tight text-[var(--site-text)]"
-                data-fit-label
-              >
-                Answer a few questions to see your fit.
-              </h3>
-              <p class="mt-3 text-sm leading-7 text-[var(--site-text-muted)]" data-fit-copy>
-                This is a soft check. It is meant to save time and point people to the right
-                next step, not trap them in a form wall.
-              </p>
-            </div>
-
-            <div class="mt-6 grid gap-4">
-              <div class="rounded-[1.25rem] border border-[var(--site-border)] bg-[var(--site-control-bg)] p-5">
-                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--site-text-soft)]">
-                  What we are hearing
-                </p>
-                <ul class="mt-4 space-y-3 text-sm leading-6 text-[var(--site-text-muted)]" data-answer-list>
-                  <li>Answer the questions and this summary will populate live.</li>
-                </ul>
-              </div>
-
-              <div class="rounded-[1.25rem] border border-[var(--site-border)] bg-[var(--site-control-bg)] p-5">
-                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--site-text-soft)]">
-                  Best next step
-                </p>
-                <p class="mt-3 text-sm leading-7 text-[var(--site-text-muted)]" data-fit-hint>
-                  No email required. No pressure.
-                </p>
-                <div class="mt-4 grid gap-3">
-                  <a href={`${base}contact`} class="site-button-primary w-full">
-                    Book consult
-                  </a>
-                  <a href={`sms:${siteConfig.phoneRaw}`} class="site-button-secondary w-full">
-                    Text Ayoub
-                  </a>
-                  <a
-                    href={siteConfig.googleMapsUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="site-button-secondary w-full"
-                  >
-                    <Icon name="simple-icons:google" class="h-4 w-4" />
-                    Read reviews
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div>
+      <div class="fit-check-grid">
+        <div class="fit-check-intro">
           <div class="flex flex-wrap items-center gap-3">
             <span class="site-kicker">Fit Check</span>
             <span class="site-chip site-chip-muted">Prototype</span>
@@ -302,13 +226,25 @@ const resultViews = {
               Fast read, no form fields
             </span>
           </div>
+        </div>
 
-          <div class="mt-8 rounded-[1rem] border border-[var(--site-border)] bg-[var(--site-control-bg)] p-4">
-            <div class="flex items-end justify-between gap-4 text-sm text-[var(--site-text-soft)]">
-              <span>Question progress</span>
-              <span data-step-progress-label>01 / 05</span>
+        <div class="fit-check-stage">
+          <div class="fit-step-progress">
+            <div class="flex flex-wrap items-end justify-between gap-3">
+              <div>
+                <span class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--site-text-soft)]">
+                  Question progress
+                </span>
+                <p class="mt-2 text-sm text-[var(--site-text-muted)]" data-step-status>0/5 answered</p>
+              </div>
+              <span
+                class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--site-text-soft)]"
+                data-step-progress-label
+              >
+                01 / 05
+              </span>
             </div>
-            <div class="mt-3 h-1.5 rounded-full bg-[var(--site-control-bg-hover)]">
+            <div class="mt-4 h-1.5 rounded-full bg-[var(--site-control-bg-hover)]">
               <div
                 class="quiz-meter-fill h-full w-0 rounded-full"
                 data-step-progress
@@ -317,7 +253,7 @@ const resultViews = {
             </div>
           </div>
 
-          <div class="mt-8">
+          <div class="mt-6">
             <section class="fit-step-card" data-step-shell data-step-state="question">
               <div class="flex flex-wrap items-center justify-between gap-4">
                 <div class="flex flex-wrap items-center gap-3">
@@ -329,13 +265,13 @@ const resultViews = {
                     01 / 05
                   </span>
                 </div>
-                <span class="site-stat">
+                <span class="site-stat fit-step-total">
                   <span class="font-semibold text-[var(--site-accent)]">5</span>
                   <span>questions total</span>
                 </span>
               </div>
 
-              <div class="mt-4">
+              <div class="mt-5 max-w-3xl">
                 <h3
                   id="fit-question-active"
                   class="font-['Sora',sans-serif] text-xl font-semibold tracking-tight text-[var(--site-text)] sm:text-2xl"
@@ -348,7 +284,7 @@ const resultViews = {
                 </p>
               </div>
 
-              <div class="mt-5 grid gap-3" data-step-options>
+              <div class="fit-step-options mt-6 grid gap-3" data-step-options>
                 {
                   questions[0].options.map((option, optionIndex) => (
                     <button
@@ -368,7 +304,7 @@ const resultViews = {
                 }
               </div>
 
-              <div class="mt-5 flex flex-wrap items-center justify-between gap-3 text-xs text-[var(--site-text-soft)]">
+              <div class="fit-step-footer mt-6 flex flex-wrap items-center justify-between gap-3 text-xs text-[var(--site-text-soft)]">
                 <button type="button" class="fit-step-back" data-step-back disabled>
                   Back
                 </button>
@@ -390,7 +326,6 @@ const resultViews = {
     root.dataset.enhanced = "true";
 
     const stepShell = root.querySelector("[data-step-shell]");
-    const readoutShell = root.querySelector("[data-fit-readout-shell]");
     const stepLabel = root.querySelector("[data-step-label]");
     const stepPosition = root.querySelector("[data-step-position]");
     const stepStatus = root.querySelector("[data-step-status]");
@@ -401,23 +336,9 @@ const resultViews = {
     const stepHint = root.querySelector("[data-step-hint]");
     const stepProgress = root.querySelector("[data-step-progress]");
     const stepProgressLabel = root.querySelector("[data-step-progress-label]");
-    const answerList = root.querySelector("[data-answer-list]");
     const answerCount = root.querySelector("[data-answer-count]");
-    const fitLabel = root.querySelector("[data-fit-label]");
-    const fitCopy = root.querySelector("[data-fit-copy]");
-    const fitHint = root.querySelector("[data-fit-hint]");
-    const fitBadge = root.querySelector("[data-result-badge]");
-    const fitScore = root.querySelector("[data-fit-score]");
-    const fitMeter = root.querySelector("[data-fit-meter]");
     const answerState = Array.from({ length: questions.length }, () => null);
     let currentIndex = 0;
-
-    const renderViews = {
-      neutral: resultViews.neutral,
-      good: resultViews.good,
-      maybe: resultViews.maybe,
-      "not-right": resultViews["not-right"],
-    };
 
     function escapeHtml(value) {
       return String(value)
@@ -462,27 +383,6 @@ const resultViews = {
       return { state, total, answered, selections };
     }
 
-    function renderSelectionsList(selections) {
-      if (!answerList) return;
-
-      if (selections.length === 0) {
-        answerList.innerHTML =
-          "<li>Answer the questions and this summary will populate live.</li>";
-        return;
-      }
-
-      answerList.innerHTML = selections
-        .map(
-          (entry) => `
-            <li class="flex items-start gap-3">
-              <span class="mt-1 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[var(--site-border)] bg-[var(--site-control-bg)] text-[10px] font-semibold text-[var(--site-accent)]">•</span>
-              <span><strong class="text-[var(--site-text)]">${escapeHtml(entry.question)}:</strong> ${escapeHtml(entry.answer)}</span>
-            </li>
-          `,
-        )
-        .join("");
-    }
-
     function renderStep(readout) {
       if (!stepShell) return;
 
@@ -493,9 +393,6 @@ const resultViews = {
       const stepNumberLabel = `${String(stepNumber).padStart(2, "0")} / ${String(questions.length).padStart(2, "0")}`;
 
       if (stepShell) stepShell.dataset.stepState = completed ? "complete" : "question";
-      if (readoutShell) {
-        readoutShell.hidden = true;
-      }
       if (stepProgress) stepProgress.style.width = `${progress || 0}%`;
       if (stepProgressLabel) stepProgressLabel.textContent = stepNumberLabel;
       if (stepStatus) stepStatus.textContent = `${answeredCount}/${questions.length} answered`;
@@ -523,7 +420,7 @@ const resultViews = {
                 .map(
                   (entry) => `
                     <li class="flex items-start gap-3">
-                      <span class="mt-1 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[var(--site-border)] bg-[var(--site-control-bg)] text-[10px] font-semibold text-[var(--site-accent)]">•</span>
+                      <span class="mt-2 inline-flex h-2.5 w-2.5 shrink-0 rounded-full bg-[var(--site-accent)]"></span>
                       <span><strong class="text-[var(--site-text)]">${escapeHtml(entry.question)}:</strong> ${escapeHtml(entry.answer)}</span>
                     </li>
                   `,
@@ -532,44 +429,50 @@ const resultViews = {
             : "<li>No answers yet.</li>";
 
           stepOptions.innerHTML = `
-            <div class="fit-step-complete-panel rounded-[1rem] border border-[var(--site-border)] bg-[var(--site-control-bg)] p-4 sm:p-5">
-              <div class="flex flex-wrap items-center justify-between gap-3">
-                <span class="site-kicker">Readout</span>
-                <span class="site-chip site-chip-muted">${escapeHtml(resultView.badge)}</span>
-              </div>
-              <div class="mt-4">
-                <div class="flex items-end justify-between gap-4 text-sm text-[var(--site-text-soft)]">
-                  <span>Fit meter</span>
-                  <span>${readout.total} / 14</span>
+            <div class="fit-complete-hero">
+              <div class="fit-complete-copy">
+                <div class="flex flex-wrap items-center gap-3">
+                  <span class="site-kicker">Readout</span>
+                  <span class="site-chip site-chip-muted">${escapeHtml(resultView.badge)}</span>
                 </div>
+                <h4 class="fit-result-title mt-4 font-['Sora',sans-serif] text-2xl font-semibold tracking-tight text-[var(--site-text)] sm:text-[2.2rem]">
+                  ${escapeHtml(resultView.title)}
+                </h4>
+                <p class="mt-3 max-w-3xl text-sm leading-7 text-[var(--site-text-muted)]">
+                  ${escapeHtml(resultView.copy)}
+                </p>
+                <p class="mt-4 text-sm leading-6 text-[var(--site-text-soft)]">
+                  ${escapeHtml(resultView.hint)}
+                </p>
+                <div class="fit-complete-meter">
+                  <div class="flex items-end justify-between gap-4 text-sm text-[var(--site-text-soft)]">
+                    <span>Fit meter</span>
+                    <span>${readout.total} / 14</span>
+                  </div>
                   <div class="mt-3 h-1.5 rounded-full bg-[var(--site-control-bg-hover)]">
                     <div class="quiz-meter-fill h-full rounded-full" style="width: ${meterWidth}%"></div>
                   </div>
+                  <p class="mt-4 text-xs font-medium uppercase tracking-[0.18em] text-[var(--site-text-soft)]">
+                    Scope, timing, budget, and support drive this read.
+                  </p>
                 </div>
-              <div class="mt-4 rounded-[1rem] border border-[var(--site-border)] bg-[var(--site-surface)] p-4 sm:p-5">
-                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--site-text-soft)]">
-                  Current read
-                </p>
-                <h4 class="fit-result-title mt-3 font-['Sora',sans-serif] text-2xl font-semibold tracking-tight text-[var(--site-text)]">
-                  ${escapeHtml(resultView.title)}
-                </h4>
-                <p class="mt-3 text-sm leading-7 text-[var(--site-text-muted)]">
-                  ${escapeHtml(resultView.copy)}
-                </p>
-                <p class="mt-3 text-sm leading-6 text-[var(--site-text-soft)]">
-                  ${escapeHtml(resultView.hint)}
-                </p>
+              </div>
+              <div class="fit-complete-actions mt-8" style="display:grid;gap:1.25rem;align-content:start;">
+                <a href="${contactHref}" class="site-button-primary w-full">Book consult</a>
+                <button
+                  type="button"
+                  class="site-button-secondary w-full fit-complete-review-button"
+                  data-step-review
+                >
+                  Review answers
+                </button>
               </div>
             </div>
-            <div class="grid gap-3 sm:grid-cols-2">
-              <a href="${contactHref}" class="site-button-primary w-full">Book consult</a>
-              <button type="button" class="site-button-secondary w-full" data-step-review>Review answers</button>
-            </div>
-            <div class="rounded-[1rem] border border-[var(--site-border)] bg-[var(--site-control-bg)] p-4 sm:p-5">
+            <div class="fit-complete-summary">
               <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--site-text-soft)]">
                 Your summary
               </p>
-              <ul class="mt-4 space-y-3 text-sm leading-6 text-[var(--site-text-muted)]">
+              <ul class="mt-4 grid gap-3 text-sm leading-6 text-[var(--site-text-muted)]">
                 ${summaryItems}
               </ul>
             </div>
@@ -617,20 +520,11 @@ const resultViews = {
     }
 
     function renderReadout(readout) {
-      const { state, total, answered, selections } = readout;
-      const progress = Math.round((answered / questions.length) * 100);
-      const view = renderViews[state];
+      const { state, answered } = readout;
 
       root.dataset.fitState = state;
 
-      if (fitLabel) fitLabel.textContent = view.title;
-      if (fitCopy) fitCopy.textContent = view.copy;
-      if (fitHint) fitHint.textContent = view.hint;
-      if (fitBadge) fitBadge.textContent = view.badge;
-      if (fitScore) fitScore.textContent = `${total} / 14`;
       if (answerCount) answerCount.textContent = `${answered}/${questions.length} answered`;
-      if (fitMeter) fitMeter.style.width = `${progress}%`;
-      renderSelectionsList(selections);
     }
 
     function syncState() {
@@ -678,6 +572,8 @@ const resultViews = {
 
 <style>
   .fit-check-shell {
+    max-width: 76rem;
+    margin-inline: auto;
     border: 1px solid var(--site-border);
     border-radius: 1.5rem;
     background:
@@ -685,6 +581,25 @@ const resultViews = {
       linear-gradient(180deg, color-mix(in oklab, var(--site-control-bg) 62%, transparent), transparent 45%),
       var(--site-surface);
     box-shadow: var(--site-shadow-md);
+  }
+
+  .fit-check-grid {
+    display: grid;
+    gap: 2rem;
+    padding: 1.5rem;
+  }
+
+  .fit-check-intro {
+    align-self: start;
+  }
+
+  .fit-check-stage {
+    align-self: start;
+  }
+
+  .fit-step-progress {
+    border-bottom: 1px solid color-mix(in oklab, var(--site-border) 86%, transparent);
+    padding-bottom: 1.25rem;
   }
 
   .fit-check-shell[data-fit-state="good"] .fit-result-title {
@@ -720,16 +635,28 @@ const resultViews = {
     border-radius: 1.25rem;
     background: linear-gradient(180deg, var(--site-card-media-tint), transparent), var(--site-surface);
     padding: 1.25rem;
-    box-shadow: var(--site-shadow-sm);
     transition:
       border-color 180ms ease,
       background-color 180ms ease,
       box-shadow 180ms ease;
   }
 
+  .fit-step-total {
+    white-space: nowrap;
+  }
+
+  .fit-step-footer {
+    border-top: 1px solid color-mix(in oklab, var(--site-border) 86%, transparent);
+    padding-top: 1rem;
+  }
+
+  .fit-step-options {
+    align-items: stretch;
+  }
+
   .quiz-option {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     gap: 1rem;
     width: 100%;
@@ -739,9 +666,6 @@ const resultViews = {
     padding: 1rem 1.05rem;
     text-align: left;
     cursor: pointer;
-    box-shadow:
-      inset 0 1px 0 color-mix(in oklab, white 65%, transparent),
-      var(--site-shadow-sm);
     transition:
       border-color 180ms ease,
       background-color 180ms ease,
@@ -753,17 +677,13 @@ const resultViews = {
     border-color: var(--site-border-strong);
     background: var(--site-control-bg-hover);
     transform: translateY(-1px);
-    box-shadow:
-      inset 0 1px 0 color-mix(in oklab, white 75%, transparent),
-      var(--site-shadow-md);
+    box-shadow: var(--site-shadow-sm);
   }
 
   .quiz-option.is-selected {
     border-color: color-mix(in oklab, var(--site-accent) 35%, var(--site-border));
     background: var(--site-accent-soft);
-    box-shadow:
-      0 0 0 1px color-mix(in oklab, var(--site-accent) 24%, transparent) inset,
-      var(--site-shadow-sm);
+    box-shadow: 0 0 0 1px color-mix(in oklab, var(--site-accent) 24%, transparent) inset;
   }
 
   .quiz-option-copy {
@@ -819,12 +739,6 @@ const resultViews = {
     background: color-mix(in oklab, var(--site-accent-soft) 70%, var(--site-surface));
   }
 
-  .fit-result-panel {
-    background:
-      linear-gradient(180deg, var(--site-card-media-tint), transparent),
-      var(--site-surface-muted);
-  }
-
   .fit-step-back {
     font-size: 0.75rem;
     font-weight: 600;
@@ -849,5 +763,63 @@ const resultViews = {
       radial-gradient(circle at top left, color-mix(in oklab, var(--site-accent) 12%, transparent), transparent 38%),
       linear-gradient(180deg, color-mix(in oklab, var(--site-control-bg) 70%, transparent), transparent 45%),
       var(--site-surface);
+  }
+
+  .fit-complete-hero {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .fit-complete-meter,
+  .fit-complete-summary {
+    border-top: 1px solid color-mix(in oklab, var(--site-border) 86%, transparent);
+    padding-top: 1.25rem;
+  }
+
+  .fit-complete-actions {
+    display: grid;
+    gap: 1.25rem;
+    align-content: start;
+  }
+
+  .fit-complete-review-button {
+    margin-top: 0.5rem;
+  }
+
+  @media (min-width: 40rem) {
+    .fit-check-grid {
+      padding: 2rem;
+    }
+
+    .fit-step-card {
+      padding: 1.5rem;
+    }
+  }
+
+  @media (min-width: 72rem) {
+    .fit-check-grid {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 2.5rem;
+      padding: 2.25rem;
+    }
+
+    .fit-step-options {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .fit-complete-hero {
+      grid-template-columns: minmax(0, 1fr) minmax(18rem, 22rem);
+      align-items: start;
+      gap: 1.5rem;
+    }
+
+    .fit-complete-meter {
+      max-width: 34rem;
+    }
+
+    .fit-complete-actions {
+      border-top: 0;
+      padding-top: 0;
+    }
   }
 </style>
