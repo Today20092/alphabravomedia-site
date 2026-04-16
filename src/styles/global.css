@@ -13,6 +13,7 @@
   --site-text-muted: oklch(0.81 0.02 74);
   --site-text-soft: oklch(0.64 0.02 70);
   --site-accent: oklch(0.72 0.09 43);
+  --site-on-accent: oklch(0.18 0.01 55);
   --site-accent-strong: oklch(0.79 0.08 44);
   --site-accent-soft: oklch(0.72 0.09 43 / 0.14);
   --site-body-glow: oklch(0.72 0.09 43 / 0.08);
@@ -51,11 +52,12 @@ html[data-theme="light"] {
   --site-border-strong: oklch(0.74 0.03 65);
   --site-text: oklch(0.24 0.02 58);
   --site-text-muted: oklch(0.47 0.03 58);
-  --site-text-soft: oklch(0.6 0.025 58);
-  --site-accent: oklch(0.58 0.13 45);
+  --site-text-soft: oklch(0.525 0.025 58);
+  --site-accent: oklch(0.57 0.13 45);
+  --site-on-accent: oklch(0.99 0 0);
   --site-accent-strong: oklch(0.5 0.15 44);
-  --site-accent-soft: oklch(0.58 0.13 45 / 0.16);
-  --site-body-glow: oklch(0.58 0.13 45 / 0.1);
+  --site-accent-soft: oklch(0.57 0.13 45 / 0.16);
+  --site-body-glow: oklch(0.57 0.13 45 / 0.1);
   --site-nav-bg: oklch(0.985 0.006 90 / 0.9);
   --site-backdrop: oklch(0.24 0.02 58 / 0.36);
   --site-control-bg: oklch(0.24 0.02 58 / 0.05);
@@ -326,7 +328,7 @@ body {
     border-radius: 999px;
     border: 1px solid color-mix(in oklab, var(--site-accent) 30%, transparent);
     background: var(--site-accent-soft);
-    color: var(--site-accent);
+    color: var(--site-accent-strong);
     font-size: 0.75rem;
     line-height: 1rem;
     font-weight: 600;
@@ -393,7 +395,7 @@ body {
   .site-button-primary {
     border: 1px solid transparent;
     background: var(--site-accent);
-    color: oklch(0.99 0 0);
+    color: var(--site-on-accent);
     box-shadow: 0 10px 26px color-mix(in oklab, var(--site-accent) 28%, transparent);
   }
 

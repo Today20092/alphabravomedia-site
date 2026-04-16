@@ -9,6 +9,7 @@
     "prebuild": "node scripts/fetch-google-business-profile.mjs",
     "preview": "astro preview",
     "astro": "astro",
+    "audit:contrast": "node scripts/audit-contrast.mjs",
     "sync:google-business-profile": "node scripts/fetch-google-business-profile.mjs",
     "new": "node scripts/new-content.js"
   },
