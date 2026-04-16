@@ -96,6 +96,12 @@ body {
   --color-site-accent: var(--site-accent);
   --color-site-accent-strong: var(--site-accent-strong);
   --color-site-accent-soft: var(--site-accent-soft);
+  --color-site-control-bg: var(--site-control-bg);
+  --color-site-control-bg-hover: var(--site-control-bg-hover);
+  --radius-site-lg: var(--site-radius-lg);
+  --radius-site-xl: var(--site-radius-xl);
+  --shadow-site-sm: var(--site-shadow-sm);
+  --shadow-site-md: var(--site-shadow-md);
 }
 
 @layer components {
@@ -107,6 +113,61 @@ body {
   .site-shell-wide {
     width: min(100% - 0.75rem, 88rem);
     margin-inline: auto;
+  }
+
+  .site-section {
+    border-top: 1px solid var(--site-border);
+    padding: 4rem 1rem;
+  }
+
+  .site-section-flush {
+    padding: 4rem 1rem;
+  }
+
+  .site-section-hero {
+    padding: 6rem 1rem 3rem;
+  }
+
+  @media (min-width: 640px) {
+    .site-section {
+      padding: 6rem 1.5rem;
+    }
+
+    .site-section-flush {
+      padding: 6rem 1.5rem;
+    }
+
+    .site-section-hero {
+      padding: 8rem 1.5rem 4rem;
+    }
+  }
+
+  .site-grid-2,
+  .site-grid-3,
+  .site-grid-4 {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  @media (min-width: 768px) {
+    .site-grid-2,
+    .site-grid-3,
+    .site-grid-4 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .site-grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .site-grid-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
   }
 
   .site-kicker {
@@ -213,6 +274,20 @@ body {
     padding: 1.5rem;
   }
 
+  .site-card-body-compact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.25rem;
+  }
+
+  .site-card-body-feature {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+  }
+
   .site-card-title {
     font-family: "Sora", sans-serif;
     font-size: 1rem;
@@ -263,6 +338,25 @@ body {
     border-color: var(--site-border);
     background: var(--site-control-bg);
     color: var(--site-text-muted);
+  }
+
+  .site-badge-overlay {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in oklab, #ffffff 22%, transparent);
+    background: color-mix(in oklab, #000000 62%, transparent);
+    color: #f7dfd0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.45);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
   }
 
   .site-stat {

@@ -11,7 +11,7 @@ export const prerender = true;
 <BaseLayout
   title={(termsEntry?.data?.title as string) || "Terms of Service | Alpha Bravo Media"}
 >
-  <section class="min-h-screen px-4 pb-24 pt-32 sm:px-6">
+  <section class="site-section-hero min-h-screen">
     <div class="site-shell">
       <div class="site-page-header">
         <span class="site-kicker">Terms</span>
@@ -29,45 +29,45 @@ export const prerender = true;
           <span class="site-chip">Quick Summary</span>
         </div>
         <ul class="space-y-4">
-          <li class="flex items-start gap-3 text-[var(--site-text-muted)]">
-            <span class="mt-1 h-2 w-2 rounded-full bg-[var(--site-accent)]"></span>
-            <span>A <strong class="text-[var(--site-text)]">25% non-refundable retainer</strong> secures the booking date.</span>
+          <li class="flex items-start gap-3 text-site-text-muted">
+            <span class="mt-1 h-2 w-2 rounded-full bg-site-accent"></span>
+            <span>A <strong class="text-site-text">25% non-refundable retainer</strong> secures the booking date.</span>
           </li>
-          <li class="flex items-start gap-3 text-[var(--site-text-muted)]">
-            <span class="mt-1 h-2 w-2 rounded-full bg-[var(--site-accent)]"></span>
-            <span>Shorter edits include up to <strong class="text-[var(--site-text)]">3 revision rounds</strong>; longer-form content includes <strong class="text-[var(--site-text)]">2 rounds</strong>.</span>
+          <li class="flex items-start gap-3 text-site-text-muted">
+            <span class="mt-1 h-2 w-2 rounded-full bg-site-accent"></span>
+            <span>Shorter edits include up to <strong class="text-site-text">3 revision rounds</strong>; longer-form content includes <strong class="text-site-text">2 rounds</strong>.</span>
           </li>
-          <li class="flex items-start gap-3 text-[var(--site-text-muted)]">
-            <span class="mt-1 h-2 w-2 rounded-full bg-[var(--site-accent)]"></span>
-            <span>Rescheduling or cancellations require at least <strong class="text-[var(--site-text)]">14 days' notice</strong>.</span>
+          <li class="flex items-start gap-3 text-site-text-muted">
+            <span class="mt-1 h-2 w-2 rounded-full bg-site-accent"></span>
+            <span>Rescheduling or cancellations require at least <strong class="text-site-text">14 days' notice</strong>.</span>
           </li>
-          <li class="flex items-start gap-3 text-[var(--site-text-muted)]">
-            <span class="mt-1 h-2 w-2 rounded-full bg-[var(--site-accent)]"></span>
-            <span>Videography is currently offered for the <strong class="text-[var(--site-text)]">men's section and general unsegregated events</strong>.</span>
+          <li class="flex items-start gap-3 text-site-text-muted">
+            <span class="mt-1 h-2 w-2 rounded-full bg-site-accent"></span>
+            <span>Videography is currently offered for the <strong class="text-site-text">men's section and general unsegregated events</strong>.</span>
           </li>
-          <li class="flex items-start gap-3 text-[var(--site-text-muted)]">
-            <span class="mt-1 h-2 w-2 rounded-full bg-[var(--site-accent)]"></span>
+          <li class="flex items-start gap-3 text-site-text-muted">
+            <span class="mt-1 h-2 w-2 rounded-full bg-site-accent"></span>
             <span>Raw footage is available for an additional fee when you provide a suitable hard drive.</span>
           </li>
-          <li class="flex items-start gap-3 text-[var(--site-text-muted)]">
-            <span class="mt-1 h-2 w-2 rounded-full bg-[var(--site-accent)]"></span>
+          <li class="flex items-start gap-3 text-site-text-muted">
+            <span class="mt-1 h-2 w-2 rounded-full bg-site-accent"></span>
             <span>Clients are responsible for any equipment damage or loss while on-site.</span>
           </li>
-          <li class="flex items-start gap-3 text-[var(--site-text-muted)]">
-            <span class="mt-1 h-2 w-2 rounded-full bg-[var(--site-accent)]"></span>
-            <span>For A/V services, venue access is required at least <strong class="text-[var(--site-text)]">2 hours before</strong> event start.</span>
+          <li class="flex items-start gap-3 text-site-text-muted">
+            <span class="mt-1 h-2 w-2 rounded-full bg-site-accent"></span>
+            <span>For A/V services, venue access is required at least <strong class="text-site-text">2 hours before</strong> event start.</span>
           </li>
         </ul>
       </div>
 
       {Content ? (
         <article
-          class="site-prose prose prose-invert max-w-none prose-h2:border-b prose-h2:border-[var(--site-border)] prose-h2:pb-3 prose-h2:text-2xl prose-h2:font-['Sora',sans-serif] prose-p:leading-7 prose-ul:space-y-2 prose-ul:pl-5"
+          class="site-prose prose max-w-none prose-h2:border-b prose-h2:border-site-border prose-h2:pb-3 prose-h2:text-2xl prose-h2:font-['Sora',sans-serif] prose-p:leading-7 prose-ul:space-y-2 prose-ul:pl-5"
         >
           <Content />
         </article>
       ) : (
-        <div class="py-12 text-center text-[var(--site-text-muted)]">
+        <div class="py-12 text-center text-site-text-muted">
           Unable to load terms of service content.
         </div>
       )}

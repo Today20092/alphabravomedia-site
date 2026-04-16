@@ -24,7 +24,7 @@ const faqs = service.data.faq ?? [];
 ---
 
 <BaseLayout title={`${service.data.title} | Alpha Bravo Media`}>
-  <section class="px-4 pb-12 pt-28 sm:px-6 sm:pb-16 sm:pt-32">
+  <section class="site-section-hero">
     <div class="site-shell">
       <nav class="mb-8" aria-label="Breadcrumb">
         <ol class="site-meta-row">
@@ -32,7 +32,7 @@ const faqs = service.data.faq ?? [];
           <li><Icon name="mdi:chevron-right" class="h-4 w-4" /></li>
           <li><a href={`${base}services`} class="site-link">Services</a></li>
           <li><Icon name="mdi:chevron-right" class="h-4 w-4" /></li>
-          <li class="text-[var(--site-text-muted)]">{service.data.title}</li>
+          <li class="text-site-text-muted">{service.data.title}</li>
         </ol>
       </nav>
 
@@ -41,7 +41,7 @@ const faqs = service.data.faq ?? [];
           <span class="site-chip">{category}</span>
           {startingPrice && <span class="site-chip site-chip-muted">{startingPrice}</span>}
         </div>
-        <div class="flex h-14 w-14 items-center justify-center rounded-[1.25rem] border border-[var(--site-border)] bg-[rgba(255,255,255,0.03)] text-[var(--site-accent)]">
+        <div class="flex h-14 w-14 items-center justify-center rounded-[1.25rem] border border-site-border bg-site-control-bg text-site-accent">
           <Icon name={icon} class="h-7 w-7" />
         </div>
         <h1 class="site-page-title max-w-4xl">{service.data.title}</h1>
@@ -50,21 +50,21 @@ const faqs = service.data.faq ?? [];
     </div>
   </section>
 
-  <section class="px-4 pb-16 sm:px-6 sm:pb-20">
+  <section class="site-section">
     <div class="site-shell">
       <ServicePricingBlock service={service} />
     </div>
   </section>
 
-  <section class="px-4 pb-10 sm:px-6 sm:pb-12">
+  <section class="site-section">
     <div class="site-shell">
       <div class="site-panel-muted p-5 sm:p-6">
         <div class="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
           <div>
-            <p class="text-sm font-semibold text-[var(--site-text)]">
+            <p class="text-sm font-semibold text-site-text">
               Most clients want proof and a clear process before they book.
             </p>
-            <p class="mt-2 text-sm leading-7 text-[var(--site-text-muted)]">
+            <p class="mt-2 text-sm leading-7 text-site-text-muted">
               Built for brands, events, weddings, and creator-led businesses around Tampa.
             </p>
           </div>
@@ -85,7 +85,7 @@ const faqs = service.data.faq ?? [];
   </section>
 
   {faqs.length > 0 && (
-    <section class="px-4 pb-16 sm:px-6 sm:pb-20">
+    <section class="site-section">
       <div class="site-shell">
         <div class="mb-8 max-w-3xl">
           <span class="site-kicker">FAQ</span>
@@ -98,10 +98,10 @@ const faqs = service.data.faq ?? [];
         <div class="grid gap-4">
           {faqs.map((item) => (
             <details class="site-panel p-5 sm:p-6">
-              <summary class="cursor-pointer list-none pr-8 font-['Sora',sans-serif] text-base font-semibold text-[var(--site-text)]">
+              <summary class="site-card-title cursor-pointer list-none pr-8">
                 {item.question}
               </summary>
-              <p class="mt-4 max-w-3xl text-sm leading-7 text-[var(--site-text-muted)]">
+              <p class="mt-4 max-w-3xl text-sm leading-7 text-site-text-muted">
                 {item.answer}
               </p>
             </details>
@@ -111,7 +111,7 @@ const faqs = service.data.faq ?? [];
     </section>
   )}
 
-  <section id="contact" class="px-4 pb-24 sm:px-6">
+  <section id="contact" class="site-section">
     <div class="site-shell">
       <div class="site-panel p-6 sm:p-8">
         <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">

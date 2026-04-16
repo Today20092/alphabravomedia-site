@@ -15,7 +15,7 @@ const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
 ---
 
 <BaseLayout title="Services & Retainers | Alpha Bravo Media">
-  <section class="px-4 pb-12 pt-32 sm:px-6 sm:pb-16 sm:pt-36">
+  <section class="site-section-hero">
     <div class="site-shell">
       <div class="site-page-header">
         <span class="site-kicker">Services</span>
@@ -44,18 +44,18 @@ const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
 
         <div class="grid gap-4">
           <div class="site-panel-muted p-6">
-            <p class="text-sm font-semibold text-[var(--site-text)]">
+            <p class="text-sm font-semibold text-site-text">
               Keep the content pipeline moving
             </p>
-            <p class="mt-2 text-sm leading-7 text-[var(--site-text-muted)]">
+            <p class="mt-2 text-sm leading-7 text-site-text-muted">
               Film, edit, repurpose, and publish on a dependable cadence.
             </p>
           </div>
           <div class="site-panel-muted p-6">
-            <p class="text-sm font-semibold text-[var(--site-text)]">
+            <p class="text-sm font-semibold text-site-text">
               Focused project work stays available
             </p>
-            <p class="mt-2 text-sm leading-7 text-[var(--site-text-muted)]">
+            <p class="mt-2 text-sm leading-7 text-site-text-muted">
               Weddings, podcasts, and events get the same attention when the scope
               needs a dedicated production block.
             </p>
@@ -65,9 +65,9 @@ const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
     </div>
   </section>
 
-  <section class="px-4 pb-16 sm:px-6 sm:pb-20">
+  <section class="site-section">
     <div class="site-shell">
-      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+      <div class="site-grid-4">
         {sortedServices.map((service) => {
           const icon = service.data.icon ?? "mdi:star";
           const category = service.data.category ?? "Service";
@@ -84,7 +84,7 @@ const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
               <div class="site-card-body">
                 <div class="flex items-start justify-between gap-4">
                   <span class="site-chip site-chip-muted">{category}</span>
-                  <div class="flex h-10 w-10 items-center justify-center rounded-2xl border border-[var(--site-border)] bg-[rgba(255,255,255,0.03)] text-[var(--site-accent)]">
+                  <div class="flex h-10 w-10 items-center justify-center rounded-2xl border border-site-border bg-site-control-bg text-site-accent">
                     <Icon name={icon} class="h-5 w-5" />
                   </div>
                 </div>
@@ -92,10 +92,10 @@ const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
                 <p class="site-card-copy line-clamp-2">{service.data.description}</p>
                 <ul class="space-y-2 pt-2">
                   {topFeatures.map((feature) => (
-                    <li class="flex items-start gap-2 text-sm leading-6 text-[var(--site-text-muted)]">
+                    <li class="flex items-start gap-2 text-sm leading-6 text-site-text-muted">
                       <Icon
                         name="mdi:check-circle"
-                        class="mt-0.5 h-4 w-4 shrink-0 text-[var(--site-accent)]"
+                        class="mt-0.5 h-4 w-4 shrink-0 text-site-accent"
                       />
                       <span>{feature}</span>
                     </li>
@@ -103,7 +103,7 @@ const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
                 </ul>
                 <div class="site-meta-row mt-auto justify-between pt-2">
                   <span>{startingPrice}</span>
-                  <span class="text-[var(--site-accent)]">See package options</span>
+                  <span class="text-site-accent">See package options</span>
                 </div>
               </div>
             </a>
@@ -115,7 +115,7 @@ const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
 
   <FitCheckQuiz />
 
-  <section class="px-4 pb-24 sm:px-6">
+  <section class="site-section">
     <div class="site-shell">
       <div class="site-panel p-6 sm:p-8">
         <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
@@ -125,8 +125,8 @@ const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
             <p class="site-section-copy mt-4">
               Start with the service that fits best, or book a free 15-minute consult call to talk through your event, ask questions, or get advice before you commit.
             </p>
-            <div class="mt-5 flex flex-wrap items-center gap-2 text-sm text-[var(--site-text-muted)]">
-              <Icon name="simple-icons:google" class="h-4 w-4 text-[var(--site-accent)]" />
+            <div class="mt-5 flex flex-wrap items-center gap-2 text-sm text-site-text-muted">
+              <Icon name="simple-icons:google" class="h-4 w-4 text-site-accent" />
               <span>
                 {reviewSummary ?? "Browse Google reviews before reaching out if you want outside proof first."}
               </span>

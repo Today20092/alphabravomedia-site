@@ -15,7 +15,7 @@ const categories = [...new Set(allItems.map((item) => item.data.category))];
 ---
 
 <BaseLayout title="Portfolio | Alpha Bravo Media">
-  <section class="px-4 pb-24 pt-32 sm:px-6">
+  <section class="site-section-hero">
     <div class="site-shell">
       <div class="space-y-10">
         <div class="site-page-header mb-0">
@@ -46,7 +46,7 @@ const categories = [...new Set(allItems.map((item) => item.data.category))];
           </div>
         )}
 
-        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3" id="portfolio-grid">
+        <div class="site-grid-3" id="portfolio-grid">
           {allItems.map((item) => (
             <a
               href={`${base}portfolio/${item.slug}`}
@@ -83,7 +83,7 @@ const categories = [...new Set(allItems.map((item) => item.data.category))];
 
                   if (facebookUrl) {
                     return (
-                      <div class="flex h-full items-center justify-center text-[var(--site-text-soft)]">
+                      <div class="flex h-full items-center justify-center text-site-text-soft">
                         <Icon name="mdi:facebook" class="h-10 w-10" />
                       </div>
                     );
@@ -92,7 +92,7 @@ const categories = [...new Set(allItems.map((item) => item.data.category))];
                   return null;
                 })()}
                 <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/70 to-transparent"></div>
-                <span class="site-chip portfolio-category-chip absolute left-4 top-4">
+                <span class="site-badge-overlay absolute left-4 top-4">
                   {item.data.category}
                 </span>
               </div>
@@ -110,8 +110,8 @@ const categories = [...new Set(allItems.map((item) => item.data.category))];
 
         {allItems.length === 0 && (
           <div class="site-panel-muted px-6 py-16 text-center">
-            <p class="text-lg text-[var(--site-text)]">No portfolio items yet.</p>
-            <p class="mt-3 text-sm text-[var(--site-text-soft)]">Check back soon.</p>
+            <p class="text-lg text-site-text">No portfolio items yet.</p>
+            <p class="mt-3 text-sm text-site-text-soft">Check back soon.</p>
           </div>
         )}
       </div>
@@ -126,14 +126,14 @@ const categories = [...new Set(allItems.map((item) => item.data.category))];
     color: var(--site-accent);
   }
 
-  .portfolio-category-chip {
-    border-color: color-mix(in oklab, #ffffff 22%, transparent);
-    background: rgba(18, 14, 12, 0.68);
-    color: #f7dfd0;
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.45);
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
-    backdrop-filter: blur(14px) saturate(140%);
-    -webkit-backdrop-filter: blur(14px) saturate(140%);
+  html[data-theme="light"] .filter-btn.site-chip-muted {
+    border-color: var(--site-border-strong);
+    background: color-mix(in oklab, var(--site-surface) 88%, var(--site-text) 12%);
+    color: var(--site-text);
+  }
+
+  html[data-theme="light"] .filter-btn.site-chip-muted:hover {
+    background: color-mix(in oklab, var(--site-surface) 80%, var(--site-text) 20%);
   }
 
   .portfolio-item.hidden {
