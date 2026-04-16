@@ -19,8 +19,8 @@ const inquiryPoints = [
           Tell us what you need and we will handle the next step.
         </h1>
         <p class="site-page-copy mb-8 max-w-2xl sm:mb-10">
-          Use the form for production inquiries, event questions, podcast support, editing, or A/V work.
-          If you prefer to talk first, use the direct contact links below.
+          Reach out about brand video, podcast production, events, editing, or A/V support.
+          Email, call, or text if you want to talk through the project first.
         </p>
       </div>
     </div>
@@ -33,17 +33,24 @@ const inquiryPoints = [
           <div class="grid gap-10 lg:grid-cols-[minmax(0,1.35fr)_minmax(18rem,0.85fr)] lg:items-end">
             <div class="max-w-3xl">
               <span class="site-kicker">Direct contact</span>
-              <h2 class="site-section-title mt-4">Use email or phone for now.</h2>
+              <h2 class="site-section-title mt-4">Use email, call, or text for now.</h2>
               <p class="site-section-copy mt-4 max-w-2xl">
-                The form is being reworked. Reach out directly and we will handle scope, timing, and next
-                steps from there.
+                Reach out directly and we will handle scope, timing, and next steps from there.
               </p>
-              <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-                <a href={`mailto:${siteConfig.email}`} class="site-button-primary">
-                  Email Ayoub
-                </a>
-                <a href={`tel:${siteConfig.phoneRaw}`} class="site-button-secondary">
-                  Call Ayoub
+              <div class="mt-8">
+                <div class="flex flex-col gap-3 sm:flex-row">
+                  <a href={`mailto:${siteConfig.email}`} class="site-button-primary">
+                    Email Ayoub
+                  </a>
+                  <a href={`tel:${siteConfig.phoneRaw}`} class="site-button-secondary">
+                    Call Ayoub
+                  </a>
+                </div>
+                <a
+                  href={`sms:${siteConfig.phoneRaw}`}
+                  class="mt-4 inline-flex text-sm font-medium text-[var(--site-text-soft)] transition-colors hover:text-[var(--site-text)]"
+                >
+                  Text Ayoub instead
                 </a>
               </div>
             </div>
