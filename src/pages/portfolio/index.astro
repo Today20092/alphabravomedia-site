@@ -28,7 +28,7 @@ const categories = [...new Set(allItems.map((item) => item.data.category))];
         </div>
 
         {categories.length > 0 && (
-          <div class="flex flex-wrap gap-3">
+          <div class="mt-4 flex flex-wrap gap-3 sm:mt-5">
             <button
               class="filter-btn site-chip active"
               data-category="all"
