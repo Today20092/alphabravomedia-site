@@ -3,6 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 import { YouTube } from "@astro-community/astro-embed-youtube";
 import { Icon } from "astro-icon/components";
+import { siteConfig } from "../../site-config";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -17,10 +18,27 @@ const { Content } = await post.render();
 
 const rawBase = import.meta.env.BASE_URL;
 const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
+const articleOgImage = post.data.image?.src ??
+  (post.data.youtubeId
+    ? `https://img.youtube.com/vi/${post.data.youtubeId}/maxresdefault.jpg`
+    : "/alpha-bravo-logo.svg");
 ---
 
-<BaseLayout title={`${post.data.title} | Alpha Bravo Media`}>
-  <article data-pagefind-body class="site-section-hero">
+<BaseLayout
+  title={`${post.data.title} | Alpha Bravo Media`}
+  description={post.data.description}
+  ogImage={articleOgImage}
+  ogImageAlt={post.data.title}
+  ogType="article"
+  author={siteConfig.founderName}
+  publishedTime={post.data.pubDate.toISOString()}
+>
+  <article
+    data-pagefind-body
+    class="site-section-hero"
+    itemScope
+    itemType="https://schema.org/Article"
+  >
     <span data-pagefind-meta="type" class="sr-only">Blog Post</span>
 
     <div class="site-shell">
@@ -31,16 +49,19 @@ const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
 
       <header class="site-page-header mt-8">
         <div class="site-meta-row">
-          <time>
+          <time itemProp="datePublished" dateTime={post.data.pubDate.toISOString()}>
             {post.data.pubDate.toLocaleDateString("en-US", {
               year: "numeric",
               month: "long",
               day: "numeric",
             })}
           </time>
+          <a href={`${base}about`} rel="author" itemProp="author" class="site-link">
+            By {siteConfig.founderName}
+          </a>
         </div>
-        <h1 class="site-page-title max-w-4xl">{post.data.title}</h1>
-        <p class="site-page-copy text-lg">{post.data.description}</p>
+        <h1 itemProp="headline" class="site-page-title max-w-4xl">{post.data.title}</h1>
+        <p itemProp="description" class="site-page-copy text-lg">{post.data.description}</p>
         {post.data.tags.length > 0 && (
           <div class="flex flex-wrap gap-3">
             {post.data.tags.map((tag: string) => (

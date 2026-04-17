@@ -14,7 +14,10 @@ const allItems = (await getCollection("portfolio")).sort(
 const categories = [...new Set(allItems.map((item) => item.data.category))];
 ---
 
-<BaseLayout title="Portfolio | Alpha Bravo Media">
+<BaseLayout
+  title="Video Production Portfolio | Alpha Bravo Media"
+  description="Case studies and selected client work across brand video, podcasts, weddings, and live productions."
+>
   <section class="site-section-hero">
     <div class="site-shell">
       <div class="space-y-10">
@@ -76,6 +79,8 @@ const categories = [...new Set(allItems.map((item) => item.data.category))];
                       <img
                         src={youtubeUrl}
                         alt={item.data.title}
+                        width="1280"
+                        height="720"
                         class="absolute inset-0 h-full w-full object-cover"
                       />
                     );

@@ -11,7 +11,7 @@ gearUsed:
 order: 3
 ---
 
-# Elevating Community Voices: A "White-Glove" Production for the *No Losses, Just Lessons* Podcast
+## Elevating Community Voices: A "White-Glove" Production for the *No Losses, Just Lessons* Podcast
 
 ## Turning a Local Landmark into a Broadcast Studio: The Konan BBQ Podcast Sessions
 

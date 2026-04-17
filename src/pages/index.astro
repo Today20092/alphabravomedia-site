@@ -22,7 +22,10 @@ const latestPortfolio = allPortfolio
   .slice(0, 3);
 ---
 
-<BaseLayout>
+<BaseLayout
+  title="Tampa Brand Video Production | Alpha Bravo Media"
+  description="Cinematic video production, podcast filming, editing, and live event support in Tampa. Strategy, filming, editing, and delivery from one production partner."
+>
   <section class="site-section-hero">
     <div class="site-shell">
       <div class="grid gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-end">
@@ -165,6 +168,8 @@ const latestPortfolio = allPortfolio
                     <img
                       src={youtubeUrl}
                       alt={item.data.title}
+                      width="1280"
+                      height="720"
                       class="absolute inset-0 h-full w-full object-cover"
                     />
                   );
@@ -233,6 +238,8 @@ const latestPortfolio = allPortfolio
                     <img
                       src={youtubeUrl}
                       alt={post.data.title}
+                      width="1280"
+                      height="720"
                       class="absolute inset-0 h-full w-full object-cover"
                     />
                   );

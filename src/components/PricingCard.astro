@@ -62,14 +62,12 @@ const { name, price, bestFor, isPopular = false, includes } = Astro.props;
   <div class="mt-8">
     <a
       href={`${base}contact`}
-      title="Open the contact form"
-      aria-label={`Inquire about ${name}`}
       class:list={[
         "w-full",
         isPopular ? "site-button-primary" : "site-button-secondary",
       ]}
     >
-      Book consult
+      Ask about {name}
     </a>
   </div>
 </div>

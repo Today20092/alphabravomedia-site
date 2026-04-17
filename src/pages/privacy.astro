@@ -1,0 +1,41 @@
+---
+import { getEntry } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const privacyEntry = await getEntry("legal", "privacy");
+const { Content } = privacyEntry ? await privacyEntry.render() : { Content: null };
+
+export const prerender = true;
+---
+
+<BaseLayout
+  title="Privacy Policy and Data Use | Alpha Bravo Media"
+  description="Review how Alpha Bravo Media handles inquiry details, project information, and third-party services connected to this website."
+>
+  <section class="site-section-hero min-h-screen">
+    <div class="site-shell">
+      <div class="site-page-header">
+        <span class="site-kicker">Privacy</span>
+        <h1 class="site-page-title max-w-4xl">
+          {privacyEntry?.data?.title || "Privacy Policy"}
+        </h1>
+        <p class="site-page-copy text-lg">
+          Review how inquiries, project details, and third-party services are handled
+          across this site.
+        </p>
+      </div>
+
+      {Content ? (
+        <article
+          class="site-prose prose max-w-none prose-h2:border-b prose-h2:border-site-border prose-h2:pb-3 prose-h2:text-2xl prose-h2:font-['Sora',sans-serif] prose-p:leading-7 prose-ul:space-y-2 prose-ul:pl-5"
+        >
+          <Content />
+        </article>
+      ) : (
+        <div class="py-12 text-center text-site-text-muted">
+          Unable to load privacy policy content.
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>

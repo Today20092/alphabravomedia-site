@@ -11,7 +11,10 @@ const allPosts = await getCollection("blog");
 const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
-<BaseLayout title="Blog | Alpha Bravo Media">
+<BaseLayout
+  title="Video Production Insights | Alpha Bravo Media"
+  description="Tutorials, gear notes, marketing insights, and production workflows for creators and brands building stronger video systems."
+>
   <section class="site-section-hero">
     <div class="site-shell">
       <div class="site-page-header">

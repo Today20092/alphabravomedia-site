@@ -21,9 +21,19 @@ const icon = service.data.icon ?? "mdi:star";
 const category = service.data.category ?? "Service";
 const startingPrice = service.data.tiers[0]?.value?.price ?? "";
 const faqs = service.data.faq ?? [];
+const serviceSeoTitles: Record<string, string> = {
+  "monthly-retainers": "Monthly Content Retainers | Alpha Bravo Media",
+  "audio-setup": "Event A/V Services | Alpha Bravo Media",
+  "mobile-podcast": "Mobile Podcast Production | Alpha Bravo Media",
+  weddings: "Wedding Videography Services | Alpha Bravo Media",
+};
+const serviceTitle = serviceSeoTitles[service.id] ?? `${service.data.title} | ${siteConfig.siteName}`;
 ---
 
-<BaseLayout title={`${service.data.title} | Alpha Bravo Media`}>
+<BaseLayout
+  title={serviceTitle}
+  description={service.data.description}
+>
   <section class="site-section-hero">
     <div class="site-shell">
       <nav class="mb-8" aria-label="Breadcrumb">

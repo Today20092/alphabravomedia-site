@@ -1,0 +1,112 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Icon } from "astro-icon/components";
+import { siteConfig } from "../site-config";
+
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
+
+const principles = [
+  "Strategy before cameras so every deliverable has a job to do.",
+  "Lean production setups that stay fast on location without looking improvised.",
+  "Editing and delivery built for business outcomes, not just aesthetics.",
+];
+---
+
+<BaseLayout
+  title={`About ${siteConfig.siteName} | Tampa Video Production`}
+  description="Learn about Ayoub, the production approach behind Alpha Bravo Media, and how the studio supports Tampa brands, creators, and events."
+>
+  <section class="site-section-hero">
+    <div class="site-shell">
+      <div class="site-page-header max-w-3xl">
+        <span class="site-kicker">About</span>
+        <h1 class="site-page-title">
+          Production built by {siteConfig.founderName} for brands that need clear messaging and premium execution.
+        </h1>
+        <p class="site-page-copy text-lg">
+          {siteConfig.siteName} is a Tampa-based video production studio focused on
+          brand storytelling, podcasts, event coverage, editing, and live A/V support.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="site-section">
+    <div class="site-shell">
+      <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)]">
+        <div class="site-panel p-6 sm:p-8">
+          <span class="site-kicker">Founder</span>
+          <h2 class="site-section-title mt-4">{siteConfig.founderName}</h2>
+          <p class="mt-4 text-sm leading-7 text-site-text-muted sm:text-base">
+            {siteConfig.founderName} leads strategy, filming, and post-production for
+            the studio. The work is built around one principle: make the message clearer,
+            make the production feel premium, and make the next step obvious for the
+            audience.
+          </p>
+          <p class="mt-4 text-sm leading-7 text-site-text-muted sm:text-base">
+            Projects range from recurring content systems for local businesses to
+            podcast production, wedding coverage, and event A/V setups that need clean
+            execution under real-world constraints.
+          </p>
+        </div>
+
+        <div class="site-panel-muted p-6 sm:p-8">
+          <span class="site-kicker">Coverage</span>
+          <h2 class="site-section-title mt-4">Based in Tampa, working across business, creator, and event production.</h2>
+          <p class="mt-4 text-sm leading-7 text-site-text-muted sm:text-base">
+            Most projects are centered in Tampa Bay, with support for nearby markets
+            when the scope makes sense. Alpha Bravo Media works best with clients who
+            want a long-term production partner, not just a camera operator.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <span class="site-chip site-chip-muted">{siteConfig.locationLabel}</span>
+            <span class="site-chip site-chip-muted">Brand video</span>
+            <span class="site-chip site-chip-muted">Podcasts</span>
+            <span class="site-chip site-chip-muted">Events and A/V</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="site-section">
+    <div class="site-shell">
+      <div class="mb-8 max-w-3xl">
+        <span class="site-kicker">Approach</span>
+        <h2 class="site-section-title mt-4">A small team and a clear production system beat bloated process.</h2>
+      </div>
+
+      <div class="site-grid-3">
+        {principles.map((principle) => (
+          <div class="site-card">
+            <div class="site-card-body-compact">
+              <Icon name="mdi:check-circle" class="h-5 w-5 text-site-accent" />
+              <p class="text-sm leading-7 text-site-text-muted sm:text-base">{principle}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="site-section">
+    <div class="site-shell">
+      <div class="site-panel p-6 sm:p-8">
+        <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
+          <div>
+            <span class="site-kicker">Next Step</span>
+            <h2 class="site-section-title mt-4">If the scope is active, start with a direct conversation.</h2>
+            <p class="site-section-copy mt-4">
+              Share the project, timeline, and deliverables. From there, Alpha Bravo Media can
+              tell you whether the fit is right and what the cleanest production path looks like.
+            </p>
+          </div>
+          <a href={`${base}contact`} class="site-button-primary">
+            Contact Alpha Bravo Media
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

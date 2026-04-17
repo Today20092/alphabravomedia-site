@@ -6,7 +6,7 @@ category: "Podcast"
 order: 3.5
 ---
 
-# Full-Service Podcast Production for Rizq MDJD
+## Full-Service Podcast Production for Rizq MDJD
 
 Rizq MDJD is a podcast focused on Muslim financial empowerment, wealth-building, and practical conversations around rizq, mindset, and stewardship. The show brings together in-person discussions and, more recently, remote guest episodes that expand the conversation beyond the table.
 

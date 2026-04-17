@@ -24,7 +24,7 @@ const id = `gallery-${Math.random().toString(36).slice(2, 8)}`;
           class="gallery-thumb site-card relative mb-3 block w-full cursor-zoom-in break-inside-avoid overflow-hidden"
           data-index={i}
           data-full={image.fullSrc ?? ''}
-          aria-label={`Open photo ${i + 1} of ${images.length}`}
+          aria-label={image.caption ?? image.alt}
         >
           {typeof image.src === 'string' ? (
             <img src={image.src} alt={image.alt} loading="lazy" decoding="async" class="block h-auto w-full" />
@@ -50,7 +50,7 @@ const id = `gallery-${Math.random().toString(36).slice(2, 8)}`;
           class={`gallery-thumb site-card relative cursor-zoom-in overflow-hidden${layout === 'square' ? ' aspect-square' : ''}`}
           data-index={i}
           data-full={image.fullSrc ?? ''}
-          aria-label={`Open photo ${i + 1} of ${images.length}`}
+          aria-label={image.caption ?? image.alt}
         >
           {typeof image.src === 'string' ? (
             <img src={image.src} alt={image.alt} loading="lazy" decoding="async" class={layout === 'square' ? 'h-full w-full object-cover' : 'block h-auto w-full'} />

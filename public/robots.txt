@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /gallery/amira-muhammad/
+
+Sitemap: https://alphabravomedia.co/sitemap-index.xml

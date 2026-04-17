@@ -16,4 +16,4 @@ The workhorse zoom that lives on my camera. Sharp, fast, and versatile.
 - Much more affordable than Sony GM equivalent
 
 
-If you get it used you can get great affordable pricing too. it works perfect for all my wide angle needs, and the only other lens you may need is a longer focal length like the 24-70mm f/2.8 DG DN Art or the [28-105mm F2.8 DG DN for L-Mount](sigma-28-105mm-f28-dg-dn-l-mount)
+If you get it used you can get great affordable pricing too. it works perfect for all my wide angle needs, and the only other lens you may need is a longer focal length like the 24-70mm f/2.8 DG DN Art or the [28-105mm F2.8 DG DN for L-Mount](sigma-28-105mm)

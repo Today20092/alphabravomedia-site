@@ -6,17 +6,17 @@ category: "Audio"
 specs: "Super-cardioid · Condenser mic · XLR output"
 ---
 
-### Professional Directional Mic
+## Professional Directional Mic
 The COMICA VP3 is a super-cardioid condenser microphone designed for serious audio capture. Its directional pickup pattern makes it ideal for isolating subject dialogue while rejecting ambient noise and reflections from the sides and rear.
 
-### Versatile Applications
+## Versatile Applications
 Perfect for cinema cameras, video DSLRs, and professional audio recording. Whether you're shooting interviews, location sound for productions, or recording voiceovers, the VP3 delivers clean, focused audio.
 
-### XLR Output
+## XLR Output
 Direct XLR connectivity integrates seamlessly with professional audio equipment, mixers, and recorders. No adapters or converters needed for standard production workflows.
 
-### Great for Live & Content
+## Great for Live & Content
 Equally suitable for live streaming, podcasting, and on-set production. The super-cardioid pattern keeps unwanted background noise to a minimum, which is critical for professional-grade content.
 
-### Solid Performer
+## Solid Performer
 Recommended for serious content creators and production professionals who need reliable, high-quality directional microphone capture.

@@ -38,7 +38,10 @@ function getRemoteFilenames(slug: string): string[] {
 }
 ---
 
-<BaseLayout title="Photo Gallery | Alpha Bravo Media">
+<BaseLayout
+  title="Client Photo Galleries | Alpha Bravo Media"
+  description="Browse event galleries, portrait sessions, and private client photo collections from Alpha Bravo Media."
+>
   <section class="site-section-hero min-h-screen">
     <div class="site-shell">
       <div class="site-page-header">
@@ -57,7 +60,7 @@ function getRemoteFilenames(slug: string): string[] {
         </div>
       ) : (
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {sorted.map((entry) => {
+          {sorted.map((entry, index) => {
             const isRemote = !!entry.data.remoteBase;
             const isPrivate = !!entry.data.password;
             const remoteFiles = isRemote ? getRemoteFilenames(entry.slug) : [];
@@ -78,8 +81,9 @@ function getRemoteFilenames(slug: string): string[] {
                   {remoteCoverUrl && isPrivate ? (
                     <img
                       src={remoteCoverUrl}
-                      alt=""
-                      aria-hidden="true"
+                      alt={`${entry.data.title} preview`}
+                      width="1200"
+                      height="900"
                       class="h-full w-full object-cover scale-110"
                       style="filter: blur(28px);"
                     />
@@ -87,7 +91,9 @@ function getRemoteFilenames(slug: string): string[] {
                     <img
                       src={remoteCoverUrl}
                       alt={entry.data.title}
-                      loading="lazy"
+                      width="1200"
+                      height="900"
+                      loading={index < 3 ? "eager" : "lazy"}
                       decoding="async"
                       class="h-full w-full object-cover"
                     />

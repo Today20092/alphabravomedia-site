@@ -5,6 +5,7 @@ import { YouTube } from "@astro-community/astro-embed-youtube";
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import Gallery from "../../components/Gallery.astro";
+import { siteConfig } from "../../site-config";
 
 export async function getStaticPaths() {
   const items = await getCollection("portfolio");
@@ -33,10 +34,29 @@ const allItems = await getCollection("portfolio");
 const relatedItems = allItems
   .filter((i) => i.slug !== item.slug && i.data.category === item.data.category)
   .slice(0, 2);
+const portfolioDescription = item.data.clientName
+  ? `${item.data.clientName} ${item.data.category.toLowerCase()} project by Alpha Bravo Media, covering production approach, outcomes, and deliverables.`
+  : `${item.data.category} project by Alpha Bravo Media, covering production approach, outcomes, and deliverables.`;
+const portfolioOgImage = item.data.image?.src ??
+  (item.data.videoId
+    ? `https://img.youtube.com/vi/${item.data.videoId}/maxresdefault.jpg`
+    : "/alpha-bravo-logo.svg");
 ---
 
-<BaseLayout title={`${item.data.title} | Alpha Bravo Media`}>
-  <article data-pagefind-body class="site-section-hero">
+<BaseLayout
+  title={`${item.data.title} | Portfolio Case Study | Alpha Bravo Media`}
+  description={portfolioDescription}
+  ogImage={portfolioOgImage}
+  ogImageAlt={item.data.title}
+  ogType="article"
+  author={siteConfig.founderName}
+>
+  <article
+    data-pagefind-body
+    class="site-section-hero"
+    itemScope
+    itemType="https://schema.org/CreativeWork"
+  >
     <span data-pagefind-meta="type" class="sr-only">Portfolio</span>
     <span data-pagefind-meta="client" style="display:none">{item.data.clientName}</span>
 
@@ -48,10 +68,13 @@ const relatedItems = allItems
 
       <header class="site-page-header mt-8">
         <span class="site-chip">{item.data.category}</span>
-        <h1 class="site-page-title max-w-4xl">{item.data.title}</h1>
+        <h1 itemProp="headline" class="site-page-title max-w-4xl">{item.data.title}</h1>
         <div class="site-meta-row">
           <span>Client</span>
           <span class="text-site-text">{item.data.clientName}</span>
+          <a href={`${base}about`} rel="author" itemProp="author" class="site-link">
+            Produced by {siteConfig.founderName}
+          </a>
         </div>
       </header>
 
@@ -162,6 +185,8 @@ const relatedItems = allItems
                     <img
                       src={`https://img.youtube.com/vi/${related.data.videoId}/maxresdefault.jpg`}
                       alt={related.data.title}
+                      width="1280"
+                      height="720"
                       class="absolute inset-0 h-full w-full object-cover"
                     />
                   ) : null}

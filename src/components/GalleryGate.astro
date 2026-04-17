@@ -37,6 +37,7 @@ const { passwordHash, images, layout = 'square', slug } = Astro.props;
         <p class="gate-sub">Enter the password to view this gallery.</p>
 
         <form id="gate-form" class="gate-form">
+          <label for="gate-input" class="sr-only">Gallery password</label>
           <input
             id="gate-input"
             type="password"
@@ -107,7 +108,6 @@ const { passwordHash, images, layout = 'square', slug } = Astro.props;
     color: #fff;
     font-size: 1rem;
     padding: 0.65rem 1rem;
-    outline: none;
     transition: border-color 0.2s;
     width: 100%;
     box-sizing: border-box;

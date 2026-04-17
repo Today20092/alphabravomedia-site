@@ -64,11 +64,17 @@ const formattedDate = new Date(date + "T00:00:00").toLocaleDateString("en-US", {
   month: "long",
   day: "numeric",
 });
+const galleryOgImage = galleryImages[0]?.src ?? "/alpha-bravo-logo.svg";
+const galleryDescription =
+  description ??
+  `${title} photo gallery from ${formattedDate}, published by Alpha Bravo Media.`;
 ---
 
 <BaseLayout
-  title={`${title} | Photo Gallery | Alpha Bravo Media`}
-  ogImage={password ? `https://alphabravomedia.co/alpha-bravo-logo.svg` : undefined}
+  title={`${title} | Client Photo Gallery | Alpha Bravo Media`}
+  description={galleryDescription}
+  ogImage={password ? "/alpha-bravo-logo.svg" : galleryOgImage}
+  ogImageAlt={title}
   noIndex={!!password}
 >
   <section class="site-section-hero min-h-screen">
