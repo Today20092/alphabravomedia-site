@@ -5,6 +5,7 @@
   "icon": "mdi:microphone",
   "category": "Podcast",
   "heroImage": "./media/podcast-hero.svg",
+  "featuredWork": "rizq-mdjd-podcast",
   "gallery": [
     {
       "src": "./media/podcast-hero.svg",

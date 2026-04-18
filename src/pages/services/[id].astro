@@ -34,6 +34,21 @@ const relatedWork = (service.data.relatedWork ?? [])
     ),
   )
   .filter(Boolean);
+const featuredWork = service.data.featuredWork
+  ? allPortfolio.find(
+      (item) =>
+        item.slug.toLowerCase().endsWith(service.data.featuredWork.toLowerCase()) ||
+        item.id.toLowerCase().endsWith(service.data.featuredWork.toLowerCase()),
+    )
+  : null;
+const featuredMediaSrc = featuredWork?.data.image?.src ?? (
+  featuredWork?.data.videoId
+    ? `https://img.youtube.com/vi/${featuredWork.data.videoId}/hqdefault.jpg`
+    : null
+);
+const featuredMediaAlt = featuredWork?.data.clientName ?? featuredWork?.data.title ?? service.data.title;
+const heroMediaSrc = featuredMediaSrc ?? service.data.heroImage?.src ?? null;
+const heroMediaAlt = featuredMediaAlt ?? service.data.title;
 
 const serviceSeoTitles: Record<string, string> = {
   "monthly-retainers": "Monthly Content Retainers | Alpha Bravo Media",
@@ -78,10 +93,10 @@ const serviceTitle = serviceSeoTitles[service.id] ?? `${service.data.title} | ${
 
         <div class="site-card overflow-hidden">
           <div class="site-card-media aspect-[4/3]">
-            {service.data.heroImage ? (
+            {heroMediaSrc ? (
               <img
-                src={service.data.heroImage.src}
-                alt={service.data.title}
+                src={heroMediaSrc}
+                alt={heroMediaAlt}
                 class="absolute inset-0 h-full w-full object-cover"
               />
             ) : (

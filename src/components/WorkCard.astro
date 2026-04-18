@@ -1,0 +1,55 @@
+---
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+
+interface Props {
+  item: any;
+  href: string;
+  ctaLabel?: string;
+}
+
+const { item, href, ctaLabel = "See work" } = Astro.props;
+const youtubeUrl = item.data.videoId
+  ? `https://img.youtube.com/vi/${item.data.videoId}/hqdefault.jpg`
+  : null;
+---
+
+<a href={href} class="site-card site-card-interactive group flex flex-col">
+  <div class="site-card-media aspect-[4/3]">
+    {item.data.image ? (
+      <Image
+        src={item.data.image}
+        alt={item.data.title}
+        class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+      />
+    ) : youtubeUrl ? (
+      <img
+        src={youtubeUrl}
+        alt={item.data.title}
+        width="1280"
+        height="720"
+        class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+      />
+    ) : item.data.facebookUrl ? (
+      <div class="flex h-full items-center justify-center text-site-text-soft">
+        <Icon name="mdi:facebook" class="h-10 w-10" />
+      </div>
+    ) : (
+      <div class="flex h-full items-center justify-center text-site-text-soft">
+        <Icon name="mdi:image-outline" class="h-10 w-10" />
+      </div>
+    )}
+    <div class="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/80 to-transparent"></div>
+    <span class="site-badge-overlay absolute left-4 top-4">{item.data.category}</span>
+  </div>
+  <div class="site-card-body">
+    <div class="site-meta-row">
+      <span>{item.data.clientName || "Selected work"}</span>
+      <span>{ctaLabel}</span>
+    </div>
+    <h3 class="site-card-title">{item.data.title}</h3>
+    {item.data.outcome && (
+      <p class="site-card-copy">{item.data.outcome}</p>
+    )}
+  </div>
+</a>

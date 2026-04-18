@@ -52,6 +52,7 @@ const services = defineCollection({
     icon: z.string().optional(),
     category: z.string().optional(),
     heroImage: image().optional(),
+    featuredWork: z.string().optional(),
     gallery: z.array(z.object({
       src: image(),
       alt: z.string(),

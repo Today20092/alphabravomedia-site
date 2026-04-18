@@ -1,0 +1,82 @@
+---
+import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  service: any;
+  href: string;
+}
+
+const { service, href } = Astro.props;
+const icon = service.data.icon ?? "mdi:star";
+const category = service.data.category ?? "Service";
+const startingPrice = service.data.tiers[0]?.value?.price ?? "";
+const topFeatures: string[] = (service.data.tiers[0]?.value?.includes ?? []).slice(0, 2);
+const allPortfolio = await getCollection("portfolio");
+const featuredWork = service.data.featuredWork
+  ? allPortfolio.find(
+      (item) =>
+        item.slug.toLowerCase().endsWith(service.data.featuredWork.toLowerCase()) ||
+        item.id.toLowerCase().endsWith(service.data.featuredWork.toLowerCase()),
+    )
+  : null;
+const featuredMediaSrc = featuredWork?.data.image?.src ?? (
+  featuredWork?.data.videoId
+    ? `https://img.youtube.com/vi/${featuredWork.data.videoId}/hqdefault.jpg`
+    : null
+);
+const featuredMediaAlt = featuredWork?.data.clientName ?? featuredWork?.data.title ?? service.data.title;
+---
+
+<a href={href} class="site-card site-card-interactive group flex flex-col">
+  <div class="site-card-media aspect-[4/3]">
+    {featuredMediaSrc ? (
+      <img
+        src={featuredMediaSrc}
+        alt={featuredMediaAlt}
+        class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+      />
+    ) : service.data.heroImage ? (
+      <img
+        src={service.data.heroImage.src}
+        alt={service.data.title}
+        class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+      />
+    ) : (
+      <div class="flex h-full items-center justify-center text-site-text-soft">
+        <Icon name={icon} class="h-12 w-12" />
+      </div>
+    )}
+    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent"></div>
+    <span class="site-badge-overlay absolute left-4 top-4">{category}</span>
+    <div class="absolute bottom-4 left-4 right-4 flex items-end justify-between gap-4">
+      <div class="max-w-[18rem]">
+        <h3 class="font-['Sora',sans-serif] text-lg font-semibold tracking-tight text-white">
+          {service.data.title}
+        </h3>
+        {startingPrice && <p class="mt-2 text-sm text-white/75">{startingPrice}</p>}
+      </div>
+      <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/15 bg-black/35 text-white backdrop-blur-sm">
+        <Icon name={icon} class="h-5 w-5" />
+      </div>
+    </div>
+  </div>
+  <div class="site-card-body">
+    <p class="site-card-copy">{service.data.description}</p>
+    <ul class="space-y-2 pt-1">
+      {topFeatures.map((feature) => (
+        <li class="flex items-start gap-2 text-sm leading-6 text-site-text-muted">
+          <Icon
+            name="mdi:check-circle"
+            class="mt-0.5 h-4 w-4 shrink-0 text-site-accent"
+          />
+          <span>{feature}</span>
+        </li>
+      ))}
+    </ul>
+    <div class="site-meta-row mt-auto">
+      <span>{category}</span>
+      <span class="text-site-accent">See packages</span>
+    </div>
+  </div>
+</a>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none">
+  <rect width="1600" height="1000" fill="#16110d"/>
+  <circle cx="260" cy="180" r="150" fill="#f3b37c" fill-opacity=".08"/>
+  <rect x="130" y="120" width="1340" height="760" rx="40" fill="#231a14" stroke="#6c513f"/>
+  <path d="M802 314c32-75 132-86 178-18 47-68 146-57 178 18 33 78-31 167-178 280-147-113-211-202-178-280Z" fill="#f3b37c"/>
+  <rect x="250" y="610" width="1100" height="28" rx="14" fill="#f7dfd0"/>
+  <rect x="250" y="666" width="760" height="24" rx="12" fill="#c9b09b"/>
+  <rect x="250" y="712" width="620" height="24" rx="12" fill="#c9b09b"/>
+  <text x="130" y="942" fill="#f7dfd0" font-family="Sora, Arial, sans-serif" font-size="52" font-weight="700">Future wedding gallery slot</text>
+</svg>

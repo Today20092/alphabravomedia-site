@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1612"/>
+      <stop offset="100%" stop-color="#493527"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f3b37c"/>
+      <stop offset="100%" stop-color="#8c5d36"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <circle cx="1220" cy="190" r="180" fill="#f3b37c" fill-opacity=".12"/>
+  <circle cx="1350" cy="320" r="280" fill="#f3b37c" fill-opacity=".06"/>
+  <rect x="140" y="170" width="510" height="660" rx="34" fill="#120f0d" stroke="#6c513f"/>
+  <rect x="184" y="250" width="422" height="18" rx="9" fill="#6c513f"/>
+  <rect x="184" y="305" width="304" height="24" rx="12" fill="#f7dfd0"/>
+  <rect x="184" y="350" width="244" height="24" rx="12" fill="#f7dfd0" fill-opacity=".65"/>
+  <rect x="184" y="425" width="110" height="110" rx="26" fill="url(#glow)"/>
+  <rect x="320" y="425" width="110" height="110" rx="26" fill="#201914" stroke="#6c513f"/>
+  <rect x="456" y="425" width="110" height="110" rx="26" fill="#201914" stroke="#6c513f"/>
+  <rect x="184" y="580" width="422" height="22" rx="11" fill="#3a2d23"/>
+  <rect x="184" y="624" width="362" height="22" rx="11" fill="#3a2d23"/>
+  <rect x="184" y="668" width="402" height="22" rx="11" fill="#3a2d23"/>
+  <rect x="760" y="215" width="670" height="540" rx="38" fill="#120f0d" stroke="#6c513f"/>
+  <rect x="820" y="285" width="270" height="330" rx="26" fill="#1d1713" stroke="#8c5d36"/>
+  <rect x="1128" y="285" width="240" height="150" rx="26" fill="#1d1713" stroke="#8c5d36"/>
+  <rect x="1128" y="465" width="240" height="150" rx="26" fill="#1d1713" stroke="#8c5d36"/>
+  <path d="M904 523c52-92 155-126 247-73" stroke="#f3b37c" stroke-width="18" stroke-linecap="round"/>
+  <path d="M1168 508l27-73 57 55" stroke="#f3b37c" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="140" y="905" fill="#f7dfd0" font-family="Sora, Arial, sans-serif" font-size="54" font-weight="700">Monthly content retainers</text>
+  <text x="140" y="956" fill="#c9b09b" font-family="Inter, Arial, sans-serif" font-size="28">Placeholder hero media. Swap with campaign, set, or client imagery later.</text>
+</svg>

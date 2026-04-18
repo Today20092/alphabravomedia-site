@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none">
+  <rect width="1600" height="1000" fill="#18130f"/>
+  <rect x="124" y="124" width="1352" height="752" rx="42" fill="#221a14" stroke="#6c513f"/>
+  <rect x="210" y="206" width="1180" height="356" rx="32" fill="#120f0d"/>
+  <rect x="238" y="234" width="1124" height="300" rx="24" fill="#31241b"/>
+  <circle cx="530" cy="384" r="110" fill="#f3b37c" fill-opacity=".85"/>
+  <circle cx="1070" cy="384" r="110" fill="#f3b37c" fill-opacity=".85"/>
+  <rect x="676" y="318" width="248" height="132" rx="26" fill="#16110d" stroke="#8c5d36"/>
+  <rect x="310" y="646" width="980" height="30" rx="15" fill="#f7dfd0"/>
+  <rect x="310" y="704" width="742" height="24" rx="12" fill="#c9b09b"/>
+  <rect x="310" y="750" width="592" height="24" rx="12" fill="#c9b09b"/>
+  <text x="124" y="945" fill="#f7dfd0" font-family="Sora, Arial, sans-serif" font-size="52" font-weight="700">Future podcast gallery slot</text>
+</svg>
