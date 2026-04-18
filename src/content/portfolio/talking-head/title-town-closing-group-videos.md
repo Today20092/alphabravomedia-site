@@ -39,24 +39,9 @@ The most significant "win" of this ongoing project has been the client's growing
 
 ### Tools Used
 
-{% table %}
-- Gear
-- Purpose
-- Client Benefit
----
-- **Lumix S5IIX**
-- 4K 10-bit Video
-- Clean, professional image that builds instant credibility
----
-- **Amaran 60x**
-- Key Lighting
-- Flattering, studio-quality aesthetic in a standard office
----
-- **Teleprompter Rig**
-- Script Delivery
-- Reduces memorization stress, allowing focus on natural delivery
----
-- **Post-Production Pipeline**
-- Editing & Uploading
-- A completely hands-off experience for the client
-{% /table %}
+| Gear | Purpose | Client Benefit |
+| --- | --- | --- |
+| **Lumix S5IIX** | 4K 10-bit Video | Clean, professional image that builds instant credibility |
+| **Amaran 60x** | Key Lighting | Flattering, studio-quality aesthetic in a standard office |
+| **Teleprompter Rig** | Script Delivery | Reduces memorization stress, allowing focus on natural delivery |
+| **Post-Production Pipeline** | Editing & Uploading | A completely hands-off experience for the client |

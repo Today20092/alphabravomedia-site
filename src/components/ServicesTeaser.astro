@@ -27,22 +27,32 @@ const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
 <section id="services-teaser" class="site-section">
   <div class="site-shell">
     <div class="mb-10 grid gap-4">
-      <span class="site-kicker">Supporting services</span>
-      <h2 class="site-section-title max-w-3xl">{title}</h2>
-      <p class="site-section-copy">{description}</p>
+      <span class="site-kicker site-reveal" data-reveal>Supporting services</span>
+      <h2 class="site-section-title site-reveal site-reveal-stagger-1 max-w-3xl" data-reveal>{title}</h2>
+      <p class="site-section-copy site-reveal site-reveal-stagger-2" data-reveal>{description}</p>
     </div>
 
     <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-      {sortedServices.map((service) => (
-        <ServicePreviewCard
-          service={service}
-          href={`${base}services/${service.id}`}
-        />
+      {sortedServices.map((service, index) => (
+        <div
+          class:list={[
+            "site-reveal",
+            index % 3 === 0 && "site-reveal-stagger-1",
+            index % 3 === 1 && "site-reveal-stagger-2",
+            index % 3 === 2 && "site-reveal-stagger-3",
+          ]}
+          data-reveal
+        >
+          <ServicePreviewCard
+            service={service}
+            href={`${base}services/${service.id}`}
+          />
+        </div>
       ))}
     </div>
 
-    <div class="mt-8">
-      <a href={`${base}services`} class="site-button-secondary">
+    <div class="mt-8 site-reveal site-reveal-stagger-1" data-reveal>
+      <a href={`${base}services`} class="site-button-secondary site-hover-lift">
         Explore all services
         <Icon name="mdi:arrow-right" class="h-4 w-4" />
       </a>

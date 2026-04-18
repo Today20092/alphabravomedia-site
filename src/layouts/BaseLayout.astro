@@ -556,6 +556,49 @@ const ogImageUrl = toAbsoluteUrl(ogImage);
             }, 3000);
           });
         });
+
+        setupRevealAnimations();
+      }
+
+      function setupRevealAnimations() {
+        if (window.__abmRevealObserver) {
+          window.__abmRevealObserver.disconnect();
+          window.__abmRevealObserver = null;
+        }
+
+        const revealNodes = document.querySelectorAll("[data-reveal]");
+        if (!revealNodes.length) return;
+
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          revealNodes.forEach((node) => {
+            node.classList.remove("site-reveal-pending");
+            node.classList.add("site-reveal-in");
+          });
+          return;
+        }
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+
+              entry.target.classList.add("site-reveal-in");
+              observer.unobserve(entry.target);
+            });
+          },
+          {
+            rootMargin: "0px 0px -12% 0px",
+            threshold: 0.18,
+          },
+        );
+
+        window.__abmRevealObserver = observer;
+
+        revealNodes.forEach((node) => {
+          if (node.classList.contains("site-reveal-in")) return;
+          node.classList.add("site-reveal-pending");
+          observer.observe(node);
+        });
       }
 
       // Run on initial load and after view transitions

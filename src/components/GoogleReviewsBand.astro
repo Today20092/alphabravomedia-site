@@ -17,9 +17,9 @@ const latestReview = getLatestGoogleReview();
 
 <section class="site-section-flush">
   <div class="site-shell">
-    <div class="site-panel-muted p-5 sm:p-8">
+    <div class="site-panel-muted site-reveal p-5 sm:p-8" data-reveal>
       <div class="grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)_auto] lg:items-center">
-        <div>
+        <div class="site-reveal" data-reveal>
           <span class="site-kicker">Client Feedback</span>
           <h2 class="site-section-title mt-4 max-w-2xl">
             Trust the process before you commit the budget.
@@ -44,7 +44,7 @@ const latestReview = getLatestGoogleReview();
           )}
         </div>
 
-        <div class="grid gap-3 text-sm leading-7 text-site-text-muted">
+        <div class="site-reveal site-reveal-stagger-1 grid gap-3 text-sm leading-7 text-site-text-muted" data-reveal>
           <div class="flex items-start gap-3">
             <Icon
               name="mdi:check-circle"
@@ -82,12 +82,12 @@ const latestReview = getLatestGoogleReview();
           )}
         </div>
 
-        <div class="flex lg:justify-end">
+        <div class="site-reveal site-reveal-stagger-2 flex lg:justify-end" data-reveal>
           <a
             href={siteConfig.googleMapsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="site-button-secondary whitespace-nowrap"
+            class="site-button-secondary site-hover-lift whitespace-nowrap"
           >
             <Icon name="simple-icons:google" class="h-4 w-4" />
             Read Google reviews

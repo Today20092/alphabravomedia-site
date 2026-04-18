@@ -5,9 +5,10 @@ import { Icon } from "astro-icon/components";
 interface Props {
   service: any;
   href: string;
+  variant?: "default" | "wide";
 }
 
-const { service, href } = Astro.props;
+const { service, href, variant = "default" } = Astro.props;
 const icon = service.data.icon ?? "mdi:star";
 const category = service.data.category ?? "Service";
 const startingPrice = service.data.tiers[0]?.value?.price ?? "";
@@ -28,8 +29,13 @@ const featuredMediaSrc = featuredWork?.data.image?.src ?? (
 const featuredMediaAlt = featuredWork?.data.clientName ?? featuredWork?.data.title ?? service.data.title;
 ---
 
-<a href={href} class="site-card site-card-interactive group flex flex-col">
-  <div class="site-card-media aspect-[4/3]">
+<a href={href} class="site-card site-card-interactive site-hover-lift group flex flex-col">
+  <div
+    class:list={[
+      "site-card-media",
+      variant === "wide" ? "aspect-[16/7] md:aspect-[18/7]" : "aspect-[4/3]",
+    ]}
+  >
     {featuredMediaSrc ? (
       <img
         src={featuredMediaSrc}

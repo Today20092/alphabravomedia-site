@@ -5,6 +5,7 @@ import { YouTube } from "@astro-community/astro-embed-youtube";
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import Gallery from "../../components/Gallery.astro";
+import ServicePreviewCard from "../../components/ServicePreviewCard.astro";
 import { siteConfig } from "../../site-config";
 
 export async function getStaticPaths() {
@@ -31,9 +32,13 @@ if (gearUsedRaw.some((g) => g === undefined)) {
 }
 
 const allItems = await getCollection("portfolio");
+const allServices = await getCollection("services");
 const relatedItems = allItems
   .filter((i) => i.slug !== item.slug && i.data.category === item.data.category)
   .slice(0, 2);
+const relatedServices = allServices.filter((service) =>
+  item.data.services.includes(service.id),
+);
 const portfolioDescription = item.data.clientName
   ? `${item.data.clientName} ${item.data.category.toLowerCase()} project by Alpha Bravo Media, covering production approach, outcomes, and deliverables.`
   : `${item.data.category} project by Alpha Bravo Media, covering production approach, outcomes, and deliverables.`;
@@ -161,6 +166,36 @@ const portfolioOgImage = item.data.image?.src ??
           </div>
         )}
       </section>
+
+      {relatedServices.length > 0 && (
+        <section class="border-t border-site-border py-16 sm:py-24" data-pagefind-ignore>
+          <div class="mb-8">
+            <span class="site-kicker">
+              {relatedServices.length === 1 ? "Related service" : "Related services"}
+            </span>
+            <h2 class="site-section-title mt-4 max-w-3xl">Book the setup behind this project</h2>
+            <p class="site-section-copy mt-4">
+              This project reflects the workflow, gear, and production support behind the
+              service{relatedServices.length === 1 ? "" : "s"} below.
+            </p>
+          </div>
+
+          <div
+            class:list={[
+              "grid gap-6",
+              relatedServices.length > 1 && "site-grid-2",
+            ]}
+          >
+            {relatedServices.map((service) => (
+              <ServicePreviewCard
+                service={service}
+                href={`${base}services/${service.id}`}
+                variant={relatedServices.length === 1 ? "wide" : "default"}
+              />
+            ))}
+          </div>
+        </section>
+      )}
 
       {relatedItems.length > 0 && (
         <section data-pagefind-ignore>

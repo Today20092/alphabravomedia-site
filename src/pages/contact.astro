@@ -40,18 +40,22 @@ const inquiryPoints = [
               <p class="site-section-copy mt-4 max-w-2xl">
                 Reach out directly and we will handle scope, timing, and next steps from there.
               </p>
-              <div class="mt-8">
-                <div class="flex flex-col gap-3 sm:flex-row">
-                  <a href={`mailto:${siteConfig.email}`} class="site-button-primary">
-                    Email Ayoub
-                  </a>
-                  <a href={`tel:${siteConfig.phoneRaw}`} class="site-button-secondary">
+              <div class="site-panel-muted mt-8 p-4 sm:p-5">
+                <p class="site-kicker">Contact methods</p>
+                <p class="mt-3 max-w-lg text-xs uppercase tracking-[0.18em] text-site-text-muted/80 sm:text-sm sm:normal-case sm:tracking-normal">
+                  Call for urgency, email for project detail, or text for a quick check-in.
+                </p>
+                <div class="mt-5 grid gap-3 sm:grid-cols-3">
+                  <a href={`tel:${siteConfig.phoneRaw}`} class="site-button-primary w-full text-center">
                     Call Ayoub
                   </a>
+                  <a href={`mailto:${siteConfig.email}`} class="site-button-secondary w-full text-center">
+                    Email Ayoub
+                  </a>
+                  <a href={`sms:${siteConfig.phoneRaw}`} class="site-button-secondary w-full text-center">
+                    Text Ayoub
+                  </a>
                 </div>
-                <p class="site-link mt-4 inline-flex text-sm font-medium">
-                  Text support is available after the first reply if that is easier.
-                </p>
               </div>
             </div>
 
