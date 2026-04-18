@@ -40,8 +40,8 @@ const featuredWork = resolveWork([
 >
   <section class="site-section-hero">
     <div class="site-shell">
-      <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:items-end">
-        <div class="site-page-header mb-0 max-w-3xl">
+      <div class="grid gap-12 lg:grid-cols-[minmax(0,1.02fr)_minmax(22rem,0.98fr)] lg:items-center xl:gap-18">
+        <div class="site-page-header mb-0 max-w-4xl">
           <span class="site-kicker">Alpha Bravo Media</span>
           <h1 class="site-page-title">
             Content that makes your business look credible, communicate clearly,
@@ -71,34 +71,93 @@ const featuredWork = resolveWork([
           </p>
         </div>
 
-        <div class="site-card overflow-hidden">
-          <div class="site-card-media aspect-video">
-            <YouTube id="wXsf-nbHbzU" class="m-0 w-full max-w-full aspect-video" />
+        <div class="relative grid gap-4 lg:pt-2 xl:pt-0">
+          <div class="site-panel-muted ml-auto w-full max-w-[25rem] overflow-hidden p-5 sm:p-6">
+            <div class="grid gap-4 sm:grid-cols-[minmax(0,1fr)_10.5rem] sm:items-center">
+              <div>
+                <p class="text-xs font-semibold uppercase tracking-[0.24em] text-site-text-soft">
+                  First call structure
+                </p>
+                <p class="mt-3 max-w-md text-sm leading-6 text-site-text">
+                  Fit gets clarified first. Scope comes next. Production starts after both are clean.
+                </p>
+              </div>
+              <div class="rounded-site-lg border border-site-border bg-site-surface px-4 py-5 shadow-site-sm">
+                <svg viewBox="0 0 220 96" class="h-20 w-full text-site-accent" aria-hidden="true">
+                  <path
+                    d="M20 70C44 49 62 37 84 37C105 37 120 59 142 59C162 59 179 42 199 22"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-width="4"
+                    opacity="0.82"
+                  ></path>
+                  <circle cx="20" cy="70" r="7" fill="currentColor" opacity="0.28"></circle>
+                  <circle cx="109" cy="48" r="7" fill="currentColor" opacity="0.5"></circle>
+                  <circle cx="199" cy="22" r="7" fill="currentColor" opacity="0.82"></circle>
+                  <g fill="currentColor" font-size="11" font-weight="700" letter-spacing="0.14em">
+                    <text x="4" y="92">FIT</text>
+                    <text x="88" y="92">SCOPE</text>
+                    <text x="168" y="92">SHOOT</text>
+                  </g>
+                </svg>
+              </div>
+            </div>
           </div>
-          <div class="grid gap-3 border-t border-site-border bg-site-surface p-5 sm:grid-cols-3">
-            <div class="site-panel-muted p-4">
-              <p class="text-xs font-semibold uppercase tracking-[0.24em] text-site-text-soft">
-                Outcome
-              </p>
-              <p class="mt-3 text-sm leading-6 text-site-text">
-                Make the business feel more trustworthy before the first call.
-              </p>
+
+          <div class="relative lg:-ml-10 xl:-ml-14">
+            <div class="site-card overflow-hidden shadow-site-md">
+              <div class="site-card-media aspect-video">
+                <YouTube id="wXsf-nbHbzU" class="m-0 w-full max-w-full aspect-video" />
+              </div>
+              <div class="grid gap-3 border-t border-site-border bg-site-surface p-5 sm:grid-cols-3">
+                <div class="site-panel-muted p-4">
+                  <p class="text-xs font-semibold uppercase tracking-[0.24em] text-site-text-soft">
+                    Outcome
+                  </p>
+                  <p class="mt-3 text-sm leading-6 text-site-text">
+                    Make the business feel more trustworthy before the first call.
+                  </p>
+                </div>
+                <div class="site-panel-muted p-4">
+                  <p class="text-xs font-semibold uppercase tracking-[0.24em] text-site-text-soft">
+                    Mechanism
+                  </p>
+                  <p class="mt-3 text-sm leading-6 text-site-text">
+                    Recurring shoot days, editing, repurposing, and delivery-ready assets.
+                  </p>
+                </div>
+                <div class="site-panel-muted p-4">
+                  <p class="text-xs font-semibold uppercase tracking-[0.24em] text-site-text-soft">
+                    Fit promise
+                  </p>
+                  <p class="mt-3 text-sm leading-6 text-site-text">
+                    If the job is not the right fit, you will hear that before anything gets booked.
+                  </p>
+                </div>
+              </div>
             </div>
-            <div class="site-panel-muted p-4">
+            <div class="site-panel absolute -left-8 bottom-8 hidden w-56 p-5 xl:block">
               <p class="text-xs font-semibold uppercase tracking-[0.24em] text-site-text-soft">
-                Mechanism
+                Why this feels lower risk
               </p>
               <p class="mt-3 text-sm leading-6 text-site-text">
-                Recurring shoot days, editing, repurposing, and delivery-ready assets.
+                No package gets pushed until the call confirms the business actually needs this.
               </p>
+              <div class="mt-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-site-accent">
+                <span class="h-2 w-2 rounded-full bg-site-accent"></span>
+                Fit before invoice
+              </div>
             </div>
-            <div class="site-panel-muted p-4">
-              <p class="text-xs font-semibold uppercase tracking-[0.24em] text-site-text-soft">
-                Fit promise
-              </p>
-              <p class="mt-3 text-sm leading-6 text-site-text">
-                If the job is not the right fit, you will hear that before anything gets booked.
-              </p>
+            <div class="pointer-events-none absolute -right-3 top-24 hidden h-28 w-28 rounded-full border border-site-border bg-site-surface/70 blur-2xl xl:block"></div>
+            <div class="pointer-events-none absolute left-12 top-10 hidden h-px w-28 bg-gradient-to-r from-site-accent/50 to-transparent xl:block"></div>
+            <div class="pointer-events-none absolute right-8 top-3 hidden text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-site-text-soft xl:block">
+              Editorial proof
+            </div>
+          </div>
+          <div class="flex justify-end xl:pr-8">
+            <div class="hidden max-w-[16rem] text-right text-xs font-semibold uppercase tracking-[0.22em] text-site-text-soft md:block">
+              Strategy, production, and repurposing kept in one clean line of responsibility.
             </div>
           </div>
         </div>
@@ -106,35 +165,141 @@ const featuredWork = resolveWork([
     </div>
   </section>
 
-  <section class="site-section">
-    <div class="site-shell">
-      <div class="mb-10 max-w-3xl">
-        <span class="site-kicker">Outcomes first</span>
-        <h2 class="site-section-title mt-4">
-          The site should answer what changes for the client, not just what camera shows up.
-        </h2>
+  <section class="site-section relative isolate overflow-hidden">
+    <div class="pointer-events-none absolute inset-0">
+      <div class="absolute -left-16 top-12 h-40 w-40 rounded-full bg-site-accent/8 blur-3xl"></div>
+      <div class="absolute right-0 top-0 h-64 w-64 rounded-full bg-site-accent/10 blur-3xl"></div>
+      <div class="absolute inset-x-0 top-24 h-px bg-gradient-to-r from-transparent via-site-accent/25 to-transparent"></div>
+    </div>
+
+    <div class="site-shell relative">
+      <div class="mb-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(19rem,0.76fr)] lg:items-end">
+        <div class="max-w-3xl">
+          <span class="site-kicker">Outcomes first</span>
+          <h2 class="site-section-title mt-4">
+            Alpha Bravo Media helps businesses look established, attract the right
+            audience, and turn content into real growth.
+          </h2>
+          <p class="mt-4 max-w-2xl text-sm leading-7 text-site-text-muted">
+            We do more than show up with cameras. We help clients build trust faster,
+            explain what makes them different, stay visible online, and use modern
+            content systems, including AI, to market more consistently.
+          </p>
+        </div>
+
+        <div class="site-panel relative mt-3 overflow-hidden p-5 sm:mt-4 sm:p-6">
+          <div class="absolute inset-0 bg-gradient-to-br from-site-accent/10 via-transparent to-site-accent/5"></div>
+          <div class="relative">
+            <div class="mb-4 flex flex-wrap gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-site-text-soft">
+              <span class="rounded-full border border-site-border bg-site-surface/80 px-3 py-1">Trust</span>
+              <span class="rounded-full border border-site-border bg-site-surface/80 px-3 py-1">Authority</span>
+              <span class="rounded-full border border-site-border bg-site-surface/80 px-3 py-1">Reach</span>
+              <span class="rounded-full border border-site-border bg-site-surface/80 px-3 py-1">AI systems</span>
+            </div>
+
+            <svg
+              viewBox="0 0 520 360"
+              class="w-full text-site-accent"
+              aria-hidden="true"
+              fill="none"
+            >
+              <defs>
+                <linearGradient id="outcomes-path" x1="64" y1="278" x2="450" y2="86" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="currentColor" stop-opacity="0.16"></stop>
+                  <stop offset="0.5" stop-color="currentColor" stop-opacity="0.62"></stop>
+                  <stop offset="1" stop-color="currentColor" stop-opacity="0.28"></stop>
+                </linearGradient>
+                <radialGradient id="outcomes-aura" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(426 78) rotate(90) scale(120 120)">
+                  <stop stop-color="currentColor" stop-opacity="0.16"></stop>
+                  <stop offset="1" stop-color="currentColor" stop-opacity="0"></stop>
+                </radialGradient>
+              </defs>
+
+              <rect x="18" y="18" width="484" height="324" rx="28" stroke="currentColor" stroke-opacity="0.12"></rect>
+              <circle cx="426" cy="78" r="120" fill="url(#outcomes-aura)" class="text-site-accent"></circle>
+              <path
+                d="M62 278C131 240 180 242 241 210C296 181 346 141 456 86"
+                stroke="url(#outcomes-path)"
+                stroke-width="8"
+                stroke-linecap="round"
+              ></path>
+
+              <g class="text-site-text">
+                <rect x="52" y="156" width="124" height="110" rx="24" fill="currentColor" fill-opacity="0.03" stroke="currentColor" stroke-opacity="0.12"></rect>
+                <rect x="198" y="126" width="124" height="110" rx="24" fill="currentColor" fill-opacity="0.03" stroke="currentColor" stroke-opacity="0.12"></rect>
+                <rect x="344" y="92" width="124" height="110" rx="24" fill="currentColor" fill-opacity="0.03" stroke="currentColor" stroke-opacity="0.12"></rect>
+              </g>
+
+              <g class="text-site-accent">
+                <circle cx="114" cy="210" r="26" stroke="currentColor" stroke-width="2.5" stroke-opacity="0.7"></circle>
+                <path d="M100 210H128" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"></path>
+                <path d="M114 196V224" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"></path>
+
+                <path d="M226 194C241 177 278 177 294 194" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-opacity="0.85"></path>
+                <path d="M220 208H300" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-opacity="0.65"></path>
+                <path d="M236 222H286" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-opacity="0.45"></path>
+
+                <circle cx="406" cy="147" r="28" stroke="currentColor" stroke-width="2.5" stroke-opacity="0.75"></circle>
+                <circle cx="406" cy="147" r="15" stroke="currentColor" stroke-width="2.5"></circle>
+                <circle cx="406" cy="147" r="4.5" fill="currentColor"></circle>
+              </g>
+
+              <g class="text-site-text-soft">
+                <path d="M62 294H456" stroke="currentColor" stroke-opacity="0.2"></path>
+                <circle cx="114" cy="210" r="6" fill="currentColor"></circle>
+                <circle cx="260" cy="194" r="6" fill="currentColor"></circle>
+                <circle cx="406" cy="147" r="6" fill="currentColor"></circle>
+              </g>
+            </svg>
+          </div>
+        </div>
       </div>
 
       <div class="grid gap-6 md:grid-cols-3">
-        <div class="site-panel p-6 sm:p-8">
-          <p class="text-sm font-semibold text-site-text">Look more credible online</p>
+        <div class="site-panel relative overflow-hidden p-6 sm:p-8">
+          <div class="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-site-border bg-site-surface text-site-accent shadow-site-sm">
+            <svg viewBox="0 0 48 48" class="h-7 w-7" aria-hidden="true" fill="none">
+              <circle cx="24" cy="24" r="15" stroke="currentColor" stroke-width="2.5"></circle>
+              <path d="M24 14V34" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"></path>
+              <path d="M14 24H34" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"></path>
+            </svg>
+          </div>
+          <p class="text-sm font-semibold text-site-text">Earn trust and win more leads</p>
           <p class="mt-3 text-sm leading-7 text-site-text-muted">
-            Better visuals, cleaner sound, and stronger presentation make it easier for
-            people to trust the business before they speak with you.
+            Strong visuals, clear messaging, and polished presentation help the business
+            look established online so more of the right people feel confident reaching out.
           </p>
         </div>
-        <div class="site-panel p-6 sm:p-8">
-          <p class="text-sm font-semibold text-site-text">Explain the offer clearly</p>
+        <div class="site-panel relative overflow-hidden p-6 sm:p-8">
+          <div class="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-site-border bg-site-surface text-site-accent shadow-site-sm">
+            <svg viewBox="0 0 48 48" class="h-7 w-7" aria-hidden="true" fill="none">
+              <path d="M10 30C14 19 20 14 28 14C35 14 39 18 39 25C39 32 34 36 25 36H17" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M15 20H28" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"></path>
+              <path d="M15 26H24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"></path>
+            </svg>
+          </div>
+          <p class="text-sm font-semibold text-site-text">Build authority in the market</p>
           <p class="mt-3 text-sm leading-7 text-site-text-muted">
-            Use content to teach, answer common questions, and make the next step obvious
-            instead of repeating the same explanation manually.
+            Content is used to show expertise, answer common questions, explain the offer
+            clearly, and position the business as the trusted choice in its field.
           </p>
         </div>
-        <div class="site-panel p-6 sm:p-8">
-          <p class="text-sm font-semibold text-site-text">Publish without managing production</p>
+        <div class="site-panel relative overflow-hidden p-6 sm:p-8">
+          <div class="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-site-border bg-site-surface text-site-accent shadow-site-sm">
+            <svg viewBox="0 0 48 48" class="h-7 w-7" aria-hidden="true" fill="none">
+              <circle cx="14" cy="24" r="4" fill="currentColor"></circle>
+              <circle cx="34" cy="14" r="4" fill="currentColor"></circle>
+              <circle cx="34" cy="34" r="4" fill="currentColor"></circle>
+              <path d="M18 24H30" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"></path>
+              <path d="M17 22L30 15" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"></path>
+              <path d="M17 26L30 33" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"></path>
+            </svg>
+          </div>
+          <p class="text-sm font-semibold text-site-text">Reach more people with less friction</p>
           <p class="mt-3 text-sm leading-7 text-site-text-muted">
-            One partner handles planning, production, editing, and repurposing so content
-            keeps moving even when the client is busy.
+            We handle planning, production, editing, repurposing, and practical AI support
+            so marketing keeps moving, reaches the target audience, and does not depend on
+            the client doing everything manually.
           </p>
         </div>
       </div>
@@ -244,37 +409,213 @@ const featuredWork = resolveWork([
 
   <section class="site-section">
     <div class="site-shell">
-      <div class="site-panel-muted p-6 sm:p-8">
-        <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.92fr)] lg:items-center">
-          <div>
-            <span class="site-kicker">Low-risk first step</span>
-            <h2 class="site-section-title mt-4">
-              Clear fit, clear scope, clear revisions. No vague handoff.
-            </h2>
-            <p class="site-section-copy mt-4">
-              The first conversation is there to protect both sides. If the project is not
-              the right fit, Ayoub says that early. If it is, the scope and delivery path
-              get clarified before production starts.
-            </p>
+      <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.08fr)] lg:items-start">
+        <div class="max-w-2xl">
+          <span class="site-kicker">Discovery before payment</span>
+          <h2 class="site-section-title mt-4">
+            We figure out the right scope before you pay for the wrong package.
+          </h2>
+          <p class="site-section-copy mt-4">
+            The first conversation is a working fit check, not a pressure call. Ayoub helps
+            you sort out what the business actually needs, recommends the right production
+            path if it makes sense, and says so early if it does not. If another specialist
+            is the better answer, he points you there before any invoice goes out.
+          </p>
+          <div class="mt-8 grid gap-4">
+            <div class="border-t border-site-border pt-4">
+              <div class="flex items-start gap-3">
+                <Icon name="mdi:account-search-outline" class="mt-0.5 h-5 w-5 text-site-accent" />
+                <div>
+                  <p class="text-sm font-semibold text-site-text">Free fit call first</p>
+                  <p class="mt-2 text-sm leading-7 text-site-text-muted">
+                    Goals, timing, budget, and deliverables get discussed before money changes hands.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="border-t border-site-border pt-4">
+              <div class="flex items-start gap-3">
+                <Icon name="mdi:clipboard-text-clock-outline" class="mt-0.5 h-5 w-5 text-site-accent" />
+                <div>
+                  <p class="text-sm font-semibold text-site-text">Clear scope before production</p>
+                  <p class="mt-2 text-sm leading-7 text-site-text-muted">
+                    Once the fit is clear, the shoot plan, delivery path, and revision window get defined.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="border-t border-site-border pt-4">
+              <div class="flex items-start gap-3">
+                <Icon name="mdi:handshake-outline" class="mt-0.5 h-5 w-5 text-site-accent" />
+                <div>
+                  <p class="text-sm font-semibold text-site-text">Referral out if it is not a match</p>
+                  <p class="mt-2 text-sm leading-7 text-site-text-muted">
+                    If the right answer is another specialist, you hear that early instead of being sold the wrong offer.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="grid gap-4">
-            <div class="site-panel p-5 sm:p-6">
-              <p class="text-sm font-semibold text-site-text">Fit first</p>
-              <p class="mt-3 text-sm leading-7 text-site-text-muted">
-                Honest guidance before the client commits to the wrong package.
-              </p>
+        </div>
+
+        <div class="grid gap-4">
+          <div class="site-panel overflow-hidden p-6 sm:p-7">
+            <div class="flex flex-col gap-6">
+              <div class="flex flex-wrap items-center gap-3">
+                <span class="site-chip site-chip-muted">No payment until fit is clear</span>
+                <span class="text-xs font-semibold uppercase tracking-[0.24em] text-site-text-soft">
+                  Discovery map
+                </span>
+              </div>
+              <div class="grid gap-5 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1fr)] lg:items-center">
+                <div>
+                  <p class="text-lg font-semibold tracking-tight text-site-text">
+                    The first call should narrow the job, not force the package.
+                  </p>
+                  <p class="mt-3 text-sm leading-7 text-site-text-muted">
+                    Need, fit, scope, and next step get clarified in that order.
+                  </p>
+                </div>
+                <div class="overflow-hidden rounded-site-xl border border-site-border bg-site-surface-muted px-4 py-5">
+                  <svg
+                    viewBox="0 0 420 180"
+                    class="h-36 w-full text-site-accent"
+                    aria-hidden="true"
+                  >
+                    <defs>
+                      <linearGradient id="fit-path" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="currentColor" stop-opacity="0.28"></stop>
+                        <stop offset="50%" stop-color="currentColor" stop-opacity="0.95"></stop>
+                        <stop offset="100%" stop-color="currentColor" stop-opacity="0.35"></stop>
+                      </linearGradient>
+                    </defs>
+                    <path
+                      d="M42 124C86 70 128 61 171 82C215 104 254 149 302 126C339 108 362 75 382 56"
+                      fill="none"
+                      stroke="url(#fit-path)"
+                      stroke-linecap="round"
+                      stroke-width="6"
+                    ></path>
+                    <g fill="currentColor">
+                      <circle cx="42" cy="124" r="13" fill-opacity="0.28"></circle>
+                      <circle cx="163" cy="80" r="13" fill-opacity="0.38"></circle>
+                      <circle cx="282" cy="132" r="13" fill-opacity="0.5"></circle>
+                      <circle cx="382" cy="56" r="13" fill-opacity="0.72"></circle>
+                    </g>
+                    <g fill="currentColor" font-size="15" font-weight="700">
+                      <text x="28" y="156">Need</text>
+                      <text x="149" y="49">Fit</text>
+                      <text x="257" y="165">Scope</text>
+                      <text x="356" y="28">Shoot</text>
+                    </g>
+                  </svg>
+                </div>
+              </div>
             </div>
-            <div class="site-panel p-5 sm:p-6">
-              <p class="text-sm font-semibold text-site-text">Scope before shoot day</p>
-              <p class="mt-3 text-sm leading-7 text-site-text-muted">
-                Timing, deliverables, and priorities are clarified before cameras come out.
-              </p>
-            </div>
-            <div class="site-panel p-5 sm:p-6">
-              <p class="text-sm font-semibold text-site-text">Reasonable revisions</p>
-              <p class="mt-3 text-sm leading-7 text-site-text-muted">
-                Refinement is part of the process when the delivery needs final adjustment.
-              </p>
+          </div>
+
+          <div class="relative isolate">
+            <div class="pointer-events-none absolute inset-x-8 top-8 -z-10 h-24 rounded-full bg-site-accent/10 blur-3xl"></div>
+
+            <div class="grid gap-4 sm:grid-cols-3">
+              <div class="site-card overflow-hidden shadow-site-sm">
+                <div class="flex h-full flex-col gap-5 p-6">
+                  <div>
+                    <p class="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-site-accent">
+                      First pass
+                    </p>
+                    <p class="mt-3 text-2xl font-semibold tracking-tight text-site-text">
+                      What gets checked
+                    </p>
+                  </div>
+                  <div class="h-px bg-site-border"></div>
+                  <div class="grid gap-3">
+                    <div class="flex items-baseline justify-between gap-4 border-b border-site-border/70 pb-2">
+                      <span class="text-sm font-semibold text-site-text">Goal</span>
+                      <span class="text-xs uppercase tracking-[0.18em] text-site-text-soft">What needs to change</span>
+                    </div>
+                    <div class="flex items-baseline justify-between gap-4 border-b border-site-border/70 pb-2">
+                      <span class="text-sm font-semibold text-site-text">Timing</span>
+                      <span class="text-xs uppercase tracking-[0.18em] text-site-text-soft">When it needs to happen</span>
+                    </div>
+                    <div class="flex items-baseline justify-between gap-4">
+                      <span class="text-sm font-semibold text-site-text">Budget</span>
+                      <span class="text-xs uppercase tracking-[0.18em] text-site-text-soft">What range makes sense</span>
+                    </div>
+                  </div>
+                  <p class="text-sm leading-7 text-site-text-muted">
+                    Enough to tell whether the project should move forward.
+                  </p>
+                </div>
+              </div>
+
+              <div class="site-card overflow-hidden shadow-site-sm">
+                <div class="flex h-full flex-col gap-5 p-6">
+                  <div>
+                    <p class="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-site-accent">
+                      In order
+                    </p>
+                    <p class="mt-3 text-2xl font-semibold tracking-tight text-site-text">
+                      What gets defined
+                    </p>
+                  </div>
+                  <div class="h-px bg-site-border"></div>
+                  <div class="grid gap-3">
+                    <div class="flex items-center gap-3">
+                      <span class="text-xs font-semibold uppercase tracking-[0.18em] text-site-text-soft">01</span>
+                      <span class="h-2.5 w-2.5 rounded-full bg-site-accent/45"></span>
+                      <span class="text-sm text-site-text">Need</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <span class="text-xs font-semibold uppercase tracking-[0.18em] text-site-text-soft">02</span>
+                      <span class="h-2.5 w-2.5 rounded-full bg-site-accent/60"></span>
+                      <span class="text-sm text-site-text">Fit</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <span class="text-xs font-semibold uppercase tracking-[0.18em] text-site-text-soft">03</span>
+                      <span class="h-2.5 w-2.5 rounded-full bg-site-accent/75"></span>
+                      <span class="text-sm text-site-text">Scope</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <span class="text-xs font-semibold uppercase tracking-[0.18em] text-site-text-soft">04</span>
+                      <span class="h-2.5 w-2.5 rounded-full bg-site-accent"></span>
+                      <span class="text-sm text-site-text">Next step</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="site-card overflow-hidden shadow-site-sm">
+                <div class="flex h-full flex-col gap-5 p-6">
+                  <div>
+                    <p class="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-site-accent">
+                      Honest outcome
+                    </p>
+                    <p class="mt-3 text-2xl font-semibold tracking-tight text-site-text">
+                      How honesty shows up
+                    </p>
+                  </div>
+                  <div class="h-px bg-site-border"></div>
+                  <div class="grid gap-3">
+                    <div class="pb-3">
+                      <p class="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-site-accent">
+                        Good fit
+                      </p>
+                      <p class="mt-3 text-sm leading-7 text-site-text">
+                        Clear shoot plan and delivery path.
+                      </p>
+                    </div>
+                    <div class="border-t border-site-border pt-4">
+                      <p class="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-site-accent">
+                        Not a fit
+                      </p>
+                      <p class="mt-3 text-sm leading-7 text-site-text">
+                        Referral out before invoice.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

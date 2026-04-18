@@ -26,8 +26,4 @@
   <rect x="820" y="285" width="270" height="330" rx="26" fill="#1d1713" stroke="#8c5d36"/>
   <rect x="1128" y="285" width="240" height="150" rx="26" fill="#1d1713" stroke="#8c5d36"/>
   <rect x="1128" y="465" width="240" height="150" rx="26" fill="#1d1713" stroke="#8c5d36"/>
-  <path d="M904 523c52-92 155-126 247-73" stroke="#f3b37c" stroke-width="18" stroke-linecap="round"/>
-  <path d="M1168 508l27-73 57 55" stroke="#f3b37c" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="140" y="905" fill="#f7dfd0" font-family="Sora, Arial, sans-serif" font-size="54" font-weight="700">Monthly content retainers</text>
-  <text x="140" y="956" fill="#c9b09b" font-family="Inter, Arial, sans-serif" font-size="28">Placeholder hero media. Swap with campaign, set, or client imagery later.</text>
 </svg>

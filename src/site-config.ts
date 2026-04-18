@@ -15,7 +15,7 @@ export const siteConfig = {
   contactFormUrl: publicTallyContactFormUrl,
   elementUsername: "@ayoubab:matrix.org",
   googleMapsUrl: "https://maps.app.goo.gl/8aHq1mHx7L9Q8z4A8",
-  googleMapsLabel: "Open Google Maps",
+  googleMapsLabel: "See our reviews on Google Maps",
   googleReviewUrl: "https://g.page/r/CYI5X3BVmD1sEBM/review",
   googleReviewLabel: "Leave a review",
   socialLinks: [
