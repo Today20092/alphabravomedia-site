@@ -15,6 +15,8 @@
   --site-accent: oklch(0.72 0.09 43);
   --site-on-accent: oklch(0.18 0.01 55);
   --site-accent-strong: oklch(0.79 0.08 44);
+  --site-link: var(--site-accent-strong);
+  --site-link-hover: var(--site-text);
   --site-accent-soft: oklch(0.72 0.09 43 / 0.14);
   --site-body-glow: oklch(0.72 0.09 43 / 0.08);
   --site-nav-bg: oklch(0.15 0.012 55 / 0.92);
@@ -56,6 +58,8 @@ html[data-theme="light"] {
   --site-accent: oklch(0.57 0.13 45);
   --site-on-accent: oklch(0.99 0 0);
   --site-accent-strong: oklch(0.5 0.15 44);
+  --site-link: var(--site-accent-strong);
+  --site-link-hover: var(--site-accent);
   --site-accent-soft: oklch(0.57 0.13 45 / 0.16);
   --site-body-glow: oklch(0.57 0.13 45 / 0.1);
   --site-nav-bg: oklch(0.985 0.006 90 / 0.9);
@@ -433,16 +437,35 @@ body {
   }
 
   .site-link {
-    color: var(--site-text-muted);
-    transition: color 180ms ease;
+    color: var(--site-link);
+    transition:
+      color 180ms ease,
+      text-decoration-color 180ms ease;
   }
 
-  .site-link:hover {
-    color: var(--site-text);
+  .site-link:visited {
+    color: var(--site-link);
   }
 
+  .site-link:hover,
+  .site-link:focus-visible {
+    color: var(--site-link-hover);
+  }
+
+}
+
+@layer utilities {
   .site-prose {
-    --tw-prose-headings: var(--site-text);
+    --tw-prose-body: var(--site-text-muted) !important;
+    --tw-prose-headings: var(--site-text) !important;
+    --tw-prose-bold: var(--site-text) !important;
+    --tw-prose-links: var(--site-link) !important;
+    --tw-prose-code: var(--site-text) !important;
+    --tw-prose-invert-body: var(--site-text-muted) !important;
+    --tw-prose-invert-headings: var(--site-text) !important;
+    --tw-prose-invert-bold: var(--site-text) !important;
+    --tw-prose-invert-links: var(--site-link) !important;
+    --tw-prose-invert-code: var(--site-text) !important;
     color: var(--site-text-muted);
   }
 
@@ -459,7 +482,20 @@ body {
   }
 
   .site-prose :where(a) {
-    color: var(--site-accent-strong);
+    color: var(--site-link) !important;
+    text-decoration-color: color-mix(in oklab, var(--site-link) 55%, transparent);
+    transition:
+      color 180ms ease,
+      text-decoration-color 180ms ease;
+  }
+
+  .site-prose :where(a:visited) {
+    color: var(--site-link) !important;
+  }
+
+  .site-prose :where(a:hover, a:focus-visible) {
+    color: var(--site-link-hover) !important;
+    text-decoration-color: currentColor;
   }
 
   .site-prose :where(code) {
