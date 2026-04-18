@@ -38,41 +38,45 @@ const featuredWork = resolveWork([
   title="Tampa Content Retainers and Video Production | Alpha Bravo Media"
   description="Outcome-first content production for Tampa businesses that need stronger trust, clearer messaging, and a consistent stream of polished media."
 >
-  <section class="site-section-hero">
-    <div class="site-shell">
+  <section class="site-section-hero relative isolate overflow-hidden">
+    <div class="site-atmosphere-hero" aria-hidden="true"></div>
+    <div class="site-vignette-frame" aria-hidden="true"></div>
+    <div class="site-texture-grain" aria-hidden="true"></div>
+
+    <div class="site-shell relative">
       <div class="grid gap-12 lg:grid-cols-[minmax(0,1.02fr)_minmax(22rem,0.98fr)] lg:items-center xl:gap-18">
         <div class="site-page-header mb-0 max-w-4xl">
-          <span class="site-kicker">Alpha Bravo Media</span>
-          <h1 class="site-page-title">
+          <span class="site-kicker site-reveal" data-reveal>Alpha Bravo Media</span>
+          <h1 class="site-page-title site-reveal site-reveal-stagger-1" data-reveal>
             Content that makes your business look credible, communicate clearly,
             and stay visible.
           </h1>
-          <p class="site-page-copy text-base sm:text-lg">
+          <p class="site-page-copy site-reveal site-reveal-stagger-2 text-base sm:text-lg" data-reveal>
             Strategy, filming, editing, photography, and repurposing handled by one
             production partner. Monthly retainers lead the offer when consistency is
             the real bottleneck.
           </p>
-          <div class="mt-6 flex flex-wrap gap-3 text-sm text-site-text-muted">
+          <div class="site-reveal site-reveal-stagger-2 mt-6 flex flex-wrap gap-3 text-sm text-site-text-muted" data-reveal>
             <span class="site-chip">Starting at $1,200/mo</span>
             <span class="site-chip site-chip-muted">Honest fit guidance before booking</span>
             <span class="site-chip site-chip-muted">Reasonable revisions after delivery</span>
           </div>
-          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a href={`${base}services/monthly-retainers`} class="site-button-primary">
+          <div class="site-reveal site-reveal-stagger-3 mt-8 flex flex-col gap-3 sm:flex-row" data-reveal>
+            <a href={`${base}services/monthly-retainers`} class="site-button-primary site-hover-lift">
               See monthly retainers
             </a>
-            <a href={`${base}portfolio`} class="site-button-secondary">
+            <a href={`${base}portfolio`} class="site-button-secondary site-hover-lift">
               Browse work
             </a>
           </div>
-          <p class="mt-5 max-w-2xl text-sm leading-6 text-site-text-soft sm:text-base">
+          <p class="site-reveal site-reveal-stagger-3 mt-5 max-w-2xl text-sm leading-6 text-site-text-soft sm:text-base" data-reveal>
             Ayoub texts first, makes sure the project is a fit, and gives a clear next
             step before you commit to production.
           </p>
         </div>
 
-        <div class="relative grid gap-4 lg:pt-2 xl:pt-0">
-          <div class="site-panel-muted ml-auto w-full max-w-[25rem] overflow-hidden p-5 sm:p-6">
+        <div class="site-reveal site-reveal-stagger-3 relative grid gap-4 lg:pt-2 xl:pt-0" data-reveal>
+          <div class="site-panel-muted site-hover-lift ml-auto w-full max-w-[25rem] overflow-hidden p-5 sm:p-6">
             <div class="grid gap-4 sm:grid-cols-[minmax(0,1fr)_10.5rem] sm:items-center">
               <div>
                 <p class="text-xs font-semibold uppercase tracking-[0.24em] text-site-text-soft">
@@ -106,7 +110,7 @@ const featuredWork = resolveWork([
           </div>
 
           <div class="relative lg:-ml-10 xl:-ml-14">
-            <div class="site-card overflow-hidden shadow-site-md">
+            <div class="site-card site-hover-lift overflow-hidden shadow-site-md">
               <div class="site-card-media aspect-video">
                 <YouTube id="wXsf-nbHbzU" class="m-0 w-full max-w-full aspect-video" />
               </div>
@@ -137,7 +141,7 @@ const featuredWork = resolveWork([
                 </div>
               </div>
             </div>
-            <div class="site-panel absolute -left-8 bottom-8 hidden w-56 p-5 xl:block">
+            <div class="site-panel site-hover-lift absolute -left-8 bottom-8 hidden w-56 p-5 xl:block">
               <p class="text-xs font-semibold uppercase tracking-[0.24em] text-site-text-soft">
                 Why this feels lower risk
               </p>
@@ -155,39 +159,30 @@ const featuredWork = resolveWork([
               Editorial proof
             </div>
           </div>
-          <div class="flex justify-end xl:pr-8">
-            <div class="hidden max-w-[16rem] text-right text-xs font-semibold uppercase tracking-[0.22em] text-site-text-soft md:block">
-              Strategy, production, and repurposing kept in one clean line of responsibility.
-            </div>
-          </div>
         </div>
       </div>
     </div>
   </section>
 
   <section class="site-section relative isolate overflow-hidden">
-    <div class="pointer-events-none absolute inset-0">
-      <div class="absolute -left-16 top-12 h-40 w-40 rounded-full bg-site-accent/8 blur-3xl"></div>
-      <div class="absolute right-0 top-0 h-64 w-64 rounded-full bg-site-accent/10 blur-3xl"></div>
-      <div class="absolute inset-x-0 top-24 h-px bg-gradient-to-r from-transparent via-site-accent/25 to-transparent"></div>
-    </div>
+    <div class="site-atmosphere-section" aria-hidden="true"></div>
 
     <div class="site-shell relative">
-      <div class="mb-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(19rem,0.76fr)] lg:items-end">
+      <div class="mb-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(19rem,0.76fr)] lg:items-start">
         <div class="max-w-3xl">
-          <span class="site-kicker">Outcomes first</span>
-          <h2 class="site-section-title mt-4">
+          <span class="site-kicker site-reveal" data-reveal>Outcomes first</span>
+          <h2 class="site-section-title site-reveal site-reveal-stagger-1 mt-4" data-reveal>
             Alpha Bravo Media helps businesses look established, attract the right
             audience, and turn content into real growth.
           </h2>
-          <p class="mt-4 max-w-2xl text-sm leading-7 text-site-text-muted">
+          <p class="site-reveal site-reveal-stagger-2 mt-4 max-w-2xl text-sm leading-7 text-site-text-muted" data-reveal>
             We do more than show up with cameras. We help clients build trust faster,
             explain what makes them different, stay visible online, and use modern
             content systems, including AI, to market more consistently.
           </p>
         </div>
 
-        <div class="site-panel relative mt-3 overflow-hidden p-5 sm:mt-4 sm:p-6">
+        <div class="site-panel site-reveal site-reveal-stagger-2 relative mt-3 overflow-hidden p-5 sm:mt-4 sm:p-6" data-reveal>
           <div class="absolute inset-0 bg-gradient-to-br from-site-accent/10 via-transparent to-site-accent/5"></div>
           <div class="relative">
             <div class="mb-4 flex flex-wrap gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-site-text-soft">
@@ -256,7 +251,7 @@ const featuredWork = resolveWork([
       </div>
 
       <div class="grid gap-6 md:grid-cols-3">
-        <div class="site-panel relative overflow-hidden p-6 sm:p-8">
+        <div class="site-panel site-hover-lift site-reveal relative overflow-hidden p-6 sm:p-8" data-reveal>
           <div class="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-site-border bg-site-surface text-site-accent shadow-site-sm">
             <svg viewBox="0 0 48 48" class="h-7 w-7" aria-hidden="true" fill="none">
               <circle cx="24" cy="24" r="15" stroke="currentColor" stroke-width="2.5"></circle>
@@ -270,7 +265,7 @@ const featuredWork = resolveWork([
             look established online so more of the right people feel confident reaching out.
           </p>
         </div>
-        <div class="site-panel relative overflow-hidden p-6 sm:p-8">
+        <div class="site-panel site-hover-lift site-reveal site-reveal-stagger-1 relative overflow-hidden p-6 sm:p-8" data-reveal>
           <div class="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-site-border bg-site-surface text-site-accent shadow-site-sm">
             <svg viewBox="0 0 48 48" class="h-7 w-7" aria-hidden="true" fill="none">
               <path d="M10 30C14 19 20 14 28 14C35 14 39 18 39 25C39 32 34 36 25 36H17" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -284,7 +279,7 @@ const featuredWork = resolveWork([
             clearly, and position the business as the trusted choice in its field.
           </p>
         </div>
-        <div class="site-panel relative overflow-hidden p-6 sm:p-8">
+        <div class="site-panel site-hover-lift site-reveal site-reveal-stagger-2 relative overflow-hidden p-6 sm:p-8" data-reveal>
           <div class="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-site-border bg-site-surface text-site-accent shadow-site-sm">
             <svg viewBox="0 0 48 48" class="h-7 w-7" aria-hidden="true" fill="none">
               <circle cx="14" cy="24" r="4" fill="currentColor"></circle>
@@ -311,39 +306,47 @@ const featuredWork = resolveWork([
       <div class="site-shell">
         <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.92fr)] lg:items-center">
           <div>
-            <span class="site-kicker">Main offer</span>
-            <h2 class="site-section-title mt-4">
+            <span class="site-kicker site-reveal" data-reveal>Main offer</span>
+            <h2 class="site-section-title site-reveal site-reveal-stagger-1 mt-4" data-reveal>
               Monthly content retainers for businesses that need momentum, not one-off media.
             </h2>
-            <p class="site-section-copy mt-4">
+            <p class="site-section-copy site-reveal site-reveal-stagger-2 mt-4" data-reveal>
               Recurring strategy and production usually create better results than isolated
               shoots. The retainer is built for businesses that want steady publishing,
               stronger positioning, and a partner who can help shape the message.
             </p>
-            <div class="mt-6 flex flex-wrap gap-3">
+            <div class="site-reveal site-reveal-stagger-2 mt-6 flex flex-wrap gap-3" data-reveal>
               <span class="site-chip">Starting at $1,200/mo</span>
               <span class="site-chip site-chip-muted">Most popular: Growth Retainer</span>
             </div>
             <ul class="mt-8 space-y-3">
-              {monthlyService.data.tiers[1]?.value?.includes.slice(0, 4).map((item: string) => (
-                <li class="flex items-start gap-3 text-sm leading-7 text-site-text-muted">
+              {monthlyService.data.tiers[1]?.value?.includes.slice(0, 4).map((item: string, index: number) => (
+                <li
+                  class:list={[
+                    "site-reveal flex items-start gap-3 text-sm leading-7 text-site-text-muted",
+                    index === 0 && "site-reveal-stagger-1",
+                    index === 1 && "site-reveal-stagger-2",
+                    index >= 2 && "site-reveal-stagger-3",
+                  ]}
+                  data-reveal
+                >
                   <Icon name="mdi:check-circle" class="mt-1 h-4 w-4 shrink-0 text-site-accent" />
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
-            <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a href={`${base}services/monthly-retainers`} class="site-button-primary">
+            <div class="site-reveal site-reveal-stagger-3 mt-8 flex flex-col gap-3 sm:flex-row" data-reveal>
+              <a href={`${base}services/monthly-retainers`} class="site-button-primary site-hover-lift">
                 See retainers and pricing
               </a>
-              <a href={`${base}contact`} class="site-button-secondary">
+              <a href={`${base}contact`} class="site-button-secondary site-hover-lift">
                 Talk through fit first
               </a>
             </div>
           </div>
 
-          <div class="site-card overflow-hidden">
-          <div class="site-card-media aspect-[4/3]">
+          <div class="site-card site-hover-lift site-reveal site-reveal-stagger-2 overflow-hidden" data-reveal>
+            <div class="site-card-media aspect-[4/3]">
               {monthlyService.data.heroImage && (
                 <img
                   src={monthlyService.data.heroImage.src}
@@ -380,21 +383,30 @@ const featuredWork = resolveWork([
       <div class="site-shell">
         <div class="mb-8 flex items-end justify-between gap-4">
           <div class="site-page-header mb-0">
-            <span class="site-kicker">Proof</span>
-            <h2 class="site-section-title">Real work tied to real service lines.</h2>
+            <span class="site-kicker site-reveal" data-reveal>Proof</span>
+            <h2 class="site-section-title site-reveal site-reveal-stagger-1" data-reveal>Real work tied to real service lines.</h2>
           </div>
-          <a href={`${base}portfolio`} class="site-button-secondary hidden sm:inline-flex">
+          <a href={`${base}portfolio`} class="site-button-secondary site-hover-lift site-reveal site-reveal-stagger-2 hidden sm:inline-flex" data-reveal>
             Browse work
           </a>
         </div>
 
         <div class="grid gap-6 lg:grid-cols-3">
-          {featuredWork.map((item: any) => (
-            <WorkCard
-              item={item}
-              href={`${base}portfolio/${item.slug}`}
-              ctaLabel="See example"
-            />
+          {featuredWork.map((item: any, index: number) => (
+            <div
+              class:list={[
+                "site-reveal",
+                index === 1 && "site-reveal-stagger-1",
+                index === 2 && "site-reveal-stagger-2",
+              ]}
+              data-reveal
+            >
+              <WorkCard
+                item={item}
+                href={`${base}portfolio/${item.slug}`}
+                ctaLabel="See example"
+              />
+            </div>
           ))}
         </div>
       </div>
@@ -411,18 +423,18 @@ const featuredWork = resolveWork([
     <div class="site-shell">
       <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.08fr)] lg:items-start">
         <div class="max-w-2xl">
-          <span class="site-kicker">Discovery before payment</span>
-          <h2 class="site-section-title mt-4">
+          <span class="site-kicker site-reveal" data-reveal>Discovery before payment</span>
+          <h2 class="site-section-title site-reveal site-reveal-stagger-1 mt-4" data-reveal>
             We figure out the right scope before you pay for the wrong package.
           </h2>
-          <p class="site-section-copy mt-4">
+          <p class="site-section-copy site-reveal site-reveal-stagger-2 mt-4" data-reveal>
             The first conversation is a working fit check, not a pressure call. Ayoub helps
             you sort out what the business actually needs, recommends the right production
             path if it makes sense, and says so early if it does not. If another specialist
             is the better answer, he points you there before any invoice goes out.
           </p>
           <div class="mt-8 grid gap-4">
-            <div class="border-t border-site-border pt-4">
+            <div class="site-reveal border-t border-site-border pt-4" data-reveal>
               <div class="flex items-start gap-3">
                 <Icon name="mdi:account-search-outline" class="mt-0.5 h-5 w-5 text-site-accent" />
                 <div>
@@ -433,7 +445,7 @@ const featuredWork = resolveWork([
                 </div>
               </div>
             </div>
-            <div class="border-t border-site-border pt-4">
+            <div class="site-reveal site-reveal-stagger-1 border-t border-site-border pt-4" data-reveal>
               <div class="flex items-start gap-3">
                 <Icon name="mdi:clipboard-text-clock-outline" class="mt-0.5 h-5 w-5 text-site-accent" />
                 <div>
@@ -444,7 +456,7 @@ const featuredWork = resolveWork([
                 </div>
               </div>
             </div>
-            <div class="border-t border-site-border pt-4">
+            <div class="site-reveal site-reveal-stagger-2 border-t border-site-border pt-4" data-reveal>
               <div class="flex items-start gap-3">
                 <Icon name="mdi:handshake-outline" class="mt-0.5 h-5 w-5 text-site-accent" />
                 <div>
@@ -459,7 +471,7 @@ const featuredWork = resolveWork([
         </div>
 
         <div class="grid gap-4">
-          <div class="site-panel overflow-hidden p-6 sm:p-7">
+          <div class="site-panel site-hover-lift site-reveal site-reveal-stagger-1 overflow-hidden p-6 sm:p-7" data-reveal>
             <div class="flex flex-col gap-6">
               <div class="flex flex-wrap items-center gap-3">
                 <span class="site-chip site-chip-muted">No payment until fit is clear</span>
@@ -518,7 +530,7 @@ const featuredWork = resolveWork([
             <div class="pointer-events-none absolute inset-x-8 top-8 -z-10 h-24 rounded-full bg-site-accent/10 blur-3xl"></div>
 
             <div class="grid gap-4 sm:grid-cols-3">
-              <div class="site-card overflow-hidden shadow-site-sm">
+              <div class="site-card site-hover-lift site-reveal overflow-hidden shadow-site-sm" data-reveal>
                 <div class="flex h-full flex-col gap-5 p-6">
                   <div>
                     <p class="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-site-accent">
@@ -549,7 +561,7 @@ const featuredWork = resolveWork([
                 </div>
               </div>
 
-              <div class="site-card overflow-hidden shadow-site-sm">
+              <div class="site-card site-hover-lift site-reveal site-reveal-stagger-1 overflow-hidden shadow-site-sm" data-reveal>
                 <div class="flex h-full flex-col gap-5 p-6">
                   <div>
                     <p class="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-site-accent">
@@ -585,7 +597,7 @@ const featuredWork = resolveWork([
                 </div>
               </div>
 
-              <div class="site-card overflow-hidden shadow-site-sm">
+              <div class="site-card site-hover-lift site-reveal site-reveal-stagger-2 overflow-hidden shadow-site-sm" data-reveal>
                 <div class="flex h-full flex-col gap-5 p-6">
                   <div>
                     <p class="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-site-accent">
@@ -625,23 +637,26 @@ const featuredWork = resolveWork([
 
   <GoogleReviewsBand />
 
-  <section class="site-section">
-    <div class="site-shell">
-      <div class="site-panel p-6 sm:p-8">
+  <section class="site-section relative isolate overflow-hidden">
+    <div class="site-atmosphere-section" aria-hidden="true"></div>
+    <div class="site-texture-grain" aria-hidden="true"></div>
+
+    <div class="site-shell relative">
+      <div class="site-panel site-reveal p-6 sm:p-8" data-reveal>
         <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
           <div>
-            <span class="site-kicker">Next step</span>
-            <h2 class="site-section-title mt-4">Start with the service that fits, then confirm scope.</h2>
-            <p class="site-section-copy mt-4">
+            <span class="site-kicker site-reveal" data-reveal>Next step</span>
+            <h2 class="site-section-title site-reveal site-reveal-stagger-1 mt-4" data-reveal>Start with the service that fits, then confirm scope.</h2>
+            <p class="site-section-copy site-reveal site-reveal-stagger-2 mt-4" data-reveal>
               The fastest path is to review the retainers or the matching service page, then
               reach out with timing, goals, and what kind of media the business actually needs.
             </p>
           </div>
-          <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-1 lg:w-[18rem]">
-            <a href={`${base}services`} class="site-button-primary w-full">
+          <div class="site-reveal site-reveal-stagger-2 grid gap-3 sm:grid-cols-2 lg:grid-cols-1 lg:w-[18rem]" data-reveal>
+            <a href={`${base}services`} class="site-button-primary site-hover-lift w-full">
               Explore services
             </a>
-            <a href={`${base}contact`} class="site-button-secondary w-full">
+            <a href={`${base}contact`} class="site-button-secondary site-hover-lift w-full">
               Book consult
             </a>
           </div>
