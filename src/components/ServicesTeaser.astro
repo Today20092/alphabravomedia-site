@@ -1,9 +1,24 @@
 ---
 import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
+import ServicePreviewCard from "./ServicePreviewCard.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  excludeIds?: string[];
+}
+
+const {
+  title = "Focused project work when the brief needs a dedicated production block.",
+  description = "Podcast production, live event support, and weddings stay available when recurring content is not the right fit.",
+  excludeIds = [],
+} = Astro.props;
 
 const allServices = await getCollection("services");
-const sortedServices = allServices.sort((a, b) => a.data.order - b.data.order);
+const sortedServices = allServices
+  .sort((a, b) => a.data.order - b.data.order)
+  .filter((service) => !excludeIds.includes(service.id));
 
 const rawBase = import.meta.env.BASE_URL;
 const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
@@ -12,48 +27,23 @@ const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
 <section id="services-teaser" class="site-section">
   <div class="site-shell">
     <div class="mb-10 grid gap-4">
-      <span class="site-kicker">Services</span>
-      <h2 class="site-section-title max-w-3xl">
-        Ongoing content support when consistency matters most.
-      </h2>
-      <p class="site-section-copy">
-        Monthly retainers keep the message moving. Weddings, podcasts, and event A/V
-        stay available when the brief calls for focused project work.
-      </p>
+      <span class="site-kicker">Supporting services</span>
+      <h2 class="site-section-title max-w-3xl">{title}</h2>
+      <p class="site-section-copy">{description}</p>
     </div>
 
-    <div class="site-grid-4">
-      {sortedServices.map((service) => {
-        const icon = service.data.icon ?? "mdi:star";
-        const startingPrice = service.data.tiers[0]?.value?.price ?? "";
-
-        return (
-          <a
-            href={`${base}services/${service.id}`}
-            class="site-card site-card-interactive group flex flex-col"
-          >
-            <div class="site-card-body">
-              <span class="site-chip site-chip-muted w-fit">
-                {service.data.category ?? "Service"}
-              </span>
-              <div class="flex h-11 w-11 items-center justify-center rounded-2xl border border-site-border bg-site-control-bg text-site-accent">
-                <Icon name={icon} class="h-5 w-5" />
-              </div>
-              <h3 class="site-card-title">{service.data.title}</h3>
-              <p class="site-card-copy line-clamp-2">{service.data.description}</p>
-              <div class="site-meta-row mt-auto justify-between">
-                <span>{startingPrice}</span>
-                <span class="text-site-accent">See package</span>
-              </div>
-            </div>
-          </a>
-        );
-      })}
+    <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      {sortedServices.map((service) => (
+        <ServicePreviewCard
+          service={service}
+          href={`${base}services/${service.id}`}
+        />
+      ))}
     </div>
 
     <div class="mt-8">
-      <a href={`${base}services`} class="site-button-primary">
-        Explore services and retainers
+      <a href={`${base}services`} class="site-button-secondary">
+        Explore all services
         <Icon name="mdi:arrow-right" class="h-4 w-4" />
       </a>
     </div>

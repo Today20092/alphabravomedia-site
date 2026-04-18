@@ -4,6 +4,22 @@
   "order": 2,
   "icon": "mdi:heart",
   "category": "Weddings",
+  "heroImage": "../portfolio/weddings/wedding-thumbnail.png",
+  "gallery": [
+    {
+      "src": "../portfolio/weddings/wedding-thumbnail.png",
+      "alt": "Wedding highlight thumbnail showing cinematic wedding coverage",
+      "caption": "Show the emotional tone and visual standard before the client starts comparing packages."
+    },
+    {
+      "src": "./media/weddings-story.svg",
+      "alt": "Placeholder wedding story frame for future imagery",
+      "caption": "Keep a future slot ready for a ceremony, family, or detail image."
+    }
+  ],
+  "relatedWork": [
+    "weddings"
+  ],
   "portfolioLink": "/portfolio?category=Weddings",
   "faq": [
     {

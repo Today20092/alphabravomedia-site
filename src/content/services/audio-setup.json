@@ -1,9 +1,30 @@
 {
-  "title": "Professional Event A/V & Production Services",
-  "description": "Professional audio and multi-camera coverage that protects the moment, keeps every word clear, and turns live events into polished assets.",
+  "title": "Event Sound, Video & Livestream Support",
+  "description": "Live event sound, camera coverage, and livestream support that keeps every word clear and turns the event into polished recap assets.",
   "order": 1,
   "icon": "mdi:speaker",
-  "category": "Event A/V",
+  "category": "Event Production",
+  "heroImage": "../portfolio/av-live-production/D2174E26-A098-4CA3-B19E-4BD2741EAE52.jpg",
+  "gallery": [
+    {
+      "src": "../portfolio/av-live-production/D2174E26-A098-4CA3-B19E-4BD2741EAE52.jpg",
+      "alt": "Event sound and stage setup before a live program",
+      "caption": "The setup should disappear into the background so the audience stays focused on the program."
+    },
+    {
+      "src": "../portfolio/av-live-production/IMG_0549.JPG",
+      "alt": "Live production table and sound support during an event",
+      "caption": "Support clear audio, smooth transitions, and a calmer event experience for organizers."
+    },
+    {
+      "src": "../portfolio/av-live-production/IMG_0559.JPG",
+      "alt": "Audience-facing live event production coverage",
+      "caption": "Useful for events that need both the live room experience and polished post-event content."
+    }
+  ],
+  "relatedWork": [
+    "ensuring-every-word-matters"
+  ],
   "portfolioLink": "/portfolio?category=AV+%26+Live+Production",
   "faq": [
     {

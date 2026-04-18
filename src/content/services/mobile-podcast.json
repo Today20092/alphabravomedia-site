@@ -4,6 +4,23 @@
   "order": 3,
   "icon": "mdi:microphone",
   "category": "Podcast",
+  "heroImage": "./media/podcast-hero.svg",
+  "gallery": [
+    {
+      "src": "./media/podcast-hero.svg",
+      "alt": "Placeholder podcast service hero showing microphones and set direction",
+      "caption": "Keep this slot now, then replace it with a real on-location podcast frame later."
+    },
+    {
+      "src": "./media/podcast-set.svg",
+      "alt": "Placeholder podcast conversation set for future imagery",
+      "caption": "Useful for future host, guest, or multi-camera setup photography."
+    }
+  ],
+  "relatedWork": [
+    "rizq-mdjd-podcast",
+    "konan-bbq-podcast"
+  ],
   "portfolioLink": "/portfolio?category=Podcast",
   "faq": [
     {

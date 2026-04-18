@@ -3,6 +3,9 @@ title: "Ensuring Every Word Matters: Audio Production for The Sunnah Initiative"
 clientName: "The Sunnah Initiative"
 videoId: "CsqFRKpo7tQ"
 category: "AV & Live Production"
+outcome: "Clear event audio and dependable live production support that keeps attention on the message instead of the technical setup."
+services:
+  - audio-setup
 order: 4
 image: "./D2174E26-A098-4CA3-B19E-4BD2741EAE52.jpg"
 gallery:
@@ -50,4 +53,3 @@ Don't let audio issues take away from your message. Let's make sure your next ev
 ***
 
 **Hosted by:** [The Sunnah Initiative](https://www.facebook.com/TheSunnahInitiativeFL)
-

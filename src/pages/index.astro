@@ -3,276 +3,309 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { YouTube } from "@astro-community/astro-embed-youtube";
 import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
-import { Image } from "astro:assets";
 import ServicesTeaser from "../components/ServicesTeaser.astro";
 import GoogleReviewsBand from "../components/GoogleReviewsBand.astro";
+import WorkCard from "../components/WorkCard.astro";
 
 const rawBase = import.meta.env.BASE_URL;
 const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
 
-const allBlogPosts = await getCollection("blog");
 const allPortfolio = await getCollection("portfolio");
+const allServices = await getCollection("services");
+const sortedServices = allServices.sort((a, b) => a.data.order - b.data.order);
+const monthlyService = sortedServices.find((service) => service.id === "monthly-retainers");
 
-const latestBlog = allBlogPosts
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 3);
+function resolveWork(refs: string[]) {
+  return refs
+    .map((ref) =>
+      allPortfolio.find(
+        (item) =>
+          item.slug.toLowerCase().endsWith(ref.toLowerCase()) ||
+          item.id.toLowerCase().endsWith(ref.toLowerCase()),
+      ),
+    )
+    .filter(Boolean);
+}
 
-const latestPortfolio = allPortfolio
-  .sort((a, b) => a.data.order - b.data.order)
-  .slice(0, 3);
+const featuredWork = resolveWork([
+  "erchid-law-firm",
+  "rizq-mdjd-podcast",
+  "ensuring-every-word-matters",
+]);
 ---
 
 <BaseLayout
-  title="Tampa Brand Video Production | Alpha Bravo Media"
-  description="Cinematic video production, podcast filming, editing, and live event support in Tampa. Strategy, filming, editing, and delivery from one production partner."
+  title="Tampa Content Retainers and Video Production | Alpha Bravo Media"
+  description="Outcome-first content production for Tampa businesses that need stronger trust, clearer messaging, and a consistent stream of polished media."
 >
   <section class="site-section-hero">
     <div class="site-shell">
-      <div class="grid gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-end">
-        <div class="site-page-header mb-0">
+      <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:items-end">
+        <div class="site-page-header mb-0 max-w-3xl">
           <span class="site-kicker">Alpha Bravo Media</span>
-          <h1 class="site-page-title max-w-3xl">
-            Cinematic video production for brands that need to earn trust and
-            publish content that feels premium.
+          <h1 class="site-page-title">
+            Content that helps your business look credible, explain the offer clearly,
+            and stay visible without managing production yourself.
           </h1>
-          <p class="site-page-copy max-w-2xl text-base sm:text-lg">
-            Strategy, filming, editing, and delivery from one production partner.
-            Built for businesses that need polished content and a clear next step
-            when they are ready to talk.
+          <p class="site-page-copy text-base sm:text-lg">
+            Strategy, filming, editing, photography, and repurposing handled by one
+            production partner. Monthly retainers lead the offer when consistency is
+            the real bottleneck.
           </p>
-          <p class="mt-4 max-w-2xl text-sm leading-6 text-site-text-soft sm:text-base">
-            Start with a free 15-minute consult call. Ayoub will text you first so
-            you know exactly what happens next.
-          </p>
+          <div class="mt-6 flex flex-wrap gap-3 text-sm text-site-text-muted">
+            <span class="site-chip">Starting at $1,200/mo</span>
+            <span class="site-chip site-chip-muted">Honest fit guidance before booking</span>
+            <span class="site-chip site-chip-muted">Reasonable revisions after delivery</span>
+          </div>
           <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a href={`${base}contact`} class="site-button-primary">
-              Book free consult
+            <a href={`${base}services/monthly-retainers`} class="site-button-primary">
+              See monthly retainers
             </a>
             <a href={`${base}portfolio`} class="site-button-secondary">
-              See selected work
+              Browse work
             </a>
           </div>
-        </div>
-
-        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
-          <a href={`${base}services`} class="site-card site-card-interactive group">
-            <div class="site-card-body-compact">
-              <div class="flex items-center justify-between gap-4">
-                <div>
-                  <p class="text-xs font-semibold uppercase tracking-[0.24em] text-site-text-soft">
-                    For customers
-                  </p>
-                  <h2 class="site-card-title mt-3">
-                    Need a production partner?
-                  </h2>
-                  <p class="mt-3 max-w-sm text-sm leading-6 text-site-text-muted">
-                    Services, portfolio, and a direct path to start a project.
-                  </p>
-                </div>
-                <span class="site-chip shrink-0">Book</span>
-              </div>
-            </div>
-          </a>
-
-          <a href={`${base}gear`} class="site-card site-card-interactive group">
-            <div class="site-card-body-compact">
-              <div class="flex items-center justify-between gap-4">
-                <div>
-                  <p class="text-xs font-semibold uppercase tracking-[0.24em] text-site-text-soft">
-                    From YouTube
-                  </p>
-                  <h2 class="site-card-title mt-3">
-                    Explore the blog and gear
-                  </h2>
-                  <p class="mt-3 max-w-sm text-sm leading-6 text-site-text-muted">
-                    Gear notes, production insights, and the tools behind the work.
-                  </p>
-                </div>
-                <span class="site-chip shrink-0">Learn</span>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="about" class="site-section">
-    <div class="site-shell">
-      <div class="grid gap-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-center">
-        <div class="max-w-2xl">
-          <span class="site-kicker">About</span>
-          <h2 class="site-section-title mt-4">
-            Production built to clarify the message and raise the standard.
-          </h2>
-          <p class="site-section-copy mt-4">
-            Planning, filming, editing, and delivery are handled together so every
-            project feels intentional, not assembled.
+          <p class="mt-5 max-w-2xl text-sm leading-6 text-site-text-soft sm:text-base">
+            Ayoub texts first, makes sure the project is a fit, and gives a clear next
+            step before you commit to production.
           </p>
-          <div class="mt-8 flex flex-wrap gap-3">
-            <span class="site-stat">Videography</span>
-            <span class="site-stat">A/V production</span>
-            <span class="site-stat">Content strategy</span>
-          </div>
         </div>
 
-        <div class="site-card">
+        <div class="site-card overflow-hidden">
           <div class="site-card-media aspect-video">
             <YouTube id="wXsf-nbHbzU" class="m-0 w-full max-w-full aspect-video" />
           </div>
+          <div class="grid gap-3 border-t border-site-border bg-site-surface p-5 sm:grid-cols-3">
+            <div class="site-panel-muted p-4">
+              <p class="text-xs font-semibold uppercase tracking-[0.24em] text-site-text-soft">
+                Outcome
+              </p>
+              <p class="mt-3 text-sm leading-6 text-site-text">
+                Make the business feel more trustworthy before the first call.
+              </p>
+            </div>
+            <div class="site-panel-muted p-4">
+              <p class="text-xs font-semibold uppercase tracking-[0.24em] text-site-text-soft">
+                Mechanism
+              </p>
+              <p class="mt-3 text-sm leading-6 text-site-text">
+                Recurring shoot days, editing, repurposing, and delivery-ready assets.
+              </p>
+            </div>
+            <div class="site-panel-muted p-4">
+              <p class="text-xs font-semibold uppercase tracking-[0.24em] text-site-text-soft">
+                Fit promise
+              </p>
+              <p class="mt-3 text-sm leading-6 text-site-text">
+                If the job is not the right fit, you will hear that before anything gets booked.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <ServicesTeaser />
+  <section class="site-section">
+    <div class="site-shell">
+      <div class="mb-10 max-w-3xl">
+        <span class="site-kicker">Outcomes first</span>
+        <h2 class="site-section-title mt-4">
+          The site should answer what changes for the client, not just what camera shows up.
+        </h2>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-3">
+        <div class="site-panel p-6 sm:p-8">
+          <p class="text-sm font-semibold text-site-text">Look more credible online</p>
+          <p class="mt-3 text-sm leading-7 text-site-text-muted">
+            Better visuals, cleaner sound, and stronger presentation make it easier for
+            people to trust the business before they speak with you.
+          </p>
+        </div>
+        <div class="site-panel p-6 sm:p-8">
+          <p class="text-sm font-semibold text-site-text">Explain the offer clearly</p>
+          <p class="mt-3 text-sm leading-7 text-site-text-muted">
+            Use content to teach, answer common questions, and make the next step obvious
+            instead of repeating the same explanation manually.
+          </p>
+        </div>
+        <div class="site-panel p-6 sm:p-8">
+          <p class="text-sm font-semibold text-site-text">Publish without managing production</p>
+          <p class="mt-3 text-sm leading-7 text-site-text-muted">
+            One partner handles planning, production, editing, and repurposing so content
+            keeps moving even when the client is busy.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {monthlyService && (
+    <section class="site-section">
+      <div class="site-shell">
+        <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.92fr)] lg:items-center">
+          <div>
+            <span class="site-kicker">Main offer</span>
+            <h2 class="site-section-title mt-4">
+              Monthly content retainers for businesses that need momentum, not one-off media.
+            </h2>
+            <p class="site-section-copy mt-4">
+              Recurring strategy and production usually create better results than isolated
+              shoots. The retainer is built for businesses that want steady publishing,
+              stronger positioning, and a partner who can help shape the message.
+            </p>
+            <div class="mt-6 flex flex-wrap gap-3">
+              <span class="site-chip">Starting at $1,200/mo</span>
+              <span class="site-chip site-chip-muted">Most popular: Growth Retainer</span>
+            </div>
+            <ul class="mt-8 space-y-3">
+              {monthlyService.data.tiers[1]?.value?.includes.slice(0, 4).map((item: string) => (
+                <li class="flex items-start gap-3 text-sm leading-7 text-site-text-muted">
+                  <Icon name="mdi:check-circle" class="mt-1 h-4 w-4 shrink-0 text-site-accent" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+              <a href={`${base}services/monthly-retainers`} class="site-button-primary">
+                See retainers and pricing
+              </a>
+              <a href={`${base}contact`} class="site-button-secondary">
+                Talk through fit first
+              </a>
+            </div>
+          </div>
+
+          <div class="site-card overflow-hidden">
+          <div class="site-card-media aspect-[4/3]">
+              {monthlyService.data.heroImage && (
+                <img
+                  src={monthlyService.data.heroImage.src}
+                  alt={monthlyService.data.title}
+                  class="absolute inset-0 h-full w-full object-cover"
+                />
+              )}
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+              <span class="site-badge-overlay absolute left-4 top-4">Retainers</span>
+              <div class="absolute bottom-5 left-5 right-5">
+                <p class="max-w-sm font-['Sora',sans-serif] text-2xl font-semibold tracking-tight text-white">
+                  Publish consistently with one team handling planning, capture, and edits.
+                </p>
+              </div>
+            </div>
+            <div class="site-card-body">
+              <div class="site-meta-row">
+                <span>Best for recurring content</span>
+                <span>Growth-first offer</span>
+              </div>
+              <p class="site-card-copy">
+                Use retainers when the business needs reels, brand photos, campaign support,
+                and a steadier content system instead of another disconnected shoot day.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  {featuredWork.length > 0 && (
+    <section class="site-section">
+      <div class="site-shell">
+        <div class="mb-8 flex items-end justify-between gap-4">
+          <div class="site-page-header mb-0">
+            <span class="site-kicker">Proof</span>
+            <h2 class="site-section-title">Real work tied to real service lines.</h2>
+          </div>
+          <a href={`${base}portfolio`} class="site-button-secondary hidden sm:inline-flex">
+            Browse work
+          </a>
+        </div>
+
+        <div class="grid gap-6 lg:grid-cols-3">
+          {featuredWork.map((item: any) => (
+            <WorkCard
+              item={item}
+              href={`${base}portfolio/${item.slug}`}
+              ctaLabel="See example"
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <ServicesTeaser
+    excludeIds={["monthly-retainers"]}
+    title="Supporting services when the job is podcast, event, or wedding specific."
+    description="The recurring content offer leads the site, but podcast production, live event support, and weddings remain available when the brief needs a dedicated production block."
+  />
+
+  <section class="site-section">
+    <div class="site-shell">
+      <div class="site-panel-muted p-6 sm:p-8">
+        <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.92fr)] lg:items-center">
+          <div>
+            <span class="site-kicker">Low-risk first step</span>
+            <h2 class="site-section-title mt-4">
+              Clear fit, clear scope, clear revisions. No vague handoff.
+            </h2>
+            <p class="site-section-copy mt-4">
+              The first conversation is there to protect both sides. If the project is not
+              the right fit, Ayoub says that early. If it is, the scope and delivery path
+              get clarified before production starts.
+            </p>
+          </div>
+          <div class="grid gap-4">
+            <div class="site-panel p-5 sm:p-6">
+              <p class="text-sm font-semibold text-site-text">Fit first</p>
+              <p class="mt-3 text-sm leading-7 text-site-text-muted">
+                Honest guidance before the client commits to the wrong package.
+              </p>
+            </div>
+            <div class="site-panel p-5 sm:p-6">
+              <p class="text-sm font-semibold text-site-text">Scope before shoot day</p>
+              <p class="mt-3 text-sm leading-7 text-site-text-muted">
+                Timing, deliverables, and priorities are clarified before cameras come out.
+              </p>
+            </div>
+            <div class="site-panel p-5 sm:p-6">
+              <p class="text-sm font-semibold text-site-text">Reasonable revisions</p>
+              <p class="mt-3 text-sm leading-7 text-site-text-muted">
+                Refinement is part of the process when the delivery needs final adjustment.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <GoogleReviewsBand />
 
   <section class="site-section">
     <div class="site-shell">
-      <div class="mb-8 flex items-end justify-between gap-4">
-        <div class="site-page-header mb-0">
-          <span class="site-kicker">Selected Work</span>
-          <h2 class="site-section-title">Recent projects that show the standard.</h2>
+      <div class="site-panel p-6 sm:p-8">
+        <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
+          <div>
+            <span class="site-kicker">Next step</span>
+            <h2 class="site-section-title mt-4">Start with the service that fits, then confirm scope.</h2>
+            <p class="site-section-copy mt-4">
+              The fastest path is to review the retainers or the matching service page, then
+              reach out with timing, goals, and what kind of media the business actually needs.
+            </p>
+          </div>
+          <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-1 lg:w-[18rem]">
+            <a href={`${base}services`} class="site-button-primary w-full">
+              Explore services
+            </a>
+            <a href={`${base}contact`} class="site-button-secondary w-full">
+              Book consult
+            </a>
+          </div>
         </div>
-        <a href={`${base}portfolio`} class="site-button-secondary hidden sm:inline-flex">
-          Browse selected work
-        </a>
       </div>
-
-      <div class="site-grid-3">
-        {latestPortfolio.map((item) => (
-          <a
-            href={`${base}portfolio/${item.slug}`}
-            class="site-card site-card-interactive group"
-          >
-            <div class="site-card-media">
-              {(() => {
-                const thumbImage = item.data.image;
-                const youtubeUrl = item.data.videoId
-                  ? `https://img.youtube.com/vi/${item.data.videoId}/maxresdefault.jpg`
-                  : null;
-
-                if (thumbImage) {
-                  return (
-                    <Image
-                      src={thumbImage}
-                      alt={item.data.title}
-                      class="absolute inset-0 h-full w-full object-cover"
-                    />
-                  );
-                }
-
-                if (youtubeUrl) {
-                  return (
-                    <img
-                      src={youtubeUrl}
-                      alt={item.data.title}
-                      width="1280"
-                      height="720"
-                      class="absolute inset-0 h-full w-full object-cover"
-                    />
-                  );
-                }
-
-                return (
-                  <div class="flex h-full items-center justify-center text-site-text-soft">
-                    <Icon name="mdi:image-outline" class="h-10 w-10" />
-                  </div>
-                );
-              })()}
-              <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/70 to-transparent"></div>
-              <span class="site-chip absolute left-4 top-4">{item.data.category}</span>
-            </div>
-            <div class="site-card-body">
-              <h3 class="site-card-title">{item.data.title}</h3>
-              <div class="site-meta-row">
-                <span>{item.data.clientName}</span>
-                <span>See project</span>
-              </div>
-            </div>
-          </a>
-        ))}
-      </div>
-
-      <a href={`${base}portfolio`} class="site-button-secondary mt-6 sm:hidden">
-        Browse selected work
-      </a>
-    </div>
-  </section>
-
-  <section class="site-section">
-    <div class="site-shell">
-      <div class="mb-8 flex items-end justify-between gap-4">
-        <div class="site-page-header mb-0">
-          <span class="site-kicker">Insights</span>
-          <h2 class="site-section-title">Practical lessons from real production work.</h2>
-        </div>
-        <a href={`${base}blog`} class="site-button-secondary hidden sm:inline-flex">
-          Read insights
-        </a>
-      </div>
-
-      <div class="site-grid-3">
-        {latestBlog.map((post) => (
-          <a href={`${base}blog/${post.slug}`} class="site-card site-card-interactive group">
-            <div class="site-card-media">
-              {(() => {
-                const thumbImage = post.data.image;
-                const youtubeUrl = post.data.youtubeId
-                  ? `https://img.youtube.com/vi/${post.data.youtubeId}/maxresdefault.jpg`
-                  : null;
-
-                if (thumbImage) {
-                  return (
-                    <Image
-                      src={thumbImage}
-                      alt={post.data.title}
-                      class="absolute inset-0 h-full w-full object-cover"
-                    />
-                  );
-                }
-
-                if (youtubeUrl) {
-                  return (
-                    <img
-                      src={youtubeUrl}
-                      alt={post.data.title}
-                      width="1280"
-                      height="720"
-                      class="absolute inset-0 h-full w-full object-cover"
-                    />
-                  );
-                }
-
-                return (
-                  <div class="flex h-full items-center justify-center text-site-text-soft">
-                    <Icon name="mdi:book-open-page-variant-outline" class="h-10 w-10" />
-                  </div>
-                );
-              })()}
-              <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/70 to-transparent"></div>
-            </div>
-            <div class="site-card-body">
-              <div class="site-meta-row">
-                <time>
-                  {post.data.pubDate.toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "short",
-                    day: "numeric",
-                  })}
-                </time>
-              </div>
-              <h3 class="site-card-title line-clamp-2">{post.data.title}</h3>
-              <p class="site-card-copy line-clamp-2">{post.data.description}</p>
-            </div>
-          </a>
-        ))}
-      </div>
-
-      <a href={`${base}blog`} class="site-button-secondary mt-6 sm:hidden">
-        Read insights
-      </a>
     </div>
   </section>
 </BaseLayout>

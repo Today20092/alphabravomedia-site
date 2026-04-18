@@ -3,6 +3,9 @@ title: "Full-Service Podcast Production for Rizq MDJD"
 clientName: "Rizq MDJD Podcast"
 videoId: "LnKuPiUVjho"
 category: "Podcast"
+outcome: "A hands-off podcast workflow with full episodes and short clips that keep the show publishing consistently."
+services:
+  - mobile-podcast
 order: 3.5
 ---
 

@@ -5,9 +5,11 @@ import { Icon } from "astro-icon/components";
 import { siteConfig } from "../../site-config";
 import { formatGoogleReviewSummary } from "../../lib/google-business-profile";
 import FitCheckQuiz from "../../components/FitCheckQuiz.astro";
+import ServicePreviewCard from "../../components/ServicePreviewCard.astro";
 
 const allServices = await getCollection("services");
 const sortedServices = allServices.sort((a, b) => a.data.order - b.data.order);
+const monthlyService = sortedServices.find((service) => service.id === "monthly-retainers");
 const reviewSummary = formatGoogleReviewSummary();
 
 const rawBase = import.meta.env.BASE_URL;
@@ -16,51 +18,52 @@ const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
 
 <BaseLayout
   title="Video Production Services and Retainers | Alpha Bravo Media"
-  description="Monthly retainers, podcast production, wedding videography, and event A/V support for Tampa brands and creator-led businesses."
+  description="Monthly retainers, podcast production, wedding coverage, and event support for Tampa businesses, creators, and community organizations."
 >
   <section class="site-section-hero">
     <div class="site-shell">
-      <div class="site-page-header">
-        <span class="site-kicker">Services</span>
-        <h1 class="site-page-title max-w-3xl">
-          Retainers and production packages for businesses that need consistent content.
-        </h1>
-        <p class="site-page-copy max-w-2xl text-base sm:text-lg">
-          Monthly retainers lead the offer. Weddings, podcasts, and event A/V stay
-          available for focused project support when the scope calls for it.
-        </p>
-      </div>
-
-      <div class="grid gap-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
-        <div class="site-panel p-6 sm:p-8">
-          <span class="site-kicker">Approach</span>
-          <h2 class="site-section-title mt-4">
-            Consistency and clearer messaging beat one-off production when the brand
-            needs momentum.
-          </h2>
-          <p class="site-section-copy mt-4">
-            Recurring strategy and production usually create better results than
-            isolated shoots. Project work stays available when the job is event-based or
-            campaign-based.
+      <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.92fr)] lg:items-end">
+        <div class="site-page-header mb-0 max-w-3xl">
+          <span class="site-kicker">Services</span>
+          <h1 class="site-page-title">
+            Choose the offer that matches the real job: recurring content, podcast production,
+            event support, or wedding coverage.
+          </h1>
+          <p class="site-page-copy max-w-2xl text-base sm:text-lg">
+            Monthly retainers stay at the top because consistency usually solves more business
+            problems than a one-off shoot. The other services stay available when the brief is
+            event-based, conversation-based, or family-based.
           </p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href={`${base}services/monthly-retainers`} class="site-button-primary">
+              Start with retainers
+            </a>
+            <a href={`${base}portfolio`} class="site-button-secondary">
+              Browse work
+            </a>
+          </div>
         </div>
 
-        <div class="grid gap-4">
+        <div class="grid gap-4 sm:grid-cols-2">
           <div class="site-panel-muted p-6">
-            <p class="text-sm font-semibold text-site-text">
-              Keep the content pipeline moving
-            </p>
-            <p class="mt-2 text-sm leading-7 text-site-text-muted">
-              Film, edit, repurpose, and publish on a dependable cadence.
+            <p class="text-sm font-semibold text-site-text">Main outcome</p>
+            <p class="mt-3 text-sm leading-7 text-site-text-muted">
+              Help the business look more credible and keep publishing without the owner
+              managing production.
             </p>
           </div>
           <div class="site-panel-muted p-6">
-            <p class="text-sm font-semibold text-site-text">
-              Focused project work stays available
+            <p class="text-sm font-semibold text-site-text">Low-risk promise</p>
+            <p class="mt-3 text-sm leading-7 text-site-text-muted">
+              Honest fit guidance first, then clear scope, then revisions when the delivery
+              needs refinement.
             </p>
-            <p class="mt-2 text-sm leading-7 text-site-text-muted">
-              Weddings, podcasts, and events get the same attention when the scope
-              needs a dedicated production block.
+          </div>
+          <div class="site-panel-muted p-6 sm:col-span-2">
+            <p class="text-sm font-semibold text-site-text">Why retainers lead</p>
+            <p class="mt-3 text-sm leading-7 text-site-text-muted">
+              Recurring production gives the client more chances to clarify the message,
+              test angles, publish consistently, and build trust over time.
             </p>
           </div>
         </div>
@@ -68,50 +71,46 @@ const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
     </div>
   </section>
 
+  {monthlyService && (
+    <section class="site-section">
+      <div class="site-shell">
+        <div class="site-panel p-6 sm:p-8">
+          <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
+            <div>
+              <span class="site-kicker">Primary offer</span>
+              <h2 class="site-section-title mt-4">Monthly content retainers start at $1,200/mo.</h2>
+              <p class="site-section-copy mt-4">
+                Best for businesses that need recurring reels, brand imagery, message clarity,
+                and a reliable content pipeline instead of another disconnected shoot.
+              </p>
+            </div>
+            <a href={`${base}services/monthly-retainers`} class="site-button-primary">
+              See retainer pricing
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
   <section class="site-section">
     <div class="site-shell">
-      <div class="site-grid-4">
-        {sortedServices.map((service) => {
-          const icon = service.data.icon ?? "mdi:star";
-          const category = service.data.category ?? "Service";
-          const startingPrice = service.data.tiers[0]?.value?.price ?? "";
-          const topFeatures: string[] = (
-            service.data.tiers[0]?.value?.includes ?? []
-          ).slice(0, 3);
+      <div class="mb-8 max-w-3xl">
+        <span class="site-kicker">Offers</span>
+        <h2 class="site-section-title mt-4">Every service should show the work before it asks for trust.</h2>
+        <p class="site-section-copy mt-4">
+          Pick the service page that matches the brief. Each page shows packages, media,
+          related work, FAQ, and the clearest next step.
+        </p>
+      </div>
 
-          return (
-            <a
-              href={`${base}services/${service.id}`}
-              class="site-card site-card-interactive group flex flex-col"
-            >
-              <div class="site-card-body">
-                <div class="flex items-start justify-between gap-4">
-                  <span class="site-chip site-chip-muted">{category}</span>
-                  <div class="flex h-10 w-10 items-center justify-center rounded-2xl border border-site-border bg-site-control-bg text-site-accent">
-                    <Icon name={icon} class="h-5 w-5" />
-                  </div>
-                </div>
-                <h2 class="site-card-title line-clamp-2">{service.data.title}</h2>
-                <p class="site-card-copy line-clamp-2">{service.data.description}</p>
-                <ul class="space-y-2 pt-2">
-                  {topFeatures.map((feature) => (
-                    <li class="flex items-start gap-2 text-sm leading-6 text-site-text-muted">
-                      <Icon
-                        name="mdi:check-circle"
-                        class="mt-0.5 h-4 w-4 shrink-0 text-site-accent"
-                      />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div class="site-meta-row mt-auto justify-between pt-2">
-                  <span>{startingPrice}</span>
-                  <span class="text-site-accent">See package options</span>
-                </div>
-              </div>
-            </a>
-          );
-        })}
+      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+        {sortedServices.map((service) => (
+          <ServicePreviewCard
+            service={service}
+            href={`${base}services/${service.id}`}
+          />
+        ))}
       </div>
     </div>
   </section>
@@ -126,7 +125,8 @@ const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
             <span class="site-kicker">Contact</span>
             <h2 class="site-section-title mt-4">Talk scope and timing, then choose the right fit.</h2>
             <p class="site-section-copy mt-4">
-              Start with the service that fits best, or book a free 15-minute consult call to talk through your event, ask questions, or get advice before you commit.
+              Start with the service page that fits best, or book a free consult to talk
+              through the job before choosing a package.
             </p>
             <div class="mt-5 flex flex-wrap items-center gap-2 text-sm text-site-text-muted">
               <Icon name="simple-icons:google" class="h-4 w-4 text-site-accent" />
@@ -148,17 +148,11 @@ const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
             <a href={`${base}contact`} class="site-button-primary w-full">
               Book consult
             </a>
-            <a href="tel:+18136650166" class="site-button-secondary w-full">
+            <a href={`tel:${siteConfig.phoneRaw}`} class="site-button-secondary w-full">
               Call Ayoub
             </a>
-            <a
-              href={siteConfig.googleMapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="site-button-secondary w-full"
-            >
-              <Icon name="simple-icons:google" class="h-4 w-4" />
-              {siteConfig.googleMapsLabel}
+            <a href={`${base}portfolio`} class="site-button-secondary w-full">
+              Browse work
             </a>
           </div>
         </div>

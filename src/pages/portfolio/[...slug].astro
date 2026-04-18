@@ -44,7 +44,7 @@ const portfolioOgImage = item.data.image?.src ??
 ---
 
 <BaseLayout
-  title={`${item.data.title} | Portfolio Case Study | Alpha Bravo Media`}
+  title={`${item.data.title} | Work Example | Alpha Bravo Media`}
   description={portfolioDescription}
   ogImage={portfolioOgImage}
   ogImageAlt={item.data.title}
@@ -57,13 +57,13 @@ const portfolioOgImage = item.data.image?.src ??
     itemScope
     itemType="https://schema.org/CreativeWork"
   >
-    <span data-pagefind-meta="type" class="sr-only">Portfolio</span>
+    <span data-pagefind-meta="type" class="sr-only">Work</span>
     <span data-pagefind-meta="client" style="display:none">{item.data.clientName}</span>
 
     <div class="site-shell">
       <a href={`${base}portfolio`} class="site-link inline-flex items-center gap-2 text-sm">
         <Icon name="mdi:arrow-left" class="h-4 w-4" />
-        Back to Portfolio
+        Back to Work
       </a>
 
       <header class="site-page-header mt-8">

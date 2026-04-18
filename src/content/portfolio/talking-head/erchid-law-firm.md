@@ -3,6 +3,9 @@ title: Talking Head Videos for Erchid Law Firm
 clientName: Erchid Law Firm
 videoId: gQ2X-aeOvWM
 category: Talking Head
+outcome: "4 to 5 monthly educational videos that turn repetitive client questions into evergreen trust-building assets."
+services:
+  - monthly-retainers
 gearUsed:
   - amaran-60xs
   - lumix-s5iix

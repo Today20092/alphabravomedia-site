@@ -2,6 +2,8 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
+import Gallery from "../../components/Gallery.astro";
+import WorkCard from "../../components/WorkCard.astro";
 import ServicePricingBlock from "../../components/ServicePricingBlock.astro";
 import { siteConfig } from "../../site-config";
 
@@ -21,12 +23,25 @@ const icon = service.data.icon ?? "mdi:star";
 const category = service.data.category ?? "Service";
 const startingPrice = service.data.tiers[0]?.value?.price ?? "";
 const faqs = service.data.faq ?? [];
+
+const allPortfolio = await getCollection("portfolio");
+const relatedWork = (service.data.relatedWork ?? [])
+  .map((ref: string) =>
+    allPortfolio.find(
+      (item) =>
+        item.slug.toLowerCase().endsWith(ref.toLowerCase()) ||
+        item.id.toLowerCase().endsWith(ref.toLowerCase()),
+    ),
+  )
+  .filter(Boolean);
+
 const serviceSeoTitles: Record<string, string> = {
   "monthly-retainers": "Monthly Content Retainers | Alpha Bravo Media",
-  "audio-setup": "Event A/V Services | Alpha Bravo Media",
+  "audio-setup": "Event Sound, Video & Livestream Support | Alpha Bravo Media",
   "mobile-podcast": "Mobile Podcast Production | Alpha Bravo Media",
   weddings: "Wedding Videography Services | Alpha Bravo Media",
 };
+
 const serviceTitle = serviceSeoTitles[service.id] ?? `${service.data.title} | ${siteConfig.siteName}`;
 ---
 
@@ -46,16 +61,43 @@ const serviceTitle = serviceSeoTitles[service.id] ?? `${service.data.title} | ${
         </ol>
       </nav>
 
-      <div class="site-page-header">
-        <div class="flex flex-wrap items-center gap-3">
-          <span class="site-chip">{category}</span>
-          {startingPrice && <span class="site-chip site-chip-muted">{startingPrice}</span>}
+      <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.92fr)] lg:items-end">
+        <div class="site-page-header mb-0 max-w-3xl">
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="site-chip">{category}</span>
+            {startingPrice && <span class="site-chip site-chip-muted">{startingPrice}</span>}
+          </div>
+          <h1 class="site-page-title max-w-4xl">{service.data.title}</h1>
+          <p class="site-page-copy text-lg">{service.data.description}</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <span class="site-chip site-chip-muted">Honest fit guidance first</span>
+            <span class="site-chip site-chip-muted">Scope clarified before production</span>
+            <span class="site-chip site-chip-muted">Reasonable revisions after delivery</span>
+          </div>
         </div>
-        <div class="flex h-14 w-14 items-center justify-center rounded-[1.25rem] border border-site-border bg-site-control-bg text-site-accent">
-          <Icon name={icon} class="h-7 w-7" />
+
+        <div class="site-card overflow-hidden">
+          <div class="site-card-media aspect-[4/3]">
+            {service.data.heroImage ? (
+              <img
+                src={service.data.heroImage.src}
+                alt={service.data.title}
+                class="absolute inset-0 h-full w-full object-cover"
+              />
+            ) : (
+              <div class="flex h-full items-center justify-center text-site-text-soft">
+                <Icon name={icon} class="h-12 w-12" />
+              </div>
+            )}
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent"></div>
+            <span class="site-badge-overlay absolute left-4 top-4">{category}</span>
+            <div class="absolute bottom-5 left-5 right-5">
+              <p class="max-w-sm font-['Sora',sans-serif] text-2xl font-semibold tracking-tight text-white">
+                Show the work early so the client understands the service before reading the whole page.
+              </p>
+            </div>
+          </div>
         </div>
-        <h1 class="site-page-title max-w-4xl">{service.data.title}</h1>
-        <p class="site-page-copy text-lg">{service.data.description}</p>
       </div>
     </div>
   </section>
@@ -68,26 +110,92 @@ const serviceTitle = serviceSeoTitles[service.id] ?? `${service.data.title} | ${
 
   <section class="site-section">
     <div class="site-shell">
-      <div class="site-panel-muted p-5 sm:p-6">
-        <div class="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
-          <div>
-            <p class="text-sm font-semibold text-site-text">
-              Most clients want proof and a clear process before they book.
-            </p>
-            <p class="mt-2 text-sm leading-7 text-site-text-muted">
-              Built for brands, events, weddings, and creator-led businesses around Tampa.
+      <div class="mb-8 max-w-3xl">
+        <span class="site-kicker">Service gallery</span>
+        <h2 class="site-section-title mt-4">Show the service before you explain the service.</h2>
+        <p class="site-section-copy mt-4">
+          These images are here to make the service easier to understand at a glance. Some
+          are placeholders for future AI-generated or project-specific images, but the media
+          slots are part of the structure now.
+        </p>
+      </div>
+
+      <Gallery
+        images={service.data.gallery.map((item: any) => ({
+          src: item.src,
+          alt: item.alt,
+          caption: item.caption,
+        }))}
+        layout="natural"
+      />
+    </div>
+  </section>
+
+  {relatedWork.length > 0 && (
+    <section class="site-section">
+      <div class="site-shell">
+        <div class="mb-8 flex items-end justify-between gap-4">
+          <div class="max-w-3xl">
+            <span class="site-kicker">Related work</span>
+            <h2 class="site-section-title mt-4">Relevant proof tied to this exact service.</h2>
+            <p class="site-section-copy mt-4">
+              Instead of sending people to a disconnected work page, show the examples that
+              make this service easier to trust.
             </p>
           </div>
-          <div class="flex lg:justify-end">
-            <a
-              href={siteConfig.googleMapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="site-button-secondary"
-            >
-              <Icon name="simple-icons:google" class="h-4 w-4" />
-              {siteConfig.googleMapsLabel}
-            </a>
+          <a href={`${base}portfolio`} class="site-button-secondary hidden sm:inline-flex">
+            Browse work
+          </a>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {relatedWork.map((item: any) => (
+            <WorkCard
+              item={item}
+              href={`${base}portfolio/${item.slug}`}
+              ctaLabel="See work"
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="site-section">
+    <div class="site-shell">
+      <div class="site-panel-muted p-6 sm:p-8">
+        <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.92fr)] lg:items-center">
+          <div>
+            <span class="site-kicker">Fit + revision promise</span>
+            <h2 class="site-section-title mt-4">
+              Start with a fit check, then move into clear scope and calm execution.
+            </h2>
+            <p class="site-section-copy mt-4">
+              The process is designed to remove guesswork. Clients should know whether the
+              job is a fit, what gets delivered, and how revisions are handled before they
+              start worrying about production details.
+            </p>
+          </div>
+
+          <div class="grid gap-4">
+            <div class="site-panel p-5 sm:p-6">
+              <p class="text-sm font-semibold text-site-text">Fit first</p>
+              <p class="mt-3 text-sm leading-7 text-site-text-muted">
+                Ayoub tells you early if the scope or budget points to a different direction.
+              </p>
+            </div>
+            <div class="site-panel p-5 sm:p-6">
+              <p class="text-sm font-semibold text-site-text">Clear delivery path</p>
+              <p class="mt-3 text-sm leading-7 text-site-text-muted">
+                Timeline, shoot expectations, and deliverables are clarified before production.
+              </p>
+            </div>
+            <div class="site-panel p-5 sm:p-6">
+              <p class="text-sm font-semibold text-site-text">Reasonable revisions</p>
+              <p class="mt-3 text-sm leading-7 text-site-text-muted">
+                Refinement is part of the process when the first pass needs adjustment.
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -106,7 +214,7 @@ const serviceTitle = serviceSeoTitles[service.id] ?? `${service.data.title} | ${
         </div>
 
         <div class="grid gap-4">
-          {faqs.map((item) => (
+          {faqs.map((item: any) => (
             <details class="site-panel p-5 sm:p-6">
               <summary class="site-card-title cursor-pointer list-none pr-8">
                 {item.question}
@@ -129,24 +237,20 @@ const serviceTitle = serviceSeoTitles[service.id] ?? `${service.data.title} | ${
             <span class="site-kicker">Contact</span>
             <h2 class="site-section-title mt-4">Ready to talk scope and timing?</h2>
             <p class="site-section-copy mt-4">
-              Start with the form or reach out directly and reference the service name. That keeps the next step focused on timing, deliverables, and fit.
+              Reach out with the service name, the rough timing, and what kind of delivery
+              matters most. That keeps the next step focused on fit instead of guesswork.
             </p>
           </div>
 
-          <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
-            <a href={`${base}contact`} class="site-button-primary">
+          <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-1 lg:w-[18rem]">
+            <a href={`${base}contact`} class="site-button-primary w-full">
               Book consult
             </a>
-            <a href="tel:+18136650166" class="site-button-secondary">
-              Call now
+            <a href={`mailto:${siteConfig.email}`} class="site-button-secondary w-full">
+              Email Ayoub
             </a>
-            <a
-              href="https://matrix.to/#/%40ayoubab%3Amatrix.org"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="site-button-secondary"
-            >
-              Message on Matrix
+            <a href={`tel:${siteConfig.phoneRaw}`} class="site-button-secondary w-full">
+              Call Ayoub
             </a>
           </div>
         </div>

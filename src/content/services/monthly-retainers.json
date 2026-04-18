@@ -4,6 +4,23 @@
   "order": 0,
   "icon": "mdi:calendar-refresh",
   "category": "Retainers",
+  "heroImage": "./media/retainers-hero.svg",
+  "gallery": [
+    {
+      "src": "./media/retainers-hero.svg",
+      "alt": "Placeholder creative direction board for recurring business content retainers",
+      "caption": "Keep a placeholder slot for real campaign imagery, team photography, or branded set coverage."
+    },
+    {
+      "src": "./media/retainers-grid.svg",
+      "alt": "Placeholder storyboard grid for content planning and recurring deliverables",
+      "caption": "Use this slot later for a proof image showing content variety, planning boards, or a shoot setup."
+    }
+  ],
+  "relatedWork": [
+    "erchid-law-firm",
+    "title-town-closing-group-videos"
+  ],
   "faq": [
     {
       "question": "What is included in a monthly retainer?",

@@ -3,6 +3,9 @@ title: 'Building Trust Through Educational Content: Title Town Closing Group'
 clientName: Title Town Closing Group
 videoId: qhYVKieI_xE
 category: Talking Head
+outcome: "Educational trust-building videos that help explain the closing process clearly before the first call."
+services:
+  - monthly-retainers
 order: 1
 gearUsed:
   - lumix-s5iix

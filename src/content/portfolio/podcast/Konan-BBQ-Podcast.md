@@ -3,6 +3,9 @@ title: "Sizzling Content, Effortless Execution: Elevating the Konan BBQ Podcast"
 clientName: "Konan BBQ Podcast"
 videoId: "V0LJPb5n5zY"
 category: "Podcast"
+outcome: "A white-glove podcast setup that lets the hosts focus on the conversation while Alpha Bravo Media handles production."
+services:
+  - mobile-podcast
 gearUsed:
   - mv7-plus-microphone
   - lumix-s5iix

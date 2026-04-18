@@ -24,6 +24,8 @@ const portfolio = defineCollection({
     image: image().optional(),
     gallery: z.array(image()).optional(),
     category: z.string(),
+    outcome: z.string().optional(),
+    services: z.array(z.string()).default([]),
     gearUsed: z.array(reference('gear')).optional(),
     order: z.number().default(999),
   }),
@@ -43,12 +45,19 @@ const gear = defineCollection({
 // Services collection - Pricing and offerings
 const services = defineCollection({
   type: 'data',
-  schema: z.object({
+  schema: ({ image }) => z.object({
     title: z.string(),
     description: z.string(),
     order: z.number().default(999),
     icon: z.string().optional(),
     category: z.string().optional(),
+    heroImage: image().optional(),
+    gallery: z.array(z.object({
+      src: image(),
+      alt: z.string(),
+      caption: z.string().optional(),
+    })).default([]),
+    relatedWork: z.array(z.string()).default([]),
     portfolioLink: z.string().optional(),
     faq: z.array(z.object({
       question: z.string(),
