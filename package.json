@@ -9,7 +9,6 @@
     "prebuild": "node scripts/fetch-google-business-profile.mjs",
     "preview": "astro preview",
     "astro": "astro",
-    "check": "astro check",
     "audit:contrast": "node scripts/audit-contrast.mjs",
     "sync:google-business-profile": "node scripts/fetch-google-business-profile.mjs",
     "new": "node scripts/new-content.js"
@@ -21,22 +20,19 @@
     "@astrojs/sitemap": "^3.7.2",
     "@iconify-json/mdi": "^1.2.3",
     "@iconify-json/simple-icons": "^1.2.72",
-    "@keystatic/astro": "^5.0.6",
-    "@keystatic/core": "^0.5.48",
     "@playform/compress": "^0.2.1",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.2.1",
     "astro": "^6.1.9",
     "astro-icon": "^1.1.5",
-    "astro-pagefind": "^1.8.5",
+    "astro-pagefind": "^1.8.6",
     "astro-seo": "^1.1.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "tailwindcss": "^4.2.1"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.8",
-    "typescript": "^6.0.3",
+    "typescript": "^5.9.3",
     "wrangler": "^4.77.0"
   }
 }

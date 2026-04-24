@@ -6,7 +6,6 @@ import pagefind from 'astro-pagefind';
 import sitemap from '@astrojs/sitemap';
 import compress from '@playform/compress';
 import icon from 'astro-icon';
-import keystatic from '@keystatic/astro';
 import react from '@astrojs/react';
 import mdx from '@astrojs/mdx';
 
@@ -15,7 +14,6 @@ export default defineConfig({
   site: 'https://alphabravomedia.co/',
   integrations: [
     react(),
-    process.env.NODE_ENV === 'development' ? keystatic() : null,
     mdx(),
     pagefind(),
     sitemap(),
