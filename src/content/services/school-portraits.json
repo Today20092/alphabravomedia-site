@@ -1,0 +1,120 @@
+{
+  "title": "School Portraits",
+  "description": "Give your Tampa Bay Islamic or private school a clean, organized picture day with flat-rate pricing, professional portraits, private online galleries, and optional parent ordering through PhotoDay.",
+  "order": 2,
+  "icon": "mdi:school",
+  "category": "School Portraits",
+  "heroImage": "../galleries/headshots/_1218525_exported_JPEG_100Q.jpg",
+  "gallery": [
+    {
+      "src": "../galleries/headshots/_1218525_exported_JPEG_100Q.jpg",
+      "alt": "Clean studio-style portrait sample for school portrait direction",
+      "caption": "Give families a clean portrait while your school gets files that work for records, yearbooks, IDs, and websites."
+    },
+    {
+      "src": "../galleries/headshots/P1091719_100_Print.jpg",
+      "alt": "Professional portrait sample with a polished school-friendly look",
+      "caption": "Keep picture day professional, respectful, and easier for your office to manage."
+    },
+    {
+      "src": "../galleries/headshots/_1229065_exported_JPEG_100Q_nocrop.jpg",
+      "alt": "Portrait sample showing clean color, crop, and delivery quality",
+      "caption": "Receive edited web and print-ready files, with optional online ordering for families."
+    }
+  ],
+  "faq": [
+    {
+      "question": "How fast are photos delivered?",
+      "answer": "Plan on delivery within 2 weeks. Delivery is often faster, but the 2-week window protects editing, organization, and quality control."
+    },
+    {
+      "question": "Do you have to use PhotoDay?",
+      "answer": "No. PhotoDay is included, but optional. If you do not want online parent ordering, your edited and cropped files can be delivered through Google Drive or on a USB drive you provide."
+    },
+    {
+      "question": "Can parents order prints?",
+      "answer": "Yes, if you enable parent ordering through PhotoDay. Families can order professional lab prints instead of relying on low-quality local printing."
+    },
+    {
+      "question": "Can parents download digital files?",
+      "answer": "Yes. You can offer digital downloads through PhotoDay if that is the best fit for your families."
+    },
+    {
+      "question": "Can your school receive all edited files?",
+      "answer": "Yes. Standard and Full School packages can include a Google Drive archive of edited and cropped files. USB delivery is also available if you provide the USB drive."
+    },
+    {
+      "question": "Can your school recover the picture day cost from photo orders?",
+      "answer": "Yes. You can keep parent pricing low, set pricing to recover part of the portrait day cost, or structure ordering as a school fundraiser."
+    },
+    {
+      "question": "What add-ons are available?",
+      "answer": "You can add extra students at $10 per student, staff-only headshot sessions from $500-$900, staff headshots on picture day at $20 per person, a second backdrop for $300, rush delivery under 5 business days for an added 25%, yearbook or ID export formatting for $250, on-site print coordination by custom quote, and second shoot days from $1,200-$1,800."
+    },
+    {
+      "question": "Do you photograph staff too?",
+      "answer": "Yes. You can add staff headshots to any package at $20 per person, or book a separate staff-only headshot session from $500-$900."
+    },
+    {
+      "question": "What if your school has more than 225 students?",
+      "answer": "Start with Full School Portrait Day, then add students at $10 per student. If you need a second shoot day, staff portraits, extra coordination, or rush delivery, those items can be scoped before booking."
+    },
+    {
+      "question": "What should you send before requesting a date?",
+      "answer": "Send your school name, contact person, email, phone, estimated student count, whether staff headshots are needed, your preferred picture day window, and whether you want parent ordering through PhotoDay."
+    },
+    {
+      "question": "What area do you serve?",
+      "answer": "Alpha Bravo Media is based in Tampa Bay and serves local Islamic schools, private schools, weekend schools, and community programs."
+    }
+  ],
+  "tiers": [
+    {
+      "discriminant": "tier",
+      "value": {
+        "name": "Essential Portrait Day",
+        "price": "$950",
+        "bestFor": "Your school has a smaller student count, weekend program, class, or community education group.",
+        "isPopular": false,
+        "includes": [
+          "Up to 75 students",
+          "1 backdrop with professional lighting",
+          "Basic editing and cropping",
+          "Web and print-ready JPEGs",
+          "PhotoDay gallery setup included",
+          "Delivery within 2 weeks"
+        ]
+      }
+    },
+    {
+      "discriminant": "tier",
+      "value": {
+        "name": "Standard Portrait Day",
+        "price": "$1,750",
+        "bestFor": "Your school needs a complete picture day for a medium-sized student body.",
+        "isPopular": false,
+        "includes": [
+          "Everything in Essential Portrait Day",
+          "Up to 150 students total",
+          "Organized student delivery workflow",
+          "Google Drive archive of edited/cropped files"
+        ]
+      }
+    },
+    {
+      "discriminant": "tier",
+      "value": {
+        "name": "Full School Portrait Day",
+        "price": "$2,250",
+        "bestFor": "Your school has roughly 175 to 225 students and wants the cleanest all-around option.",
+        "isPopular": true,
+        "includes": [
+          "Everything in Standard Portrait Day",
+          "Up to 225 students total",
+          "Organized private gallery workflow",
+          "Best fit for most private and Islamic schools"
+        ]
+      }
+    }
+  ]
+}

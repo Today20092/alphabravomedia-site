@@ -51,6 +51,7 @@ const heroMediaAlt = featuredMediaAlt ?? service.data.title;
 const serviceSeoTitles: Record<string, string> = {
   "monthly-retainers": "Monthly Content Retainers | Alpha Bravo Media",
   "audio-setup": "Event Sound, Video & Livestream Support | Alpha Bravo Media",
+  "school-portraits": "School Portraits for Tampa Bay Private Schools | Alpha Bravo Media",
   "mobile-podcast": "Mobile Podcast Production | Alpha Bravo Media",
   weddings: "Wedding Videography Services | Alpha Bravo Media",
 };
@@ -83,9 +84,9 @@ const serviceTitle = serviceSeoTitles[service.id] ?? `${service.data.title} | ${
           <h1 class="site-page-title max-w-4xl">{service.data.title}</h1>
           <p class="site-page-copy text-lg">{service.data.description}</p>
           <div class="mt-6 flex flex-wrap gap-3">
-            <span class="site-chip site-chip-muted">Honest fit guidance first</span>
-            <span class="site-chip site-chip-muted">Scope clarified before production</span>
-            <span class="site-chip site-chip-muted">Reasonable revisions after delivery</span>
+            <span class="site-chip site-chip-muted">Clear scope before booking</span>
+            <span class="site-chip site-chip-muted">Organized production day</span>
+            <span class="site-chip site-chip-muted">Delivery plan confirmed up front</span>
           </div>
         </div>
 
@@ -102,13 +103,6 @@ const serviceTitle = serviceSeoTitles[service.id] ?? `${service.data.title} | ${
                 <Icon name={icon} class="h-12 w-12" />
               </div>
             )}
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent"></div>
-            <span class="site-badge-overlay absolute left-4 top-4">{category}</span>
-            <div class="absolute bottom-5 left-5 right-5">
-              <p class="max-w-sm font-['Sora',sans-serif] text-2xl font-semibold tracking-tight text-white">
-                Show the work early so the client understands the service before reading the whole page.
-              </p>
-            </div>
           </div>
         </div>
       </div>
@@ -125,11 +119,10 @@ const serviceTitle = serviceSeoTitles[service.id] ?? `${service.data.title} | ${
     <div class="site-shell">
       <div class="mb-8 max-w-3xl">
         <span class="site-kicker">Service gallery</span>
-        <h2 class="site-section-title mt-4">Show the service before you explain the service.</h2>
+        <h2 class="site-section-title mt-4">See the level of polish before you book.</h2>
         <p class="site-section-copy mt-4">
-          These images are here to make the service easier to understand at a glance. Some
-          are placeholders for future AI-generated or project-specific images, but the media
-          slots are part of the structure now.
+          Review the lighting, framing, color, and finish so you know what your final images
+          can look like before you schedule production.
         </p>
       </div>
 
@@ -139,7 +132,7 @@ const serviceTitle = serviceSeoTitles[service.id] ?? `${service.data.title} | ${
           alt: item.alt,
           caption: item.caption,
         }))}
-        layout="natural"
+        layout="square"
       />
     </div>
   </section>
@@ -150,10 +143,10 @@ const serviceTitle = serviceSeoTitles[service.id] ?? `${service.data.title} | ${
         <div class="mb-8 flex items-end justify-between gap-4">
           <div class="max-w-3xl">
             <span class="site-kicker">Related work</span>
-            <h2 class="site-section-title mt-4">Relevant proof tied to this exact service.</h2>
+            <h2 class="site-section-title mt-4">See similar work before you book.</h2>
             <p class="site-section-copy mt-4">
-              Instead of sending people to a disconnected work page, show the examples that
-              make this service easier to trust.
+              Look through related projects so you can judge the style, production quality,
+              and type of outcome before starting a conversation.
             </p>
           </div>
           <a href={`${base}portfolio`} class="site-button-secondary hidden sm:inline-flex">
@@ -179,35 +172,33 @@ const serviceTitle = serviceSeoTitles[service.id] ?? `${service.data.title} | ${
       <div class="site-panel-muted p-6 sm:p-8">
         <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.92fr)] lg:items-center">
           <div>
-            <span class="site-kicker">Discovery before payment</span>
+            <span class="site-kicker">Before you book</span>
             <h2 class="site-section-title mt-4">
-              Start by figuring out the right fit, not by forcing the wrong package.
+              Know what you are getting before anything is scheduled.
             </h2>
             <p class="site-section-copy mt-4">
-              The process is designed to remove guesswork before anything gets booked.
-              Clients should know whether the job is a fit, whether another specialist would
-              serve them better, what gets delivered, and how revisions are handled before
-              they pay for production.
+              You should have a clear package, timeline, delivery method, and next step before
+              you commit. The goal is a smooth production day and files you can actually use.
             </p>
           </div>
 
           <div class="grid gap-4">
             <div class="site-panel p-5 sm:p-6">
-              <p class="text-sm font-semibold text-site-text">Free fit call first</p>
+              <p class="text-sm font-semibold text-site-text">Clear fit before booking</p>
               <p class="mt-3 text-sm leading-7 text-site-text-muted">
-                Ayoub helps sort out the real need first and says so early if the scope or budget points elsewhere.
+                Talk through what you need first so the recommended package matches the job.
               </p>
             </div>
             <div class="site-panel p-5 sm:p-6">
-              <p class="text-sm font-semibold text-site-text">Clear delivery path</p>
+              <p class="text-sm font-semibold text-site-text">Delivery details up front</p>
               <p class="mt-3 text-sm leading-7 text-site-text-muted">
-                Timeline, shoot expectations, and deliverables are clarified before production.
+                Timing, shoot expectations, file delivery, and revisions are clarified before production.
               </p>
             </div>
             <div class="site-panel p-5 sm:p-6">
-              <p class="text-sm font-semibold text-site-text">Referral if needed</p>
+              <p class="text-sm font-semibold text-site-text">No pressure into the wrong offer</p>
               <p class="mt-3 text-sm leading-7 text-site-text-muted">
-                If another partner is the better answer, you hear that before getting pushed into the wrong offer.
+                If your scope needs a different setup, you will know before anything is booked.
               </p>
             </div>
           </div>
@@ -221,9 +212,9 @@ const serviceTitle = serviceSeoTitles[service.id] ?? `${service.data.title} | ${
       <div class="site-shell">
         <div class="mb-8 max-w-3xl">
           <span class="site-kicker">FAQ</span>
-          <h2 class="site-section-title mt-4">Questions clients usually ask before they reach out.</h2>
+          <h2 class="site-section-title mt-4">Questions you may have before reaching out.</h2>
           <p class="site-section-copy mt-4">
-            Clear answers narrow the scope faster and make the first conversation more useful.
+            Get clear answers on pricing, delivery, ordering, and what to send when you ask for a date.
           </p>
         </div>
 
@@ -251,8 +242,8 @@ const serviceTitle = serviceSeoTitles[service.id] ?? `${service.data.title} | ${
             <span class="site-kicker">Contact</span>
             <h2 class="site-section-title mt-4">Ready to talk scope and timing?</h2>
             <p class="site-section-copy mt-4">
-              Reach out with the service name, the rough timing, and what kind of delivery
-              matters most. That keeps the next step focused on fit instead of guesswork.
+              Send the service you are interested in, your rough timing, and the delivery that
+              matters most. You will get a clearer next step without guessing at the package.
             </p>
           </div>
 
