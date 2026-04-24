@@ -369,10 +369,15 @@ const ogImageUrl = toAbsoluteUrl(ogImage);
                   </a>
                 ))
             }
-            <div class="site-link flex items-center gap-3 text-site-text-muted">
+            <a
+              href={siteConfig.socialLinks.find((link) => link.platform === "discord")?.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="site-link flex items-center gap-3"
+            >
               <Icon name="simple-icons:discord" class="h-4 w-4 text-site-accent" />
               <span>Discord creator community</span>
-            </div>
+            </a>
           </div>
         </div>
 
