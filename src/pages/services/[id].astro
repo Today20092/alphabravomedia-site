@@ -33,10 +33,10 @@ const relatedWork = (service.data.relatedWork ?? [])
     ),
   )
   .filter(Boolean);
-const featuredWork = service.data.featuredWork
-  ? allPortfolio.find(
-      (item) =>
-        item.id.toLowerCase().endsWith(service.data.featuredWork.toLowerCase()),
+const featuredWorkRef = service.data.featuredWork;
+const featuredWork = featuredWorkRef
+  ? allPortfolio.find((item) =>
+      item.id.toLowerCase().endsWith(featuredWorkRef.toLowerCase()),
     )
   : null;
 const featuredMediaSrc = featuredWork?.data.image?.src ?? (

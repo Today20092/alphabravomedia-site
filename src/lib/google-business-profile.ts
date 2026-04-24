@@ -15,7 +15,7 @@ type GoogleBusinessProfile = {
   reviews: GoogleReview[];
 };
 
-const profile = googleBusinessProfile as GoogleBusinessProfile;
+const profile = googleBusinessProfile as unknown as GoogleBusinessProfile;
 
 export { profile as googleBusinessProfile };
 

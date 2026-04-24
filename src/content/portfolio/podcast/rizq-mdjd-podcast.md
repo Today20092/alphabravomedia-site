@@ -2,8 +2,36 @@
 title: "Full-Service Podcast Production for Rizq MDJD"
 clientName: "Rizq MDJD Podcast"
 videoId: "LnKuPiUVjho"
+channelUrl: "https://www.youtube.com/@RizqMDJD/videos"
+playlistUrl: "https://youtube.com/playlist?list=PLVHRcYqB7pUrvVfYg-5sICzgxf7OcFOY_"
 category: "Podcast"
-outcome: "A hands-off podcast workflow with full episodes and short clips that keep the show publishing consistently."
+outcome: "Ongoing full-service podcast production for every episode on the Rizq MDJD channel, including recording, editing, YouTube packaging, uploads, and short-form content support."
+proofPoints:
+  - "Produced every episode currently published on the Rizq MDJD YouTube channel"
+  - "Full episode edits with pacing, structure, and clean delivery"
+  - "On-location camera, lighting, audio, and recording support"
+  - "Remote guest workflow for online interview episodes"
+  - "YouTube descriptions, upload support, and publishing handoff"
+  - "Short-form clips for social distribution when included"
+episodeLinks:
+  - title: "EP 10: Divide & Conquer: How Our Communities Were Disempowered"
+    videoId: "l2KqvKyuQ2U"
+    url: "https://youtu.be/l2KqvKyuQ2U"
+  - title: "EP 9: The Bonds That Hold Us: Why Communities Trump Governments ft. Almir Colan"
+    videoId: "lAGQ_lAzvhg"
+    url: "https://youtu.be/lAGQ_lAzvhg"
+  - title: "EP 8: Is Islamic Finance Socialism or Capitalism? ft. Almir Colan"
+    videoId: "zAw8JjlBpEM"
+    url: "https://youtu.be/zAw8JjlBpEM"
+  - title: "EP 7: From Financial Chains to True Freedom: An Islamic Perspective"
+    videoId: "U5mvnfxDd_4"
+    url: "https://youtu.be/U5mvnfxDd_4"
+  - title: "EP 6: Beyond Interest: Exploring the Ethical World of Islamic Finance"
+    videoId: "W6XaF1gg_co"
+    url: "https://youtu.be/W6XaF1gg_co"
+  - title: "EP 5: The Muslim Mindset: Muslims Need to Become Producers, Not Just Consumers"
+    videoId: "LnKuPiUVjho"
+    url: "https://youtu.be/LnKuPiUVjho"
 services:
   - mobile-podcast
 order: 3.5
@@ -13,7 +41,9 @@ order: 3.5
 
 Rizq MDJD is a podcast focused on Muslim financial empowerment, wealth-building, and practical conversations around rizq, mindset, and stewardship. The show brings together in-person discussions and, more recently, remote guest episodes that expand the conversation beyond the table.
 
-My role is to handle the entire production workflow from start to finish so the hosts can stay focused on the conversation. That includes:
+Alpha Bravo Media has produced every podcast episode currently published on the Rizq MDJD YouTube channel. This is an ongoing production partnership, not a one-off shoot, and the goal is to make the show easy for the hosts to keep publishing consistently.
+
+My role is to handle the full production workflow from start to finish so the hosts can stay focused on the conversation. That includes:
 
 - Bringing and setting up the camera, lights, audio equipment, and recording gear
 - Recording and managing the video and audio during the session
@@ -29,9 +59,9 @@ The goal is to make the process simple for the client while keeping the final re
 
 The short-form clips are especially valuable because they help pull attention back to the full episode and give the podcast more chances to reach new viewers across different platforms.
 
-Watch the podcast here:
+Watch the full channel here:
 
-- [Rizq MDJD YouTube Channel](https://www.youtube.com/@RizqMDJD)
+- [Rizq MDJD YouTube Videos](https://www.youtube.com/@RizqMDJD/videos)
 - [Full Podcast Playlist](https://youtube.com/playlist?list=PLVHRcYqB7pUrvVfYg-5sICzgxf7OcFOY_&si=Ud4uiGijBcBp1s5s)
 
 For the full podcast service details, you can also view the [Podcast Services](/#services) section on my homepage.

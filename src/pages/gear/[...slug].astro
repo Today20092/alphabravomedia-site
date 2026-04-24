@@ -38,8 +38,8 @@ const gearDescription = item.data.specs
   <article
     data-pagefind-body
     class="site-section-hero"
-    itemScope
-    itemType="https://schema.org/Review"
+    itemscope
+    itemtype="https://schema.org/Review"
   >
     <span data-pagefind-meta="type" class="sr-only">Gear</span>
     <span data-pagefind-meta="category" style="display:none">{item.data.category}</span>
@@ -66,10 +66,10 @@ const gearDescription = item.data.specs
         <div>
           <div class="site-page-header">
             <span class="site-chip site-chip-muted">{item.data.category}</span>
-            <h1 itemProp="headline" class="site-page-title max-w-3xl">{item.data.title}</h1>
+            <h1 itemprop="headline" class="site-page-title max-w-3xl">{item.data.title}</h1>
             <div class="site-meta-row">
               <span>{item.data.category}</span>
-              <a href={`${base}about`} rel="author" itemProp="author" class="site-link">
+              <a href={`${base}about`} rel="author" itemprop="author" class="site-link">
                 Recommended by {siteConfig.founderName}
               </a>
             </div>

@@ -394,9 +394,19 @@ const ogImageUrl = toAbsoluteUrl(ogImage);
 
     <!-- Scripts -->
     <script>
+      type SiteTheme = "dark" | "light";
+      type AbmWindow = Window &
+        typeof globalThis & {
+          __abmThemeChangeHandler?: (event: MouseEvent) => void;
+          __abmThemeMediaQuery?: MediaQueryList;
+          __abmThemeMediaHandler?: () => void;
+          __abmRevealObserver?: IntersectionObserver | null;
+        };
+
+      const abmWindow = window as AbmWindow;
       let lastScrollY = window.scrollY;
       const themeStorageKey = "abm-theme";
-      const themeColors = {
+      const themeColors: Record<SiteTheme, string> = {
         dark: "#110f0d",
         light: "#f4efe7",
       };
@@ -416,7 +426,7 @@ const ogImageUrl = toAbsoluteUrl(ogImage);
         lastScrollY = currentScrollY;
       }
 
-      function getStoredTheme() {
+      function getStoredTheme(): SiteTheme | null {
         try {
           const value = localStorage.getItem(themeStorageKey);
           if (value === "dark" || value === "light") return value;
@@ -427,13 +437,13 @@ const ogImageUrl = toAbsoluteUrl(ogImage);
         return null;
       }
 
-      function getSystemTheme() {
+      function getSystemTheme(): SiteTheme {
         return window.matchMedia("(prefers-color-scheme: dark)").matches
           ? "dark"
           : "light";
       }
 
-      function applyTheme(theme) {
+      function applyTheme(theme: SiteTheme) {
         const root = document.documentElement;
         const meta = document.querySelector('meta[name="theme-color"]');
 
@@ -457,11 +467,11 @@ const ogImageUrl = toAbsoluteUrl(ogImage);
       function setupThemeToggle() {
         applyTheme(getStoredTheme() ?? getSystemTheme());
 
-        if (window.__abmThemeChangeHandler) {
-          document.removeEventListener("click", window.__abmThemeChangeHandler);
+        if (abmWindow.__abmThemeChangeHandler) {
+          document.removeEventListener("click", abmWindow.__abmThemeChangeHandler);
         }
 
-        window.__abmThemeChangeHandler = (event) => {
+        abmWindow.__abmThemeChangeHandler = (event: MouseEvent) => {
           if (!(event.target instanceof Element)) return;
           const button = event.target.closest("[data-theme-toggle]");
           if (!button) return;
@@ -481,24 +491,24 @@ const ogImageUrl = toAbsoluteUrl(ogImage);
           applyTheme(nextTheme);
         };
 
-        document.addEventListener("click", window.__abmThemeChangeHandler);
+        document.addEventListener("click", abmWindow.__abmThemeChangeHandler);
 
-        if (window.__abmThemeMediaQuery && window.__abmThemeMediaHandler) {
-          window.__abmThemeMediaQuery.removeEventListener(
+        if (abmWindow.__abmThemeMediaQuery && abmWindow.__abmThemeMediaHandler) {
+          abmWindow.__abmThemeMediaQuery.removeEventListener(
             "change",
-            window.__abmThemeMediaHandler,
+            abmWindow.__abmThemeMediaHandler,
           );
         }
 
-        window.__abmThemeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-        window.__abmThemeMediaHandler = () => {
+        abmWindow.__abmThemeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+        abmWindow.__abmThemeMediaHandler = () => {
           if (!getStoredTheme()) {
             applyTheme(getSystemTheme());
           }
         };
-        window.__abmThemeMediaQuery.addEventListener(
+        abmWindow.__abmThemeMediaQuery.addEventListener(
           "change",
-          window.__abmThemeMediaHandler,
+          abmWindow.__abmThemeMediaHandler,
         );
       }
 
@@ -561,9 +571,9 @@ const ogImageUrl = toAbsoluteUrl(ogImage);
       }
 
       function setupRevealAnimations() {
-        if (window.__abmRevealObserver) {
-          window.__abmRevealObserver.disconnect();
-          window.__abmRevealObserver = null;
+        if (abmWindow.__abmRevealObserver) {
+          abmWindow.__abmRevealObserver.disconnect();
+          abmWindow.__abmRevealObserver = null;
         }
 
         const revealNodes = document.querySelectorAll("[data-reveal]");
@@ -592,7 +602,7 @@ const ogImageUrl = toAbsoluteUrl(ogImage);
           },
         );
 
-        window.__abmRevealObserver = observer;
+        abmWindow.__abmRevealObserver = observer;
 
         revealNodes.forEach((node) => {
           if (node.classList.contains("site-reveal-in")) return;

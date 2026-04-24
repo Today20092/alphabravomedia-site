@@ -9,6 +9,7 @@
     "prebuild": "node scripts/fetch-google-business-profile.mjs",
     "preview": "astro preview",
     "astro": "astro",
+    "check": "astro check",
     "audit:contrast": "node scripts/audit-contrast.mjs",
     "sync:google-business-profile": "node scripts/fetch-google-business-profile.mjs",
     "new": "node scripts/new-content.js"
@@ -34,6 +35,8 @@
     "tailwindcss": "^4.2.1"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.8",
+    "typescript": "^6.0.3",
     "wrangler": "^4.77.0"
   }
 }

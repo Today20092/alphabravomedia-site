@@ -2,8 +2,35 @@
 title: 'Building Trust Through Educational Content: Title Town Closing Group'
 clientName: Title Town Closing Group
 videoId: qhYVKieI_xE
+channelUrl: "https://www.youtube.com/@titletownclosing"
 category: Talking Head
-outcome: "Educational trust-building videos that help explain the closing process clearly before the first call."
+outcome: "Ongoing talking-head video production for Title Town Closing Group, turning real estate closing questions into a growing library of trust-building YouTube content."
+proofPoints:
+  - "Produced the full published video run currently on the Title Town Closing YouTube channel"
+  - "Ongoing talking-head content for real estate closing education"
+  - "Performance coaching, teleprompter support, filming, editing, and upload workflow"
+  - "Office-based production setup with consistent lighting, framing, and audio"
+  - "Evergreen videos that explain liens, taxes, title issues, and closing decisions"
+  - "Consistent channel presentation for buyers, sellers, and real estate partners"
+episodeLinks:
+  - title: "I Lost $400K on a 'Great Deal' - The Foreclosure Trap Nobody Talks About"
+    videoId: "TL_BJWgb4S0"
+    url: "https://youtu.be/TL_BJWgb4S0"
+  - title: "The $87,000 Foreclosure Mistake: How One Hidden Lien Wipes Out Florida Investors"
+    videoId: "3-aR18DOVkE"
+    url: "https://youtu.be/3-aR18DOVkE"
+  - title: "What Is a Lien? How Legal Claims Can Take Your Home"
+    videoId: "hk1fyTmyP50"
+    url: "https://youtu.be/hk1fyTmyP50"
+  - title: "Florida Homeowners: Pay Property Taxes by March 31st or Lose Your House to Auction"
+    videoId: "lhSAV6VNfJY"
+    url: "https://youtu.be/lhSAV6VNfJY"
+  - title: "Top 5 Common Title Issues That Delay Florida Real Estate Closings"
+    videoId: "qhYVKieI_xE"
+    url: "https://youtu.be/qhYVKieI_xE"
+  - title: "Who Chooses the Title Company in Florida Real Estate Transactions?"
+    videoId: "t8ZklG6E6IA"
+    url: "https://youtu.be/t8ZklG6E6IA"
 services:
   - monthly-retainers
 order: 1

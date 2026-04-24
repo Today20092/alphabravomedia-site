@@ -23,10 +23,18 @@ const portfolio = defineCollection({
     clientName: z.string(),
     videoId: z.string().optional(), // Unlisted YouTube video ID
     facebookUrl: z.string().url().optional(), // Facebook video URL
+    channelUrl: z.string().url().optional(),
+    playlistUrl: z.string().url().optional(),
     image: image().optional(),
     gallery: z.array(image()).optional(),
     category: z.string(),
     outcome: z.string().optional(),
+    proofPoints: z.array(z.string()).default([]),
+    episodeLinks: z.array(z.object({
+      title: z.string(),
+      videoId: z.string(),
+      url: z.string().url().optional(),
+    })).default([]),
     services: z.array(z.string()).default([]),
     gearUsed: z.array(reference('gear')).optional(),
     order: z.number().default(999),

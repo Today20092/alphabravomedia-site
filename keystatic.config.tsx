@@ -117,7 +117,7 @@ export default config({
     }),
   },
   singletons: {
-    terms: config.singleton({
+    terms: singleton({
       label: 'Terms of Service',
       path: 'src/content/legal/terms',
       format: { contentField: 'content' },

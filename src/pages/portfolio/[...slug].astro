@@ -59,8 +59,8 @@ const portfolioOgImage = item.data.image?.src ??
   <article
     data-pagefind-body
     class="site-section-hero"
-    itemScope
-    itemType="https://schema.org/CreativeWork"
+    itemscope
+    itemtype="https://schema.org/CreativeWork"
   >
     <span data-pagefind-meta="type" class="sr-only">Work</span>
     <span data-pagefind-meta="client" style="display:none">{item.data.clientName}</span>
@@ -73,11 +73,11 @@ const portfolioOgImage = item.data.image?.src ??
 
       <header class="site-page-header mt-8">
         <span class="site-chip">{item.data.category}</span>
-        <h1 itemProp="headline" class="site-page-title max-w-4xl">{item.data.title}</h1>
+        <h1 itemprop="headline" class="site-page-title max-w-4xl">{item.data.title}</h1>
         <div class="site-meta-row">
           <span>Client</span>
           <span class="text-site-text">{item.data.clientName}</span>
-          <a href={`${base}about`} rel="author" itemProp="author" class="site-link">
+          <a href={`${base}about`} rel="author" itemprop="author" class="site-link">
             Produced by {siteConfig.founderName}
           </a>
         </div>
@@ -117,6 +117,109 @@ const portfolioOgImage = item.data.image?.src ??
       >
         <Content />
       </div>
+
+      {(item.data.proofPoints.length > 0 || item.data.channelUrl || item.data.playlistUrl) && (
+        <section class="site-panel mb-16 p-6 sm:p-8">
+          <div class="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+            <div>
+              <span class="site-kicker">Production volume</span>
+              <h2 class="site-section-title mt-4">Built as an ongoing content system.</h2>
+              <p class="site-section-copy mt-4">
+                This case study represents repeatable production work across published
+                episodes, not a one-off portfolio sample.
+              </p>
+              <div class="mt-6 flex flex-wrap gap-3">
+                {item.data.channelUrl && (
+                  <a
+                    href={item.data.channelUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="site-button-primary"
+                  >
+                    <Icon name="simple-icons:youtube" class="h-4 w-4" />
+                    View channel
+                  </a>
+                )}
+                {item.data.playlistUrl && (
+                  <a
+                    href={item.data.playlistUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="site-button-secondary"
+                  >
+                    <Icon name="mdi:playlist-play" class="h-5 w-5" />
+                    View playlist
+                  </a>
+                )}
+              </div>
+            </div>
+
+            {item.data.proofPoints.length > 0 && (
+              <div class="grid gap-3 sm:grid-cols-2">
+                {item.data.proofPoints.map((point) => (
+                  <div class="rounded-site-lg border border-site-border bg-site-control-bg p-4">
+                    <Icon name="mdi:check-circle-outline" class="mb-3 h-5 w-5 text-site-accent" />
+                    <p class="text-sm leading-6 text-site-text-muted">{point}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
+      {item.data.episodeLinks.length > 0 && (
+        <section class="mb-16" data-pagefind-ignore>
+          <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <span class="site-kicker">Selected episodes</span>
+              <h2 class="site-section-title mt-4">A look at the published run.</h2>
+            </div>
+            {item.data.channelUrl && (
+              <a
+                href={item.data.channelUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="site-link inline-flex items-center gap-2 text-sm font-semibold"
+              >
+                See all videos
+                <Icon name="mdi:arrow-top-right" class="h-4 w-4" />
+              </a>
+            )}
+          </div>
+
+          <div class="site-grid-3">
+            {item.data.episodeLinks.map((episode) => (
+              <a
+                href={episode.url ?? `https://youtu.be/${episode.videoId}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="site-card site-card-interactive group"
+              >
+                <div class="site-card-media aspect-video">
+                  <img
+                    src={`https://img.youtube.com/vi/${episode.videoId}/maxresdefault.jpg`}
+                    alt={episode.title}
+                    width="1280"
+                    height="720"
+                    loading="lazy"
+                    class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
+                  <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/75 to-transparent"></div>
+                  <span class="site-badge-overlay absolute left-4 top-4">Episode</span>
+                </div>
+                <div class="site-card-body-compact">
+                  <h3 class="site-card-title">{episode.title}</h3>
+                  <div class="site-meta-row">
+                    <span>Watch on YouTube</span>
+                    <Icon name="mdi:arrow-top-right" class="h-4 w-4" />
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
 
       {item.data.gallery && item.data.gallery.length > 0 && (
         <section class="mb-16">
