@@ -6,7 +6,7 @@ import GalleryGate from "../../components/GalleryGate.astro";
 export async function getStaticPaths() {
   const entries = await getCollection("galleries");
   return entries.map((entry) => ({
-    params: { slug: entry.slug },
+    params: { slug: entry.id },
     props: { entry },
   }));
 }
@@ -18,7 +18,7 @@ const { Content } = await render(entry);
 const rawBase = import.meta.env.BASE_URL;
 const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
 
-const slug = entry.slug;
+const slug = entry.id;
 
 const allImageLists = import.meta.glob<{ default: string[] }>(
   "/src/content/galleries/**/images.json",

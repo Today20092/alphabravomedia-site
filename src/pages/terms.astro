@@ -1,9 +1,9 @@
 ---
-import { getEntry } from "astro:content";
+import { getEntry, render } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const termsEntry = await getEntry("legal", "terms");
-const { Content } = termsEntry ? await termsEntry.render() : { Content: null };
+const { Content } = termsEntry ? await render(termsEntry) : { Content: null };
 
 export const prerender = true;
 ---

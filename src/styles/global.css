@@ -399,6 +399,13 @@ body {
     pointer-events: none;
   }
 
+  .site-card-media > iframe {
+    display: block;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+  }
+
   .site-atmosphere-hero,
   .site-atmosphere-section {
     position: absolute;
@@ -706,6 +713,26 @@ body {
   .site-prose :where(code) {
     color: var(--site-text);
   }
+}
+
+.site-card-media > lite-youtube {
+  position: absolute !important;
+  inset: 0 !important;
+  display: block !important;
+  width: 100% !important;
+  max-width: none !important;
+  height: 100% !important;
+  aspect-ratio: auto !important;
+  background-size: cover !important;
+}
+
+.site-card-media > lite-youtube::after {
+  content: none !important;
+}
+
+.site-card-media > lite-youtube > iframe {
+  width: 100% !important;
+  height: 100% !important;
 }
 
 @media (prefers-reduced-motion: reduce) {

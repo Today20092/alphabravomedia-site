@@ -20,7 +20,6 @@ function resolveWork(refs: string[]) {
     .map((ref) =>
       allPortfolio.find(
         (item) =>
-          item.slug.toLowerCase().endsWith(ref.toLowerCase()) ||
           item.id.toLowerCase().endsWith(ref.toLowerCase()),
       ),
     )
@@ -403,7 +402,7 @@ const featuredWork = resolveWork([
             >
               <WorkCard
                 item={item}
-                href={`${base}portfolio/${item.slug}`}
+                href={`${base}portfolio/${item.id}`}
                 ctaLabel="See example"
               />
             </div>

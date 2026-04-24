@@ -29,7 +29,6 @@ const relatedWork = (service.data.relatedWork ?? [])
   .map((ref: string) =>
     allPortfolio.find(
       (item) =>
-        item.slug.toLowerCase().endsWith(ref.toLowerCase()) ||
         item.id.toLowerCase().endsWith(ref.toLowerCase()),
     ),
   )
@@ -37,7 +36,6 @@ const relatedWork = (service.data.relatedWork ?? [])
 const featuredWork = service.data.featuredWork
   ? allPortfolio.find(
       (item) =>
-        item.slug.toLowerCase().endsWith(service.data.featuredWork.toLowerCase()) ||
         item.id.toLowerCase().endsWith(service.data.featuredWork.toLowerCase()),
     )
   : null;
@@ -167,7 +165,7 @@ const serviceTitle = serviceSeoTitles[service.id] ?? `${service.data.title} | ${
           {relatedWork.map((item: any) => (
             <WorkCard
               item={item}
-              href={`${base}portfolio/${item.slug}`}
+              href={`${base}portfolio/${item.id}`}
               ctaLabel="See work"
             />
           ))}

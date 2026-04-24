@@ -52,7 +52,7 @@ const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.
 
       <div class="site-grid-3">
         {posts.map((post) => (
-          <a href={`${base}blog/${post.slug}`} class="site-card site-card-interactive group">
+          <a href={`${base}blog/${post.id}`} class="site-card site-card-interactive group">
             <div class="site-card-media">
               {post.data.image ? (
                 <Image

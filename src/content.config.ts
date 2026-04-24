@@ -1,8 +1,10 @@
-import { defineCollection, z, reference } from 'astro:content';
+import { defineCollection, reference } from 'astro:content';
+import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
 
 // Blog collection - YouTube tutorials, reviews, etc.
 const blog = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog' }),
   schema: ({ image }) => z.object({
     title: z.string(),
     pubDate: z.coerce.date(),
@@ -15,7 +17,7 @@ const blog = defineCollection({
 
 // Portfolio collection - Client work
 const portfolio = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/portfolio' }),
   schema: ({ image }) => z.object({
     title: z.string(),
     clientName: z.string(),
@@ -33,7 +35,7 @@ const portfolio = defineCollection({
 
 // Gear collection - Equipment recommendations
 const gear = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '*.md', base: './src/content/gear' }),
   schema: z.object({
     title: z.string(),
     amazonLink: z.string().url(),
@@ -42,9 +44,10 @@ const gear = defineCollection({
     specs: z.string().optional(),
   }),
 });
+
 // Services collection - Pricing and offerings
 const services = defineCollection({
-  type: 'data',
+  loader: glob({ pattern: '*.json', base: './src/content/services' }),
   schema: ({ image }) => z.object({
     title: z.string(),
     description: z.string(),
@@ -76,9 +79,10 @@ const services = defineCollection({
     })).default([]),
   }),
 });
+
 // Legal collection - Terms of Service, Privacy Policy, etc.
 const legal = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '*.mdx', base: './src/content/legal' }),
   schema: z.object({
     title: z.string(),
   }),
@@ -86,15 +90,15 @@ const legal = defineCollection({
 
 // Galleries collection - Client photo event galleries
 const galleries = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/index.md', base: './src/content/galleries' }),
   schema: z.object({
     title: z.string(),
     date: z.string(),
     description: z.string().optional(),
     // Layout options:
-    //   square  — uniform square crop grid (default, good for headshots)
-    //   natural — grid preserving each photo's true aspect ratio
-    //   masonry — Pinterest-style columns, best for mixed event photography
+    //   square - uniform square crop grid (default, good for headshots)
+    //   natural - grid preserving each photo's true aspect ratio
+    //   masonry - Pinterest-style columns, best for mixed event photography
     galleryLayout: z.enum(['square', 'natural', 'masonry']).default('square'),
     password: z.string().optional(),
     remoteBase: z.string().optional(),

@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { getCollection, getEntries } from "astro:content";
+import { getCollection, getEntries, render } from "astro:content";
 import { YouTube } from "@astro-community/astro-embed-youtube";
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
@@ -11,13 +11,13 @@ import { siteConfig } from "../../site-config";
 export async function getStaticPaths() {
   const items = await getCollection("portfolio");
   return items.map((item) => ({
-    params: { slug: item.slug },
+    params: { slug: item.id },
     props: { item },
   }));
 }
 
 const { item } = Astro.props;
-const { Content } = await item.render();
+const { Content } = await render(item);
 
 const rawBase = import.meta.env.BASE_URL;
 const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
@@ -34,7 +34,7 @@ if (gearUsedRaw.some((g) => g === undefined)) {
 const allItems = await getCollection("portfolio");
 const allServices = await getCollection("services");
 const relatedItems = allItems
-  .filter((i) => i.slug !== item.slug && i.data.category === item.data.category)
+  .filter((i) => i.id !== item.id && i.data.category === item.data.category)
   .slice(0, 2);
 const relatedServices = allServices.filter((service) =>
   item.data.services.includes(service.id),
@@ -85,9 +85,13 @@ const portfolioOgImage = item.data.image?.src ??
 
       {(item.data.videoId || item.data.facebookUrl || item.data.image) && (
         <div class="site-card mb-12 overflow-hidden">
-          <div class="site-card-media aspect-video flex items-center justify-center">
+          <div class="site-card-media aspect-video">
             {item.data.videoId ? (
-              <YouTube id={item.data.videoId} class="m-0 w-full max-w-full aspect-video" />
+              <YouTube
+                id={item.data.videoId}
+                posterQuality="max"
+                class="m-0 w-full max-w-full aspect-video"
+              />
             ) : item.data.facebookUrl ? (
               <iframe
                 src={`https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(item.data.facebookUrl)}&show_text=0&t=0`}
@@ -153,7 +157,7 @@ const portfolioOgImage = item.data.image?.src ??
             <div class="mt-4 flex flex-wrap gap-3">
               {gearUsed.map((gear) => (
                 <a
-                  href={`${base}gear/${gear.slug}`}
+                  href={`${base}gear/${gear.id}`}
                   class="site-chip site-chip-muted"
                 >
                   <Icon name="mdi:camera-outline" class="h-4 w-4 text-site-accent" />
@@ -206,7 +210,7 @@ const portfolioOgImage = item.data.image?.src ??
           <div class="grid gap-6 md:grid-cols-2">
             {relatedItems.map((related) => (
               <a
-                href={`${base}portfolio/${related.slug}`}
+                href={`${base}portfolio/${related.id}`}
                 class="site-card site-card-interactive group"
               >
                 <div class="site-card-media">

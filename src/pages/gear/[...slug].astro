@@ -1,26 +1,26 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import { Icon } from "astro-icon/components";
 import { siteConfig } from "../../site-config";
 
 export async function getStaticPaths() {
   const gear = await getCollection("gear");
   return gear.map((item) => ({
-    params: { slug: item.slug },
+    params: { slug: item.id },
     props: { item },
   }));
 }
 
 const { item } = Astro.props;
-const { Content } = await item.render();
+const { Content } = await render(item);
 
 const rawBase = import.meta.env.BASE_URL;
 const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
 
 const allGear = await getCollection("gear");
 const relatedItems = allGear
-  .filter((g) => g.slug !== item.slug && g.data.category === item.data.category)
+  .filter((g) => g.id !== item.id && g.data.category === item.data.category)
   .slice(0, 3);
 const gearDescription = item.data.specs
   ? `${item.data.title}: ${item.data.specs}`
@@ -107,7 +107,7 @@ const gearDescription = item.data.specs
           <div class="grid gap-6 md:grid-cols-3">
             {relatedItems.map((related) => (
               <a
-                href={`${base}gear/${related.slug}`}
+                href={`${base}gear/${related.id}`}
                 class="site-card site-card-interactive group"
               >
                 <div class="site-card-media aspect-square flex items-center justify-center p-5">

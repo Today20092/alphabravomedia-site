@@ -52,7 +52,7 @@ const categories = [...new Set(allItems.map((item) => item.data.category))];
         <div class="site-grid-3" id="portfolio-grid">
           {allItems.map((item) => (
             <a
-              href={`${base}portfolio/${item.slug}`}
+              href={`${base}portfolio/${item.id}`}
               class="portfolio-item site-card site-card-interactive group"
               data-category={item.data.category}
             >

@@ -63,8 +63,8 @@ function getRemoteFilenames(slug: string): string[] {
           {sorted.map((entry, index) => {
             const isRemote = !!entry.data.remoteBase;
             const isPrivate = !!entry.data.password;
-            const remoteFiles = isRemote ? getRemoteFilenames(entry.slug) : [];
-            const localImgs = isRemote ? [] : getImagesForSlug(entry.slug);
+            const remoteFiles = isRemote ? getRemoteFilenames(entry.id) : [];
+            const localImgs = isRemote ? [] : getImagesForSlug(entry.id);
             const count = isRemote ? remoteFiles.length : localImgs.length;
             const remoteCoverUrl =
               isRemote && remoteFiles.length > 0
@@ -74,7 +74,7 @@ function getRemoteFilenames(slug: string): string[] {
 
             return (
               <a
-                href={`${base}gallery/${entry.slug}`}
+                href={`${base}gallery/${entry.id}`}
                 class="site-card site-card-interactive group"
               >
                 <div class="site-card-media aspect-[4/3]">

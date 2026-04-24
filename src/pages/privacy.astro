@@ -1,9 +1,9 @@
 ---
-import { getEntry } from "astro:content";
+import { getEntry, render } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const privacyEntry = await getEntry("legal", "privacy");
-const { Content } = privacyEntry ? await privacyEntry.render() : { Content: null };
+const { Content } = privacyEntry ? await render(privacyEntry) : { Content: null };
 
 export const prerender = true;
 ---

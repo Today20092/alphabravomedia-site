@@ -17,7 +17,6 @@ const allPortfolio = await getCollection("portfolio");
 const featuredWork = service.data.featuredWork
   ? allPortfolio.find(
       (item) =>
-        item.slug.toLowerCase().endsWith(service.data.featuredWork.toLowerCase()) ||
         item.id.toLowerCase().endsWith(service.data.featuredWork.toLowerCase()),
     )
   : null;
