@@ -1,0 +1,142 @@
+---
+title: "How to Archive Projects with DaVinci Resolve Media Management"
+pubDate: 2026-05-01
+description: "A practical DaVinci Resolve media management workflow for creators who want to archive finished projects, reduce storage costs, and keep the files they may need later."
+youtubeId: "UrK1rGKn014"
+tags:
+  - DaVinci Resolve
+  - video editing
+  - media management
+  - creator workflow
+---
+
+When you start recording higher-quality video, storage becomes one of the first real costs of being a creator.
+
+That is especially true if you are filming long projects, recording directly to SSD, shooting at higher bit rates, collecting B-roll, working with external audio, or saving everything from every job "just in case." A finished edit may only use a small percentage of the media you recorded, but the raw project folder can still take up tens or hundreds of gigabytes.
+
+In the video above, I walk through a practical way to handle that problem inside DaVinci Resolve using the **Media Management** tool. The goal is simple: keep a clean archive of the finished project without carrying the full storage cost of every unused raw file forever.
+
+## What DaVinci Resolve Media Management Is For
+
+DaVinci Resolve's Media Management tool is built for moving, copying, trimming, transcoding, and relinking the media in a project. It is not only a beginner storage-saving feature. It is part of a professional post-production workflow.
+
+Editors and post-production teams use media management when they need to:
+
+- Copy a project and its media to another drive or workstation
+- Send a timeline or project to another editor, colorist, or finishing system
+- Consolidate media from multiple folders into one organized location
+- Trim unused portions of long clips while keeping handles around each edit
+- Transcode camera originals into a smaller, easier-to-manage format
+- Relink a Resolve project to the new managed media
+- Prepare a project for archive after delivery
+
+For larger productions, this matters because media is often spread across camera cards, SSDs, audio folders, graphics folders, music libraries, and shared storage. Media management gives the editor a way to collect only what the project actually needs and package it in a more predictable structure.
+
+For creators, the same idea applies on a smaller scale. You may not have a full post-production team, but you still need a system for keeping finished projects organized without buying more storage every time you shoot something new.
+
+## Why This Matters for Creators
+
+Storage gets expensive fast. Once you move from phone clips or low-bit-rate footage into mirrorless cameras, log recording, 4K timelines, 10-bit files, external recorders, or high-bit-rate codecs, the size of each project grows quickly.
+
+In my own workflow, I often record directly to an SSD from my Lumix Panasonic camera at around **150 megabits per second**. That gives me high-quality source footage, but it also means a single project can become very large before I even add B-roll, photos, audio files, music, exports, thumbnails, or other project assets.
+
+The problem is that after the project is finished, I usually do not need every second of every original clip.
+
+Many times:
+
+- The final timeline only uses part of the footage
+- Long takes have multiple unused sections
+- Extra B-roll never makes the final edit
+- The project has already been delivered to the client or published online
+- I may not open the project again for months, years, or ever
+
+Deleting everything can feel risky. Keeping everything at full quality can be expensive. Media management gives you a middle option: archive the project in a smaller, cleaner form so you can still reopen it later if needed.
+
+## The Workflow I Use
+
+My usual workflow looks like this:
+
+1. Record the footage, often directly to an SSD.
+2. Bring the media into DaVinci Resolve.
+3. Add the footage, B-roll, images, audio, and music needed for the edit.
+4. Finish and deliver the project.
+5. Open **Media Management** inside DaVinci Resolve.
+6. Use **Transcode** instead of only copying the files.
+7. Choose **Used Media and Trim** when I only want the media used in the edit.
+8. Add frame handles so I still have extra room around each cut.
+9. Re-encode the used footage at a lower bit rate for archive.
+10. Save the managed media into a clean project archive folder.
+
+In the example from the video, the project media went from about **71 GB** down to about **46 GB** using a media-managed archive. Your numbers will depend on your footage, codec, timeline, bit rate, handles, and how much unused media is in the project, but the storage savings can be significant.
+
+## Copy, Transcode, and Trim: The Main Options
+
+Inside Media Management, Resolve gives you a few different paths depending on what you are trying to do.
+
+### Copy
+
+Copy makes a duplicate of the selected media. This is useful when you want to move a project to another drive, hand it to another editor, or create a clean folder that contains the media for a project without changing the format.
+
+This is commonly used in professional workflows when someone needs to pass a project to another person or another machine while keeping the media intact.
+
+### Transcode
+
+Transcode re-encodes the selected media into a new format or bit rate. This is the option I focus on in the video because it can reduce file size for archive.
+
+For example, if the original footage was recorded at 150 Mbps, you might choose to archive the used media at 50 Mbps. You are making a quality tradeoff, but for many finished projects that you may rarely reopen, that tradeoff can be worth it.
+
+This is especially useful when you want to keep a project available for a future re-edit, reference, revision, or re-render, but you do not need to keep every original camera file at its original size.
+
+### Used Media and Trim
+
+This is one of the most important archive features. Instead of saving every source clip in full, Resolve can save only the parts of the clips that were actually used in your timeline.
+
+You can also set frame handles, such as 30, 60, or 120 frames. Handles give you extra media before and after each edit point, so if you reopen the project later, you still have room to adjust a cut.
+
+If you recorded a long clip but only used a few sections, this can save a lot of space.
+
+## Folder Organization and Relinking
+
+Media Management can also help organize the project into one archive location.
+
+One useful option is **Use project name subfolder**, which creates a folder using the Resolve project name. This keeps the managed media grouped and easier to store on an archive drive.
+
+Another option is **Preserve hierarchy**. If your original media was organized into folders and subfolders, Resolve can keep that folder structure in the managed version. If you turn that off, Resolve can collect the files together into a simpler structure.
+
+There is also **Relink to new files**. I usually recommend using this when you are creating a managed archive version of the project. After Resolve creates the new transcoded media, it relinks the project to those new files. That way, your archive project points to the smaller managed media instead of the original full-size files.
+
+If you are only making a duplicate to send to someone else, you may choose a different relinking strategy. But for archiving a finished project, relinking can make the archive cleaner and easier to verify.
+
+## Choosing Archive Quality
+
+The right transcode settings depend on the project and how much quality you are willing to trade for storage savings.
+
+If you are archiving something important that you may need to revise later, avoid going too low. A lower bit rate can save space, but it can also reduce image quality, especially in detailed scenes, fast motion, noise, gradients, or heavy color grading.
+
+In the video, I show options like target bit rate, variable bit rate, encoder presets, and audio settings. Those settings deserve their own deeper breakdown, but the basic idea is this:
+
+- Use a higher-quality archive if the project may need future edits
+- Use more aggressive compression if the project is unlikely to be reopened
+- Avoid transcoding to a bit rate higher than the original footage
+- Keep enough handles around edits so future revisions are still possible
+- Consider keeping audio at higher quality if the audio matters for later changes
+
+For many creator projects, a high-quality variable bit rate setting or a reasonable target bit rate can be a practical archive choice. The goal is not to create a perfect camera-original backup. The goal is to create a smaller version of the project that is still useful if you need it later.
+
+## A Professional Habit for Smaller Teams
+
+Good media management is not only about saving drive space. It is about building a repeatable post-production habit.
+
+When professionals finish a project, they do not always leave every asset scattered across the same working drives forever. They consolidate, copy, trim, transcode, archive, and document where the project lives. That makes it easier to restore a project, hand it off, revisit an old edit, or protect working storage for new jobs.
+
+Creators can benefit from the same discipline. Even if you are editing alone, your future self is basically another editor who needs to understand what happened six months from now.
+
+A clean archive folder is easier to back up. A smaller project is cheaper to store. A Resolve project linked to managed media is easier to reopen than a project pointing to files spread across old downloads, SSD folders, audio folders, and desktop exports.
+
+## Final Thoughts
+
+If you are new to DaVinci Resolve or new to editing, Media Management is one of those tools that may not seem important until your drives start filling up. But once you begin working with higher-quality footage, storage becomes part of the workflow.
+
+You do not always need to keep every raw file forever at full quality. You also do not always need to delete everything after delivery. DaVinci Resolve's Media Management tool gives you a practical middle ground: copy what matters, trim what you used, transcode it to a smaller archive format, and keep the project organized in one place.
+
+For creators, wedding filmmakers, YouTubers, editors, and small production teams, that can mean lower storage costs, cleaner archives, and less stress when a client or future project needs an old edit reopened.

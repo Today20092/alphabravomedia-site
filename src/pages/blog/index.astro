@@ -60,6 +60,13 @@ const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.
                   alt={post.data.title}
                   class="absolute inset-0 h-full w-full object-cover"
                 />
+              ) : post.data.youtubeId ? (
+                <img
+                  src={`https://img.youtube.com/vi/${post.data.youtubeId}/maxresdefault.jpg`}
+                  alt={post.data.title}
+                  loading="lazy"
+                  class="absolute inset-0 h-full w-full object-cover"
+                />
               ) : (
                 <div class="flex h-full items-center justify-center text-site-text-soft">
                   <Icon name="mdi:book-open-page-variant-outline" class="h-10 w-10" />
