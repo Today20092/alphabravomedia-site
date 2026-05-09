@@ -228,6 +228,7 @@ const portfolioOgImage = item.data.image?.src ??
             <h2 class="site-section-title mt-4">Event gallery</h2>
           </div>
           <Gallery
+            layout={item.data.category === "Weddings" ? "masonry" : "square"}
             images={item.data.gallery.map((img) => ({
               src: img,
               alt: item.data.title,
