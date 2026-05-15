@@ -5,6 +5,7 @@
   "icon": "mdi:school",
   "category": "School Portraits",
   "heroImage": "../galleries/headshots/_1218525_exported_JPEG_100Q.jpg",
+  "previewImagePosition": "center 22%",
   "gallery": [
     {
       "src": "../galleries/headshots/_1218525_exported_JPEG_100Q.jpg",

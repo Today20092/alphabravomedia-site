@@ -63,6 +63,7 @@ const services = defineCollection({
     icon: z.string().optional(),
     category: z.string().optional(),
     heroImage: image().optional(),
+    previewImagePosition: z.string().optional(),
     featuredWork: z.string().optional(),
     gallery: z.array(z.object({
       src: image(),

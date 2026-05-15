@@ -12,6 +12,7 @@ const { service, href, variant = "default" } = Astro.props;
 const icon = service.data.icon ?? "mdi:star";
 const category = service.data.category ?? "Service";
 const startingPrice = service.data.tiers[0]?.value?.price ?? "";
+const previewImagePosition = service.data.previewImagePosition ?? "center";
 const topFeatures: string[] = (service.data.tiers[0]?.value?.includes ?? []).slice(0, 2);
 const allPortfolio = await getCollection("portfolio");
 const featuredWork = service.data.featuredWork
@@ -39,12 +40,14 @@ const featuredMediaAlt = featuredWork?.data.clientName ?? featuredWork?.data.tit
       <img
         src={featuredMediaSrc}
         alt={featuredMediaAlt}
+        style={{ objectPosition: previewImagePosition }}
         class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
       />
     ) : service.data.heroImage ? (
       <img
         src={service.data.heroImage.src}
         alt={service.data.title}
+        style={{ objectPosition: previewImagePosition }}
         class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
       />
     ) : (
