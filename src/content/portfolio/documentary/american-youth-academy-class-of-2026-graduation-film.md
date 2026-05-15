@@ -1,7 +1,7 @@
 ---
 title: "American Youth Academy Class of 2026 Graduation Film"
 clientName: "American Youth Academy"
-videoId: "s8tv1g_sYAc"
+videoId: "79pB2SPVQBM"
 category: "Documentary"
 outcome: "A fast-turnaround graduation film built from student interviews, school-provided memories, and a clear story structure for American Youth Academy's Class of 2026 graduation ceremony."
 proofPoints:
