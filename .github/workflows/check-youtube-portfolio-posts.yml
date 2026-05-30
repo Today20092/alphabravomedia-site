@@ -1,0 +1,86 @@
+name: Check YouTube Portfolio Posts
+
+on:
+  schedule:
+    - cron: "0 10 * * 2,5"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check YouTube feeds
+        id: youtube-check
+        shell: bash
+        run: |
+          npm run check:youtube-portfolio > youtube-report.md 2>&1
+          cat youtube-report.md
+          if grep -q "# New YouTube Portfolio Videos Detected" youtube-report.md; then
+            echo "has_new_videos=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_new_videos=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create or update issue
+        if: steps.youtube-check.outputs.has_new_videos == 'true'
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const fs = require("node:fs");
+            const title = "New YouTube portfolio videos detected";
+            const body = fs.readFileSync("youtube-report.md", "utf8");
+            const { owner, repo } = context.repo;
+
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner,
+              repo,
+              state: "open",
+              labels: "youtube-portfolio",
+            });
+            const existingIssue = issues.find((issue) => issue.title === title);
+
+            if (existingIssue) {
+              await github.rest.issues.update({
+                owner,
+                repo,
+                issue_number: existingIssue.number,
+                body,
+              });
+              return;
+            }
+
+            try {
+              await github.rest.issues.createLabel({
+                owner,
+                repo,
+                name: "youtube-portfolio",
+                color: "cc5500",
+                description: "New YouTube videos that may need portfolio updates",
+              });
+            } catch (error) {
+              if (error.status !== 422) throw error;
+            }
+
+            await github.rest.issues.create({
+              owner,
+              repo,
+              title,
+              body,
+              labels: ["youtube-portfolio"],
+            });

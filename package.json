@@ -11,6 +11,7 @@
     "astro": "astro",
     "audit:contrast": "node scripts/audit-contrast.mjs",
     "sync:google-business-profile": "node scripts/fetch-google-business-profile.mjs",
+    "check:youtube-portfolio": "node scripts/check-youtube-portfolio-posts.mjs",
     "new": "node scripts/new-content.js"
   },
   "dependencies": {
