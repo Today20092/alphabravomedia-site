@@ -1,7 +1,11 @@
 ---
 import SearchModal from "../components/SearchModal.astro";
+import LinkButton from "../components/ui/LinkButton.astro";
+import { buttonVariants } from "../components/ui/button";
+import { SEO } from "astro-seo";
 import { Icon } from "astro-icon/components";
 import { ClientRouter } from "astro:transitions";
+import { cn } from "../lib/utils";
 import { siteConfig } from "../site-config";
 
 interface Props {
@@ -58,35 +62,72 @@ const navLinks = [
 const currentPath = Astro.url.pathname;
 const canonicalUrl = toAbsoluteUrl(canonical ?? Astro.url.pathname);
 const ogImageUrl = toAbsoluteUrl(ogImage);
+const seoMeta = [
+  { name: "generator", content: Astro.generator },
+  { name: "author", content: author },
+  { name: "theme-color", content: "#110f0d" },
+];
+const iconButtonClass = cn(buttonVariants({ variant: "outline", size: "icon-lg" }), "rounded-full");
+const searchButtonClass = cn(
+  buttonVariants({ variant: "outline", size: "lg" }),
+  "hidden rounded-full md:inline-flex",
+);
+const themeButtonClass = cn(
+  buttonVariants({ variant: "secondary", size: "lg" }),
+  "site-theme-toggle hidden rounded-full md:inline-flex",
+);
+const mobileThemeButtonClass = cn(
+  buttonVariants({ variant: "secondary", size: "lg" }),
+  "site-theme-toggle flex w-full justify-start rounded-full",
+);
 ---
 
 <!doctype html>
 <html lang="en" class="scroll-smooth">
   <head>
-    <meta charset="UTF-8" />
+    <SEO
+      charset="UTF-8"
+      title={title}
+      description={description}
+      canonical={canonicalUrl}
+      noindex={noIndex}
+      robotsExtras={noIndex ? "nosnippet" : undefined}
+      openGraph={{
+        basic: {
+          title,
+          type: ogType,
+          image: ogImageUrl,
+          url: canonicalUrl,
+        },
+        optional: {
+          description,
+          siteName: siteConfig.siteName,
+        },
+        image: {
+          alt: ogImageAlt,
+        },
+        article:
+          ogType === "article"
+            ? {
+                authors: [author],
+                publishedTime,
+              }
+            : undefined,
+      }}
+      twitter={{
+        card: "summary_large_image",
+        title,
+        description,
+        image: ogImageUrl,
+        imageAlt: ogImageAlt,
+      }}
+      extend={{
+        meta: seoMeta,
+      }}
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
     <link rel="icon" href={`${base}favicon.ico`} />
-    <meta name="generator" content={Astro.generator} />
-    <meta name="description" content={description} />
-    <meta name="author" content={author} />
-    <meta name="theme-color" content="#110f0d" />
-    <link rel="canonical" href={canonicalUrl} />
-    <title>{title}</title>
-    <meta property="og:type" content={ogType} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:site_name" content={siteConfig.siteName} />
-    <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:image" content={ogImageUrl} />
-    <meta property="og:image:alt" content={ogImageAlt} />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImageUrl} />
-    {publishedTime && <meta property="article:published_time" content={publishedTime} />}
-    {ogType === "article" && <meta property="article:author" content={author} />}
-    {noIndex && <meta name="robots" content="noindex, nosnippet" />}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -115,6 +156,7 @@ const ogImageUrl = toAbsoluteUrl(ogImage);
 
         const theme = storedTheme ?? systemTheme;
         root.dataset.theme = theme;
+        root.classList.toggle("dark", theme === "dark");
         root.style.colorScheme = theme;
         if (meta) {
           meta.setAttribute("content", theme === "dark" ? "#110f0d" : "#f4efe7");
@@ -123,7 +165,7 @@ const ogImageUrl = toAbsoluteUrl(ogImage);
     </script>
     <ClientRouter />
   </head>
-  <body class="bg-site-bg text-site-text font-['Inter',sans-serif] antialiased">
+  <body class="bg-site-bg text-site-text font-sans antialiased">
     <!-- Navigation -->
     <header class="fixed top-0 left-0 right-0 z-50">
       <nav class="site-shell-wide mt-4 rounded-[1.35rem] border border-site-border bg-[var(--site-nav-bg)] px-4 py-4 shadow-site-sm backdrop-blur sm:px-5">
@@ -161,7 +203,7 @@ const ogImageUrl = toAbsoluteUrl(ogImage);
           <button
             data-theme-toggle
             type="button"
-            class="site-button-secondary site-theme-toggle hidden md:inline-flex"
+            class={themeButtonClass}
             aria-pressed="true"
           >
             <Icon name="mdi:weather-night" class="h-4 w-4" data-theme-icon="moon" />
@@ -172,7 +214,7 @@ const ogImageUrl = toAbsoluteUrl(ogImage);
           <!-- Search Button (desktop) -->
           <button
             data-search-open
-            class="hidden md:flex items-center gap-2 rounded-full border border-site-border px-3 py-2 text-sm font-medium text-site-text-muted transition-colors duration-200 hover:border-site-border-strong hover:text-site-text"
+            class={searchButtonClass}
           >
             <svg
               class="w-4 h-4"
@@ -196,20 +238,20 @@ const ogImageUrl = toAbsoluteUrl(ogImage);
           <!-- CTA Button -->
           {
             siteConfig.phoneRaw && (
-              <a
+              <LinkButton
                 href={`tel:${siteConfig.phoneRaw}`}
-                class="site-button-primary hidden md:inline-flex"
+                class="hidden md:inline-flex"
               >
                 <Icon name="mdi:phone-outline" class="h-4 w-4" />
                 Call direct
-              </a>
+              </LinkButton>
             )
           }
 
           <!-- Mobile Menu Button -->
           <button
             id="mobile-menu-btn"
-            class="rounded-full border border-site-border p-2 text-site-text-muted transition-colors hover:text-site-text md:hidden"
+            class={cn(iconButtonClass, "md:hidden")}
             aria-label="Toggle menu"
             aria-expanded="false"
             aria-controls="mobile-menu"
@@ -255,7 +297,7 @@ const ogImageUrl = toAbsoluteUrl(ogImage);
               <button
                 data-theme-toggle
                 type="button"
-                class="site-button-secondary site-theme-toggle flex w-full justify-start"
+                class={mobileThemeButtonClass}
                 aria-pressed="true"
               >
                 <Icon name="mdi:weather-night" class="h-4 w-4" data-theme-icon="moon" />
@@ -453,6 +495,7 @@ const ogImageUrl = toAbsoluteUrl(ogImage);
         const meta = document.querySelector('meta[name="theme-color"]');
 
         root.dataset.theme = theme;
+        root.classList.toggle("dark", theme === "dark");
         root.style.colorScheme = theme;
 
         if (meta) {

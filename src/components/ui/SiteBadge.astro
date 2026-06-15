@@ -1,0 +1,22 @@
+---
+import { badgeVariants } from "./badge";
+import { cn } from "@/lib/utils";
+
+interface Props {
+  variant?: "default" | "muted";
+  class?: string;
+}
+
+const { variant = "default", class: className } = Astro.props;
+const shadcnVariant = variant === "muted" ? "secondary" : "default";
+---
+
+<span
+  class={cn(
+    badgeVariants({ variant: shadcnVariant }),
+    "h-auto rounded-full px-3 py-1 text-[0.75rem] font-semibold uppercase tracking-[0.08em]",
+    className,
+  )}
+>
+  <slot />
+</span>

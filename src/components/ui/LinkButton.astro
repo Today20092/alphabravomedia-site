@@ -1,0 +1,32 @@
+---
+import { buttonVariants } from "./button";
+import { cn } from "@/lib/utils";
+
+interface Props {
+  href: string;
+  variant?: "primary" | "secondary" | "ghost";
+  class?: string;
+  target?: string;
+  rel?: string;
+}
+
+const {
+  href,
+  variant = "primary",
+  class: className,
+  target,
+  rel,
+} = Astro.props;
+
+const shadcnVariant =
+  variant === "primary" ? "default" : variant === "secondary" ? "secondary" : "ghost";
+---
+
+<a
+  href={href}
+  target={target}
+  rel={rel}
+  class={cn(buttonVariants({ variant: shadcnVariant, size: "lg" }), "rounded-full", className)}
+>
+  <slot />
+</a>

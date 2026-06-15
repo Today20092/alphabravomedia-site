@@ -1,6 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
+import SiteCard from "./ui/SiteCard.astro";
 
 interface Props {
   item: any;
@@ -14,7 +15,7 @@ const youtubeUrl = item.data.videoId
   : null;
 ---
 
-<a href={href} class="site-card site-card-interactive site-hover-lift group flex flex-col">
+<SiteCard href={href} interactive class="site-hover-lift group">
   <div class="site-card-media aspect-[4/3]">
     {item.data.image ? (
       <Image
@@ -52,4 +53,4 @@ const youtubeUrl = item.data.videoId
       <p class="site-card-copy">{item.data.outcome}</p>
     )}
   </div>
-</a>
+</SiteCard>

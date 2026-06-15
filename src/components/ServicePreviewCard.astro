@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
+import SiteCard from "./ui/SiteCard.astro";
 
 interface Props {
   service: any;
@@ -29,7 +30,7 @@ const featuredMediaSrc = featuredWork?.data.image?.src ?? (
 const featuredMediaAlt = featuredWork?.data.clientName ?? featuredWork?.data.title ?? service.data.title;
 ---
 
-<a href={href} class="site-card site-card-interactive site-hover-lift group flex flex-col">
+<SiteCard href={href} interactive class="site-hover-lift group">
   <div
     class:list={[
       "site-card-media",
@@ -87,4 +88,4 @@ const featuredMediaAlt = featuredWork?.data.clientName ?? featuredWork?.data.tit
       <span class="text-site-accent">See packages</span>
     </div>
   </div>
-</a>
+</SiteCard>

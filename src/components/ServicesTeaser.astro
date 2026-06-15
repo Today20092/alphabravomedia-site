@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
 import ServicePreviewCard from "./ServicePreviewCard.astro";
+import LinkButton from "./ui/LinkButton.astro";
 
 interface Props {
   title?: string;
@@ -52,10 +53,10 @@ const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
     </div>
 
     <div class="mt-8 site-reveal site-reveal-stagger-1" data-reveal>
-      <a href={`${base}services`} class="site-button-secondary site-hover-lift">
+      <LinkButton href={`${base}services`} variant="secondary" class="site-hover-lift">
         Explore all services
         <Icon name="mdi:arrow-right" class="h-4 w-4" />
-      </a>
+      </LinkButton>
     </div>
   </div>
 </section>

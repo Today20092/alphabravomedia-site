@@ -1,6 +1,8 @@
 ---
 import { getCollection } from "astro:content";
 import ServicePricingBlock from "./ServicePricingBlock.astro";
+import { buttonVariants } from "./ui/button";
+import { cn } from "@/lib/utils";
 
 const allServices = await getCollection("services");
 const sortedServices = allServices.sort((a, b) => a.data.order - b.data.order);
@@ -29,7 +31,11 @@ const sortedServices = allServices.sort((a, b) => a.data.order - b.data.order);
             aria-selected={index === 0 ? "true" : "false"}
             aria-controls={`panel-${service.id}`}
             id={`tab-${service.id}`}
-            class={`service-tab site-button-secondary ${index === 0 ? "is-active" : ""}`}
+            class={cn(
+              buttonVariants({ variant: "secondary", size: "lg" }),
+              "service-tab rounded-full",
+              index === 0 ? "is-active" : "",
+            )}
             data-target={`panel-${service.id}`}
           >
             {service.data.title}

@@ -1,6 +1,7 @@
 ---
 import PricingCard from "./PricingCard.astro";
 import { Icon } from "astro-icon/components";
+import LinkButton from "./ui/LinkButton.astro";
 
 export interface Props {
   service: any;
@@ -36,10 +37,10 @@ const { service } = Astro.props;
   {
     service.data.portfolioLink && (
       <div>
-        <a href={service.data.portfolioLink} class="site-button-secondary">
+        <LinkButton href={service.data.portfolioLink} variant="secondary">
           Browse work examples
           <Icon name="mdi:arrow-right" class="h-4 w-4" />
-        </a>
+        </LinkButton>
       </div>
     )
   }

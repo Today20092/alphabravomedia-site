@@ -1,5 +1,7 @@
 ---
 import { Image } from "astro:assets";
+import { buttonVariants } from "./ui/button";
+import { cn } from "@/lib/utils";
 
 interface Props {
   images: Array<{
@@ -76,7 +78,7 @@ const id = `gallery-${Math.random().toString(36).slice(2, 8)}`;
   <div id={`${id}-load-more-wrap`} class="flex justify-center mt-8">
     <button
       id={`${id}-load-more`}
-      class="site-button-secondary"
+      class={cn(buttonVariants({ variant: "secondary", size: "lg" }), "rounded-full")}
     >
       Load more photos
     </button>

@@ -11,6 +11,12 @@
       "sourceType": "github",
       "computedHash": "516bd2154eb843a8240e43d5b285229129853114ad7075a5e141e1c08e408c84"
     },
+    "refactoring-ui": {
+      "source": "wondelai/skills",
+      "sourceType": "github",
+      "skillPath": "refactoring-ui/SKILL.md",
+      "computedHash": "80d7e5510891fa23348a2cc13646021195f680a9d49d5d92b42fcd73dd0bb53e"
+    },
     "skill-creator": {
       "source": "anthropics/skills",
       "sourceType": "github",

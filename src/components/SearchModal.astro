@@ -1,6 +1,10 @@
 ---
 // SearchModal.astro — no props needed
 import { Icon } from "astro-icon/components";
+import { buttonVariants } from "./ui/button";
+import { cn } from "@/lib/utils";
+
+const iconButtonClass = cn(buttonVariants({ variant: "ghost", size: "icon-lg" }), "rounded-full");
 ---
 
 <!-- Backdrop -->
@@ -37,7 +41,7 @@ import { Icon } from "astro-icon/components";
       </span>
       <button
         id="search-close"
-        class="rounded-lg p-1.5 text-site-text-muted transition-colors hover:bg-site-control-bg-hover hover:text-site-text"
+        class={iconButtonClass}
         aria-label="Close search"
       >
         <Icon name="mdi:close" class="w-5 h-5" />
