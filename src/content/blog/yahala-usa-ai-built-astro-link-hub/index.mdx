@@ -1,0 +1,123 @@
+---
+title: "Building Ya Hala's AI-Assisted Astro Link Hub"
+pubDate: 2026-06-15
+description: "How Alpha Bravo Media built a fast, branded link hub for Ya Hala with Haithum using Astro, Tailwind CSS, shadcn-style components, Codex, T3 Chat, GitHub, and Cloudflare Pages."
+tags:
+  - web design
+  - Astro
+  - Tailwind CSS
+  - AI coding
+  - Cloudflare Pages
+---
+
+I built **[yahalausa.co](https://yahalausa.co/)** and **[yahalausa.net](https://yahalausa.net/)** for Ya Hala with Haithum as a custom web hub for the brand.
+
+At first glance, it could sound like a link-in-bio project. That was not really the goal. Ya Hala is not just a profile with a few links. It is an Arab American storytelling platform with field interviews, community visits, latest videos, social reach, sponsor opportunities, and stories from cities across the United States.
+
+A generic link page would have been too small for that.
+
+The site needed to feel like a simple front door, but it also had to carry more context: what Ya Hala covers, where the stories are happening, how large the audience is, and where someone should go next if they want to watch, follow, sponsor, interview, or share the page.
+
+---
+
+## Why Ya Hala Needed More Than a Linktree
+
+Ya Hala with Haithum lives across multiple platforms: YouTube, TikTok, Instagram, Facebook, and direct collaboration channels. The content is also location-driven. Episodes move from city to city, covering Arab businesses, halal food, immigrant success stories, community leaders, neighborhoods, and local culture.
+
+That creates a different kind of web problem.
+
+The site had to do more than list links. It needed to:
+
+- Point people to the official social channels
+- Feature videos without burying the page in embeds
+- Make the brand's reach visible quickly
+- Show the geographic spread of the stories
+- Give collaborators a clear contact path
+- Work well when opened from a phone or QR code
+- Load fast enough that people actually use it
+
+For a media brand, the first few seconds matter. Someone scanning a QR code or tapping a profile link should immediately understand the scale and direction of the project.
+
+---
+
+## What We Built
+
+The final site is a single-page hub designed around speed, clarity, and mobile sharing.
+
+It includes official social links, featured videos, audience reach metrics, a QR code flow, a map of places Ya Hala has visited, and a collaboration call-to-action for sponsors, interviews, and story features.
+
+The live page also gives the brand room to explain what it covers: Arab businesses and brands, halal food and markets, immigrant success stories, and Arab American neighborhoods across the country.
+
+That matters because Ya Hala's value is not only in one viral video. It is in the pattern of showing up in communities, documenting real stories, and making those stories easier to find.
+
+---
+
+## The Stack
+
+I built the project with a modern frontend stack that fit the job:
+
+- **Astro** for a fast static-first structure
+- **Tailwind CSS v4** for responsive styling and a clean design system
+- **shadcn-style components** and **Radix UI** patterns for polished interface pieces
+- **React** where client-side interactivity made sense
+- **Lucide icons** for lightweight UI iconography
+- **QR code tooling** for mobile sharing
+- **GitHub** for source control
+- **Cloudflare** for deployment and custom domain routing
+
+Astro was a good fit because the page is content-heavy but does not need to behave like a full app. Most of the experience can be served fast and statically, while React can still handle the interactive parts that need it.
+
+Cloudflare handled the public routing for both `yahalausa.net` and `yahalausa.co`, including the `www` versions. That gave the project a clean deployment path and kept the live site tied to the domains people are actually sharing.
+
+---
+
+## How AI Fit Into the Workflow
+
+This was an AI-assisted build, not an AI-replaced build.
+
+I used T3 Chat/code assistance and Codex as development collaborators while building the site. That helped speed up scaffolding, component iteration, refactors, validation, and debugging. It also made it easier to move quickly through the small decisions that usually slow down a web build: layout variations, data structure cleanup, component naming, mobile behavior, and deployment checks.
+
+But the important decisions still had to be human.
+
+AI can generate code, but it does not automatically know the brand. It does not decide what the first screen should communicate. It does not know which numbers matter, which links deserve priority, or how the page should feel to someone scanning a QR code after meeting the creator in person.
+
+The workflow was useful because the direction stayed clear: build a fast, branded, practical hub for Ya Hala. The tools helped execute that direction faster.
+
+---
+
+## What Made This Build Different
+
+The challenge was keeping the page simple without making the brand feel small.
+
+A lot of link pages are designed like directories. This one needed to feel more like a compact media homepage. Ya Hala already has a strong identity and a real audience, so the site had to show that without becoming heavy or cluttered.
+
+It also needed to support a bilingual, media-first brand. The audience may arrive from Arabic-language videos, English-language search, social media, a direct message, a sponsor conversation, or a QR code. The site had to make sense in all of those contexts.
+
+That shaped the build:
+
+- Mobile performance came first
+- The social channels had to be obvious
+- The video content had to be easy to browse
+- The reach metrics had to be visible without feeling like a pitch deck
+- The map had to show that this is a national community storytelling project
+- The collaboration path had to be direct
+
+The result is not a generic template. It is a focused web hub for one media brand and the way that brand actually moves.
+
+---
+
+## The Result
+
+Ya Hala now has a custom link hub live at both **[yahalausa.net](https://yahalausa.net/)** and **[yahalausa.co](https://yahalausa.co/)**.
+
+The site connects the brand's social channels, videos, audience reach, visited places, and collaboration call-to-action in one fast page. It is built in a maintainable Astro and Tailwind stack, tracked in GitHub, and deployed through Cloudflare for the public domains.
+
+For Alpha Bravo Media, this is part of a bigger pattern.
+
+The work is not only filming, editing, color grading, or publishing videos. Sometimes the job is building the digital infrastructure around the creator brand: the page someone visits after watching a video, the hub a sponsor checks before reaching out, the QR code that turns an in-person conversation into a follow, and the system that keeps the brand easier to share.
+
+That is what this project was about.
+
+**[Visit Ya Hala](https://yahalausa.net/)**
+
+**[View the GitHub repository](https://github.com/Today20092/yahala-usa-linktree)**
