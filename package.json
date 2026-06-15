@@ -7,15 +7,18 @@
     "predev": "node scripts/fetch-google-business-profile.mjs",
     "build": "astro build",
     "prebuild": "node scripts/fetch-google-business-profile.mjs",
-    "preview": "astro preview",
+    "preview": "npm run build && wrangler dev",
     "astro": "astro",
     "audit:contrast": "node scripts/audit-contrast.mjs",
     "sync:google-business-profile": "node scripts/fetch-google-business-profile.mjs",
     "check:youtube-portfolio": "node scripts/check-youtube-portfolio-posts.mjs",
-    "new": "node scripts/new-content.js"
+    "new": "node scripts/new-content.js",
+    "generate-types": "wrangler types",
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
     "@astro-community/astro-embed-youtube": "^0.5.10",
+    "@astrojs/cloudflare": "^13.7.0",
     "@astrojs/mdx": "^6.0.1",
     "@astrojs/react": "^5.0.6",
     "@astrojs/sitemap": "^3.7.3",
@@ -40,6 +43,10 @@
   },
   "devDependencies": {
     "shadcn": "^4.11.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "wrangler": "^4.100.0"
+  },
+  "overrides": {
+    "vite": "^7"
   }
 }

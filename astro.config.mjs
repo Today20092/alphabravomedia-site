@@ -9,10 +9,13 @@ import icon from 'astro-icon';
 import react from '@astrojs/react';
 import mdx from '@astrojs/mdx';
 
+import cloudflare from '@astrojs/cloudflare';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://alphabravomedia.co/',
   output: 'static',
+
   integrations: [
     react(),
     mdx(),
@@ -26,10 +29,14 @@ export default defineConfig({
       },
     })
   ].filter(Boolean),
+
   markdown: {
     syntaxHighlight: false,
   },
+
   vite: {
     plugins: [tailwindcss()]
-  }
+  },
+
+  adapter: cloudflare()
 });
