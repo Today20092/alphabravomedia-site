@@ -1,5 +1,5 @@
 ---
-title: "Ma'an Academy: Educational Documentary & Fundraising Film"
+title: "Ma'an Academy: Educational Documentary"
 clientName: "Ma'an Academy"
 videoId: "zfEZwdZnUmc"
 category: "Documentary"
@@ -14,10 +14,10 @@ order: 0
 ## Project Overview
 Alpha Bravo Media was commissioned by **[Ma’an Academy](https://maanacademy.org/index.php)**, a premier non-profit educational institution in Tampa, Florida, to produce a high-impact documentary. Ma’an Academy is pioneering a unique intersection of the **Montessori Method** and Arabic language immersion. 
 
-Our objective was to create a cinematic narrative that not only tells the story of the school but serves as a cornerstone for their community fundraising and awareness campaigns.
+Our objective was to tell the school's story through a documentary introducing its educational approach to families and the wider community.
 
 ## The Challenge
-Ma’an Academy needed to bridge the gap between traditional Arabic instruction and modern, hands-on educational techniques. They required a film that could communicate their sophisticated Montessori approach to parents, donors, and board members while maintaining the spiritual and cultural significance of their mission.
+Ma’an Academy needed to bridge the gap between traditional Arabic instruction and modern, hands-on educational techniques. They required a film that could communicate their sophisticated Montessori approach to parents and board members while maintaining the spiritual and cultural significance of their mission.
 
 ## Our Strategic Execution
 Alpha Bravo Media provided full-scale production, moving beyond simple filming to deep storytelling:
@@ -37,7 +37,6 @@ As reflected in the Holy Quran (Surah Yusuf, Verse 2):
 
 ## The Impact
 The final documentary serves as a multi-purpose asset for Ma’an Academy. It is currently utilized for:
-*   **Fundraising Galas:** Engaging donors through emotional and visual storytelling.
 *   **Parent Recruitment:** Clearly explaining the Montessori advantage to new families.
 *   **Community Outreach:** Showcasing their diverse programs, including *Tadabor Al Quran*, Weekend Programs, and specialized After-School immersion for ages 3–12.
 

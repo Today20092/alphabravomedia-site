@@ -29,7 +29,7 @@
   "faq": [
     {
       "question": "What kinds of events do you support?",
-      "answer": "The setup is built for community events, dinners, fundraisers, recitations, guest speakers, and other gatherings where clear sound and dependable production matter."
+      "answer": "The setup is built for community events, dinners, recitations, guest speakers, and other gatherings where clear sound and dependable production matter."
     },
     {
       "question": "What is needed from the venue before setup day?",
@@ -62,7 +62,7 @@
       "value": {
         "name": "Audio + Highlights Package",
         "price": "Starting at $1,150",
-        "bestFor": "Guest speakers, fundraisers, and special event recaps that need video plus clean audio.",
+        "bestFor": "Guest speakers and special event recaps that need video plus clean audio.",
         "isPopular": true,
         "includes": [
           "Everything in Essential PA Package",
@@ -78,7 +78,7 @@
       "value": {
         "name": "Full Broadcast & Live Stream",
         "price": "Starting at $1,800",
-        "bestFor": "Major fundraisers, conferences, and high-impact VIP events that need broadcast-level coverage.",
+        "bestFor": "Conferences and major events that need broadcast-level coverage.",
         "isPopular": false,
         "includes": [
           "Complete premium audio setup",
