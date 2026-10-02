@@ -1,0 +1,44 @@
+/* Editorial journal, using the homepage's charcoal, cream, and lime tokens. */
+.blog-index { max-width: 90rem; margin-inline: auto; }
+.blog-heading { max-width: 55rem; margin-bottom: 4rem; }
+.blog-heading h1, .article-reader #article-top { font-size: clamp(2.4rem, 5vw, 5.5rem); line-height: 1.08; letter-spacing: -.055em; font-weight: 500; color: var(--foreground); }
+.blog-entry { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); align-items: center; gap: 3rem; padding-block: 2.5rem; border-top: 1px solid var(--border); }
+.blog-entry-media { aspect-ratio: 16 / 9; overflow: hidden; background: var(--secondary); }
+.blog-entry-media img { width: 100%; height: 100%; object-fit: cover; }
+.blog-entry-placeholder { display: grid; place-items: center; height: 100%; color: var(--primary); }
+.blog-entry time, .blog-video-label { font-size: .8rem; color: var(--foreground); }
+.blog-entry h2 { font-size: clamp(1.5rem, 2.6vw, 2.5rem); line-height: 1.2; letter-spacing: -.035em; font-weight: 500; margin-block: 1rem; }
+.blog-entry p { line-height: 1.8; opacity: .8; }
+.blog-read { display: inline-block; margin-top: 1.5rem; color: var(--primary); font-size: .9rem; }
+.blog-entry:hover h2 { text-decoration: underline; text-underline-offset: .2em; }
+.article-reader { --site-text: var(--foreground); --site-text-muted: #c2beaf; --site-text-soft: #c2beaf; --site-accent: var(--primary); --site-accent-strong: var(--primary); --site-border: var(--border); --site-surface: var(--secondary); --site-control-bg: var(--secondary); padding: 4rem 4vw 6rem; }
+.article-reader .article-page--reader { width: 100%; padding: 0; }
+.article-reader { --site-link: var(--primary); --site-link-hover: var(--foreground); }
+.article-reader #article-top { font-family: inherit; }
+.article-reader .site-page-header { margin-bottom: 3rem; }
+.article-reader .site-meta-row { color: var(--site-text-muted); }
+.article-reader .site-page-copy { color: var(--site-text-muted); max-width: 48rem; line-height: 1.8; margin-block: 1.5rem; }
+.article-reader .site-chip { background: var(--secondary); border-color: var(--border); color: var(--foreground); border-radius: 0; }
+.article-reader #article-body { color: var(--foreground); font-size: 1.125rem; line-height: 1.85; --tw-prose-body: var(--foreground); --tw-prose-headings: var(--foreground); --tw-prose-bold: var(--foreground); --tw-prose-links: var(--primary); --tw-prose-counters: var(--site-text-muted); --tw-prose-bullets: var(--primary); --tw-prose-hr: var(--border); --tw-prose-quotes: var(--foreground); --tw-prose-quote-borders: var(--primary); --tw-prose-captions: var(--site-text-muted); --tw-prose-code: var(--foreground); --tw-prose-pre-code: var(--foreground); --tw-prose-pre-bg: var(--secondary); --tw-prose-th-borders: var(--border); --tw-prose-td-borders: var(--border); }
+.article-reader #article-body :is(h2,h3,h4) { font-weight: 500; letter-spacing: -.025em; }
+.article-reader #article-body a { color: var(--primary); text-decoration: underline; text-underline-offset: .2em; }
+.article-reader #article-body :is(pre, table) { display: block; max-width: 100%; overflow-x: auto; }
+.article-reader #article-body :is(p, li, a, h2, h3, h4) { overflow-wrap: anywhere; }
+.article-reader #article-body img { border-radius: 0; }
+.article-reader .article-community { border-top: 1px solid var(--border); margin-top: 4rem; padding-top: 2rem; }
+.article-community h2 { font-size: 1.8rem; font-weight: 500; letter-spacing: -.025em; }
+.article-community p { line-height: 1.8; margin-block: 1rem 1.5rem; }
+.article-reader .article-page_contents { border-radius: 0; }
+.reading-progress { background: var(--border); }
+.reading-progress_fill { background: var(--primary); }
+.article-image-viewer_dialogcontent { background: var(--background); color: var(--foreground); border-color: var(--border); }
+.article-image-viewer_dialogcontent [data-slot="dialog-description"] { color: #c2beaf; }
+.article-image-viewer_dialogcontent [data-slot="dialog-title"] { font-family: inherit; }
+.article-image-viewer_zoom { background: var(--secondary); }
+.article-image-viewer_zoom-icon { background: var(--background); }
+@media(max-width: 639px) {
+  .blog-index { padding-top: 3rem; }
+  .blog-heading { margin-bottom: 2rem; }
+  .blog-entry { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; padding-block: 2rem; }
+  .article-reader { padding-top: 2.5rem; }
+}

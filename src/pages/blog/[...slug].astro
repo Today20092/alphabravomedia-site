@@ -4,6 +4,10 @@ import { getCollection, render } from "astro:content";
 import { YouTube } from "@astro-community/astro-embed-youtube";
 import { Icon } from "astro-icon/components";
 import { siteConfig } from "../../site-config";
+import ArticleReadingTools from "../../components/ArticleReadingTools.astro";
+import ArticleExtras from "../../components/ArticleExtras.astro";
+import "../../styles/article-reader.css";
+import "../../styles/blog.css";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -14,7 +18,13 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
+const sections = headings.filter(heading => heading.depth === 2 && heading.slug !== "footnote-label");
+const contents = sections.map(heading => {
+  const start = headings.indexOf(heading) + 1;
+  const next = headings.findIndex((item, index) => index >= start && item.depth === 2);
+  return { ...heading, children: headings.slice(start, next < 0 ? undefined : next).filter(item => item.depth === 3) };
+});
 
 const rawBase = import.meta.env.BASE_URL;
 const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
@@ -33,15 +43,17 @@ const articleOgImage = post.data.image?.src ??
   author={siteConfig.founderName}
   publishedTime={post.data.pubDate.toISOString()}
 >
+  <ArticleReadingTools />
+  <ArticleExtras />
   <article
     data-pagefind-body
-    class="site-section-hero"
+    class="site-section-hero article-reader site-shell--article"
     itemscope
     itemtype="https://schema.org/Article"
   >
     <span data-pagefind-meta="type" class="sr-only">Blog Post</span>
 
-    <div class="site-shell">
+    <div class:list={["site-shell article-page--reader", { "has-contents": sections.length >= 2 }]}>
       <a href={`${base}blog`} class="site-link inline-flex items-center gap-2 text-sm">
         <Icon name="mdi:arrow-left" class="h-4 w-4" />
         Back to Blog
@@ -54,13 +66,14 @@ const articleOgImage = post.data.image?.src ??
               year: "numeric",
               month: "long",
               day: "numeric",
+              timeZone: "UTC",
             })}
           </time>
           <a href={`${base}about`} rel="author" itemprop="author" class="site-link">
             By {siteConfig.founderName}
           </a>
         </div>
-        <h1 itemprop="headline" class="site-page-title max-w-4xl">{post.data.title}</h1>
+        <h1 id="article-top" tabindex="-1" itemprop="headline" class="site-page-title max-w-4xl">{post.data.title}</h1>
         <p itemprop="description" class="site-page-copy text-lg">{post.data.description}</p>
         {post.data.tags.length > 0 && (
           <div class="flex flex-wrap gap-3">
@@ -83,13 +96,15 @@ const articleOgImage = post.data.image?.src ??
         </div>
       )}
 
-      <div
-        class="site-prose prose prose-a:text-site-accent-strong md:prose-lg max-w-none prose-headings:text-balance prose-h1:text-3xl md:prose-h1:text-4xl prose-h2:text-2xl md:prose-h2:text-3xl prose-h3:text-xl md:prose-h3:text-2xl"
+      {sections.length >= 2 && <div class="article-page_contents-rail"><details data-pagefind-ignore class="article-page_contents"><summary class="article-page_contents-toggle"><Icon name="mdi:format-list-bulleted" class="size-5" /><span id="article-contents-title">On this page</span><Icon name="mdi:chevron-down" class="size-4" /></summary><nav aria-labelledby="article-contents-title" class="article-page_contents-nav"><div class="article-page_contents-track" aria-hidden="true"><span></span></div><ul class="article-page_contents-list">{contents.map(({slug, text, children}) => <li data-contents-section={slug}><a href={`#${slug}`} data-contents-link class="article-page_contents-link">{text}</a>{children.length > 0 && <ul class="article-page_contents-children">{children.map(child => <li><a href={`#${child.slug}`} data-contents-link class="article-page_contents-link">{child.text}</a></li>)}</ul>}</li>)}</ul></nav></details></div>}
+
+      <div id="article-body"
+        class="site-prose prose max-w-none"
       >
         <Content />
       </div>
 
-      <aside class="site-panel mt-16 p-6 sm:p-8">
+      <aside class="article-community">
         <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
           <div>
             <span class="site-kicker">Creator Community</span>

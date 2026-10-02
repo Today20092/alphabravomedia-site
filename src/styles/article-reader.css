@@ -1,0 +1,46 @@
+/* Reader behavior adapted from tik-tok-live-landingpage; uses this site's tokens. */
+.article-page--reader { max-width: 76rem; }
+.article-page--reader > :not(.article-page_contents-rail) { min-width: 0; }
+#article-body { max-width: 48rem; margin-inline: auto; }
+#article-top, #article-body :is(h2[id], h3[id], h4[id]) { scroll-margin-block-start: 7rem; }
+.article-page_contents-rail { margin-block: 2rem; }
+.article-page_contents { border: 1px solid var(--site-border); border-radius: .75rem; background: var(--site-surface); }
+.article-page_contents-toggle { display: flex; align-items: center; gap: .75rem; padding: 1rem; cursor: pointer; font-weight: 600; }
+.article-page_contents-toggle > :last-child { margin-left: auto; }
+.article-page_contents-nav { position: relative; padding: 0 1rem 1rem; }
+.article-page_contents-list, .article-page_contents-children { list-style: none; margin: 0; padding: 0; }
+.article-page_contents-children { padding-left: 1rem; font-size: .85rem; }
+.article-page_contents-link { display: block; padding: .5rem .75rem; border-left: 2px solid transparent; color: var(--site-text-muted); line-height: 1.5; }
+.article-page_contents-link:hover, .article-page_contents-link[aria-current] { color: var(--site-accent); border-color: var(--site-accent); background: var(--site-control-bg); }
+.article-page_contents-track { display: none; }
+.reading-progress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; background: var(--site-border); z-index: 60; }
+.reading-progress_fill { height: 100%; background: var(--site-accent); transform-origin: left; }
+.reading-progress[hidden], .reading-back-to-top[hidden] { display: none; }
+.reading-back-to-top { position: fixed; right: 1rem; bottom: 1rem; z-index: 40; }
+.article-section-heading { display: flex; align-items: baseline; gap: .5rem; }
+.article-section-heading > span { flex: 1; }
+.section-copy-link { flex-shrink: 0; opacity: .65; }
+.section-copy-link:hover, .section-copy-link:focus-visible { opacity: 1; }
+.article-image-trigger { display: block; width: 100%; border: 0; padding: 0; background: transparent; cursor: zoom-in; }
+.article-image-trigger:focus-visible { outline: 3px solid var(--site-accent); outline-offset: 4px; }
+.article-image-viewer_dialogcontent { width: calc(100vw - 1rem); max-width: calc(100vw - 1rem) !important; height: calc(100dvh - 1rem); padding: 1rem; display: flex; flex-direction: column; gap: 1rem; }
+.article-image-viewer_header { display: flex; justify-content: space-between; align-items: start; gap: 1rem; }
+.article-image-viewer_canvas { flex: 1; min-height: 0; overflow: hidden; }
+.article-image-viewer_zoom { position: relative; display: grid; place-items: center; width: 100%; height: 100%; overflow: hidden; border: 0; background: var(--site-surface-muted); touch-action: none; }
+.article-image-viewer_zoom-idle { cursor: zoom-in; }
+.article-image-viewer_zoom-active { cursor: grab; }
+.article-image-viewer_image { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; user-select: none; }
+.article-image-viewer_zoom-icon { position: absolute; right: 1rem; bottom: 1rem; padding: .7rem; background: var(--site-bg); border-radius: 50%; }
+@media (min-width: 64rem) {
+  .article-page--reader.has-contents { display: grid; grid-template-columns: 14rem minmax(0, 1fr); gap: 0 3rem; }
+  .article-page--reader.has-contents > * { grid-column: 2; }
+  .article-page--reader.has-contents > .article-page_contents-rail { grid-column: 1; grid-row: 3 / span 3; margin: 0; }
+  .article-page_contents { position: sticky; top: 7rem; max-height: calc(100dvh - 9rem); overflow-y: auto; border: 0; background: transparent; }
+  .has-reading-tools .article-page_contents-toggle { pointer-events: none; }
+  .has-reading-tools .article-page_contents-toggle > svg { display: none; }
+  .article-page_contents-nav { padding-left: 1rem; }
+  .article-page_contents-track { display: block; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--site-border); }
+  .article-page_contents-track > span { display: block; height: 100%; background: var(--site-accent); transform-origin: top; transform: scaleY(0); }
+  .reading-progress--rail { clip-path: inset(50%); width: 1px; height: 1px; }
+}
+@media print { .article-page_contents-rail, .reading-progress, .reading-back-to-top, .section-copy-link { display: none !important; } .article-page--reader.has-contents { display: block; } }
