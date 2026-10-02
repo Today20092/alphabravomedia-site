@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "routes": {
+    "/": {"key":"","locale":"en"},
+    "/about/": {"key":"","locale":"en"},
+    "/blog/": {"key":"","locale":"en"},
+    "/blog/community-creators-launchpad/": {"key":"","locale":"en"},
+    "/blog/davinci-resolve-media-management-archive-workflow/": {"key":"","locale":"en"},
+    "/blog/false-color-lut-generator/": {"key":"","locale":"en"},
+    "/blog/yahala-usa-ai-built-astro-link-hub/": {"key":"","locale":"en"},
+    "/contact/": {"key":"","locale":"en"},
+    "/gear/": {"key":"","locale":"en"},
+    "/gear/amaran-60xs/": {"key":"","locale":"en"},
+    "/gear/amaran-halo-60x/": {"key":"","locale":"en"},
+    "/gear/amaran-light-dome-90/": {"key":"","locale":"en"},
+    "/gear/amaran-pano-60c/": {"key":"","locale":"en"},
+    "/gear/amaran-ray-120c/": {"key":"","locale":"en"},
+    "/gear/comica-vp3-xlr/": {"key":"","locale":"en"},
+    "/gear/deity-v-mic-d4/": {"key":"","locale":"en"},
+    "/gear/lumix-s5iix/": {"key":"","locale":"en"},
+    "/gear/mv7-plus-microphone/": {"key":"","locale":"en"},
+    "/gear/sigma-16-28mm/": {"key":"","locale":"en"},
+    "/gear/sigma-28-105mm/": {"key":"","locale":"en"},
+    "/gear/smallrig-cage-kit-sony/": {"key":"","locale":"en"},
+    "/gear/tilta-dmw-blk22-portable-charging-station/": {"key":"","locale":"en"},
+    "/gear/tilta-np-fz100-portable-charging-station/": {"key":"","locale":"en"},
+    "/gear/ugreen-nexode-65w/": {"key":"","locale":"en"},
+    "/privacy/": {"key":"","locale":"en"},
+    "/resources/": {"key":"","locale":"en"},
+    "/terms/": {"key":"","locale":"en"}
+  }
+}

@@ -15,9 +15,9 @@ const blog = defineCollection({
   }),
 });
 
-// Portfolio collection - Client work
+// Archived collections retain their schemas for source templates, but load no public data or media.
 const portfolio = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/portfolio' }),
+  loader: async () => [],
   schema: ({ image }) => z.object({
     title: z.string(),
     clientName: z.string(),
@@ -55,7 +55,7 @@ const gear = defineCollection({
 
 // Services collection - Pricing and offerings
 const services = defineCollection({
-  loader: glob({ pattern: '*.json', base: './src/content/services' }),
+  loader: async () => [],
   schema: ({ image }) => z.object({
     title: z.string(),
     description: z.string(),
@@ -99,7 +99,7 @@ const legal = defineCollection({
 
 // Galleries collection - Client photo event galleries
 const galleries = defineCollection({
-  loader: glob({ pattern: '**/index.md', base: './src/content/galleries' }),
+  loader: async () => [],
   schema: z.object({
     title: z.string(),
     date: z.string(),
