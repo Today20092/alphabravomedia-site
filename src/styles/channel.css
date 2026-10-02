@@ -1,0 +1,24 @@
+/* Production treatment of the approved editorial prototype. */
+@import "./revamp-prototype.css";
+body.revamp-prototype { padding-bottom: 0; }
+.channel-header { flex-wrap: wrap; position: relative; }
+.channel-header nav { order: 2; }
+.channel-header > .channel-button { order: 3; }
+.channel-header a { min-height: 44px; display: inline-flex; align-items: center; }
+.channel-header .proto-brand { display: block; }
+.channel-header [aria-current="page"] { color: var(--primary); }
+.channel-button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: .8rem 1.3rem; border: 1px solid var(--border); font-weight: 600; }
+.channel-button-primary { background: var(--primary); color: var(--primary-foreground)!important; border-color: var(--primary); }
+.channel-button:hover { text-decoration: underline; text-underline-offset: 4px; }
+.channel-footer { border-top: 1px solid var(--border); }
+.channel-footer nav { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+.channel-footer nav a { display: inline-flex; align-items: center; min-height: 44px; }
+.channel-copy { max-width: 48rem; }
+.channel-copy p { line-height: 1.8; margin: 1.5rem 0; }
+.channel-copy h2 { margin-top: 3rem; }
+.channel-contact { display: flex; flex-wrap: wrap; gap: 1rem; }
+@media(max-width: 1000px) {
+  .channel-header nav { order: 4; width: 100%; justify-content: space-between; flex-wrap: wrap; gap: .5rem 1rem; }
+  .channel-header > .channel-button { margin-left: auto; font-size: .8rem; }
+}
+@media(prefers-reduced-motion: reduce) { html { scroll-behavior: auto!important; } }

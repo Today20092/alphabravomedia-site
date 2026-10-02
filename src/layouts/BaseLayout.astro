@@ -1,5 +1,8 @@
 ---
 import SearchModal from "../components/SearchModal.astro";
+import ChannelHeader from "../components/ChannelHeader.astro";
+import ChannelFooter from "../components/ChannelFooter.astro";
+import "../styles/channel.css";
 import LinkButton from "../components/ui/LinkButton.astro";
 import { buttonVariants } from "../components/ui/button";
 import { SEO } from "astro-seo";
@@ -25,8 +28,8 @@ const youtubeLink = siteConfig.socialLinks.find(
 );
 
 const {
-  title = `${siteConfig.siteName} | Tampa Video Production`,
-  description = siteConfig.defaultDescription,
+  title = `${siteConfig.siteName} | Video guides and equipment notes`,
+  description = "Video guides, editing workflows, practical tools, and equipment notes from Alpha Bravo Media.",
   canonical,
   ogImage = "/alpha-bravo-logo.svg",
   ogImageAlt = `${siteConfig.siteName} logo`,
@@ -165,277 +168,15 @@ const mobileThemeButtonClass = cn(
     </script>
     <ClientRouter />
   </head>
-  <body class="bg-site-bg text-site-text font-sans antialiased">
-    <!-- Navigation -->
-    <header class="fixed top-0 left-0 right-0 z-50">
-      <nav class="site-shell-wide mt-4 rounded-[1.35rem] border border-site-border bg-[var(--site-nav-bg)] px-4 py-4 shadow-site-sm backdrop-blur sm:px-5">
-        <div class="flex items-center justify-between gap-4">
-          <!-- Logo -->
-          <a
-            href={base}
-            class="font-['Sora',sans-serif] text-base font-semibold tracking-tight text-site-text transition-colors hover:text-site-accent-strong sm:text-lg"
-          >
-            {siteConfig.siteName}
-          </a>
-
-          <!-- Desktop Navigation -->
-          <ul class="hidden md:flex items-center gap-6 lg:gap-8">
-            {
-              navLinks.map((link) => (
-                <li>
-                  <a
-                    href={link.href}
-                    class:list={[
-                      "font-['Sora',sans-serif] text-sm font-medium transition-colors duration-200",
-                      currentPath === link.href
-                        ? "text-site-text"
-                        : "text-site-text-muted hover:text-site-text",
-                    ]}
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-
-          <!-- Theme Toggle (desktop) -->
-          <button
-            data-theme-toggle
-            type="button"
-            class={themeButtonClass}
-            aria-pressed="true"
-          >
-            <Icon name="mdi:weather-night" class="h-4 w-4" data-theme-icon="moon" />
-            <Icon name="mdi:weather-sunny" class="h-4 w-4" data-theme-icon="sun" />
-            <span data-theme-label>Dark theme</span>
-          </button>
-
-          <!-- Search Button (desktop) -->
-          <button
-            data-search-open
-            class={searchButtonClass}
-          >
-            <svg
-              class="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
-            <span>Search</span>
-            <kbd class="hidden font-mono text-xs text-site-text-soft lg:inline"
-              aria-hidden="true"
-              >⌘K</kbd
-            >
-          </button>
-
-          <!-- CTA Button -->
-          {
-            siteConfig.phoneRaw && (
-              <LinkButton
-                href={`tel:${siteConfig.phoneRaw}`}
-                class="hidden md:inline-flex"
-              >
-                <Icon name="mdi:phone-outline" class="h-4 w-4" />
-                Call direct
-              </LinkButton>
-            )
-          }
-
-          <!-- Mobile Menu Button -->
-          <button
-            id="mobile-menu-btn"
-            class={cn(iconButtonClass, "md:hidden")}
-            aria-label="Toggle menu"
-            aria-expanded="false"
-            aria-controls="mobile-menu"
-          >
-            <Icon id="menu-open" name="mdi:menu" class="w-6 h-6" />
-            <Icon id="menu-close" name="mdi:close" class="w-6 h-6 hidden" />
-          </button>
-        </div>
-
-        <!-- Mobile Navigation -->
-        <div
-          id="mobile-menu"
-          class="mt-4 hidden border-t border-site-border pt-4 md:hidden"
-        >
-          <ul class="flex flex-col gap-4">
-            {
-              navLinks.map((link) => (
-                <li>
-                  <a
-                    href={link.href}
-                    class:list={[
-                      "block font-['Sora',sans-serif] text-sm font-medium transition-colors duration-200",
-                      currentPath === link.href
-                        ? "text-site-text"
-                        : "text-site-text-muted hover:text-site-text",
-                    ]}
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))
-            }
-            <li>
-              <button
-                data-search-open
-                class="flex w-full items-center gap-2 text-sm font-medium text-site-text-muted transition-colors hover:text-site-text"
-              >
-                <Icon name="mdi:magnify" class="w-4 h-4" />
-                Search
-              </button>
-            </li>
-            <li>
-              <button
-                data-theme-toggle
-                type="button"
-                class={mobileThemeButtonClass}
-                aria-pressed="true"
-              >
-                <Icon name="mdi:weather-night" class="h-4 w-4" data-theme-icon="moon" />
-                <Icon name="mdi:weather-sunny" class="h-4 w-4" data-theme-icon="sun" />
-                <span data-theme-label>Dark theme</span>
-              </button>
-            </li>
-            {
-              youtubeLink && (
-                <li>
-                  <a
-                    href={youtubeLink.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="flex items-center gap-2 text-sm font-medium text-site-text-muted transition-colors hover:text-site-text"
-                  >
-                    <Icon name={youtubeLink.icon} class="w-4 h-4" />
-                    {youtubeLink.label}
-                  </a>
-                </li>
-              )
-            }
-          </ul>
-        </div>
-      </nav>
-    </header>
+  <body class="revamp-prototype variant-A antialiased">
+    <ChannelHeader />
 
     <!-- Main Content -->
-    <main>
+    <main id="main-content" tabindex="-1">
       <slot />
     </main>
 
-    <!-- Footer -->
-    <footer
-      id="contact"
-      class="contact-highlight-target relative border-t border-site-border px-4 py-14 sm:px-6 sm:py-16"
-    >
-      <div class="site-shell">
-        <div
-          id="contact-methods"
-          class="mb-10 grid gap-8 border-t border-site-border pt-8 transition-all duration-500 md:grid-cols-[1.1fr_1fr_0.9fr] md:mb-0 md:rounded-[1.5rem] md:border md:bg-site-surface md:p-6"
-        >
-          <div
-            class="transition-all duration-500 md:rounded-xl"
-            id="contact-brand-highlight"
-          >
-            <span class="site-kicker">Contact</span>
-            <h2 class="mt-4 font-['Sora',sans-serif] text-2xl font-semibold tracking-tight text-site-text">
-              {siteConfig.siteName}
-            </h2>
-            <p class="mt-3 max-w-[34ch] text-sm leading-7 text-site-text-muted">
-              {siteConfig.tagline}
-            </p>
-            <p class="mt-4 max-w-[34ch] text-sm leading-7 text-site-text-soft">
-              Free 15-minute consult call. Ayoub will text you first to confirm timing, then walk through scope, fit, and next steps.
-            </p>
-          </div>
-
-          <div class="grid gap-4 text-sm">
-            <p class="text-xs font-semibold uppercase tracking-[0.24em] text-site-text-soft">
-              Reach out
-            </p>
-            <a href={`mailto:${siteConfig.email}`} class="site-link flex items-center gap-3">
-              <Icon name="mdi:email-outline" class="h-4 w-4 text-site-accent" />
-              <span>{siteConfig.email}</span>
-            </a>
-            <a href={`tel:${siteConfig.phoneRaw}`} class="site-link flex items-center gap-3">
-              <Icon name="mdi:phone-outline" class="h-4 w-4 text-site-accent" />
-              <span>{siteConfig.phone}</span>
-            </a>
-            <a href={`${base}contact`} class="site-link flex items-center gap-3">
-              <Icon name="mdi:message-outline" class="h-4 w-4 text-site-accent" />
-              <span>Start an inquiry</span>
-            </a>
-            <a
-              href={`https://matrix.to/#/${siteConfig.elementUsername}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="site-link flex items-center gap-3"
-            >
-              <Icon name="simple-icons:element" class="h-4 w-4 text-site-accent" />
-              <span class="font-mono text-xs sm:text-sm">{siteConfig.elementUsername}</span>
-            </a>
-          </div>
-
-          <div class="grid gap-4 text-sm">
-            <p class="text-xs font-semibold uppercase tracking-[0.24em] text-site-text-soft">
-              Elsewhere
-            </p>
-            <a
-              href={siteConfig.googleMapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="site-link flex items-center gap-3"
-            >
-              <Icon name="simple-icons:google" class="h-4 w-4 text-site-accent" />
-              <span>{siteConfig.googleMapsLabel}</span>
-            </a>
-            {
-              siteConfig.socialLinks
-                .filter((link) => link.platform !== "discord")
-                .map((link) => (
-                  <a
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="site-link flex items-center gap-3"
-                  >
-                    <Icon name={link.icon} class="h-4 w-4 text-site-accent" />
-                    <span>{link.label}</span>
-                  </a>
-                ))
-            }
-            <a
-              href={siteConfig.socialLinks.find((link) => link.platform === "discord")?.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="site-link flex items-center gap-3"
-            >
-              <Icon name="simple-icons:discord" class="h-4 w-4 text-site-accent" />
-              <span>Discord creator community</span>
-            </a>
-          </div>
-        </div>
-
-        <div class="flex flex-col gap-3 border-t border-site-border pt-6 text-sm text-site-text-soft sm:flex-row sm:items-center sm:justify-between">
-          <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-6">
-            <p>
-              &copy; {new Date().getFullYear()} {siteConfig.siteName}. All rights reserved.
-            </p>
-            <a href={`${base}about`} class="site-link">About</a>
-            <a href={`${base}privacy`} class="site-link">Privacy Policy</a>
-            <a href={`${base}terms`} class="site-link">Terms of Service</a>
-          </div>
-          <p>Based in Tampa, serving brands, creators, and events.</p>
-        </div>
-      </div>
-    </footer>
+    <ChannelFooter />
 
     <SearchModal />
 

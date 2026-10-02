@@ -1,0 +1,15 @@
+---
+import { siteConfig } from "../site-config";
+const base = import.meta.env.BASE_URL;
+---
+<footer class="proto-footer channel-footer">
+  <div>
+    <a class="proto-brand" href={base}>alpha bravo<span>media</span></a>
+    <p>Made &amp; shared by {siteConfig.founderName}.<br />© {new Date().getFullYear()} Alpha Bravo Media.</p>
+    <nav aria-label="Footer navigation">
+      <a href={`${base}contact`}>Contact</a>
+      <a href={`${base}privacy`}>Privacy</a>
+      <a href={`${base}terms`}>Terms</a>
+    </nav>
+  </div>
+</footer>
