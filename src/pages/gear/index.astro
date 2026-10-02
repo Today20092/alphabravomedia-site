@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
+import "../../styles/toolbox.css";
 
 const rawBase = import.meta.env.BASE_URL;
 const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
@@ -49,19 +50,21 @@ const getCategoryId = (category: string) =>
   title="Video Production Gear Guide | Alpha Bravo Media"
   description="Cameras, lenses, lights, audio gear, and accessories used in real Alpha Bravo Media productions."
 >
-  <section class="site-section-hero">
+  <section class="site-section-hero gear-toolbox">
     <div class="site-shell">
       <div class="space-y-10">
         <div class="site-page-header mb-0 max-w-3xl">
           <span class="site-kicker">Gear</span>
           <h1 class="site-page-title">
-            Cameras, lenses, lights, audio, and the working setup behind the work.
+            What's in the kit?
           </h1>
           <p class="site-page-copy text-lg">
             A practical equipment list, grouped by role, with notes for the tools that
             actually make it into production.
           </p>
         </div>
+
+        <p class="gear-disclosure">As an Amazon Associate I earn from qualifying purchases. Gear detail pages include affiliate links.</p>
 
         <div class="mt-4 flex flex-wrap gap-3 sm:mt-5">
           <span class="site-stat">{allGear.length} picks</span>

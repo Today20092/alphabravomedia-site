@@ -3,6 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection, render } from "astro:content";
 import { Icon } from "astro-icon/components";
 import { siteConfig } from "../../site-config";
+import "../../styles/toolbox.css";
 
 export async function getStaticPaths() {
   const gear = await getCollection("gear");
@@ -24,7 +25,7 @@ const relatedItems = allGear
   .slice(0, 3);
 const gearDescription = item.data.specs
   ? `${item.data.title}: ${item.data.specs}`
-  : `${item.data.title} is part of the working ${item.data.category.toLowerCase()} kit used by Alpha Bravo Media for client and creator productions.`;
+  : `${item.data.title} is part of the working ${item.data.category.toLowerCase()} kit used by Alpha Bravo Media.`;
 ---
 
 <BaseLayout
@@ -37,7 +38,7 @@ const gearDescription = item.data.specs
 >
   <article
     data-pagefind-body
-    class="site-section-hero"
+    class="site-section-hero gear-toolbox"
     itemscope
     itemtype="https://schema.org/Review"
   >
@@ -79,7 +80,7 @@ const gearDescription = item.data.specs
             <a
               href={item.data.amazonLink}
               target="_blank"
-              rel="noopener noreferrer"
+              rel="sponsored noopener noreferrer"
               class="site-button-primary"
             >
               <Icon name="simple-icons:amazon" class="h-4 w-4" />
@@ -89,6 +90,8 @@ const gearDescription = item.data.specs
               Affiliate link
             </span>
           </div>
+
+          <p class="gear-disclosure">As an Amazon Associate I earn from qualifying purchases. Buying through this affiliate link supports the channel at no extra cost to you.</p>
 
           <div
             class="site-prose prose prose-a:text-site-accent-strong mt-8 max-w-none prose-headings:text-balance prose-h1:text-3xl md:prose-h1:text-4xl prose-h2:text-2xl md:prose-h2:text-3xl prose-h3:text-xl md:prose-h3:text-2xl"

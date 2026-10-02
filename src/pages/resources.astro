@@ -1,6 +1,22 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/toolbox.css";
+const base = import.meta.env.BASE_URL;
 ---
 <BaseLayout title="Resources | Alpha Bravo Media" description="Explore the False Color LUT Builder guide and a practical DaVinci Resolve archive workflow.">
-  <section class="proto-hero channel-copy"><p class="proto-byline">Resources</p><h1>Open the<br /><em>toolbox.</em></h1><p>Tools and guides from the channel.</p><h2><a href="/blog/false-color-lut-generator">False Color LUT Builder ↗</a></h2><p>Build a false color LUT and learn how to read exposure.</p><h2><a href="/blog/davinci-resolve-media-management-archive-workflow">DaVinci Resolve archive workflow ↗</a></h2><p>Keep your finished projects organized with a practical media management guide.</p></section>
+  <section class="toolbox-page proto-section">
+    <header class="toolbox-heading"><p class="proto-byline">Resources</p><h1>Open the toolbox.</h1><p class="proto-intro">Tools and practical guides from the channel, with instructions to put them to work.</p></header>
+    <div class="toolbox-panels">
+      <article class="toolbox-panel">
+        <span>Exposure tool</span><h2>False Color LUT Builder</h2><p>Build a false color LUT and learn how to read exposure. The repository contains the tool and setup instructions.</p>
+        <a href="https://github.com/Today20092/lut_builder">Open the tool repository <span aria-hidden="true">↗</span></a>
+        <a href={`${base}blog/false-color-lut-generator`}>Read the exposure guide <span aria-hidden="true">↗</span></a>
+      </article>
+      <article class="toolbox-panel">
+        <span>DaVinci Resolve guide</span><h2>Keep the project. Lose the clutter.</h2><p>A practical media management and archive workflow for keeping finished projects organized.</p>
+        <a href={`${base}blog/davinci-resolve-media-management-archive-workflow`}>Read the archive guide <span aria-hidden="true">↗</span></a>
+      </article>
+    </div>
+    <p class="toolbox-next">Looking for equipment? <a href={`${base}gear`}>Explore the working kit <span aria-hidden="true">↗</span></a></p>
+  </section>
 </BaseLayout>

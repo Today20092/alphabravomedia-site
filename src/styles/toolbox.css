@@ -1,0 +1,33 @@
+/* Resources and equipment share the approved editorial workshop treatment. */
+.toolbox-page { max-width: 90rem; margin-inline: auto; }
+.toolbox-heading { max-width: 60rem; margin-bottom: 4rem; }
+.toolbox-heading h1, .gear-toolbox .site-page-title { font-size: clamp(2.4rem, 5vw, 5.5rem); line-height: 1.08; letter-spacing: -.055em; font-weight: 500; }
+.toolbox-panels { display: flex; }
+.toolbox-panel { flex: 1; min-width: 0; padding: 3rem; border: 1px solid var(--border); background: var(--secondary); transition: flex .5s; }
+.toolbox-panel:hover, .toolbox-panel:focus-within { flex: 1.35; }
+.toolbox-panel > span { font-size: .8rem; color: var(--primary); }
+.toolbox-panel h2 { font-size: clamp(2rem, 3vw, 3.2rem); margin-block: 2rem; }
+.toolbox-panel p { max-width: 32rem; line-height: 1.8; margin-bottom: 2rem; }
+.toolbox-panel a { display: block; width: fit-content; margin-top: 1rem; text-decoration: underline; text-underline-offset: .25em; color: var(--primary); }
+.toolbox-next { margin-top: 3rem; line-height: 1.8; }
+.toolbox-next a { text-decoration: underline; text-underline-offset: .25em; }
+.gear-toolbox { --site-text: var(--foreground); --site-text-muted: #c2beaf; --site-text-soft: #c2beaf; --site-accent: var(--primary); --site-accent-strong: var(--primary); --site-link: var(--primary); --site-link-hover: var(--foreground); --site-border: var(--border); --site-surface: var(--secondary); --site-control-bg: var(--secondary); padding: 4rem 4vw 6rem; }
+.gear-toolbox .site-shell { max-width: 90rem; padding: 0; }
+.gear-toolbox .site-page-header { max-width: 60rem; }
+.gear-toolbox :is(.site-page-title, .site-section-title, .site-card-title, .site-prose h1, .site-prose h2, .site-prose h3) { font-family: inherit; }
+.gear-toolbox .site-page-copy { line-height: 1.8; }
+.gear-toolbox :is(.site-card, .site-chip, .site-stat) { border-radius: 0; border-color: var(--border); background: var(--secondary); color: var(--foreground); box-shadow: none; }
+.gear-toolbox .site-card-media { background: #f6f0de; border-radius: 0; }
+.gear-toolbox .site-card-title { font-weight: 500; letter-spacing: -.025em; }
+.gear-toolbox .site-button-primary { background: var(--primary); color: var(--primary-foreground); border-radius: 0; }
+.gear-disclosure { font-size: .875rem; line-height: 1.8; max-width: 52rem; margin-block: 1.5rem; color: var(--site-text-muted); }
+.gear-toolbox .site-prose { color: var(--foreground); --tw-prose-body: var(--foreground); --tw-prose-headings: var(--foreground); --tw-prose-bold: var(--foreground); --tw-prose-links: var(--primary); --tw-prose-bullets: var(--primary); --tw-prose-hr: var(--border); }
+.gear-toolbox .site-prose :is(p, li, a, h1, h2, h3) { overflow-wrap: anywhere; }
+.gear-toolbox .site-prose :is(pre, table) { display: block; max-width: 100%; overflow-x: auto; }
+@media(max-width: 639px) {
+  .toolbox-heading { margin-bottom: 2rem; }
+  .toolbox-panels { flex-direction: column; }
+  .toolbox-panel { padding: 2rem 1.5rem; }
+  .gear-toolbox { padding-top: 2.5rem; }
+}
+@media(prefers-reduced-motion: reduce) { .toolbox-panel { transition: none; } }
