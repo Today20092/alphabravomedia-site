@@ -36,7 +36,7 @@ try {
   assert.equal(await visible(), 3);
   await page.locator('#gear-reset').click();
   await page.locator('#gear-sigma-85mm a[href="/gear/sigma-85mm"]').click();
-  await page.waitForURL('**/gear/sigma-85mm*');
+  await page.waitForURL(/\/gear\/sigma-85mm\/?$/);
   await page.getByRole('link', { name: 'Back to Gear', exact: true }).click();
   await page.waitForURL(/\/gear\/?$/);
   await page.locator('[data-gear-controls]').waitFor({ state: 'visible' });
