@@ -39,9 +39,7 @@ const relatedItems = allItems
 const relatedServices = allServices.filter((service) =>
   item.data.services.includes(service.id),
 );
-const portfolioDescription = item.data.clientName
-  ? `${item.data.clientName} ${item.data.category.toLowerCase()} project by Alpha Bravo Media, covering production approach, outcomes, and deliverables.`
-  : `${item.data.category} project by Alpha Bravo Media, covering production approach, outcomes, and deliverables.`;
+const portfolioDescription = item.data.outcome || `${item.data.title}. Production approach and deliverables by Alpha Bravo Media.`;
 const portfolioOgImage = item.data.image?.src ??
   (item.data.videoId
     ? `https://img.youtube.com/vi/${item.data.videoId}/maxresdefault.jpg`

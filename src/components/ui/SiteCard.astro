@@ -14,9 +14,9 @@ const Tag = href ? "a" : "div";
 <Tag
   href={href}
   class={cn(
-    "group/card flex flex-col overflow-hidden rounded-[min(var(--radius-4xl),24px)] border border-border bg-card text-card-foreground shadow-sm ring-1 ring-foreground/5",
+    "group/card flex flex-col overflow-hidden rounded-lg border border-border bg-card text-card-foreground shadow-sm ring-1 ring-foreground/5",
     interactive &&
-      "transition-all duration-200 hover:border-site-border-strong hover:bg-muted hover:shadow-site-sm focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ring/30",
+      "transition-all duration-200 hover:border-site-border-strong hover:bg-muted focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ring/30",
     className,
   )}
 >

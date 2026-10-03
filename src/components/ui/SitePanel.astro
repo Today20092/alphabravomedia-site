@@ -11,7 +11,7 @@ const { muted = false, class: className } = Astro.props;
 
 <div
   class={cn(
-    "relative rounded-[min(var(--radius-4xl),24px)] border border-border text-card-foreground shadow-sm",
+    "relative rounded-lg border border-border text-card-foreground shadow-sm",
     muted ? "bg-muted" : "bg-card",
     className,
   )}
