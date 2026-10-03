@@ -3,6 +3,7 @@ title: "Aputure Amaran Ray 120c RGB Video Light"
 amazonLink: "https://amzn.to/482iQiZ"
 imageUrl: "https://m.media-amazon.com/images/I/71fPRoisLlL._AC_SL1500_.jpg"
 category: "Lights"
+note: "Another RGB lighting option to compare when planning a video setup."
 specs: "120W · Full RGB · 1,800K–20,000K"
 ---
 

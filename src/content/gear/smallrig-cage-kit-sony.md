@@ -3,6 +3,7 @@ title: "SmallRig Cage Kit for Sony Alpha 7 Series"
 amazonLink: "https://amzn.to/4mBJl4U"
 imageUrl: "https://m.media-amazon.com/images/I/615r86iJAvL._AC_SL1500_.jpg"
 category: "Accessories"
+note: "A cage option for supported Sony Alpha bodies. This is not a cage for the Lumix S5IIX."
 specs: "Rig mount points · Professional protection · Sony A7 series"
 ---
 

@@ -3,6 +3,8 @@ title: "Panasonic Lumix S5IIX Full-Frame Cinema Camera"
 amazonLink: "https://amzn.to/4r8qU8v"
 imageUrl: "https://m.media-amazon.com/images/I/81ePPdH2feL._AC_SL1500_.jpg"
 category: "Camera"
+status: "current"
+note: "My primary camera for client work, with both video and photography in the same body."
 specs: "6K Open Gate · V-Log · ProRes / BRAW support"
 ---
 

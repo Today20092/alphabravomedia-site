@@ -3,6 +3,7 @@ title: "Tilta DMW-BLK22 Portable Charging Station"
 amazonLink: "https://amzn.to/4uUZ2XT"
 imageUrl: "https://m.media-amazon.com/images/I/61p1+htYMIL._AC_SL1500_.jpg"
 category: "Accessories"
+note: "A multi-battery charging option for DMW-BLK22 batteries used by compatible Lumix cameras."
 specs: "DMW-BLK22 · USB-C PD 45W · Charges 4 batteries"
 ---
 

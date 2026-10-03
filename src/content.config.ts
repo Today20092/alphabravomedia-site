@@ -50,6 +50,8 @@ const gear = defineCollection({
     imageUrl: z.string(),
     category: z.string(),
     specs: z.string().optional(),
+    status: z.enum(['current', 'recommended', 'considering']).default('recommended'),
+    note: z.string().optional(),
   }),
 });
 

@@ -3,6 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection, render } from "astro:content";
 import { Icon } from "astro-icon/components";
 import { siteConfig } from "../../site-config";
+import { Badge } from "../../components/ui/badge";
 import "../../styles/toolbox.css";
 
 export async function getStaticPaths() {
@@ -25,11 +26,12 @@ const relatedItems = allGear
   .slice(0, 3);
 const gearDescription = item.data.specs
   ? `${item.data.title}: ${item.data.specs}`
-  : `${item.data.title} is part of the working ${item.data.category.toLowerCase()} kit used by Alpha Bravo Media.`;
+  : `${item.data.title}: equipment notes from Alpha Bravo Media.`;
+const statusLabels = { current: "In my kit", recommended: "Recommendation", considering: "Considering, not yet owned" };
 ---
 
 <BaseLayout
-  title={`${item.data.title} | Gear Review | Alpha Bravo Media`}
+  title={`${item.data.title} | Gear Notes | Alpha Bravo Media`}
   description={gearDescription}
   ogImage={item.data.imageUrl}
   ogImageAlt={item.data.title}
@@ -40,7 +42,7 @@ const gearDescription = item.data.specs
     data-pagefind-body
     class="site-section-hero gear-toolbox"
     itemscope
-    itemtype="https://schema.org/Review"
+    itemtype="https://schema.org/Article"
   >
     <span data-pagefind-meta="type" class="sr-only">Gear</span>
     <span data-pagefind-meta="category" style="display:none">{item.data.category}</span>
@@ -67,6 +69,7 @@ const gearDescription = item.data.specs
         <div>
           <div class="site-page-header">
             <span class="site-chip site-chip-muted">{item.data.category}</span>
+            <Badge variant={item.data.status === "current" ? "default" : "secondary"}>{statusLabels[item.data.status]}</Badge>
             <h1 itemprop="headline" class="site-page-title max-w-3xl">{item.data.title}</h1>
             <div class="site-meta-row">
               <span>{item.data.category}</span>
@@ -76,22 +79,25 @@ const gearDescription = item.data.specs
             </div>
           </div>
 
+          {item.data.note && <p class="mb-5 leading-relaxed">{item.data.note}</p>}
+          <p class="gear-disclosure">I may earn a commission when you buy through this link. As an Amazon Associate I earn from qualifying purchases.</p>
           <div class="flex flex-wrap gap-3">
             <a
               href={item.data.amazonLink}
               target="_blank"
               rel="sponsored noopener noreferrer"
-              class="site-button-primary"
+              class="site-button-primary min-h-11"
+              aria-label={`View ${item.data.title} on Amazon (opens in a new tab)`}
             >
               <Icon name="simple-icons:amazon" class="h-4 w-4" />
               View on Amazon
             </a>
             <span class="site-chip site-chip-muted">
-              Affiliate link
+              Paid link
             </span>
           </div>
 
-          <p class="gear-disclosure">As an Amazon Associate I earn from qualifying purchases. Buying through this affiliate link supports the channel at no extra cost to you.</p>
+          <p class="gear-disclosure">Check current pricing, availability, and the exact model on Amazon before ordering.</p>
 
           <div
             class="site-prose prose prose-a:text-site-accent-strong mt-8 max-w-none prose-headings:text-balance prose-h1:text-3xl md:prose-h1:text-4xl prose-h2:text-2xl md:prose-h2:text-3xl prose-h3:text-xl md:prose-h3:text-2xl"

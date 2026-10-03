@@ -3,17 +3,17 @@ title: "Sigma 16-28mm F2.8 DG Lens"
 amazonLink: "https://amzn.to/4raFhcu"
 imageUrl: "https://m.media-amazon.com/images/I/71H3sA-TvZL._AC_SL1500_.jpg"
 category: "Lens"
+status: "current"
+note: "My wide-angle lens for vlogs, video, and the wider shots in my photography kit."
 specs: "f/2.8 · Sharp workhorse zoom · L-Mount"
 ---
 
-The workhorse zoom that lives on my camera. Sharp, fast, and versatile.
+This is the wide-angle lens in my current two-lens setup, alongside the [Sigma 85mm f/1.4](/gear/sigma-85mm/). I use my kit for vlogs, video recording, portraits, and event photography.
 
-## Why I Use It
+## Why it is in my kit
 
-- Covers most focal lengths I need for corporate work
-- f/2.8 throughout the zoom range
-- Excellent sharpness and minimal distortion
-- Much more affordable than Sony GM equivalent
+It covers my wide-angle needs with an f/2.8 aperture throughout the zoom range. It is the lens I reach for when I want more of the surroundings in the shot.
 
+## Before you buy
 
-If you get it used you can get great affordable pricing too. it works perfect for all my wide angle needs, and the only other lens you may need is a longer focal length like the 24-70mm f/2.8 DG DN Art or the [28-105mm F2.8 DG DN for L-Mount](/gear/sigma-28-105mm/)
+This link is for L-Mount. Check your camera's mount before ordering. A wide-angle zoom and an 85mm prime leave a gap in focal lengths; I do not currently own the [28–105mm zoom](/gear/sigma-28-105mm/) I am considering to fill it.

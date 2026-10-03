@@ -3,6 +3,7 @@ title: "Aputure Amaran Halo 60x COB LED Video Light"
 amazonLink: "https://amzn.to/3OoNTPk"
 imageUrl: "https://m.media-amazon.com/images/I/71Q7Mh2155L._AC_SX679_.jpg"
 category: "Lights"
+note: "A portable bi-color lighting option to compare with my current 60x S key light."
 specs: "63W · Bi-color · Portable key light"
 ---
 

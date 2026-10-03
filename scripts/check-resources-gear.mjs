@@ -13,6 +13,10 @@ for (const slug of ['false-color-lut-generator', 'davinci-resolve-media-manageme
 assert.equal(resources('main a[download]').length, 0, 'No invented downloads');
 const gear = page('gear');
 assert.match(gear('main').text(), /As an Amazon Associate I earn from qualifying purchases/);
+assert.equal(gear('[data-gear-item]').length, readdirSync('src/content/gear').filter(file => file.endsWith('.md')).length);
+assert.equal(gear('[data-kit]').length, 4, 'Keep all four task-based kits');
+assert.equal(gear('#gear-sigma-28-105mm').closest('[data-gear-group]').find('h3').text(), 'On my wishlist');
+assert.equal(gear('#gear-sigma-85mm').closest('[data-gear-group]').find('h3').text(), 'What I use');
 for (const file of readdirSync('src/content/gear').filter(file => file.endsWith('.md'))) {
   const source = readFileSync(`src/content/gear/${file}`, 'utf8');
   const slug = file.replace(/\.md$/, '').toLowerCase();
@@ -20,6 +24,9 @@ for (const file of readdirSync('src/content/gear').filter(file => file.endsWith(
   const detail = page(`gear/${slug}`);
   const amazon = source.match(/^amazonLink:\s*["']?([^\s"']+)/m)?.[1];
   assert.ok(amazon, `${file}: missing source destination`);
+  const buy = gear(`main a[href="${amazon}"]`);
+  assert.equal(buy.length, 1, `${slug}: missing direct retailer link`);
+  assert.ok(buy.attr('rel').split(/\s+/).includes('sponsored'), `${slug}: qualify paid links`);
   assert.equal(detail(`main a[href="${amazon}"]`).length, 1, `${slug}: changed affiliate destination`);
   assert.match(detail('main').text(), /As an Amazon Associate I earn from qualifying purchases/);
   assert.equal(detail('h1').length, 1);

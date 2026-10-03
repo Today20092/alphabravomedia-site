@@ -2,170 +2,196 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
-import "../../styles/toolbox.css";
+import { buttonVariants } from "../../components/ui/button";
+import { Badge } from "../../components/ui/badge";
+import { Input } from "../../components/ui/input";
+import { cn } from "../../lib/utils";
 
-const rawBase = import.meta.env.BASE_URL;
-const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
-
+const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
 const allGear = await getCollection("gear");
-
-const gearByCategory = allGear.reduce((acc, item) => {
-  const cat = item.data.category;
-  if (!acc[cat]) acc[cat] = [];
-  acc[cat].push(item);
-  return acc;
-}, {} as Record<string, typeof allGear>);
-
-const sortedGearByCategory = Object.fromEntries(
-  Object.entries(gearByCategory).map(([category, items]) => [
-    category,
-    [...items].sort((a, b) => a.data.title.localeCompare(b.data.title)),
-  ]),
-) as Record<string, typeof allGear>;
-
-const categoryOrder = ["Camera", "Lens", "Lights", "Audio", "Accessories"];
-const categories = [
-  ...categoryOrder.filter((category) => sortedGearByCategory[category]?.length > 0),
-  ...Object.keys(sortedGearByCategory)
-    .filter((category) => !categoryOrder.includes(category))
-    .sort((a, b) => a.localeCompare(b)),
+const categories = ["Camera", "Lens", "Lights", "Audio", "Accessories"];
+const statusLabels = { current: "In my kit", recommended: "Recommendation", considering: "Considering" };
+const groups = [
+  { status: "current", title: "What I use", copy: "The gear in my working setup, with notes on why it is there." },
+  { status: "recommended", title: "More gear to explore", copy: "Other recommendations, separate from my confirmed current setup." },
+  { status: "considering", title: "On my wishlist", copy: "Equipment I am considering. I do not own these items yet." },
+] as const;
+const kits = [
+  { id: "vlogs", title: "Vlogs", icon: "mdi:video-outline", copy: "Start with a camera, a wide-angle lens, and a compact mic.", items: ["lumix-s5iix", "sigma-16-28mm", "deity-v-mic-d4"] },
+  { id: "video", title: "Recording video", icon: "mdi:movie-open-outline", copy: "The camera and wide zoom, with my key light and mic for recording indoors.", items: ["lumix-s5iix", "sigma-16-28mm", "amaran-60xs", "deity-v-mic-d4"] },
+  { id: "portraits", title: "Portraits", icon: "mdi:account-outline", copy: "My camera and 85mm portrait lens. Two pieces to start with.", items: ["lumix-s5iix", "sigma-85mm"] },
+  { id: "events", title: "Event photography", icon: "mdi:camera-outline", copy: "My camera and both lenses for wide shots and a longer portrait focal length.", items: ["lumix-s5iix", "sigma-16-28mm", "sigma-85mm"] },
 ];
-
-const categoryMeta: Record<string, { icon: string }> = {
-  Camera: { icon: "mdi:camera-iris" },
-  Lens: { icon: "mdi:camera-metering-matrix" },
-  Lights: { icon: "mdi:spotlight-beam" },
-  Audio: { icon: "mdi:microphone-variant" },
-  Accessories: { icon: "mdi:toolbox-outline" },
-};
-
-const defaultMeta = { icon: "mdi:star-four-points-circle-outline" };
-
-const getCategoryMeta = (category: string) => categoryMeta[category] ?? defaultMeta;
-const getCategoryId = (category: string) =>
-  `category-${category.toLowerCase().replace(/\s+/g, "-")}`;
+const camera = allGear.find((item) => item.id === "lumix-s5iix");
+const buyClass = cn(buttonVariants({ size: "lg" }), "min-h-11 w-full rounded-sm");
 ---
 
-<BaseLayout
-  title="Video Production Gear Guide | Alpha Bravo Media"
-  description="Cameras, lenses, lights, audio gear, and accessories used in real Alpha Bravo Media productions."
->
-  <section class="site-section-hero gear-toolbox">
-    <div class="site-shell">
-      <div class="space-y-10">
-        <div class="site-page-header mb-0 max-w-3xl">
-          <span class="site-kicker">Gear</span>
-          <h1 class="site-page-title">
-            What's in the kit?
-          </h1>
-          <p class="site-page-copy text-lg">
-            A practical equipment list, grouped by role, with notes for the tools that
-            actually make it into production.
-          </p>
+<BaseLayout title="Gear I Use | Cameras, Lenses & Creator Kits | Alpha Bravo Media" description="Explore my gear for vlogs, video recording, portraits, and event photography. Personal notes, task-based kits, and direct Amazon links.">
+  <div class="gear-shop">
+    <header class="gear-hero">
+      <div>
+        <p class="gear-eyebrow">Alpha Bravo Media / The gear shelf</p>
+        <h1>Good gear.<br />A reason for<br /><em>every piece.</em></h1>
+        <p class="gear-intro">What I use for vlogs, video, portraits, and event photography. Browse my setup, see what each piece does, and find the right gear for your own kit.</p>
+        <div class="gear-hero-actions">
+          <a href="#catalog" data-slot="button" data-variant="default" class={cn(buttonVariants({ size: "lg" }), "min-h-11 rounded-sm")}>Explore the gear <Icon name="mdi:arrow-down" data-icon="inline-end" /></a>
+          <a href="#kits" class="gear-text-link">Find your starting kit <Icon name="mdi:arrow-top-right" /></a>
         </div>
-
-        <p class="gear-disclosure">As an Amazon Associate I earn from qualifying purchases. Gear detail pages include affiliate links.</p>
-
-        <div class="mt-4 flex flex-wrap gap-3 sm:mt-5">
-          <span class="site-stat">{allGear.length} picks</span>
-          <span class="site-stat">{categories.length} categories</span>
-        </div>
-
-        {allGear.length > 0 && (
-          <nav aria-label="Browse gear categories">
-            <p class="mb-5 text-xs font-semibold uppercase tracking-[0.24em] text-site-text-soft">
-              Categories
-            </p>
-            <div class="flex snap-x gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-              {categories.map((category) => {
-                const meta = getCategoryMeta(category);
-                return (
-                  <a href={`#${getCategoryId(category)}`} class="site-chip site-chip-muted min-w-max snap-start">
-                    <Icon name={meta.icon} class="h-4 w-4 text-site-accent" />
-                    <span class="normal-case tracking-normal text-sm text-site-text-muted">
-                      {category}
-                    </span>
-                    <span class="normal-case tracking-normal text-sm text-site-text-soft">
-                      {sortedGearByCategory[category].length}
-                    </span>
-                  </a>
-                );
-              })}
-            </div>
-          </nav>
-        )}
-
-        {allGear.length === 0 ? (
-          <div class="site-panel-muted px-6 py-20 text-center">
-            <p class="text-lg text-site-text">No gear listed yet.</p>
-            <p class="mt-3 text-sm text-site-text-soft">
-              Add a few recommendations and this page will render them automatically.
-            </p>
-          </div>
-        ) : (
-          <div class="space-y-16">
-            {categories.map((category, categoryIndex) => {
-              const meta = getCategoryMeta(category);
-              const items = sortedGearByCategory[category];
-
-              return (
-                <section id={getCategoryId(category)} class="scroll-mt-28">
-                  <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-                    <div class="site-page-header mb-0">
-                      <span class="site-chip site-chip-muted w-fit">
-                        <Icon name={meta.icon} class="h-4 w-4 text-site-accent" />
-                        <span class="normal-case tracking-normal text-sm text-site-text-muted">
-                          {category}
-                        </span>
-                      </span>
-                    </div>
-                    <p class="text-sm text-site-text-soft">
-                      {items.length} {items.length === 1 ? "recommendation" : "recommendations"}
-                    </p>
-                  </div>
-
-                  <div class="site-grid-3">
-                    {items.map((item, itemIndex) => (
-                      <a
-                        href={`${base}gear/${item.id}`}
-                        class="site-card site-card-interactive group"
-                      >
-                        <div class="site-card-media aspect-[4/3] sm:aspect-square flex items-center justify-center p-6">
-                          {item.data.imageUrl ? (
-                            <img
-                              src={item.data.imageUrl}
-                              alt={item.data.title}
-                              width="1500"
-                              height="1500"
-                              class="h-full w-full object-contain"
-                              loading={categoryIndex === 0 && itemIndex < 3 ? "eager" : "lazy"}
-                            />
-                          ) : (
-                            <Icon
-                              name={meta.icon}
-                              class="h-14 w-14 text-site-text-soft"
-                            />
-                          )}
-                        </div>
-
-                        <div class="site-card-body">
-                          <div class="site-meta-row">
-                            <span>{category}</span>
-                          </div>
-                          <h2 class="site-card-title">{item.data.title}</h2>
-                          <div class="site-meta-row">
-                            <span class="text-site-accent">View gear</span>
-                          </div>
-                        </div>
-                      </a>
-                    ))}
-                  </div>
-                </section>
-              );
-            })}
-          </div>
-        )}
       </div>
-    </div>
-  </section>
+      {camera && <div class="gear-hero-photo">
+        <span class="gear-photo-label">The camera at the center of my setup</span>
+        <img src={camera.data.imageUrl} alt="Panasonic Lumix S5IIX, my primary camera" width="1500" height="1500" loading="eager" fetchpriority="high" />
+        <div class="gear-photo-caption"><span>01 / Camera body</span><strong>Lumix S5IIX</strong><span>Video + photography</span></div>
+      </div>}
+    </header>
+    <aside class="gear-disclosure" aria-label="Affiliate disclosure">
+      <Icon name="mdi:information-outline" />
+      <p>I may earn a commission when you buy through links on this page. As an Amazon Associate I earn from qualifying purchases. Purchases happen on Amazon, where you can check current prices and availability.</p>
+    </aside>
+    <section id="kits" class="gear-kits" aria-labelledby="kits-heading">
+      <div class="gear-section-heading"><div><p class="gear-eyebrow">Start with the job</p><h2 id="kits-heading">What are you making?</h2></div><p>Starting points from my current gear.<br />Choose what fits your workflow.</p></div>
+      <div class="gear-kit-grid">
+        {kits.map((kit, index) => <a href="#catalog" class="gear-kit" data-kit={kit.id}>
+          <div class="gear-kit-top"><span>0{index + 1}</span><Icon name={kit.icon} /></div>
+          <h3>{kit.title}</h3><p>{kit.copy}</p>
+          <span class="gear-kit-action">Browse {kit.items.length} pieces <Icon name="mdi:arrow-down" /></span>
+        </a>)}
+      </div>
+      <p class="gear-fit-note">These are starting points, not complete shopping lists. Check camera mounts, battery types, and audio connections before buying. My current lenses are L-Mount; Sony accessories are labeled separately.</p>
+    </section>
+    <section id="catalog" class="gear-catalog" aria-labelledby="catalog-heading">
+      <div class="gear-section-heading"><div><p class="gear-eyebrow">The full shelf</p><h2 id="catalog-heading">Find your next piece.</h2></div><p>{allGear.length} picks / {categories.length} categories</p></div>
+      <search class="gear-controls" data-gear-controls hidden aria-label="Search and filter gear">
+        <div class="gear-search"><label for="gear-search">Search gear</label><Input id="gear-search" type="search" placeholder="Try Sigma, a microphone, or a light…" className="min-h-11" /></div>
+        <div class="gear-category"><label for="gear-category">Category</label><select id="gear-category"><option value="">All categories</option>{categories.map((category) => <option value={category}>{category === "Lens" ? "Lenses" : category === "Camera" ? "Cameras" : category}</option>)}</select></div>
+        <button type="button" id="gear-reset" class={cn(buttonVariants({ variant: "outline", size: "lg" }), "min-h-11 rounded-sm")}>Reset filters</button>
+      </search>
+      <p class="gear-results" id="gear-results" role="status" aria-live="polite">Showing all {allGear.length} pieces</p>
+      <div id="gear-empty" class="gear-no-results" hidden><h3>No matching gear.</h3><p>Try a different search or reset the filters above.</p></div>
+      {groups.map((group) => <section class="gear-group" data-gear-group aria-labelledby={`heading-${group.status}`}>
+        <div class="gear-group-heading"><h3 id={`heading-${group.status}`}>{group.title}</h3><p>{group.copy}</p></div>
+        <div class="gear-grid">
+          {allGear.filter((item) => item.data.status === group.status).sort((a, b) => categories.indexOf(a.data.category) - categories.indexOf(b.data.category) || a.data.title.localeCompare(b.data.title)).map((item) => <article class="gear-product" id={`gear-${item.id}`} data-gear-item data-category={item.data.category} data-search={`${item.data.title} ${item.data.category} ${item.data.specs ?? ""} ${item.data.note ?? ""}`} data-kits={kits.filter((kit) => kit.items.includes(item.id.toLowerCase())).map((kit) => kit.id).join(" ")}>
+            <div class="gear-product-image">
+              <img src={item.data.imageUrl} alt={item.data.title} width="1500" height="1500" loading="lazy" />
+              <div class="gear-product-status"><Badge variant={group.status === "current" ? "default" : "secondary"}>{statusLabels[group.status]}</Badge></div>
+            </div>
+            <div class="gear-product-body">
+              <p class="gear-product-category">{item.data.category === "Lens" ? "Lenses" : item.data.category}</p>
+              <h4>{item.data.title}</h4>
+              {item.data.specs && <p class="gear-product-specs">{item.data.specs}</p>}
+              <p class="gear-product-note">{item.data.note ?? "Explore the specifications and product notes to see whether this fits your setup."}</p>
+              <div class="gear-product-actions">
+                <a href={item.data.amazonLink} data-slot="button" data-variant="default" class={buyClass} target="_blank" rel="sponsored noopener noreferrer" aria-label={`View ${item.data.title} on Amazon (opens in a new tab)`}>View on Amazon <Icon name="mdi:arrow-top-right" data-icon="inline-end" /></a>
+                <div class="gear-product-links"><a href={`${base}gear/${item.id}`} class="gear-text-link">Read the notes <span class="sr-only">for {item.data.title}</span></a><span>Paid link</span></div>
+              </div>
+            </div>
+          </article>)}
+        </div>
+      </section>)}
+    </section>
+    <footer class="gear-bottom-note"><h2>Build around what you shoot.</h2><p>You do not need everything on this page. Start with the pieces that solve a problem in your setup, and check compatibility before ordering.</p><a href={`${base}blog`} class="gear-text-link">Explore the guides <Icon name="mdi:arrow-right" /></a></footer>
+  </div>
 </BaseLayout>
+
+<script>
+  function initGearShop() {
+    const controls = document.querySelector<HTMLElement>("[data-gear-controls]");
+    if (!controls || controls.dataset.ready) return;
+    controls.dataset.ready = "true";
+    const search = document.querySelector<HTMLInputElement>("#gear-search")!;
+    const category = document.querySelector<HTMLSelectElement>("#gear-category")!;
+    const cards = Array.from(document.querySelectorAll<HTMLElement>("[data-gear-item]"));
+    const kitLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>("[data-kit]"));
+    let activeKit = "";
+    const update = () => {
+      const query = search.value.trim().toLowerCase();
+      let count = 0;
+      cards.forEach((card) => {
+        card.hidden = !((card.dataset.search ?? "").toLowerCase().includes(query) && (!category.value || card.dataset.category === category.value) && (!activeKit || (card.dataset.kits ?? "").split(" ").includes(activeKit)));
+        if (!card.hidden) count++;
+      });
+      document.querySelectorAll<HTMLElement>("[data-gear-group]").forEach((group) => { group.hidden = !group.querySelector("[data-gear-item]:not([hidden])"); });
+      kitLinks.forEach((link) => { if (link.dataset.kit === activeKit) link.setAttribute("aria-current", "true"); else link.removeAttribute("aria-current"); });
+      const kitName = kitLinks.find((link) => link.dataset.kit === activeKit)?.querySelector("h3")?.textContent;
+      document.querySelector("#gear-results")!.textContent = `${count} ${count === 1 ? "piece" : "pieces"}${kitName ? ` for ${kitName.toLowerCase()}` : ""}${category.value ? ` in ${category.value.toLowerCase()}` : ""}${query ? ` matching “${search.value.trim()}”` : ""}`;
+      document.querySelector<HTMLElement>("#gear-empty")!.hidden = count > 0;
+    };
+    controls.hidden = false;
+    search.addEventListener("input", update);
+    category.addEventListener("change", update);
+    document.querySelector("#gear-reset")!.addEventListener("click", () => { search.value = ""; category.value = ""; activeKit = ""; update(); search.focus(); });
+    kitLinks.forEach((link) => link.addEventListener("click", () => { activeKit = link.dataset.kit ?? ""; search.value = ""; category.value = ""; update(); }));
+    update();
+  }
+  initGearShop();
+  document.addEventListener("astro:page-load", initGearShop);
+</script>
+
+<style>
+  .gear-shop { max-width: 90rem; margin: auto; padding: 4rem 4vw 6rem; }
+  .gear-shop [hidden] { display: none !important; }
+  .gear-shop :is(h1,h2,h3,h4,p) { margin: 0; }
+  .gear-shop :is(h1,h2,h3,h4) { font-family: inherit; font-weight: 500; }
+  .gear-eyebrow { font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; }
+  .gear-hero { display: grid; grid-template-columns: 1.15fr 1fr; align-items: center; gap: 4rem; }
+  .gear-hero h1 { margin-top: 1.5rem; font-size: clamp(3.2rem,6vw,6.4rem); line-height: 1.04; letter-spacing: -.065em; }
+  .gear-hero h1 em { font-style: normal; color: var(--primary); }
+  .gear-intro { max-width: 35rem; margin-top: 1.75rem !important; line-height: 1.8; color: var(--secondary-foreground); }
+  .gear-hero-actions { display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; margin-top: 2rem; }
+  .gear-text-link { display: inline-flex; gap: .6rem; align-items: center; min-height: 44px; font-size: .85rem; text-decoration: underline !important; text-underline-offset: 4px; }
+  .gear-text-link svg { width: 1rem; height: 1rem; }
+  .gear-hero-photo { background: #f6f0de; color: #131313; padding: 1.5rem; }
+  .gear-photo-label { font-size: .7rem; text-transform: uppercase; letter-spacing: .1em; }
+  .gear-hero-photo img { width: 100%; aspect-ratio: 1.25; object-fit: contain; margin-block: 1.5rem; mix-blend-mode: multiply; }
+  .gear-photo-caption { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .6rem; border-top: 1px solid currentColor; padding-top: 1rem; font-size: .7rem; }
+  .gear-photo-caption strong { font-size: 1.2rem; font-weight: 500; }
+  .gear-disclosure { display: flex; align-items: start; gap: 1rem; border-block: 1px solid var(--border); padding: 1.25rem 0; margin-top: 3rem; font-size: .8rem; line-height: 1.7; color: var(--secondary-foreground); }
+  .gear-disclosure svg { width: 1.2rem; height: 1.2rem; flex-shrink: 0; margin-top: .15rem; }
+  .gear-section-heading { display: flex; align-items: end; justify-content: space-between; gap: 2rem; margin-bottom: 2rem; }
+  .gear-section-heading h2 { font-size: clamp(2rem,3.5vw,3.5rem); line-height: 1.1; letter-spacing: -.05em; margin-top: .75rem; }
+  .gear-section-heading > p { font-size: .85rem; line-height: 1.7; color: var(--secondary-foreground); }
+  .gear-kits,.gear-catalog { padding-top: 4rem; scroll-margin-top: 2rem; }
+  .gear-kit-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); border: 1px solid var(--border); }
+  .gear-kit { padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; background: var(--secondary); }
+  .gear-kit + .gear-kit { border-left: 1px solid var(--border); }
+  .gear-kit:hover,.gear-kit[aria-current] { background: var(--accent); }
+  .gear-kit-top { display: flex; justify-content: space-between; font-size: .7rem; color: var(--primary); }
+  .gear-kit-top svg { width: 1.5rem; height: 1.5rem; }
+  .gear-kit h3 { font-size: 1.4rem; letter-spacing: -.035em; }
+  .gear-kit p { font-size: .83rem; line-height: 1.7; color: var(--secondary-foreground); }
+  .gear-kit-action { display: flex; align-items: center; gap: .5rem; font-size: .8rem; margin-top: auto; padding-top: .5rem; }
+  .gear-kit-action svg { width: 1rem; height: 1rem; }
+  .gear-fit-note { font-size: .8rem; line-height: 1.8; color: var(--secondary-foreground); max-width: 70rem; margin-top: 1rem !important; }
+  .gear-controls { display: flex; align-items: end; gap: 1rem; padding: 1.5rem; background: var(--secondary); border: 1px solid var(--border); }
+  .gear-search { flex: 1; min-width: 0; }
+  .gear-category { flex: 0 1 13rem; }
+  .gear-controls label { display: block; font-size: .75rem; margin-bottom: .6rem; }
+  .gear-controls select { width: 100%; min-height: 44px; border: 1px solid var(--border); border-radius: .25rem; background: var(--background); color: var(--foreground); padding: .5rem .7rem; font: inherit; font-size: .85rem; }
+  .gear-controls select:focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; }
+  .gear-results { font-size: .8rem; color: var(--secondary-foreground); padding-block: 1rem; }
+  .gear-group { margin-top: 2rem; }
+  .gear-group-heading { margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: baseline; gap: 1.5rem; }
+  .gear-group-heading h3 { font-size: 1.6rem; letter-spacing: -.04em; }
+  .gear-group-heading p { font-size: .82rem; line-height: 1.7; color: var(--secondary-foreground); }
+  .gear-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 1.5rem; }
+  .gear-product { min-width: 0; display: flex; flex-direction: column; border: 1px solid var(--border); background: var(--secondary); }
+  .gear-product-image { position: relative; padding: 2.5rem 2rem 1.5rem; background: #f6f0de; }
+  .gear-product-image img { width: 100%; aspect-ratio: 1.3; object-fit: contain; mix-blend-mode: multiply; }
+  .gear-product-status { position: absolute; top: 1rem; left: 1rem; }
+  .gear-product-body { padding: 1.5rem; display: flex; flex: 1; flex-direction: column; gap: .7rem; }
+  .gear-product-category { font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--primary); }
+  .gear-product h4 { font-size: 1.3rem; line-height: 1.3; letter-spacing: -.025em; text-wrap: balance; }
+  .gear-product-specs { font-size: .73rem; line-height: 1.6; color: var(--secondary-foreground); }
+  .gear-product-note { font-size: .88rem; line-height: 1.75; }
+  .gear-product-actions { margin-top: auto; padding-top: 1rem; }
+  .gear-product-links { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
+  .gear-product-links > span { font-size: .68rem; color: var(--secondary-foreground); }
+  .gear-no-results { padding: 3rem 1.5rem; border-block: 1px solid var(--border); }
+  .gear-no-results p { margin-top: .7rem; line-height: 1.8; }
+  .gear-bottom-note { border-top: 1px solid var(--border); margin-top: 4rem; padding-top: 2rem; }
+  .gear-bottom-note h2 { font-size: 2rem; letter-spacing: -.04em; }
+  .gear-bottom-note p { max-width: 45rem; line-height: 1.8; margin-block: 1rem; }
+  @media(max-width: 1000px) { .gear-hero { gap: 2rem; } .gear-kit-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } .gear-kit:nth-child(3) { border-left: 0; } .gear-kit:nth-child(n+3) { border-top: 1px solid var(--border); } .gear-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+  @media(max-width: 639px) { .gear-shop { padding-top: 2.5rem; } .gear-hero { grid-template-columns: 1fr; } .gear-hero-photo { margin-top: .5rem; } .gear-hero h1 { font-size: clamp(3rem,12vw,4.5rem); } .gear-section-heading,.gear-group-heading { align-items: start; flex-direction: column; gap: .8rem; } .gear-kit { padding: 1.1rem; } .gear-kit h3 { font-size: 1.2rem; } .gear-controls { flex-wrap: wrap; padding: 1rem; } .gear-search { flex-basis: 100%; } .gear-category { flex: 1; } .gear-grid { grid-template-columns: 1fr; } .gear-product-image img { aspect-ratio: 1.5; } .gear-kits,.gear-catalog { padding-top: 3rem; } }
+</style>

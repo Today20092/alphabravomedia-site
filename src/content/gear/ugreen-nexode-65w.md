@@ -3,6 +3,8 @@ title: "UGREEN Nexode 65W GaN USB-C Wall Charger"
 amazonLink: "https://amzn.to/4tNHsEt"
 imageUrl: "https://m.media-amazon.com/images/I/51nKMY3u+hL._AC_SY300_SX300_QL70_FMwebp_.jpg"
 category: "Accessories"
+status: "current"
+note: "A compact USB charging option for a travel kit. Check port types and power needs for your devices."
 specs: "65W · 4-port USB-C · Charges MacBook + phones"
 ---
 

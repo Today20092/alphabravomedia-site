@@ -3,6 +3,7 @@ title: "Aputure Amaran Pano 60c RGB Panel Light Kit"
 amazonLink: "https://amzn.to/4cq88Ea"
 imageUrl: "https://m.media-amazon.com/images/I/61376aE74eL._AC_SX679_.jpg"
 category: "Lights"
+note: "An RGB panel option when your setup calls for colored light rather than a bi-color key."
 specs: "60W · RGBWW panel · 2,300K–10,000K"
 ---
 

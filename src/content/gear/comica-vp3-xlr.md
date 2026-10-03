@@ -3,6 +3,7 @@ title: "COMICA VP3 XLR Shotgun Microphone"
 amazonLink: "https://amzn.to/3Op8S4z"
 imageUrl: "https://m.media-amazon.com/images/I/61XzvrCz9hL._AC_SY300_SX300_QL70_FMwebp_.jpg"
 category: "Audio"
+note: "An XLR microphone option for setups with a compatible recorder, mixer, or audio input."
 specs: "Super-cardioid · Condenser mic · XLR output"
 ---
 

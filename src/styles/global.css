@@ -957,6 +957,11 @@ html[data-theme="dark"],
 }
 
 @layer base {
+.gear-shop {
+  --muted: var(--secondary);
+  --muted-foreground: var(--secondary-foreground);
+}
+
   * {
     @apply border-border outline-ring/50;
   }

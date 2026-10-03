@@ -3,6 +3,8 @@ title: "Aputure Amaran COB 60X S LED Video Light"
 amazonLink: "https://amzn.to/4boBbaX"
 imageUrl: "https://m.media-amazon.com/images/I/71qz98wn-OL._AC_SL1500_.jpg"
 category: "Lights"
+status: "current"
+note: "My main key light. I usually pair it with a softbox when recording indoors."
 specs: "60W · Bi-color · Bowens mount"
 ---
 

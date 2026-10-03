@@ -3,6 +3,7 @@ title: "Shure MV7+ Microphone"
 amazonLink: "https://amzn.to/46Bs7xP"
 imageUrl: "https://m.media-amazon.com/images/I/81SkpwyPZnL._AC_SL1500_.jpg"
 category: "Audio"
+note: "My recommendation for podcasting, streaming, and voice-over setups with USB or XLR audio."
 specs: "XLR + USB-C · Dynamic mic · Built-in DSP"
 ---
 

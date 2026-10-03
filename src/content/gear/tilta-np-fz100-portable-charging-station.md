@@ -3,6 +3,8 @@ title: "Tilta NP-FZ100 Portable Charging Station"
 amazonLink: "https://amzn.to/4cq0s4V"
 imageUrl: "https://m.media-amazon.com/images/I/611Ts0B3wNL._AC_SL1500_.jpg"
 category: "Accessories"
+status: "current"
+note: "My travel charging setup for NP-FZ100 batteries. This version is for Sony batteries, not my Lumix."
 specs: "NP-FZ100 · USB-C PD 45W · Charges 4 batteries"
 ---
 
