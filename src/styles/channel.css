@@ -21,4 +21,14 @@ body.revamp-prototype { padding-bottom: 0; }
   .channel-header nav { order: 4; width: 100%; justify-content: space-between; flex-wrap: wrap; gap: .5rem 1rem; }
   .channel-header > .channel-button { margin-left: auto; font-size: .8rem; }
 }
+@media(max-width: 900px) {
+  .proto-notes { padding-bottom: 2rem; }
+  .proto-notes + .proto-section { padding-top: 2rem; }
+}
+@media(max-width: 550px) {
+  .proto-article { grid-template-columns: minmax(0, 1fr) 1.5rem; row-gap: 1rem; }
+  .proto-article > span:first-child { grid-column: 1; grid-row: 1; }
+  .proto-article > div { grid-column: 1; grid-row: 2; }
+  .proto-article > span:last-child { grid-column: 2; grid-row: 2; font-size: 1rem; }
+}
 @media(prefers-reduced-motion: reduce) { html { scroll-behavior: auto!important; } }
