@@ -41,6 +41,9 @@ export default defineConfig({
     syntaxHighlight: false,
   },
   vite: {
+    server: {
+      allowedHosts: ['desktop-ayoub.cuttlefish-coho.ts.net'],
+    },
     plugins: [tailwindcss()]
   }
 });

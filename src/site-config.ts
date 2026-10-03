@@ -20,12 +20,6 @@ export const siteConfig = {
   googleReviewLabel: "Leave a review",
   socialLinks: [
     {
-      platform: "discord",
-      label: "Discord",
-      href: "https://discord.gg/5C8yFbzv77",
-      icon: "simple-icons:discord",
-    },
-    {
       platform: "youtube",
       label: "YouTube",
       href: "https://youtube.com/@alphabravomedia",

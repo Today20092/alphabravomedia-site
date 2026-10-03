@@ -2,6 +2,6 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { siteConfig } from "../site-config";
 ---
-<BaseLayout title="Contact Alpha Bravo Media | Get in touch" description="Contact Ayoub at Alpha Bravo Media by email or connect through the channel and creator community.">
+<BaseLayout title="Contact Alpha Bravo Media | Get in touch" description="Contact Ayoub at Alpha Bravo Media by email or connect through YouTube and Instagram.">
   <section class="proto-hero channel-copy"><p class="proto-byline">Contact</p><h1>Keep the<br /><em>conversation going.</em></h1><p>Have a question about a guide, tool, or video? Reach out by email or connect through the links below.</p><p><a class="channel-button channel-button-primary" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></p><nav class="channel-contact" aria-label="Social links">{siteConfig.socialLinks.map(link => <a class="channel-button" href={link.href}>{link.label} ↗</a>)}<a class="channel-button" href={`https://matrix.to/#/${siteConfig.elementUsername}`}>Matrix ↗</a></nav></section>
 </BaseLayout>

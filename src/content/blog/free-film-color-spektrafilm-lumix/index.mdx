@@ -1,0 +1,60 @@
+---
+title: "You don't need to buy LUTs to get great film color"
+pubDate: 2026-10-02
+description: "How I use free spektrafilm OFX to export a Kodak 2383 look as a 33-point LUT for portraits and quick videos on my Panasonic S5IIX."
+tags:
+  - color grading
+  - DaVinci Resolve
+  - Panasonic Lumix
+  - photography
+---
+
+I've been using [spektrafilm OFX](https://spektrafilm.114c.de/) in DaVinci Resolve Studio to make a 33-point `.cube` LUT for my Panasonic S5IIX. I load it into the camera as a Real Time LUT, and it's how I've been getting portraits and headshots with color I love.
+
+The plugin is free. You don't need to buy another LUT pack to try this.
+
+## You don't need to keep buying looks
+
+There's so much advice that comes down to "buy my LUT." Buy the right pack, get the right look, and somehow your footage will come together.
+
+Honestly, there are already so many ways to get great color without spending money on LUTs. People have done the research, built the tools, and shared their work. We can use that work instead of reinventing it every time we want filmic color.
+
+A LUT also doesn't take care of the whole image for you. Exposure, contrast, and white balance do most of the work in the footage I grade. Once those are right, I can spend my time on the smaller adjustments and matching shots instead of searching for another look to buy.
+
+## The settings I use
+
+[spektrafilm OFX](https://spektrafilm.114c.de/) has film and print profiles, including Kodak 2383, and supports 33-point LUT export. I use its Kodak 2383 print look as my starting point.
+
+For my Panasonic workflow, these are the settings I use:
+
+| Setting | My choice |
+| --- | --- |
+| Input gamma | Panasonic V-Log |
+| Input gamut | Panasonic V-Gamut |
+| Output gamut | Rec.709 |
+| Output gamma | 2.2 |
+| LUT size | 33-point `.cube` |
+
+The input needs to match what the LUT will receive. In this case, I'm making a look for V-Log and V-Gamut. Rec.709 with gamma 2.2 is the output I use for this camera workflow.
+
+Make sure your Resolve setup feeds the plugin the input you've selected. If another transform has already converted your clip, selecting V-Log in the plugin won't undo that conversion. Check the full path before exporting so you don't build a second conversion into the LUT.
+
+Download the plugin, install it using the included instructions, and open it in Resolve Studio. Choose the look, set the input and output, then use the plugin's LUT export to save a 33-point `.cube` file. The download includes a manual. Read it if you want to understand the controls and adjust the look beyond the preset. The project's [installation notes](https://github.com/chaert-s/spektrafilm-ofx#readme) explain what comes in the package.
+
+## Taking the look into the camera
+
+Once I've exported the LUT, I load it into the S5IIX's LUT library and select it for Real Time LUT. Panasonic's [S5IIX workflow guide](https://www.panasonic.com/au/consumer/lumix-cameras-video-cameras/lumix-s-series-full-frame-cameras-learn/article/lumix-s5iix-special-features/all-onboard-workflow.html) confirms that the camera can apply imported `.cube` LUTs to photos and video.
+
+For quick MP4 videos that I'm going to post on social media, I can bake the color into the recording. For portraits, I can get the look in the JPEG straight out of the camera. That's the workflow I've been using for my headshots. A RAW photo still needs processing if you want the same finished look.
+
+Test the LUT on a few shots before using it for a job. Check skin tones, highlights, exposure, and white balance in the light you'll actually shoot in. When you bake the look into a video or JPEG, you commit to that color in the file.
+
+The LUT carries the color transform. It can't reproduce spatial effects such as grain, halation, or diffusion. Those still need the plugin in Resolve. For my camera workflow, the color is what I'm after.
+
+## Learn the basics with free resources
+
+Another free tool worth looking at is Juan Pablo Zambrano's [JP2499 DCTL](https://github.com/JuanPabloZambrano/DCTL/tree/main/2499_DRT). It's a separate tool to explore in Resolve, not something you need to stack on top of spektrafilm to follow my workflow.
+
+I also recommend [Cullen Kelly's free YouTube lessons](https://www.youtube.com/@CullenKelly). His explanations of exposure, contrast, and white balance are useful when you're learning how to make a grade work instead of hoping a preset will fix it.
+
+Before spending money on another LUT pack, try spektrafilm and read the manual. Make a look with the correct input and output, export it, and test it on your camera. That's how I've been getting the portrait color I want without buying someone else's LUTs.

@@ -7,6 +7,7 @@ import { siteConfig } from "../../site-config";
 import ArticleReadingTools from "../../components/ArticleReadingTools.astro";
 import ArticleExtras from "../../components/ArticleExtras.astro";
 import "../../styles/article-reader.css";
+import "../../styles/typeset.css";
 import "../../styles/blog.css";
 
 export async function getStaticPaths() {
@@ -99,34 +100,11 @@ const articleOgImage = post.data.image?.src ??
       {sections.length >= 2 && <div class="article-page_contents-rail"><details data-pagefind-ignore class="article-page_contents"><summary class="article-page_contents-toggle"><Icon name="mdi:format-list-bulleted" class="size-5" /><span id="article-contents-title">On this page</span><Icon name="mdi:chevron-down" class="size-4" /></summary><nav aria-labelledby="article-contents-title" class="article-page_contents-nav"><div class="article-page_contents-track" aria-hidden="true"><span></span></div><ul class="article-page_contents-list">{contents.map(({slug, text, children}) => <li data-contents-section={slug}><a href={`#${slug}`} data-contents-link class="article-page_contents-link">{text}</a>{children.length > 0 && <ul class="article-page_contents-children">{children.map(child => <li><a href={`#${child.slug}`} data-contents-link class="article-page_contents-link">{child.text}</a></li>)}</ul>}</li>)}</ul></nav></details></div>}
 
       <div id="article-body"
-        class="site-prose prose max-w-none"
+        class="typeset typeset-blog"
       >
         <Content />
       </div>
 
-      <aside class="article-community">
-        <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
-          <div>
-            <span class="site-kicker">Creator Community</span>
-            <h2 class="site-section-title mt-4">
-              Want more help with video, marketing, and AI workflows?
-            </h2>
-            <p class="site-section-copy mt-4">
-              Join the Discord to learn with other creators, ask questions, and compare
-              how people are using these tools in real businesses.
-            </p>
-          </div>
-          <a
-            href="https://discord.gg/5C8yFbzv77"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="site-button-primary"
-          >
-            <Icon name="simple-icons:discord" class="h-4 w-4" />
-            Join the Discord
-          </a>
-        </div>
-      </aside>
     </div>
   </article>
 </BaseLayout>

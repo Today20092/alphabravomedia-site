@@ -21,15 +21,13 @@
 .article-reader .site-meta-row { color: var(--site-text-muted); }
 .article-reader .site-page-copy { color: var(--site-text-muted); max-width: 48rem; line-height: 1.8; margin-block: 1.5rem; }
 .article-reader .site-chip { background: var(--secondary); border-color: var(--border); color: var(--foreground); border-radius: 0; }
-.article-reader #article-body { color: var(--foreground); font-size: 1.125rem; line-height: 1.85; --tw-prose-body: var(--foreground); --tw-prose-headings: var(--foreground); --tw-prose-bold: var(--foreground); --tw-prose-links: var(--primary); --tw-prose-counters: var(--site-text-muted); --tw-prose-bullets: var(--primary); --tw-prose-hr: var(--border); --tw-prose-quotes: var(--foreground); --tw-prose-quote-borders: var(--primary); --tw-prose-captions: var(--site-text-muted); --tw-prose-code: var(--foreground); --tw-prose-pre-code: var(--foreground); --tw-prose-pre-bg: var(--secondary); --tw-prose-th-borders: var(--border); --tw-prose-td-borders: var(--border); }
+.typeset-blog { --typeset-font-body: inherit; --typeset-font-heading: inherit; --typeset-font-mono: var(--font-mono, ui-monospace, monospace); --typeset-size: 1.125rem; --typeset-leading: 1.75; --typeset-flow: 1em; --color-foreground: var(--foreground); --color-muted: var(--secondary); --color-muted-foreground: var(--site-text-muted); --color-border: var(--border); --color-ring: var(--primary); font-size: 1.125rem; }
+.typeset-blog > :first-child { margin-block-start: 0; }
 .article-reader #article-body :is(h2,h3,h4) { font-weight: 500; letter-spacing: -.025em; }
 .article-reader #article-body a { color: var(--primary); text-decoration: underline; text-underline-offset: .2em; }
 .article-reader #article-body :is(pre, table) { display: block; max-width: 100%; overflow-x: auto; }
 .article-reader #article-body :is(p, li, a, h2, h3, h4) { overflow-wrap: anywhere; }
 .article-reader #article-body img { border-radius: 0; }
-.article-reader .article-community { border-top: 1px solid var(--border); margin-top: 4rem; padding-top: 2rem; }
-.article-community h2 { font-size: 1.8rem; font-weight: 500; letter-spacing: -.025em; }
-.article-community p { line-height: 1.8; margin-block: 1rem 1.5rem; }
 .article-reader .article-page_contents { border-radius: 0; }
 .reading-progress { background: var(--border); }
 .reading-progress_fill { background: var(--primary); }
