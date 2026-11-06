@@ -4,6 +4,8 @@ A cinematic, high-end portfolio website built with Astro 5, Tailwind CSS v4, and
 
 **Live Site:** https://alphabravomedia.co/
 
+[Website analytics](docs/website-analytics.md) explains the automatic Cloudflare setup, private-path exclusions, and report access.
+
 ---
 
 ## Table of Contents
