@@ -19,6 +19,8 @@ const rules = readFileSync('dist/_redirects', 'utf8').split('\n')
 const redirects = new Map(rules.map(([from, to]) => [from, to]));
 assert.equal(redirects.size, rules.length, 'Duplicate redirect sources');
 const expected = {
+  '/gear/sigma-16-28mm/sigma-28-105mm': '/gear/sigma-28-105mm/',
+  '/gear/sigma-28-105mm/sigma-16-28mm': '/gear/sigma-16-28mm/',
   '/services': '/about/',
   '/services/audio-setup': '/about/',
   '/services/mobile-podcast': '/about/',
@@ -43,6 +45,14 @@ const expected = {
 };
 for (const [from, to] of Object.entries(expected)) {
   for (const path of [from, `${from}/`]) assert.equal(redirects.get(path), to, path);
+}
+for (const [from, to] of [
+  ['sigma-16-28mm', 'sigma-28-105mm'],
+  ['sigma-28-105mm', 'sigma-16-28mm'],
+]) {
+  const page = load(readFileSync(`dist/gear/${from}/index.html`, 'utf8'));
+  assert.ok(page(`a[href="/gear/${to}/"]`).length, `${from}: lens link must be root-relative`);
+  assert.equal(page(`a[href="${to}"]`).length, 0, `${from}: relative lens link creates a nested 404`);
 }
 for (const [from, to, status] of rules) {
   assert.equal(status, '301');

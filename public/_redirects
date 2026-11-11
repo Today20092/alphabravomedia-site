@@ -1,5 +1,9 @@
 /blog/community-creators-launchpad /blog/ 301
 /blog/community-creators-launchpad/ /blog/ 301
+/gear/sigma-16-28mm/sigma-28-105mm /gear/sigma-28-105mm/ 301
+/gear/sigma-16-28mm/sigma-28-105mm/ /gear/sigma-28-105mm/ 301
+/gear/sigma-28-105mm/sigma-16-28mm /gear/sigma-16-28mm/ 301
+/gear/sigma-28-105mm/sigma-16-28mm/ /gear/sigma-16-28mm/ 301
 /services /about/ 301
 /services/ /about/ 301
 /services/audio-setup /about/ 301
