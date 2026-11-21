@@ -1,4 +1,4 @@
-// Run after npm run build. Verify the public resource and gear destinations.
+// Run after pnpm run build. Verify the public resource and gear destinations.
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync } from 'node:fs';
 import { load } from 'cheerio';

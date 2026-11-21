@@ -1,4 +1,4 @@
-// Run after npm run build: node scripts/check-article-reader.mjs
+// Run after pnpm run build: node scripts/check-article-reader.mjs
 import assert from 'node:assert/strict';
 import { readdirSync, readFileSync } from 'node:fs';
 import { load } from 'cheerio';
