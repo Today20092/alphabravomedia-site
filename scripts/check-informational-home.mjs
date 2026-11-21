@@ -1,4 +1,4 @@
-// Run after npm run build.
+// Run after pnpm run build.
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { load } from 'cheerio';
