@@ -1,4 +1,4 @@
-// Run after npm run build. Checks the public build and Cloudflare redirect contract.
+// Run after pnpm run build. Checks the public build and Cloudflare redirect contract.
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { load } from 'cheerio';

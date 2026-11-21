@@ -74,16 +74,16 @@ alphabravomedia-site/
 
 ```bash
 # Install dependencies
-npm install
+pnpm install
 
 # Start development server
-npm run dev
+pnpm run dev
 
 # Build for production
-npm run build
+pnpm run build
 
 # Preview production build
-npm run preview
+pnpm run preview
 ```
 
 ---
@@ -94,7 +94,7 @@ You can manage content visually using **[Keystatic (Admin UI)](http://localhost:
 
 ### Using Keystatic (CMS)
 
-1. Start the development server (`npm run dev`).
+1. Start the development server (`pnpm run dev`).
 2. Open **[http://localhost:4321/keystatic](http://localhost:4321/keystatic)** in your browser.
 3. Use the interface to easily add, edit, or delete your content collections.
 
@@ -314,7 +314,7 @@ All contact info, social links, and branding throughout the site pull from this 
 
 ### Google Reviews Sync
 
-Google Business Profile reviews are fetched during `npm run dev` and `npm run build` when the required environment variables are set.
+Google Business Profile reviews are fetched during `pnpm run dev` and `pnpm run build` when the required environment variables are set.
 
 Required variables:
 
@@ -414,10 +414,10 @@ The site auto-deploys to GitHub Pages on push to `master`.
 
 | Command | Action |
 |---------|--------|
-| `npm install` | Install dependencies |
-| `npm run dev` | Start dev server at `localhost:4321` |
-| `npm run build` | Build production site to `./dist/` |
-| `npm run preview` | Preview production build locally |
+| `pnpm install` | Install dependencies |
+| `pnpm run dev` | Start dev server at `localhost:4321` |
+| `pnpm run build` | Build production site to `./dist/` |
+| `pnpm run preview` | Preview production build locally |
 
 ---
 
@@ -429,7 +429,7 @@ When adding new content:
 - [ ] Add all required frontmatter fields
 - [ ] Use correct category enum values
 - [ ] Add images to `public/images/` if needed
-- [ ] Test locally with `npm run dev`
+- [ ] Test locally with `pnpm run dev`
 - [ ] Commit and push to deploy
 
 ---

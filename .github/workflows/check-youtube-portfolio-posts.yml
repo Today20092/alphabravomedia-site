@@ -16,20 +16,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
       - name: Setup Node
         uses: actions/setup-node@v6
         with:
           node-version: 22
-          cache: npm
+          cache: pnpm
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Check YouTube feeds
         id: youtube-check
         shell: bash
         run: |
-          npm run check:youtube-portfolio > youtube-report.md 2>&1
+          pnpm run check:youtube-portfolio > youtube-report.md 2>&1
           cat youtube-report.md
           if grep -q "# New YouTube Portfolio Videos Detected" youtube-report.md; then
             echo "has_new_videos=true" >> "$GITHUB_OUTPUT"
